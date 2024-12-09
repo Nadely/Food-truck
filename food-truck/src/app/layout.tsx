@@ -3,6 +3,7 @@ import Header from './components/header';
 import Footer from './components/footer';
 import CategorieNav from './components/categorienav';
 import Nav from './components/nav';
+import Main from './main';
 import { ReactNode } from 'react';
 
 export const metadata = {
@@ -17,19 +18,20 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <header>
           <Header />
         </header>
-        
+
         <div className="flex flex-row">
-          <aside className="flex flex-col items-center justify-center left-0 w-[200px] h-full mt-20">
+          <aside className="flex flex-col items-center justify-center left-0 w-[200px] h-full mt-20 mb-4">
             <CategorieNav />
           </aside>
 
           <main className="flex-grow">
             <Nav />
             {children}
+            <Main />
           </main>
         </div>
 
-        <footer>
+        <footer className="mt-auto">
           <Footer />
         </footer>
       </body>

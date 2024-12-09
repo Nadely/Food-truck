@@ -12,6 +12,16 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      keyframes: {
+        borderChange: {
+          '0%': { borderColor: 'grey', borderWidth: '2px' },
+          '50%': { borderColor: '#fde8e8', borderWidth: '4px' },
+          '100%': { borderColor: '#fca5a5', borderWidth: '2px' },
+        },
+      },
+      animation: {
+        colorChange: 'borderChange 2s ease-in-out',
+      },
     },
   },
   plugins: [],
