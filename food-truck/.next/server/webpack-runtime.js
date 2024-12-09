@@ -130,7 +130,11 @@
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
+<<<<<<< HEAD
 /******/ 		__webpack_require__.h = () => ("3c97181e8ab5aed6")
+=======
+/******/ 		__webpack_require__.h = () => ("441072aebcd9168a")
+>>>>>>> navNad1
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */

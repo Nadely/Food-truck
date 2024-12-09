@@ -11,6 +11,7 @@
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
     ],
+<<<<<<< HEAD
     "/stocks/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -30,6 +31,12 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/evenements/page.js"
+=======
+    "/[slug]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[slug]/page.js"
+>>>>>>> navNad1
     ]
   }
 }
