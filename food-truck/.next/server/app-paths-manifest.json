@@ -1,12 +1,4 @@
 {
-<<<<<<< HEAD
-  "/page": "app/page.js",
-  "/stocks/page": "app/stocks/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
-  "/commandes/page": "app/commandes/page.js",
-  "/evenements/page": "app/evenements/page.js"
-=======
-  "/[slug]/page": "app/[slug]/page.js",
-  "/page": "app/page.js"
->>>>>>> navNad1
+  "/(categories)/commandes/page": "app/(categories)/commandes/page.js",
+  "/(categories)/stocks/page": "app/(categories)/stocks/page.js"
 }

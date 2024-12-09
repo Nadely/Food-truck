@@ -45,7 +45,7 @@ body {
     border-color: grey;
   }
   100% {
-    width: 10%;
+    width: 100%;
     border-color:rgb(255, 192, 192);
   }
 }

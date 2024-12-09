@@ -11,32 +11,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/page.js"
     ],
-<<<<<<< HEAD
-    "/stocks/page": [
+    "/(categories)/commandes/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/stocks/page.js"
+      "static/chunks/app/(categories)/commandes/page.js"
     ],
-    "/commandes/page": [
+    "/(categories)/stocks/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/commandes/page.js"
-    ],
-    "/historique/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/historique/page.js"
-    ],
-    "/evenements/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/evenements/page.js"
-=======
-    "/[slug]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/[slug]/page.js"
->>>>>>> navNad1
+      "static/chunks/app/(categories)/stocks/page.js"
     ]
   }
 }

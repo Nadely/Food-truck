@@ -495,39 +495,6 @@ video {
 [hidden]:where(:not([hidden="until-found"])) {
   display: none;
 }
-.container {
-  width: 100%;
-}
-@media (min-width: 640px) {
-
-  .container {
-    max-width: 640px;
-  }
-}
-@media (min-width: 768px) {
-
-  .container {
-    max-width: 768px;
-  }
-}
-@media (min-width: 1024px) {
-
-  .container {
-    max-width: 1024px;
-  }
-}
-@media (min-width: 1280px) {
-
-  .container {
-    max-width: 1280px;
-  }
-}
-@media (min-width: 1536px) {
-
-  .container {
-    max-width: 1536px;
-  }
-}
 .absolute {
   position: absolute;
 }
@@ -546,12 +513,12 @@ video {
 .top-0 {
   top: 0px;
 }
-<<<<<<< HEAD
-=======
 .mb-4 {
   margin-bottom: 1rem;
 }
->>>>>>> navNad1
+.mt-2 {
+  margin-top: 0.5rem;
+}
 .mt-20 {
   margin-top: 5rem;
 }
@@ -582,44 +549,83 @@ video {
 .h-full {
   height: 100%;
 }
-.h-lvh {
-  height: 100lvh;
-}
 .min-h-screen {
   min-height: 100vh;
+}
+.w-10 {
+  width: 2.5rem;
 }
 .w-\[150px\] {
   width: 150px;
 }
 .w-\[200px\] {
   width: 200px;
-<<<<<<< HEAD
-=======
-}
-.w-full {
-  width: 100%;
->>>>>>> navNad1
 }
 .w-screen {
   width: 100vw;
 }
-<<<<<<< HEAD
-.w-6 {
-  width: 1.5rem;
+.w-20 {
+  width: 5rem;
 }
-.max-w-full {
-  max-width: 100%;
+.w-\[100px\] {
+  width: 100px;
 }
-=======
->>>>>>> navNad1
+.w-\[33\] {
+  width: 33;
+}
+.w-\[33\.\] {
+  width: 33.;
+}
+.w-\[33v\] {
+  width: 33v;
+}
+.w-\[33vw\] {
+  width: 33vw;
+}
+.w-\[33\.33\%\] {
+  width: 33.33%;
+}
+.w-\[33\%\] {
+  width: 33%;
+}
+.w-\[\] {
+  width: ;
+}
+.w-\[25\] {
+  width: 25;
+}
+.w-\[250px\] {
+  width: 250px;
+}
+.w-\[25vh\] {
+  width: 25vh;
+}
+.w-full {
+  width: 100%;
+}
+.w-1 {
+  width: 0.25rem;
+}
+.w-1\/5 {
+  width: 20%;
+}
+.w-1\/6 {
+  width: 16.666667%;
+}
+.w-1\/3 {
+  width: 33.333333%;
+}
+.w-1\/2 {
+  width: 50%;
+}
 .flex-grow {
   flex-grow: 1;
 }
+.flex-row {
+  flex-direction: row;
+}
 .flex-col {
   flex-direction: column;
-}
-.flex-nowrap {
-  flex-wrap: nowrap;
 }
 .items-center {
   align-items: center;
@@ -627,26 +633,12 @@ video {
 .justify-center {
   justify-content: center;
 }
-<<<<<<< HEAD
-.justify-between {
-  justify-content: space-between;
-=======
 .gap-0 {
   gap: 0px;
->>>>>>> navNad1
 }
 .gap-4 {
   gap: 1rem;
 }
-<<<<<<< HEAD
-.gap-8 {
-  gap: 2rem;
-}
-.gap-11 {
-  gap: 2.75rem;
-}
-=======
->>>>>>> navNad1
 .rounded-lg {
   border-radius: 0.5rem;
 }
@@ -743,8 +735,6 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
-<<<<<<< HEAD
-=======
 
 @keyframes borderChange {
   0% {
@@ -768,7 +758,7 @@ body {
     border-color: grey;
   }
   100% {
-    width: 10%;
+    width: 100%;
     border-color:rgb(255, 192, 192);
   }
 }
@@ -777,9 +767,30 @@ body {
   animation: fillLeftToRight 2s forwards;
 }
 
->>>>>>> navNad1
 .hover\:text-white:hover {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+@media (min-width: 768px) {
+
+  .md\:w-1\/12 {
+    width: 8.333333%;
+  }
+
+  .md\:w-1\/3 {
+    width: 33.333333%;
+  }
+
+  .md\:w-1\/6 {
+    width: 16.666667%;
+  }
+}
+
+@media (min-width: 1280px) {
+
+  .xl\:w-1\/6 {
+    width: 16.666667%;
+  }
 }
 

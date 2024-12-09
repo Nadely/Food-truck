@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <CategorieNav />
           </aside>
 
-          <main className="flex-grow">
+          <main className="flex-grow mt-2">
             <Nav />
             {children}
             <Main />
