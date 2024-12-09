@@ -1,8 +1,8 @@
 import './globals.css';
-import Header from './components/header';
-import Footer from './components/footer';
-import CategorieNav from './components/categorienav';
-import Nav from './components/nav';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import CategorieNav from './components/CategorieNav';
+import Nav from './components/Nav';
 import Main from './main';
 import { ReactNode } from 'react';
 
