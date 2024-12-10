@@ -22,7 +22,7 @@ const Commandes = () => {
         const commande = pretes.find(c => c.id === commandeId);
         if (commande) {
             setPretes(pretes.filter(c => c.id !== commandeId));
-            setHistorique([...historique, commande]);
+            // setHistorique([...historique, commande]);
         }
     };
 
@@ -34,10 +34,10 @@ const Commandes = () => {
     return (
         <div className="flex flex-col mt-2">
             <div className="flex flex-row justify-end justify-center items-center mr-20 gap-4">
-                <Link href="/nouvelle-commande" className="bg-yellow-200 text-black p-1 border-2 border-black rounded-md h-8 font-bold font-serif hover:text-white transition-colors duration-300">
+                <Link href="/nouvelle-commande" className="button-yellow">
                     Nouvelle Commande
                 </Link>
-                <Link href="/historique" className="bg-blue-500 text-black p-1 border-2 border-black rounded-md h-8 font-bold font-serif hover:text-white transition-colors duration-300">
+                <Link href="/historique" className="button-blue">
                     Historique
                 </Link>
             </div>
@@ -82,7 +82,7 @@ const Commandes = () => {
                                                     </div>
                                                     <button
                                                         onClick={() => handlePrête(commande.id)}
-                                                        className="bg-green-200 text-black p-1 border-2 border-black rounded-md h-10 items-center justify-center font-bold font-serif mt-2">
+                                                        className="button-green">
                                                         Prête
                                                     </button>
                                                 </div>
@@ -135,7 +135,7 @@ const Commandes = () => {
                                                     </div>
                                                     <button
                                                         onClick={() => handleServie(commande.id)}
-                                                        className="bg-red-200 text-black p-1 border-2 border-black rounded-md h-10 items-center justify-center font-bold font-serif mt-2">
+                                                        className="button-red">
                                                         Servie
                                                     </button>
                                                 </div>
