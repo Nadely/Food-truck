@@ -1,4 +1,6 @@
 {
   "/(categories)/commandes/page": "app/(categories)/commandes/page.js",
-  "/(categories)/stocks/page": "app/(categories)/stocks/page.js"
+  "/(categories)/stocks/page": "app/(categories)/stocks/page.js",
+  "/page": "app/page.js",
+  "/(categories)/historique/page": "app/(categories)/historique/page.js"
 }

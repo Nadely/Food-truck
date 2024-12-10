@@ -20,6 +20,11 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/(categories)/stocks/page.js"
+    ],
+    "/(categories)/historique/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(categories)/historique/page.js"
     ]
   }
 }
