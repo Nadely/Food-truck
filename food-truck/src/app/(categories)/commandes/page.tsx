@@ -5,6 +5,17 @@ import data from './preparation.json'; // Assurez-vous que le chemin est correct
 import Link from 'next/link';
 import { useState } from 'react';
 
+export interface Commande {
+	id: number;
+	image: string;
+	items: string[];
+	user_name: string;
+	user_image: string;
+	time: string;
+	price: string;
+}
+
+
 const Commandes = () => {
     const [preparations, setPreparations] = useState(data.preparations);
     const [pretes, setPretes] = useState(data.pretes);
