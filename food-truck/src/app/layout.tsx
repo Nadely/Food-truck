@@ -7,8 +7,8 @@ import Main from './main';
 import { ReactNode } from 'react';
 
 export const metadata = {
-  title: "Votre Application",
-  description: "Description de votre application",
+  title: 'Votre Application',
+  description: 'Description de votre application',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -19,12 +19,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Header />
         </header>
 
-        <div className="flex flex-row">
-          <aside className="flex flex-col items-center justify-center left-0 w-[200px] h-full mt-20 mb-4">
+        <div className="flex flex-row mt-2">
+          <aside className="flex flex-col items-center justify-center left-0 w-[200px] h-full mt-20 mb-2">
             <CategorieNav />
           </aside>
 
-          <main className="flex-grow mt-2">
+          <main className="flex-grow">
             <Nav />
             {children}
             <Main />
