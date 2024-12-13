@@ -1,13 +1,80 @@
 {
-	"historique": [
-			{
-					"id": 1,
-					"image": "/images/commande1.jpg",
-					"items": ["Menu Mitraillette, Hot Mammouth, Curry, Maroille, Fanta Orange", "Menu enfant, Poulycroc, Mayonnaise, Compote", "Grande frites, Ketchup"],
-					"user_name": "Bob",
-					"user_image": "/avatar.jpg",
-					"time": "10:00",
-					"price": "30,99€"
-			}
-	]
+    "historique": [
+        {
+            "id": 5,
+            "image": "/images/commande1.jpg",
+            "items": [
+                "Menu Mitraillette, Hot Mammouth, Curry, Maroille, Fanta Orange",
+                "Menu enfant, Poulycroc, Mayonnaise, Compote",
+                "Grande frites, Ketchup"
+            ],
+            "user_name": "Marie",
+            "user_image": "/avatar.jpg",
+            "time": "10h00",
+            "date": "2024-12-13T10:00:00.000Z",
+            "lieu": "Neau",
+            "price": "50,99€",
+            "createdAt": "2024-12-13T10:00:00.000Z"
+        },
+        {
+            "id": 7,
+            "image": "/images/commande1.jpg",
+            "items": [
+                "Menu Mitraillette, Hot Mammouth, Curry, Maroille, Fanta Orange"
+            ],
+            "user_name": "Jacques",
+            "user_image": "/avatar.jpg",
+            "time": "10h00",
+            "date": "2024-12-13T10:10:10.000Z",
+            "lieu": "Neau",
+            "price": "9,50€",
+            "createdAt": "2024-12-13T10:10:10.000Z"
+        },
+        {
+            "id": 7,
+            "image": "/images/commande1.jpg",
+            "items": [
+                "Menu Mitraillette, Hot Mammouth, Curry, Maroille, Fanta Orange"
+            ],
+            "user_name": "Erwan",
+            "user_image": "/avatar.jpg",
+            "time": "10h20",
+            "date": "2024-12-13T10:10:10.000Z",
+            "lieu": "Neau",
+            "price": "46,99€",
+            "createdAt": "2024-12-13T10:11:10.000Z"
+        },
+        {
+            "id": 7,
+            "image": "/images/commande1.jpg",
+            "items": [
+                "Menu Mitraillette, Hot Mammouth, Curry, Maroille, Fanta Orange"
+            ],
+            "user_name": "Erwan",
+            "user_image": "/avatar.jpg",
+            "time": "10h20",
+            "date": "2024-12-13T10:10:10.000Z",
+            "lieu": "Neau",
+            "price": "60€",
+            "createdAt": "2024-12-13T10:20:10.000Z"
+        }
+    ],
+    "recettes": [
+        {
+            "date": "2024-12-02T10:00:00.000Z",
+            "lieu": "Neau",
+            "recette": "81.98€"
+        },
+        {
+            "date": "2024-12-01T10:00:00.000Z",
+            "lieu": "Montsûrs",
+            "recette": "30.99€"
+        },
+        {
+            "date": "2024-12-13T10:10:10.000Z",
+            "lieu": "Neau",
+            "recette": "167.48€"
+        }
+    ],
+    "pertes": []
 }
