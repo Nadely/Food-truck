@@ -22,7 +22,7 @@ export interface Historique {
     date: string | Date; // Ajout du champ date
     lieu: string;
     recette: string;
-    createdAt: Date;
+    createdAt: number;
 }
 
 export interface Recettes {
@@ -47,6 +47,13 @@ const Historique = () => {
         return numberPrice.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
     };
 
+    const loadLocalStorage = () => {
+		const storageValue = localStorage.getItem('selectedLieu');
+		return storageValue || "Maison";
+	};
+
+    const loadLieu = loadLocalStorage();
+
     const fetchHistorique = async () => {
         try {
             const response = await fetch('/api/historique');
@@ -54,6 +61,7 @@ const Historique = () => {
                 const data = await response.json();
                 const sortedHistorique = Array.isArray(data.historique) ? data.historique.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) : [];
                 setHistorique(sortedHistorique);
+                console.log(loadLieu);
                 setRecettes(Array.isArray(data.recettes) ? data.recettes : []);
             } else {
                 console.error('Erreur lors de la récupération de l\'historique.');

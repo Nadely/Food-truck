@@ -49,6 +49,7 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
+
     try {
         const historiquePath = path.join(process.cwd(), 'src/app/(categories)/historique/historique.json');
 
