@@ -1,14 +1,14 @@
-import './globals.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import CategorieNav from './components/CategorieNav';
-import Nav from './components/Nav';
-import Main from './main';
-import { ReactNode } from 'react';
+import "./globals.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import CategorieNav from "./components/CategorieNav";
+import Nav from "./components/Nav";
+import Main from "./main";
+import { ReactNode } from "react";
 
 export const metadata = {
-  title: 'Votre Application',
-  description: 'Description de votre application',
+  title: "Votre Application",
+  description: "Description de votre application",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

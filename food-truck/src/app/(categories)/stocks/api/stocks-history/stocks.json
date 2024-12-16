@@ -1,0 +1,378 @@
+[
+  {
+    "stocks": [
+      {
+        "id": 1,
+        "produit": "Produit 1",
+        "categorie": "Catégorie 1",
+        "stock": 10,
+        "conseille": 5,
+        "perdue": 0,
+        "stockAnnuel": 110
+      },
+      {
+        "id": 2,
+        "produit": "Produit 2",
+        "categorie": "Catégorie 2",
+        "stock": 20,
+        "conseille": 10,
+        "perdue": 0,
+        "stockAnnuel": 220
+      },
+      {
+        "id": 3,
+        "produit": "Produit 3",
+        "categorie": "Catégorie 3",
+        "stock": 30,
+        "conseille": 15,
+        "perdue": 0,
+        "stockAnnuel": 330
+      },
+      {
+        "id": 4,
+        "produit": "Produit 4",
+        "categorie": "Catégorie 4",
+        "stock": 40,
+        "conseille": 20,
+        "perdue": 0,
+        "stockAnnuel": 440
+      },
+      {
+        "id": 5,
+        "produit": "Produit 5",
+        "categorie": "Catégorie 5",
+        "stock": 50,
+        "conseille": 25,
+        "perdue": 0,
+        "stockAnnuel": 550
+      },
+      {
+        "id": 6,
+        "produit": "Produit 6",
+        "categorie": "Catégorie 2",
+        "stock": 60,
+        "conseille": 30,
+        "perdue": 0,
+        "stockAnnuel": 660
+      },
+      {
+        "id": 7,
+        "produit": "Produit 7",
+        "categorie": "Catégorie 1",
+        "stock": 70,
+        "conseille": 35,
+        "perdue": 0,
+        "stockAnnuel": 770
+      },
+      {
+        "id": 8,
+        "produit": "Produit 8",
+        "categorie": "Catégorie 5",
+        "stock": 80,
+        "conseille": 40,
+        "perdue": 0,
+        "stockAnnuel": 880
+      },
+      {
+        "id": 9,
+        "produit": "Produit 9",
+        "categorie": "Catégorie 2",
+        "stock": 90,
+        "conseille": 45,
+        "perdue": 0,
+        "stockAnnuel": 990
+      },
+      {
+        "id": 10,
+        "produit": "Produit 10",
+        "categorie": "Catégorie 3",
+        "stock": 100,
+        "conseille": 50,
+        "perdue": 0,
+        "stockAnnuel": 1100
+      }
+    ]
+  },
+  {
+    "stocks": [
+      {
+        "id": 1,
+        "produit": "Produit 1",
+        "categorie": "Catégorie 1",
+        "stock": 212,
+        "conseille": 5,
+        "perdue": 0,
+        "stockAnnuel": 322
+      },
+      {
+        "id": 2,
+        "produit": "Produit 2",
+        "categorie": "Catégorie 2",
+        "stock": 20,
+        "conseille": 10,
+        "perdue": 0,
+        "stockAnnuel": 240
+      },
+      {
+        "id": 3,
+        "produit": "Produit 3",
+        "categorie": "Catégorie 3",
+        "stock": 30,
+        "conseille": 15,
+        "perdue": 0,
+        "stockAnnuel": 360
+      },
+      {
+        "id": 4,
+        "produit": "Produit 4",
+        "categorie": "Catégorie 4",
+        "stock": 40,
+        "conseille": 20,
+        "perdue": 0,
+        "stockAnnuel": 480
+      },
+      {
+        "id": 5,
+        "produit": "Produit 5",
+        "categorie": "Catégorie 5",
+        "stock": 50,
+        "conseille": 25,
+        "perdue": 0,
+        "stockAnnuel": 600
+      },
+      {
+        "id": 6,
+        "produit": "Produit 6",
+        "categorie": "Catégorie 2",
+        "stock": 60,
+        "conseille": 30,
+        "perdue": 0,
+        "stockAnnuel": 720
+      },
+      {
+        "id": 7,
+        "produit": "Produit 7",
+        "categorie": "Catégorie 1",
+        "stock": 70,
+        "conseille": 35,
+        "perdue": 0,
+        "stockAnnuel": 840
+      },
+      {
+        "id": 8,
+        "produit": "Produit 8",
+        "categorie": "Catégorie 5",
+        "stock": 80,
+        "conseille": 40,
+        "perdue": 0,
+        "stockAnnuel": 960
+      },
+      {
+        "id": 9,
+        "produit": "Produit 9",
+        "categorie": "Catégorie 2",
+        "stock": 90,
+        "conseille": 45,
+        "perdue": 0,
+        "stockAnnuel": 1080
+      },
+      {
+        "id": 10,
+        "produit": "Produit 10",
+        "categorie": "Catégorie 3",
+        "stock": 100,
+        "conseille": 50,
+        "perdue": 0,
+        "stockAnnuel": 1200
+      }
+    ]
+  },
+  {
+    "stocks": [
+      {
+        "id": 1,
+        "produit": "Produit 1",
+        "categorie": "Catégorie 1",
+        "stock": 212,
+        "conseille": 5,
+        "perdue": 0,
+        "stockAnnuel": 534
+      },
+      {
+        "id": 2,
+        "produit": "Produit 2",
+        "categorie": "Catégorie 2",
+        "stock": 20,
+        "conseille": 10,
+        "perdue": 0,
+        "stockAnnuel": 260
+      },
+      {
+        "id": 3,
+        "produit": "Produit 3",
+        "categorie": "Catégorie 3",
+        "stock": 30,
+        "conseille": 15,
+        "perdue": 0,
+        "stockAnnuel": 390
+      },
+      {
+        "id": 4,
+        "produit": "Produit 4",
+        "categorie": "Catégorie 4",
+        "stock": 40,
+        "conseille": 20,
+        "perdue": 0,
+        "stockAnnuel": 520
+      },
+      {
+        "id": 5,
+        "produit": "Produit 5",
+        "categorie": "Catégorie 5",
+        "stock": 50,
+        "conseille": 25,
+        "perdue": 0,
+        "stockAnnuel": 650
+      },
+      {
+        "id": 6,
+        "produit": "Produit 6",
+        "categorie": "Catégorie 2",
+        "stock": 60,
+        "conseille": 30,
+        "perdue": 0,
+        "stockAnnuel": 780
+      },
+      {
+        "id": 7,
+        "produit": "Produit 7",
+        "categorie": "Catégorie 1",
+        "stock": 70,
+        "conseille": 35,
+        "perdue": 0,
+        "stockAnnuel": 910
+      },
+      {
+        "id": 8,
+        "produit": "Produit 8",
+        "categorie": "Catégorie 5",
+        "stock": 80,
+        "conseille": 40,
+        "perdue": 0,
+        "stockAnnuel": 1040
+      },
+      {
+        "id": 9,
+        "produit": "Produit 9",
+        "categorie": "Catégorie 2",
+        "stock": 90,
+        "conseille": 45,
+        "perdue": 0,
+        "stockAnnuel": 1170
+      },
+      {
+        "id": 10,
+        "produit": "Produit 10",
+        "categorie": "Catégorie 3",
+        "stock": 100,
+        "conseille": 50,
+        "perdue": 0,
+        "stockAnnuel": 1300
+      }
+    ]
+  },
+  {
+    "stocks": [
+      {
+        "id": 1,
+        "produit": "Produit 1",
+        "categorie": "Catégorie 1",
+        "stock": 212,
+        "conseille": 5,
+        "perdue": 0,
+        "stockAnnuel": 746
+      },
+      {
+        "id": 2,
+        "produit": "Produit 2",
+        "categorie": "Catégorie 2",
+        "stock": 20,
+        "conseille": 10,
+        "perdue": 0,
+        "stockAnnuel": 280
+      },
+      {
+        "id": 3,
+        "produit": "Produit 3",
+        "categorie": "Catégorie 3",
+        "stock": 30,
+        "conseille": 15,
+        "perdue": 0,
+        "stockAnnuel": 420
+      },
+      {
+        "id": 4,
+        "produit": "Produit 4",
+        "categorie": "Catégorie 4",
+        "stock": 40,
+        "conseille": 20,
+        "perdue": 0,
+        "stockAnnuel": 560
+      },
+      {
+        "id": 5,
+        "produit": "Produit 5",
+        "categorie": "Catégorie 5",
+        "stock": 50,
+        "conseille": 25,
+        "perdue": 0,
+        "stockAnnuel": 700
+      },
+      {
+        "id": 6,
+        "produit": "Produit 6",
+        "categorie": "Catégorie 2",
+        "stock": 60,
+        "conseille": 30,
+        "perdue": 0,
+        "stockAnnuel": 840
+      },
+      {
+        "id": 7,
+        "produit": "Produit 7",
+        "categorie": "Catégorie 1",
+        "stock": 70,
+        "conseille": 35,
+        "perdue": 0,
+        "stockAnnuel": 980
+      },
+      {
+        "id": 8,
+        "produit": "Produit 8",
+        "categorie": "Catégorie 5",
+        "stock": 80,
+        "conseille": 40,
+        "perdue": 0,
+        "stockAnnuel": 1120
+      },
+      {
+        "id": 9,
+        "produit": "Produit 9",
+        "categorie": "Catégorie 2",
+        "stock": 90,
+        "conseille": 45,
+        "perdue": 0,
+        "stockAnnuel": 1260
+      },
+      {
+        "id": 10,
+        "produit": "Produit 10",
+        "categorie": "Catégorie 3",
+        "stock": 100,
+        "conseille": 50,
+        "perdue": 0,
+        "stockAnnuel": 1400
+      }
+    ]
+  }
+]

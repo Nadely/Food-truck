@@ -1,0 +1,22 @@
+[
+  {
+    "date": "2024-12-16T10:13:33.124Z",
+    "items": [
+      {
+        "categories": "Catégorie 1",
+        "produit": "Produit 1",
+        "quantite": 10
+      }
+    ]
+  },
+  {
+    "date": "2024-12-16T10:15:42.398Z",
+    "items": [
+      {
+        "categories": "Catégorie 1",
+        "produit": "Produit 1",
+        "quantite": 10
+      }
+    ]
+  }
+]
