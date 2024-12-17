@@ -68,4 +68,12 @@ body {
 
 .button-yellow {
   @apply bg-yellow-200 text-black p-1 border-2 border-black rounded-md h-10 items-center justify-center font-bold font-serif mt-2;
-} 
+}
+
+.button-purple {
+ @apply bg-purple-200 text-black p-1 border-2 border-black rounded-md h-10 items-center justify-center font-bold font-serif mt-2;
+}
+
+.button-orange {
+  @apply bg-orange-200 text-black p-1 border-2 border-black rounded-md h-10 items-center justify-center font-bold font-serif mt-2;
+}
