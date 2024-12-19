@@ -35,12 +35,12 @@ const AperosBox = () => {
     return (
 			<div className="flex flex-col items-center justify-center0 font-bold font-serif mt-10 text-2xl">
 				<h1 className="border-b-2 border-black w-full text-center mr-5">Apéros Box</h1>
-				<div className="inline-block w-full flex flex-col items-center justify-center font-serif text-lg mt-10 gap-4">
-							<div className="flex flex-row items-center justify-center gap-4">
+				<div className="inline-block w-full flex flex-col items-center justify-center font-serif text-lg mt-10">
+							<div className="flex flex-row items-center justify-center gap-8">
 								<button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '200px', height: '200px' }}>
 									<Image src="/funbox.jpg" alt="Fun Box" width={100} height={100} />
-									<p className="text-sm mt-1">Fun Box</p>
-									<p className="text-sm mt-1">5€</p>
+									<p className="text-sm mt-auto">Fun Box</p>
+									<p className="text-sm mb-auto">5€</p>
 									<div className="flex flex-row items-center gap-4">
 											<button onClick={decrementFunBox} className="text-sm">-</button>
 											<span className="text-sm">{funBoxQuantity}</span>
@@ -49,8 +49,8 @@ const AperosBox = () => {
 							</button>
 							<button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '200px', height: '200px' }}>
 									<Image src="/spicybox.jpg" alt="Spicy Box" width={100} height={100} />
-									<p className="text-sm mt-1">Spicy Box</p>
-									<p className="text-sm mt-1">5€</p>
+									<p className="text-sm mt-auto">Spicy Box</p>
+									<p className="text-sm mb-auto">5€</p>
 									<div className="flex flex-row items-center gap-4">
 											<button onClick={decrementSpicyBox} className="text-sm">-</button>
 											<span className="text-sm">{spicyBoxQuantity}</span>
@@ -59,8 +59,8 @@ const AperosBox = () => {
 							</button>
 							<button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '200px', height: '200px' }}>
 									<Image src="/cheesebox.jpg" alt="Cheese Box" width={100} height={100} />
-									<p className="text-sm mt-1">Cheese Box</p>
-									<p className="text-sm mt-1">5€</p>
+									<p className="text-sm mt-auto">Cheese Box</p>
+									<p className="text-sm mb-auto">5€</p>
 									<div className="flex flex-row items-center gap-4">
 											<button onClick={decrementCheeseBox} className="text-sm">-</button>
 											<span className="text-sm">{cheeseBoxQuantity}</span>
@@ -69,8 +69,8 @@ const AperosBox = () => {
 							</button>
 							<button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '200px', height: '200px' }}>
 									<Image src="/chickenbox.jpg" alt="Chicken Box" width={100} height={100} />
-									<p className="text-sm mt-1">Chicken Box</p>
-									<p className="text-sm mt-1">5€</p>
+									<p className="text-sm mt-auto">Chicken Box</p>
+									<p className="text-sm mb-auto">5€</p>
 									<div className="flex flex-row items-center gap-4">
 											<button onClick={decrementChickenBox} className="text-sm">-</button>
 											<span className="text-sm">{chickenBoxQuantity}</span>
@@ -79,8 +79,8 @@ const AperosBox = () => {
 							</button>
 							<button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '200px', height: '200px' }}>
 									<Image src="/veganbox.jpg" alt="Vegan Box" width={100} height={100} />
-									<p className="text-sm mt-1">Vegan Box</p>
-									<p className="text-sm mt-1">5€</p>
+									<p className="text-sm mt-auto">Vegan Box</p>
+									<p className="text-sm mb-auto">5€</p>
 									<div className="flex flex-row items-center gap-4">
 											<button onClick={decrementVeganBox} className="text-sm">-</button>
 											<span className="text-sm">{veganBoxQuantity}</span>
@@ -89,8 +89,8 @@ const AperosBox = () => {
 							</button>
 							<button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '200px', height: '200px' }}>
 									<Image src="/partybox.jpg" alt="Party Box" width={100} height={100} />
-									<p className="text-sm mt-1">Party Box</p>
-									<p className="text-sm mt-1">11€</p>
+									<p className="text-sm mt-auto">Party Box</p>
+									<p className="text-sm mb-auto">11€</p>
 									<div className="flex flex-row items-center gap-4">
 											<button onClick={decrementPartyBox} className="text-sm">-</button>
 											<span className="text-sm">{partyBoxQuantity}</span>
@@ -98,8 +98,8 @@ const AperosBox = () => {
 									</div>
 							</button>
 					</div>
-					<div className="flex flex-col items-center justify-center gap-8">
-						<button className="button-blue w-40 mt-10">
+					<div className="flex flex-col items-center justify-center mt-10">
+						<button className="button-blue w-40">
 							<Link href="/sauces">Valider</Link>
 						</button>
 					</div>
