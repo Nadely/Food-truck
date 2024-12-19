@@ -61,7 +61,7 @@ const Nav = () => {
             )}
             {composition === 'aperos-box' && (
                 <Link href="/aperos-box" className="inline-block whitespace-nowrap text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2 w-auto">
-                    Aperos Box
+                    Apéros Box
                 </Link>
             )}
             {composition === 'boissons' && (
@@ -76,7 +76,7 @@ const Nav = () => {
             )}
             {composition === 'choixSauces' && (
                 <Link href="/choixSauces" className="inline-block whitespace-nowrap text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2 w-auto">
-                    Choix des sauces ?
+                    Sauces ?
                 </Link>
             )}
             {composition === 'brochettes' && (
@@ -112,6 +112,26 @@ const Nav = () => {
             {composition === 'supplements' && (
                 <Link href="/supplements" className="inline-block whitespace-nowrap text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2 w-auto">
                     Suppléments
+                </Link>
+            )}
+            {composition === 'burgers' && (
+                <Link href="/burgers" className="inline-block whitespace-nowrap text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2 w-auto">
+                    Burgers
+                </Link>
+            )}
+            {composition === 'choixSupplements' && (
+                <Link href="/choixSupplements" className="inline-block whitespace-nowrap text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2 w-auto">
+                    Suppléments ?
+                </Link>
+            )}
+            {composition === 'choixBoissons' && (
+                <Link href="/choixBoissons" className="inline-block whitespace-nowrap text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2 w-auto">
+                    Boissons ?
+                </Link>
+            )}
+            {composition === 'veggies' && (
+                <Link href="/veggies" className="inline-block whitespace-nowrap text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2 w-auto">
+                    Veggies
                 </Link>
             )}
         </div>

@@ -70,84 +70,84 @@ const Boissons = () => {
     const decrementCanadaDry = () => setCanadaDryQuantity(canadaDryQuantity > 0 ? canadaDryQuantity - 1 : 0);
 
     return (
-        <div className="flex flex-col items-center justify-center mt-20 font-bold font-serif text-2xl">
+        <div className="flex flex-col items-center justify-center mt-10 font-bold font-serif text-2xl">
             <h1 className="border-b-2 border-black w-full text-center mr-5">Boissons</h1>
-            <div className="inline-block w-full flex flex-col items-center justify-center mt-20 font-serif text-sm gap-4 mb-5">
+            <div className="inline-block w-full flex flex-col items-center justify-center mt-10 font-serif text-lg gap-4 mb-5">
                 <div className="flex flex-row items-center justify-center gap-8">
-                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '150px', height: '150px' }}>
-                        <Image src="/coca-cola.jpg" alt="Coca Cola" width={55} height={55} />
-                        <p className="text-xs mt-1">Coca Cola</p>
-                        <p className="text-xs mb-1">1,5€</p>
+                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                        <Image src="/coca-cola.jpg" alt="Coca Cola" width={75} height={75} />
+                        <p className="text-sm mt-auto">Coca Cola</p>
+                        <p className="text-sm mb-auto">1,5€</p>
                         <div className="flex flex-row items-center gap-4">
                             <button onClick={decrementCoca} className="text-sm">-</button>
                             <span className="text-sm">{cocaQuantity}</span>
                             <button onClick={incrementCoca} className="text-sm">+</button>
                         </div>
                     </button>
-                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '150px', height: '150px' }}>
-                        <Image src="/coca-cola-zero.png" alt="Coca-Cola Zero" width={55} height={55} />
-                        <p className="text-xs mt-1">Coca-Cola Zero</p>
-                        <p className="text-xs mb-1">1,5€</p>
+                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                        <Image src="/coca-cola-zero.png" alt="Coca-Cola Zero" width={75} height={75} />
+                        <p className="text-sm mt-auto">Coca-Cola Zero</p>
+                        <p className="text-sm mb-auto">1,5€</p>
                         <div className="flex flex-row items-center gap-4">
                             <button onClick={decrementCocaZero} className="text-sm">-</button>
                             <span className="text-sm">{cocaZeroQuantity}</span>
                             <button onClick={incrementCocaZero} className="text-sm">+</button>
                         </div>
                     </button>
-                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '150px', height: '150px' }}>
-                        <Image src="/fanta-citron.png" alt="Fanta citron" width={55} height={55} />
-                        <p className="text-xs mt-1">Fanta citron</p>
-                        <p className="text-xs mb-1">1,5€</p>
+                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                        <Image src="/fanta-citron.png" alt="Fanta citron" width={80} height={80} />
+                        <p className="text-sm mt-auto">Fanta citron</p>
+                        <p className="text-sm mb-auto">1,5€</p>
                         <div className="flex flex-row items-center gap-4">
                             <button onClick={decrementFantaCitron} className="text-sm">-</button>
                             <span className="text-sm">{fantaCitronQuantity}</span>
                             <button onClick={incrementFantaCitron} className="text-sm">+</button>
                         </div>
                     </button>
-                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '150px', height: '150px' }}>
-                        <Image src="/fanta-orange.jpg" alt="Fanta orange" width={55} height={55} />
-                        <p className="text-xs mt-1">Fanta orange</p>
-                        <p className="text-xs mb-1">1,5€</p>
+                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                        <Image src="/fanta-orange.jpg" alt="Fanta orange" width={75} height={75} />
+                        <p className="text-sm mt-auto">Fanta orange</p>
+                        <p className="text-sm mb-auto">1,5€</p>
                         <div className="flex flex-row items-center gap-4">
                             <button onClick={decrementFantaOrange} className="text-sm">-</button>
                             <span className="text-sm">{fantaOrangeQuantity}</span>
                             <button onClick={incrementFantaOrange} className="text-sm">+</button>
                         </div>
                     </button>
-                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '150px', height: '150px' }}>
-                        <Image src="/canada-dry.jpeg" alt="canada-dry" width={55} height={55} />
-                        <p className="text-xs mt-1">Canada Dry</p>
-                        <p className="text-xs mb-1">1,5€</p>
+                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                        <Image src="/canada-dry.jpeg" alt="canada-dry" width={75} height={75} />
+                        <p className="text-sm mt-auto">Canada Dry</p>
+                        <p className="text-sm mb-auto">1,5€</p>
                         <div className="flex flex-row items-center gap-4">
                             <button onClick={decrementCanadaDry} className="text-sm">-</button>
                             <span className="text-sm">{canadaDryQuantity}</span>
                             <button onClick={incrementCanadaDry} className="text-sm">+</button>
                         </div>
                     </button>
-                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '150px', height: '150px' }}>
-                        <Image src="/orangina.jpg" alt="Orangina" width={55} height={55} />
-                        <p className="text-xs mt-1">Orangina</p>
-                        <p className="text-xs mb-1">1,5€</p>
+                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                        <Image src="/orangina.jpg" alt="Orangina" width={75} height={75} />
+                        <p className="text-sm mt-auto">Orangina</p>
+                        <p className="text-sm mb-auto">1,5€</p>
                         <div className="flex flex-row items-center gap-4">
                             <button onClick={decrementOrangina} className="text-sm">-</button>
                             <span className="text-sm">{oranginaQuantity}</span>
                             <button onClick={incrementOrangina} className="text-sm">+</button>
                         </div>
                     </button>
-                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '150px', height: '150px' }}>
-                        <Image src="/seven-up.jpg" alt="Seven Up" width={55} height={55} />
-                        <p className="text-xs mt-1">Seven Up</p>
-                        <p className="text-xs mb-1">1,5€</p>
+                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                        <Image src="/seven-up.jpg" alt="Seven Up" width={75} height={75} />
+                        <p className="text-sm mt-auto">Seven Up</p>
+                        <p className="text-sm mb-auto">1,5€</p>
                         <div className="flex flex-row items-center gap-4">
                             <button onClick={decrementSevenUp} className="text-sm">-</button>
                             <span className="text-sm">{sevenUpQuantity}</span>
                             <button onClick={incrementSevenUp} className="text-sm">+</button>
                         </div>
                     </button>
-                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '150px', height: '150px' }}>
-                        <Image src="/capri-sun.jpg" alt="Capri-Sun" width={55} height={55} />
-                        <p className="text-xs mt-1">Capri-Sun</p>
-                        <p className="text-xs mb-1">1€</p>
+                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                        <Image src="/capri-sun.jpg" alt="Capri-Sun" width={75} height={75} />
+                        <p className="text-sm mt-auto">Capri-Sun</p>
+                        <p className="text-sm mb-auto">1€</p>
                         <div className="flex flex-row items-center gap-4">
                             <button onClick={decrementCapriSun} className="text-sm">-</button>
                             <span className="text-sm">{capriSunQuantity}</span>
@@ -156,80 +156,80 @@ const Boissons = () => {
                     </button>
                 </div>
                 <div className="flex flex-row items-center justify-center gap-8">
-                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '150px', height: '150px' }}>
-                        <Image src="/ice-tea.png" alt="Ice Tea" width={55} height={55} />
-                        <p className="text-xs mt-1">Ice Tea</p>
-                        <p className="text-xs mb-1">1,5€</p>
+                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                        <Image src="/ice-tea.png" alt="Ice Tea" width={75} height={75} />
+                        <p className="text-sm mt-auto">Ice Tea</p>
+                        <p className="text-sm mb-auto">1,5€</p>
                         <div className="flex flex-row items-center gap-4">
                             <button onClick={decrementIceTea} className="text-sm">-</button>
                             <span className="text-sm">{iceTeaQuantity}</span>
                             <button onClick={incrementIceTea} className="text-sm">+</button>
                         </div>
                     </button>
-                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '150px', height: '150px' }}>
-                        <Image src="/oasis.jpg" alt="Oasis" width={55} height={55} />
-                        <p className="text-xs mt-1">Oasis</p>
-                        <p className="text-xs mb-1">1,5€</p>
+                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                        <Image src="/oasis.jpg" alt="Oasis" width={75} height={75} />
+                        <p className="text-sm mt-auto">Oasis</p>
+                        <p className="text-sm mb-auto">1,5€</p>
                         <div className="flex flex-row items-center gap-4">
                             <button onClick={decrementOasis} className="text-sm">-</button>
                             <span className="text-sm">{oasisQuantity}</span>
                             <button onClick={incrementOasis} className="text-sm">+</button>
                         </div>
                     </button>
-                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '150px', height: '150px' }}>
-                        <Image src="/tropico.jpg" alt="Tropico" width={55} height={55} />
-                        <p className="text-xs mt-1">Tropico</p>
-                        <p className="text-xs mb-1">1,5€</p>
+                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                        <Image src="/tropico.jpg" alt="Tropico" width={75} height={75} />
+                        <p className="text-sm mt-auto">Tropico</p>
+                        <p className="text-sm mb-auto">1,5€</p>
                         <div className="flex flex-row items-center gap-4">
                             <button onClick={decrementTropico} className="text-sm">-</button>
                             <span className="text-sm">{tropicoQuantity}</span>
                             <button onClick={incrementTropico} className="text-sm">+</button>
                         </div>
                     </button>
-                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '150px', height: '150px' }}>
-                        <Image src="/eau.png" alt="Eau" width={55} height={55} />
-                        <p className="text-xs mt-1">Eau</p>
-                        <p className="text-xs mb-1">1€</p>
+                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                        <Image src="/eau.png" alt="Eau" width={75} height={75} />
+                        <p className="text-sm mt-auto">Eau</p>
+                        <p className="text-sm mb-auto">1€</p>
                         <div className="flex flex-row items-center gap-4">
                             <button onClick={decrementEau} className="text-sm">-</button>
                             <span className="text-sm">{eauQuantity}</span>
                             <button onClick={incrementEau} className="text-sm">+</button>
                         </div>
                     </button>
-                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '150px', height: '150px' }}>
-                        <Image src="/eau-pétillante.jpg" alt="Eau pétillante" width={55} height={55} />
-                        <p className="text-xs mt-1">Eau pétillante</p>
-                        <p className="text-xs mb-1">1,5€</p>
+                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                        <Image src="/eau-pétillante.jpg" alt="Eau pétillante" width={100} height={100} />
+                        <p className="text-sm mt-auto">Eau pétillante</p>
+                        <p className="text-sm mb-auto">1,5€</p>
                         <div className="flex flex-row items-center gap-4">
                             <button onClick={decrementEauPerillante} className="text-sm">-</button>
                             <span className="text-sm">{eauPerillanteQuantity}</span>
                             <button onClick={incrementEauPerillante} className="text-sm">+</button>
                         </div>
                     </button>
-                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '150px', height: '150px' }}>
-                        <Image src="/leffe.jpg" alt="Leffe" width={55} height={55} />
-                        <p className="text-xs mt-1">Leffe</p>
-                        <p className="text-xs mb-1">3,5€</p>
+                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                        <Image src="/leffe.jpg" alt="Leffe" width={75} height={75} />
+                        <p className="text-sm mt-auto">Leffe</p>
+                        <p className="text-sm mb-auto">3,5€</p>
                         <div className="flex flex-row items-center gap-4">
                             <button onClick={decrementLeffe} className="text-sm">-</button>
                             <span className="text-sm">{leffeQuantity}</span>
                             <button onClick={incrementLeffe} className="text-sm">+</button>
                         </div>
                     </button>
-                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '150px', height: '150px' }}>
-                        <Image src="/leffe-blanche.png" alt="Leffe Blanche" width={55} height={55} />
-                        <p className="text-xs mt-1">Leffe Blanche</p>
-                        <p className="text-xs mb-1">3,5€</p>
+                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                        <Image src="/leffe-blanche.png" alt="Leffe Blanche" width={65} height={65} />
+                        <p className="text-sm mt-auto">Leffe Blanche</p>
+                        <p className="text-sm mb-auto">3,5€</p>
                         <div className="flex flex-row items-center gap-4">
                             <button onClick={decrementLeffeBlanche} className="text-sm">-</button>
                             <span className="text-sm">{leffeBlancheQuantity}</span>
                             <button onClick={incrementLeffeBlanche} className="text-sm">+</button>
                         </div>
                     </button>
-                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '150px', height: '150px' }}>
-                        <Image src="/leffe-ruby.jpg" alt="Leffe Ruby" width={55} height={55} />
-                        <p className="text-xs mt-1">Leffe Ruby</p>
-                        <p className="text-xs mb-1">3,5€</p>
+                    <button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '180px', height: '180px' }}>
+                        <Image src="/leffe-ruby.jpg" alt="Leffe Ruby" width={75} height={75} />
+                        <p className="text-sm mt-auto">Leffe Ruby</p>
+                        <p className="text-sm mb-auto">3,5€</p>
                         <div className="flex flex-row items-center gap-4">
                             <button onClick={decrementLeffeRuby} className="text-sm">-</button>
                             <span className="text-sm">{leffeRubyQuantity}</span>
@@ -238,7 +238,7 @@ const Boissons = () => {
                     </button>
                 </div>
                 <div className="flex flex-col items-center justify-center gap-8">
-                    <button className="button-blue w-40 mt-10 mb-5">
+                    <button className="button-blue w-40 mt-auto0 mb-5">
                         Valider
                     </button>
                 </div>
