@@ -7,13 +7,16 @@ import { useEffect, useState } from 'react';
 const Nav = () => {
     const pathname = usePathname();
     const categories = pathname.split('/').pop();
-    const composition = pathname.split('/').pop();
+    const composition = pathname.split('/').pop() || "";
     const [animationKey, setAnimationKey] = useState(0);
+
+    const alwaysVisibleLinks = ['nouvelle-commande', 'solos', 'menus', 'aperos-box', 'boissons', 'frites', 'choixSauces', 'brochettes', 'snacksVeggies', 'snacks', 'sauces', 'mitraillettes', 'enfants', 'supplements', 'burgers', 'choixSupplements', 'choixBoissons', 'veggies'];
 
     useEffect(() => {
         // Change the key to force re-render and restart the animation
         setAnimationKey(prevKey => prevKey + 1);
     }, [categories, composition]);
+
 
     return (
         <div className="flex xl:w-1/6 md:w-1/3 w-1/2">
@@ -44,10 +47,13 @@ const Nav = () => {
                     Evènements
                 </Link>
             )}
-            {composition === 'nouvelle-commande' && (
-                <Link href="/nouvelle-commande" className="inline-block whitespace-nowrap text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2 w-auto">
+            {(composition === 'nouvelle-commande' || alwaysVisibleLinks.includes(composition)) && (
+                <Link href="/nouvelle-commande" className="inline-block whitespace-nowrap text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2 w-auto ">
                     Nouvelle Commande
                 </Link>
+            )}
+            {(alwaysVisibleLinks.includes(composition) && composition !== 'nouvelle-commande') && (
+                <div key={animationKey} className="flex flex-col border-2 animate-fillLeftToRight h-1 bg-red-200 mt-5"></div>
             )}
             {composition === 'solos' && (
                 <Link href="/solos" className="inline-block whitespace-nowrap text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2 w-auto">
