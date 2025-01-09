@@ -1,0 +1,39 @@
+[
+  {
+    "date": "2025-01-09T13:26:14.313Z",
+    "items": [
+      {
+        "categories": [
+          "beef",
+          "meat"
+        ],
+        "produit": "Mega burger",
+        "quantite": 9
+      },
+      {
+        "categories": [
+          "vegetables",
+          "vegan"
+        ],
+        "produit": "Vegan Burger",
+        "quantite": 454
+      },
+      {
+        "categories": [
+          "fish",
+          "meat"
+        ],
+        "produit": "Space fish",
+        "quantite": 22
+      },
+      {
+        "categories": [
+          "chicken",
+          "meat"
+        ],
+        "produit": "Crousty chick",
+        "quantite": 14
+      }
+    ]
+  }
+]

@@ -1,0 +1,60 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Mega burger",
+      "price": 3.99,
+      "categories": [
+        "beef",
+        "meat"
+      ],
+      "image": "https://www.mcqueensdairies.com/wp-content/uploads/2020/02/Chocolate-Chip-Cookies-600x600.jpg",
+      "stock": 78,
+      "stockConseil": 11,
+      "lost": 8,
+      "stockAnnuel": 570
+    },
+    {
+      "id": 2,
+      "name": "Vegan Burger",
+      "price": 2.99,
+      "categories": [
+        "vegetables",
+        "vegan"
+      ],
+      "image": "https://images.squarespace-cdn.com/content/v1/5b798c1e4f66f0c3e2c2a4e3/1590403186466-3I0O0E7C0Z3K7I7O7V7P7M7Q7F/image.jpg?format=2500w",
+      "stock": 45,
+      "stockConseil": 12,
+      "lost": 0,
+      "stockAnnuel": 832
+    },
+    {
+      "id": 3,
+      "name": "Space fish",
+      "price": 1.99,
+      "categories": [
+        "fish",
+        "meat"
+      ],
+      "image": "https://images.squarespace-cdn.com/content/v1/5b798c1e4f66f0c3e2c2a4e3/1590403186466-3I0O0E7C0Z3K7I7O7V7P7M7Q7F/image.jpg?format=2500w",
+      "stock": 152,
+      "stockConseil": 13,
+      "lost": 0,
+      "stockAnnuel": 1042
+    },
+    {
+      "id": 4,
+      "name": "Crousty chick",
+      "price": 4.99,
+      "categories": [
+        "chicken",
+        "meat"
+      ],
+      "image": "https://www.mcqueensdairies.com/wp-content/uploads/2020/02/Chocolate-Chip-Cookies-600x600.jpg",
+      "stock": 112,
+      "stockConseil": 14,
+      "lost": 7,
+      "stockAnnuel": 987
+    }
+  ]
+}
