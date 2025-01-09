@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import { Product } from "@/app/types/record";
 import { saveCurrentStocks, saveLosses } from "./stockService";
 
-
-
 const Stocks = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -29,7 +27,6 @@ const Stocks = () => {
         setLoading(false);
       });
   }, []);
-  
 
   const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
 
@@ -49,7 +46,7 @@ const Stocks = () => {
   // Obtenir toutes les catégories uniques
   const categories = [
     "all",
-    ...new Set(products.map((item) => item.categories).flat()),
+    ...new Set(products.map((item) => item.categories[1]).flat()),
   ];
 
   // Filtrer les items selon la catégorie sélectionnée
@@ -163,7 +160,7 @@ const Stocks = () => {
             <tr key={item.id}>
               <td className="border border-slate-700">{item.name}</td>
               <td className="border border-slate-700">
-                {item.categories.join(", ")}
+                {item.categories[0]}
               </td>
               <td className="border border-slate-700 flex justify-between items-center gap-2">
                 <input
