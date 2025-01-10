@@ -81,7 +81,7 @@ const Commandes = () => {
 	return (
 		<div className="flex flex-col mt-2">
 			<div className="flex flex-row justify-end items-center mr-20 gap-4">
-				<Link href="/nouvelle-commande" className="button-yellow">
+				<Link href="/nouvelle_commande" className="button-yellow">
 					Nouvelle Commande
 				</Link>
 				<Link href="/historique" className="button-blue">
