@@ -11,8 +11,8 @@
       "image": "https://www.mcqueensdairies.com/wp-content/uploads/2020/02/Chocolate-Chip-Cookies-600x600.jpg",
       "stock": 78,
       "stockConseil": 11,
-      "lost": 8,
-      "stockAnnuel": 570
+      "lost": 0,
+      "stockAnnuel": 804
     },
     {
       "id": 2,
@@ -23,10 +23,10 @@
         "vegan"
       ],
       "image": "https://images.squarespace-cdn.com/content/v1/5b798c1e4f66f0c3e2c2a4e3/1590403186466-3I0O0E7C0Z3K7I7O7V7P7M7Q7F/image.jpg?format=2500w",
-      "stock": 45,
+      "stock": 2,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 832
+      "stockAnnuel": 879
     },
     {
       "id": 3,
@@ -37,14 +37,14 @@
         "meat"
       ],
       "image": "https://images.squarespace-cdn.com/content/v1/5b798c1e4f66f0c3e2c2a4e3/1590403186466-3I0O0E7C0Z3K7I7O7V7P7M7Q7F/image.jpg?format=2500w",
-      "stock": 152,
+      "stock": 42,
       "stockConseil": 13,
       "lost": 0,
-      "stockAnnuel": 1042
+      "stockAnnuel": 1388
     },
     {
       "id": 4,
-      "name": "Crousty chick",
+      "name": "Crousty chicken",
       "price": 4.99,
       "categories": [
         "chicken",
@@ -53,8 +53,8 @@
       "image": "https://www.mcqueensdairies.com/wp-content/uploads/2020/02/Chocolate-Chip-Cookies-600x600.jpg",
       "stock": 112,
       "stockConseil": 14,
-      "lost": 7,
-      "stockAnnuel": 987
+      "lost": 0,
+      "stockAnnuel": 1323
     }
   ]
 }
