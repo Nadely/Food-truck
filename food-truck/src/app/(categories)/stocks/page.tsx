@@ -129,11 +129,13 @@ const Stocks = () => {
           Valider tout le stock
         </button>
       </div>
-      <table className="border-separate border-spacing-2 border border-slate-500">
+      <table className="border-separate border-spacing-2 border border-slate-500 rounded-lg">
         <thead>
           <tr>
-            <th className="border border-slate-600">Produits</th>
-            <th className="border border-slate-600">
+            <th className="border border-slate-600 text-center px-2 rounded-tl-lg bg-slate-200 ">
+              Produits
+            </th>
+            <th className="border border-slate-600 px-2 bg-slate-200">
               {/* Menu déroulant des catégories */}
               <select
                 value={selectedCategory}
@@ -149,32 +151,42 @@ const Stocks = () => {
                 ))}
               </select>
             </th>
-            <th className="border border-slate-600">Quantité en stock</th>
-            <th className="border border-slate-600">Quantité conseillée</th>
-            <th className="border border-slate-600">Pertes</th>
-            <th className="border border-slate-600">Stock annuel</th>
+            <th className="border border-slate-600 px-2 bg-slate-200">
+              Quantité en stock
+            </th>
+            <th className="border border-slate-600 px-2 bg-slate-200">
+              Quantité conseillée
+            </th>
+            <th className="border border-slate-600 px-2 bg-slate-200">
+              Pertes
+            </th>
+            <th className="border border-slate-600 px-2 rounded-tr-lg bg-slate-200">
+              Stock annuel
+            </th>
           </tr>
         </thead>
         <tbody>
           {filteredItems.map((item) => (
             <tr key={item.id}>
-              <td className="border border-slate-700">{item.name}</td>
-              <td className="border border-slate-700">
+              <td className="border border-slate-700 px-2">{item.name}</td>
+              <td className="border border-slate-700 px-2">
                 {item.categories[0]}
               </td>
-              <td className="border border-slate-700 flex justify-between items-center gap-2">
+              <td className="border border-slate-700 flex justify-between items-center gap-2 ">
                 <input
                   type="number"
                   value={quantities[item.id] || 0}
                   onChange={(e) =>
                     handleQuantityChange(item.id, parseInt(e.target.value))
                   }
-                  className="w-16 text-center text-black"
+                  className="w-16 text-center text-black px-2 h-[36px]"
                   min="0"
                 />
               </td>
-              <td className="border border-slate-700">{item.stockConseil}</td>
-              <td className="border border-slate-700">
+              <td className="border border-slate-700 px-2">
+                {item.stockConseil}
+              </td>
+              <td className="border border-slate-700 px-2">
                 {item.lost}
                 <button
                   onClick={() => handleLoss(item.id)}
@@ -183,7 +195,9 @@ const Stocks = () => {
                   +
                 </button>
               </td>
-              <td className="border border-slate-700">{item.stockAnnuel}</td>
+              <td className="border border-slate-700 px-2">
+                {item.stockAnnuel}
+              </td>
             </tr>
           ))}
         </tbody>
