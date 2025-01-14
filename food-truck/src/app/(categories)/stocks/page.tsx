@@ -46,7 +46,7 @@ const Stocks = () => {
   // Obtenir toutes les catégories uniques
   const categories = [
     "all",
-    ...new Set(products.map((item) => item.categories[1]).flat()),
+    ...new Set(products.map((item) => item.categories).flat()),
   ];
 
   // Filtrer les items selon la catégorie sélectionnée

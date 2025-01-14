@@ -164,5 +164,21 @@
         "quantite": 112
       }
     ]
+  },
+  {
+    "date": "2025-01-14T11:37:56.468Z",
+    "items": [
+      {
+        "categories": [
+          "poulet",
+          "viande",
+          "garniture",
+          "frit",
+          "burger"
+        ],
+        "produit": "steak mexicain",
+        "quantite": 4
+      }
+    ]
   }
 ]

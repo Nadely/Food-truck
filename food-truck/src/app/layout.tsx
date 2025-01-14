@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </header>
 
         <div className="flex flex-row mt-2">
-          <aside className="flex flex-col items-center justify-center left-0 w-[200px] mt-20 mb-2">
+          <aside className="flex flex-col items-center left-0 w-[200px] mt-20 mb-2">
             <CategorieNav />
           </aside>
 
