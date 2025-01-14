@@ -60,7 +60,7 @@ const Nav = () => {
           Nouvelle Commande
         </Link>
       )}
-      {composition !== 'nouvelle_commande' && (
+      {composition !== 'nouvelle_commande' && composition !== '' && (
         <div className="flex flex-col border-2 animate-fillLeftToRight h-1 bg-red-200 mt-5"></div>
       )}
 
