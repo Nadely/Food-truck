@@ -35,7 +35,7 @@ const AperosBox = () => {
     return (
 			<div className="flex flex-col items-center justify-center0 font-bold font-serif mt-10 text-2xl">
 				<h1 className="border-b-2 border-black w-full text-center mr-5">Apéros Box</h1>
-				<div className="inline-block w-full flex flex-col items-center justify-center font-serif text-lg mt-10">
+				<div className="w-full flex flex-col items-center justify-center font-serif text-lg mt-10">
 							<div className="flex flex-row items-center justify-center gap-8">
 								<button className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center" style={{ width: '200px', height: '200px' }}>
 									<Image src="/funbox.jpg" alt="Fun Box" width={100} height={100} />
