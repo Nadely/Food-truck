@@ -90,5 +90,79 @@
         "quantite": 150
       }
     ]
+  },
+  {
+    "date": "2025-01-14T08:55:47.367Z",
+    "items": [
+      {
+        "categories": [
+          "beef",
+          "meat"
+        ],
+        "produit": "Mega burger",
+        "quantite": 81
+      },
+      {
+        "categories": [
+          "vegetables",
+          "vegan"
+        ],
+        "produit": "Vegan Burger",
+        "quantite": 2
+      },
+      {
+        "categories": [
+          "fish",
+          "meat"
+        ],
+        "produit": "Space fish",
+        "quantite": 42
+      },
+      {
+        "categories": [
+          "chicken",
+          "meat"
+        ],
+        "produit": "Crousty chicken",
+        "quantite": 112
+      }
+    ]
+  },
+  {
+    "date": "2025-01-14T09:05:15.733Z",
+    "items": [
+      {
+        "categories": [
+          "beef",
+          "meat"
+        ],
+        "produit": "Mega burger",
+        "quantite": 81
+      },
+      {
+        "categories": [
+          "vegetables",
+          "vegan"
+        ],
+        "produit": "Vegan Burger",
+        "quantite": 2
+      },
+      {
+        "categories": [
+          "fish",
+          "meat"
+        ],
+        "produit": "Space fish",
+        "quantite": 42
+      },
+      {
+        "categories": [
+          "chicken",
+          "meat"
+        ],
+        "produit": "Crousty chicken",
+        "quantite": 112
+      }
+    ]
   }
 ]

@@ -9,10 +9,10 @@
         "meat"
       ],
       "image": "https://www.mcqueensdairies.com/wp-content/uploads/2020/02/Chocolate-Chip-Cookies-600x600.jpg",
-      "stock": 78,
+      "stock": 81,
       "stockConseil": 11,
       "lost": 0,
-      "stockAnnuel": 804
+      "stockAnnuel": 1206
     },
     {
       "id": 2,
@@ -26,7 +26,7 @@
       "stock": 2,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 879
+      "stockAnnuel": 889
     },
     {
       "id": 3,
@@ -40,7 +40,7 @@
       "stock": 42,
       "stockConseil": 13,
       "lost": 0,
-      "stockAnnuel": 1388
+      "stockAnnuel": 1598
     },
     {
       "id": 4,
@@ -54,7 +54,7 @@
       "stock": 112,
       "stockConseil": 14,
       "lost": 0,
-      "stockAnnuel": 1323
+      "stockAnnuel": 1883
     }
   ]
 }
