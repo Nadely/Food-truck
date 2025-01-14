@@ -5,7 +5,6 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CategorieNav from './components/CategorieNav';
 import Nav from './components/Nav';
-import Main from './main';
 import { usePathname } from 'next/navigation';
 import Panier from './components/Panier';
 
@@ -27,18 +26,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="flex-grow">
             <Nav />
 
-            {/* Section pour Main et Panier */}
+            {/* Section pour children et Panier */}
             <div className="flex mt-2 gap-4 font-bold font-serif">
-              {/* Main : 2/3 */}
+              {/* children : 2/3 */}
               {pathname && pathname.startsWith('/nouvelle_commande') ? (
                 <div className="flex-[2] w-3/4 p-2">
                   {children}
-                  <Main />
                 </div>
               ) : (
                 <div className="flex-[2] w-full p-2">
                   {children}
-                  <Main />
                 </div>
               )}
 

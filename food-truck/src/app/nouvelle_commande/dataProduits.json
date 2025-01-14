@@ -133,34 +133,34 @@
 	],
 
 
-	"SnacksVeggies": [
+	"Snacks Veggies": [
 		{
 			"id": 1,
 			"name": "Belcanto Zero Meat",
 			"image": "",
 			"price": "4,5€",
-			"categorie": "SnacksVeggies"
+			"categorie": "Snacks Veggies"
 		},
 		{
 			"id": 2,
 			"name": "Fricadelle Zero Meat",
 			"image": "",
 			"price": "4€",
-			"categorie": "SnacksVeggies"
+			"categorie": "Snacks Veggies"
 		},
 		{
 			"id": 3,
 			"name": "Hamburger Zero Meat",
 			"image": "",
 			"price": "4€",
-			"categorie": "SnacksVeggies"
+			"categorie": "Snacks Veggies"
 		},
 		{
 			"id": 4,
 			"name": "Poulycroc Vegi",
 			"image": "",
 			"price": "4,5€",
-			"categorie": "SnacksVeggies"
+			"categorie": "Snacks Veggies"
 		}
 	],
 	"Sauces": [
@@ -420,48 +420,48 @@
 	],
 
 
-	"Apero-Box": [
+	"Apéro-Box": [
 		{
 			"id": 1,
 			"name": "Fun Box",
 			"image": "/funbox.jpg",
 			"price": "5€",
-			"categorie": "Apero-Box"
+			"categorie": "Apéro-Box"
 		},
 		{
 			"id": 2,
 			"name": "Spicy Box",
 			"image": "/spicybox.jpg",
 			"price": "5€",
-			"categorie": "Apero-Box"
+			"categorie": "Apéro-Box"
 		},
 		{
 			"id": 3,
 			"name": "Cheese Box",
 			"image": "/cheesebox.jpg",
 			"price": "5€",
-			"categorie": "Apero-Box"
+			"categorie": "Apéro-Box"
 		},
 		{
 			"id": 4,
 			"name": "Chicken Box",
 			"image": "/chickenbox.jpg",
 			"price": "5€",
-			"categorie": "Apero-Box"
+			"categorie": "Apéro-Box"
 		},
 		{
 			"id": 5,
 			"name": "Vegan Box",
 			"image": "/veganbox.jpg",
 			"price": "5€",
-			"categorie": "Apero-Box"
+			"categorie": "Apéro-Box"
 		},
 		{
 			"id": 6,
 			"name": "Party Box",
 			"image": "/partybox.jpg",
 			"price": "11€",
-			"categorie": "Apero-Box"
+			"categorie": "Apéro-Box"
 		}
 	],
 

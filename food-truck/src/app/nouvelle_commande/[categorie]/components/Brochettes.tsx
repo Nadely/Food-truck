@@ -6,18 +6,18 @@ import { useState } from "react";
 import data from "../../dataProduits.json";
 import { useRouter } from "next/navigation";
 
-const Snacks = () => {
+const Brochettes = () => {
   const searchParams = useSearchParams();
   const viaMitraillette = searchParams.get("viaMitraillette") === "true";
   const router = useRouter();
 
   const [quantities, setQuantities] = useState<{ [key: number]: number }>(
-    data.Snacks.reduce((acc: { [key: number]: number }, product) => {
+    data.Brochettes.reduce((acc: { [key: number]: number }, product) => {
       acc[product.id] = 0;
       return acc;
     }, {})
   );
-  const [selectedSnack, setSelectedSnack] = useState<number | null>(null);
+  const [selectedBrochette, setSelectedBrochette] = useState<number | null>(null);
 
   const handleIncrement = (id: number) => {
     if (!viaMitraillette) {
@@ -37,23 +37,23 @@ const Snacks = () => {
     }
   };
 
-  const handleSelectSnack = (id: number) => {
+  const handleSelectBrochette = (id: number) => {
     if (viaMitraillette) {
-      setSelectedSnack(id);
+      setSelectedBrochette(id);
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif text-2xl">
-      <h1 className="border-b-2 border-black w-full text-center mr-5">Snacks</h1>
+      <h1 className="border-b-2 border-black w-full text-center mr-5">Brochettes</h1>
       <div className="inline-block w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
         <div className="flex flex-col items-center justify-center">
-          <div className="grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1">
-            {data.Snacks.map((product) => (
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
+            {data.Brochettes.map((product) => (
               <div
                 key={product.id}
                 className={`flex flex-col items-center justify-center gap-4 ${
-                  viaMitraillette && selectedSnack === product.id
+                  viaMitraillette && selectedBrochette === product.id
                     ? "bg-green-200"
                     : ""
                 }`}
@@ -61,7 +61,7 @@ const Snacks = () => {
                 <div
                   className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center cursor-pointer"
                   style={{ width: "180px", height: "180px" }}
-                  onClick={() => handleSelectSnack(product.id)}
+                  onClick={() => handleSelectBrochette(product.id)}
                 >
                   <Image src={product.image} alt={product.name} width={100} height={100} />
                   <p className="text-sm mt-auto">{product.name}</p>
@@ -99,4 +99,4 @@ const Snacks = () => {
   );
 };
 
-export default Snacks;
+export default Brochettes;

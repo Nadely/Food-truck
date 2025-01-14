@@ -10,17 +10,17 @@ const Nav = () => {
   const composition = segments.includes('nouvelle_commande') ? categories : '';
 
   const linksCompo = [
-    'nouvelle_commande', 'solos', 'menus', 'aperos-box', 'boissons', 'frites',
-    'choixSauces', 'brochettes', 'snacksVeggies', 'snacks', 'sauces',
-    'mitraillettes', 'enfants', 'supplements', 'burgers',
-    'choixSupplements', 'choixBoissons', 'veggies'
+    'nouvelle_commande', 'Solos', 'Menus', 'Aperos-box', 'Boissons', 'Frites',
+    'ChoixSauces', 'Brochettes', 'SnacksVeggies', 'Snacks', 'Sauces',
+    'Mitraillettes', 'Enfants', 'Supplements', 'Burgers',
+    'ChoixSupplements', 'ChoixBoissons', 'Veggies'
   ];
 
   const renderLink = (href: string, text: string) => (
     composition === href && (
       <Link
         href={`/${href}`}
-        className="inline-block whitespace-nowrap text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2 w-auto"
+        className="whitespace-nowrap text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2 w-auto"
       >
         {text}
       </Link>
@@ -56,27 +56,31 @@ const Nav = () => {
         </Link>
       )}
       {(composition === 'nouvelle_commande' || linksCompo.includes(composition)) && (
-        <Link href="/nouvelle_commande" className="whitespace-nowrap text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2 w-auto ">
+        <Link href="/nouvelle_commande" className="whitespace-nowrap text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2 w-auto">
           Nouvelle Commande
         </Link>
       )}
-      {renderLink('solos', 'Solos')}
-      {renderLink('menus', 'Menus')}
-      {renderLink('aperos-box', 'Apéros Box')}
-      {renderLink('boissons', 'Boissons')}
-      {renderLink('frites', 'Frites')}
-      {renderLink('choixSauces', 'Sauces ?')}
-      {renderLink('brochettes', 'Brochettes')}
-      {renderLink('snacksVeggies', 'Snacks Veggies')}
-      {renderLink('snacks', 'Snacks')}
-      {renderLink('sauces', 'Sauces')}
-      {renderLink('mitraillettes', 'Mitraillettes')}
-      {renderLink('enfants', 'Menus enfants')}
-      {renderLink('supplements', 'Suppléments')}
-      {renderLink('burgers', 'Burgers')}
-      {renderLink('choixSupplements', 'Suppléments ?')}
-      {renderLink('choixBoissons', 'Boissons ?')}
-      {renderLink('veggies', 'Veggies')}
+      {composition !== 'nouvelle_commande' && (
+        <div className="flex flex-col border-2 animate-fillLeftToRight h-1 bg-red-200 mt-5"></div>
+      )}
+
+      {renderLink('Solos', 'Solos')}
+      {renderLink('Menus', 'Menus')}
+      {renderLink('Aperos-box', 'Apéros Box')}
+      {renderLink('Boissons', 'Boissons')}
+      {renderLink('Frites', 'Frites')}
+      {renderLink('ChoixSauces', 'Sauces ?')}
+      {renderLink('Brochettes', 'Brochettes')}
+      {renderLink('SnacksVeggies', 'Snacks Veggies')}
+      {renderLink('Snacks', 'Snacks')}
+      {renderLink('Sauces', 'Sauces')}
+      {renderLink('Mitraillettes', 'Mitraillettes')}
+      {renderLink('Enfants', 'Menus enfants')}
+      {renderLink('Supplements', 'Suppléments')}
+      {renderLink('Burgers', 'Burgers')}
+      {renderLink('ChoixSupplements', 'Suppléments ?')}
+      {renderLink('ChoixBoissons', 'Boissons ?')}
+      {renderLink('Veggies', 'Veggies')}
     </div>
   );
 };
