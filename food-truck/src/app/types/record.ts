@@ -1,13 +1,12 @@
 export interface Product {
   id: number;
   name: string;
-  price: number;
   categories: string[];
-  image: string;
   stock: number;
   stockConseil: number;
   lost: number;
   stockAnnuel: number;
+  stockLimite: number;
 }
 
 export interface LossRecord {
