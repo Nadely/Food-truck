@@ -87,7 +87,7 @@ const Brochettes = () => {
             className="button-blue w-40 mt-10 mb-5"
             onClick={() =>
               viaMitraillette
-                ? router.push("/Garnitures")
+                ? router.push("Supplements?viaBrochettes=true")
                 : router.push("/panier.json")
             }
           >

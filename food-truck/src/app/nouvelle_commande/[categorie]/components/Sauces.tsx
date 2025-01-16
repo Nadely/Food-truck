@@ -10,12 +10,25 @@ const Sauces = () => {
 
   const [selectedSauces, setSelectedSauces] = useState<number[]>([]); // Permet de sélectionner plusieurs sauces
 
-  const handleSelectSauce = (id: number) => {
-    setSelectedSauces((prevSelected) =>
-      prevSelected.includes(id) // Vérifie si la sauce est déjà sélectionnée
-        ? prevSelected.filter((sauceId) => sauceId !== id) // Retire si déjà sélectionnée
-        : [...prevSelected, id] // Ajoute sinon
-    );
+  const handleSelectSauce = (id: number, name: string) => {
+    if (name === "Aucune sauce") {
+      // Si "Aucune sauce" est cliqué, on désélectionne toutes les sauces
+      setSelectedSauces(prevSelected =>
+        prevSelected.length === 0 ? [] : [id] // Si déjà sélectionnée, on désélectionne tout
+      );
+    } else {
+      setSelectedSauces(prevSelected => {
+        if (prevSelected.includes(id)) {
+          // Si la sauce est déjà sélectionnée, on la désélectionne
+          return prevSelected.filter((sauceId) => sauceId !== id);
+        } else {
+          // Si "Aucune sauce" est sélectionnée, on la retire
+          const updatedSelection = prevSelected.filter((sauceId) => sauceId !== data.Sauces.find((product) => product.name === "Aucune sauce")?.id);
+          // Ajouter la sauce normalement
+          return [...updatedSelection, id];
+        }
+      });
+    }
   };
 
   return (
@@ -28,13 +41,13 @@ const Sauces = () => {
               <div
                 key={product.id}
                 className={`flex flex-col items-center justify-center gap-4 ${
-                  selectedSauces.includes(product.id) ? "bg-green-200 border-4 border-green-500" : ""
+                  selectedSauces.includes(product.id) ? "bg-green-200 border-4 border-green-500 rounded-lg" : ""
                 }`}
               >
                 <div
                   className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center cursor-pointer"
                   style={{ width: "180px", height: "180px" }}
-                  onClick={() => handleSelectSauce(product.id)}
+                  onClick={() => handleSelectSauce(product.id, product.name)} // Ajout du nom de la sauce
                 >
                   <Image src={product.image} alt={product.name} width={100} height={100} />
                   <p className="text-sm mt-auto">{product.name}</p>

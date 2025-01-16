@@ -6,21 +6,21 @@ import { useState } from "react";
 import data from "../../dataProduits.json";
 import { useRouter } from "next/navigation";
 
-const Snacks = () => {
+const SnacksVeggies = () => {
   const searchParams = useSearchParams();
-  const viaMitraillette = searchParams.get("viaMitraillette") === "true";
+  const viaVeggiMitraillette = searchParams.get("viaVeggiMitraillette") === "true";
   const router = useRouter();
 
   const [quantities, setQuantities] = useState<{ [key: number]: number }>(
-    data.Snacks.reduce((acc: { [key: number]: number }, product) => {
+    data.SnacksVeggies.reduce((acc: { [key: number]: number }, product) => {
       acc[product.id] = 0;
       return acc;
     }, {})
   );
-  const [selectedSnack, setSelectedSnack] = useState<number | null>(null);
+  const [selectedSnackVeggies, setSelectedSnackVeggies] = useState<number | null>(null);
 
   const handleIncrement = (id: number) => {
-    if (!viaMitraillette) {
+    if (!viaVeggiMitraillette) {
       setQuantities((prevQuantities) => ({
         ...prevQuantities,
         [id]: prevQuantities[id] + 1,
@@ -29,7 +29,7 @@ const Snacks = () => {
   };
 
   const handleDecrement = (id: number) => {
-    if (!viaMitraillette) {
+    if (!viaVeggiMitraillette) {
       setQuantities((prevQuantities) => ({
         ...prevQuantities,
         [id]: prevQuantities[id] > 0 ? prevQuantities[id] - 1 : 0,
@@ -38,8 +38,8 @@ const Snacks = () => {
   };
 
   const handleSelectSnack = (id: number) => {
-    if (viaMitraillette) {
-      setSelectedSnack(id);
+    if (viaVeggiMitraillette) {
+      setSelectedSnackVeggies(id);
     }
   };
 
@@ -48,15 +48,15 @@ const Snacks = () => {
       <h1 className="border-b-2 border-black w-full text-center mr-5">Snacks</h1>
       <div className="inline-block w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
         <div className="flex flex-col items-center justify-center">
-          <div className="grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1">
-            {data.Snacks.filter(
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-1">
+            {data.SnacksVeggies.filter(
               (product) =>
-                viaMitraillette || product.name !== "Steack haché"
+                viaVeggiMitraillette || product.name !== "Steack haché"
             ).map((product) => (
               <div
                 key={product.id}
                 className={`flex flex-col items-center justify-center gap-4 ${
-                  viaMitraillette && selectedSnack === product.id
+                  viaVeggiMitraillette && selectedSnackVeggies === product.id
                     ? "bg-green-200 border-4 border-green-500 rounded-lg"
                     : ""
                 }`}
@@ -73,8 +73,8 @@ const Snacks = () => {
                     height={100}
                   />
                   <p className="text-sm mt-auto">{product.name}</p>
-                  {!viaMitraillette && <p className="text-sm mt-auto">{product.price}</p>}
-                  {!viaMitraillette && (
+                  {!viaVeggiMitraillette && <p className="text-sm mt-auto">{product.price}</p>}
+                  {!viaVeggiMitraillette && (
                     <div className="flex flex-row items-center gap-4">
                       <button
                         onClick={() => handleDecrement(product.id)}
@@ -100,8 +100,8 @@ const Snacks = () => {
           <button
             className="button-blue w-40 mt-10 mb-5"
             onClick={() =>
-              viaMitraillette
-                ? router.push("Supplements?viaSnacks=true")
+              viaVeggiMitraillette
+                ? router.push("Supplements?viaSnacksVeggies=true")
                 : router.push("/panier.json")
             }
           >
@@ -113,4 +113,4 @@ const Snacks = () => {
   );
 };
 
-export default Snacks;
+export default SnacksVeggies;
