@@ -87,7 +87,7 @@ const Boissons = () => {
                 }`}
               >
                 <div
-                  className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center cursor-pointer"
+                  className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center cursor-pointer hover:scale-105 transition-transform duration-200 hover:shadow-md shadow-sm"
                   style={{ width: "180px", height: "180px" }}
                   onClick={() => {
                     if (product.name === "Aucune boisson") {

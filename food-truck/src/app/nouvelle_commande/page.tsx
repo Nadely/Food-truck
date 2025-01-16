@@ -38,7 +38,7 @@ const NouvelleCommande = () => {
               onClick={() => {
                 router.push(`/nouvelle_commande/${categorie}`); // Navigue vers la bonne catégorie
               }}
-              className={`${categorieColors[categorie]} border-2 border-black rounded-lg p-4 flex flex-col items-center justify-center gap-4 cursor-pointer`}
+              className={`${categorieColors[categorie]} border-2 border-black rounded-lg p-4 flex flex-col items-center justify-center gap-4 cursor-pointer hover:bg-green-400 hover:scale-105 transition-transform duration-200 hover:shadow-md shadow-sm`}
               style={{ width: "180px", height: "180px" }}
             >
               <div className="flex items-center justify-center">

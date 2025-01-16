@@ -37,7 +37,7 @@ const Veggies = () => {
           <button
             key={product.id}
             onClick={() => handleProduitClick(product)}
-            className="flex flex-col items-center justify-center gap-4 border-2 border-black rounded-lg p-2 cursor-pointer"
+            className="flex flex-col items-center justify-center gap-4 border-2 border-black rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:scale-105 transition-transform duration-200 hover:shadow-md shadow-sm"
             style={{ width: "200px", height: "200px" }}
           >
             <Image
