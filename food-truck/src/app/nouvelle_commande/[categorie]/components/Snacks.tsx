@@ -48,7 +48,7 @@ const Snacks = () => {
       <h1 className="border-b-2 border-black w-full text-center mr-5">Snacks</h1>
       <div className="inline-block w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
         <div className="flex flex-col items-center justify-center">
-          <div className="grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1">
+          <div className="grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             {data.Snacks.filter(
               (product) =>
                 viaMitraillette || product.name !== "Steack haché"
@@ -101,7 +101,7 @@ const Snacks = () => {
             className="button-blue w-40 mt-10 mb-5"
             onClick={() =>
               viaMitraillette
-                ? router.push("Supplements?viaSnacks=true")
+                ? router.push("Sauces?viaSnacks=true")
                 : router.push("/panier.json")
             }
           >

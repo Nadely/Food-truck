@@ -23,7 +23,7 @@ const Frites = () => {
       <h1 className="border-b-2 border-black w-full text-center mr-5">Frites</h1>
       <div className="inline-block w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
         <div className="flex flex-col items-center justify-center">
-          <div className="grid md:grid-cols-2 gap-1">
+          <div className="grid md:grid-cols-2 gap-4">
             {data.Frites.map((product) => (
               <div
                 key={product.id}

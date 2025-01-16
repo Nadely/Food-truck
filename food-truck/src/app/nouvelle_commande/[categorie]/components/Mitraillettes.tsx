@@ -18,7 +18,7 @@ const Mitraillettes = () => {
       product.id === 1
         ? "Snacks"
         : product.id === 2
-        ? "Supplements"
+        ? "Sauces"
         : product.id === 3
         ? "Brochettes"
         : ""; // option par défaut
@@ -34,7 +34,7 @@ const Mitraillettes = () => {
   return (
     <div className="flex flex-col items-center justify-center mt-2 font-bold font-serif text-2xl">
       <h1 className="border-b-2 border-black w-full text-center">Mitraillettes</h1>
-      <div className="inline-block w-full flex flex-row items-center justify-center mt-10 font-serif text-lg gap-8 mb-5">
+      <div className="inline-block w-full flex flex-row items-center justify-center mt-10 font-serif text-lg gap-4 mb-5">
         {data.Mitraillettes.map((product) => (
           <button
             key={product.id}
