@@ -2,6 +2,20 @@
 
 import data from "./dataProduits.json";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+
+const categorieColors: Record<string, string> = {
+  "Mitraillettes": "bg-red-200",  // Couleur pour Mitraillettes
+  "Burgers": "bg-yellow-200", // Couleur pour Burger
+  "Veggies": "bg-green-200",  // Couleur pour Salad
+  "Enfants": "bg-blue-200",  // Couleur pour Menu_Enfants
+  "AperoBox": "bg-purple-200", // Couleur pour AperoBox
+  "Boissons": "bg-pink-200",  // Couleur pour Boissons
+  "Frites": "bg-orange-200", // Couleur pour Frites
+  "Brochettes": "bg-cyan-200", // Couleur pour Brochettes
+  "SnacksVeggies": "bg-lime-200", // Couleur pour SnacksVeggies
+  "Snacks": "bg-teal-200", // Couleur pour Snacks
+};
 
 const NouvelleCommande = () => {
   const router = useRouter();
@@ -24,10 +38,20 @@ const NouvelleCommande = () => {
               onClick={() => {
                 router.push(`/nouvelle_commande/${categorie}`); // Navigue vers la bonne catégorie
               }}
-              className="button-blue flex items-center justify-center w-full h-20 text-center"
+              className={`${categorieColors[categorie]} border-2 border-black rounded-lg p-4 flex flex-col items-center justify-center gap-4 cursor-pointer`}
               style={{ width: "180px", height: "180px" }}
             >
-              {categorie}
+              <div className="flex items-center justify-center">
+                <Image
+                  src={`/${categorie}.png`}
+                  alt={categorie}
+                  width={100}
+                  height={100}
+                />
+              </div>
+              <div className="flex items-center justify-center">
+                {categorie}
+              </div>
             </button>
           ))}
         </div>
