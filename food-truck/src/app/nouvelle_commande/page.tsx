@@ -5,16 +5,16 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 const categorieColors: Record<string, string> = {
-  "Mitraillettes": "bg-red-200",  // Couleur pour Mitraillettes
-  "Burgers": "bg-yellow-200", // Couleur pour Burger
-  "Veggies": "bg-green-200",  // Couleur pour Salad
-  "Enfants": "bg-blue-200",  // Couleur pour Menu_Enfants
-  "AperoBox": "bg-purple-200", // Couleur pour AperoBox
-  "Boissons": "bg-pink-200",  // Couleur pour Boissons
-  "Frites": "bg-orange-200", // Couleur pour Frites
-  "Brochettes": "bg-cyan-200", // Couleur pour Brochettes
-  "SnacksVeggies": "bg-lime-200", // Couleur pour SnacksVeggies
-  "Snacks": "bg-teal-200", // Couleur pour Snacks
+  "Mitraillettes": "bg-red-200",
+  "Burgers": "bg-yellow-200",
+  "Veggies": "bg-green-200",
+  "Enfants": "bg-blue-200",
+  "AperoBox": "bg-purple-200",
+  "Boissons": "bg-pink-200",
+  "Frites": "bg-orange-200",
+  "Brochettes": "bg-cyan-200",
+  "SnacksVeggies": "bg-lime-200",
+  "Snacks": "bg-teal-200",
 };
 
 const NouvelleCommande = () => {
