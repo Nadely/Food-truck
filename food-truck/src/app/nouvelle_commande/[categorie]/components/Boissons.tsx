@@ -4,8 +4,6 @@ import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import data from "../../dataProduits.json";
-import React from "react";
-import { dataProduct } from "@/app/types/allTypes";
 
 const Boissons = () => {
   const searchParams = useSearchParams();
