@@ -1,4 +1,200 @@
 {
+	"Mitraillettes": [
+		{
+			"id": 1,
+			"name": "Classique",
+			"image": "/mitraillette.png",
+			"price": "8.50€",
+			"categorie": "Mitraillettes",
+			"garniture": ["Salade", "Tomate", "Oignons Frit"]
+		},
+		{
+			"id": 2,
+			"name": "Filet Américain",
+			"image": "/americain-filet.jpg",
+			"price": "8.50€",
+			"categorie": "Mitraillettes",
+			"garniture": ["Salade", "Tomate", "Oignons Frit"]
+		},
+		{
+			"id": 3,
+			"name": "Brochette",
+			"image": "/mitraillette-brochette.jpg",
+			"price": "9€",
+			"categorie": "Mitraillettes",
+			"garniture": ["Salade", "Tomate", "Oignons Frit"]
+		}
+	],
+
+
+	"Burgers": [
+		{
+			"id": 1,
+			"name": "Burger",
+			"image": "/burger.jpg",
+			"price": "7€",
+			"categorie": "Burgers",
+			"garniture": ["Salade", "Tomate", "Oignons Frit", "Sauce Hamburger"]
+		},
+		{
+			"id": 2,
+			"name": "Mexicano Burger",
+			"image": "/mexicano-burger.jpg",
+			"price": "7€",
+			"categorie": "Burgers",
+			"garniture": ["Salade", "Tomate", "Cornichons sucrées", "Sauce Bicky"]
+		},
+		{
+			"id": 3,
+			"name": "Fish Burger",
+			"image": "/fish-burger.jpg",
+			"price": "7€",
+			"categorie": "Burgers",
+			"garniture": ["Salade", "Tomate", "Oignons Frit", "Sauce Hamburger"]
+		},
+		{
+			"id": 4,
+			"name": "Bicky Burger",
+			"image": "/bicky-burger.png",
+			"price": "7€",
+			"categorie": "Burgers",
+			"garniture": ["Salade", "Tomate", "Cornichons sucrées", "Sauce Bicky"]
+		},
+		{
+			"id": 5,
+			"name": "Chicken Burger",
+			"image": "/chicken-burger.jpg",
+			"price": "7€",
+			"categorie": "Burgers",
+			"garniture": ["Salade", "Tomate", "Oignons Frit", "Sauce Hamburger"]
+		},
+		{
+			"id": 6,
+			"name": "Crispy Burger",
+			"image": "/crispy-burger.jpg",
+			"price": "7.5€",
+			"categorie": "Burgers",
+			"garniture": ["Salade", "Tomate", "Oignons Frit", "Sauce Hamburger"]
+		}
+	],
+
+	"Veggies": [
+		{
+			"id": 1,
+			"name": "Veggie Mitraillette",
+			"image": "/mitraillette-veggie.jpg",
+			"price": "8€",
+			"categorie": "Veggies"
+		},
+		{
+			"id": 2,
+			"name": "Veggie Burger",
+			"image": "/veggi-burger.jpg",
+			"price": "7€",
+			"categorie": "Veggies"
+		}
+	],
+
+	"Enfants": [
+		{
+			"id": 1,
+			"name": "Compote",
+			"image": "/compote.jpg",
+			"price": "6.5€",
+			"categorie": "Menu_Enfants"
+		},
+		{
+			"id": 2,
+			"name": "Crème au chocolat",
+			"image": "/creme-chocolat.png",
+			"price": "6.5€",
+			"categorie": "Menu_Enfants"
+		},
+		{
+			"id": 3,
+			"name": "Nuggets",
+			"image": "/nuggets.png",
+			"categorie": "Menu_Enfants"
+		},
+		{
+			"id": 4,
+			"name": "Poulycroc",
+			"image": "/poulycroc.jpg",
+			"categorie": "Menu_Enfants"
+		},
+		{
+			"id": 5,
+			"name": "Capri-Sun",
+			"image": "/capri-sun.jpg",
+			"categorie": "Menu_Enfants"
+		},
+		{
+			"id": 6,
+			"name": "Frites",
+			"image": "/frites.jpg",
+			"categorie": "Menu_Enfants"
+		}
+	],
+
+	"AperoBox": [
+		{
+			"id": 1,
+			"name": "Fun Box",
+			"image": "/funbox.jpg",
+			"price": "5€",
+			"categorie": "AperoBox"
+		},
+		{
+			"id": 2,
+			"name": "Spicy Box",
+			"image": "/spicybox.jpg",
+			"price": "5€",
+			"categorie": "AperoBox"
+		},
+		{
+			"id": 3,
+			"name": "Cheese Box",
+			"image": "/cheesebox.jpg",
+			"price": "5€",
+			"categorie": "AperoBox"
+		},
+		{
+			"id": 4,
+			"name": "Chicken Box",
+			"image": "/chickenbox.jpg",
+			"price": "5€",
+			"categorie": "AperoBox"
+		},
+		{
+			"id": 5,
+			"name": "Vegan Box",
+			"image": "/veganbox.jpg",
+			"price": "5€",
+			"categorie": "AperoBox"
+		},
+		{
+			"id": 6,
+			"name": "Party Box",
+			"image": "/partybox.jpg",
+			"price": "11€",
+			"categorie": "AperoBox"
+		},
+		{
+			"id": 7,
+			"name": "B.Ball",
+			"image": "/bball.jpg",
+			"price": "5€",
+			"categorie": "AperoBox"
+		},
+		{
+			"id": 8,
+			"name": "Mega Cheese",
+			"image": "/mega-cheese.jpg",
+			"price": "5€",
+			"categorie": "AperoBox"
+		}
+	],
+
 	"Snacks": [
 		{
 			"id": 1,
@@ -10,7 +206,7 @@
 		{
 			"id": 2,
 			"name": "Fricadelle XXL",
-			"image": "/fricadelle-xxl.jpg",
+			"image": "/fricadelle.jpg",
 			"price": "6€",
 			"categorie": "Snacks"
 		},
@@ -45,7 +241,7 @@
 		{
 			"id": 7,
 			"name": "Bouffe feu",
-			"image": "/bouffe-feu.jpeg",
+			"image": "/bouffe-feu.jpg",
 			"price": "4€",
 			"categorie": "Snacks"
 		},
@@ -83,6 +279,20 @@
 			"image": "/loempidel.jpeg",
 			"price": "4€",
 			"categorie": "Snacks"
+		},
+		{
+			"id": 13,
+			"name": "Steack haché",
+			"image": "/steack-haché.png",
+			"price": "0€",
+			"categorie": "Snacks"
+		},
+		{
+			"id": 14,
+			"name": "Belcanto XXL",
+			"image": "/belcanto.jpg",
+			"price": "0€",
+			"categorie": "Snacks"
 		}
 	],
 
@@ -91,74 +301,74 @@
 		{
 			"id": 1,
 			"name": "Volaille",
-			"image": "",
+			"image": "/brochette-volaille.jpg",
 			"price": "4,5€",
 			"categorie": "Brochettes"
 		},
 		{
 			"id": 2,
 			"name": "Tzigane",
-			"image": "",
+			"image": "/brochette-tzigane.jpeg",
 			"price": "4,5€",
 			"categorie": "Brochettes"
 		},
 		{
 			"id": 3,
 			"name": "Ardennaise",
-			"image": "",
+			"image": "/brochette-ardennaise.jpg",
 			"price": "4,5€",
 			"categorie": "Brochettes"
 		},
 		{
 			"id": 4,
 			"name": "Poisson",
-			"image": "",
+			"image": "/brochette-poisson.jpg",
 			"price": "4,5€",
 			"categorie": "Brochettes"
 		},
 		{
 			"id": 5,
 			"name": "Porc",
-			"image": "",
+			"image": "/brochette-porc.jpg",
 			"price": "4,5€",
 			"categorie": "Brochettes"
 		},
 		{
 			"id": 6,
 			"name": "Boeuf",
-			"image": "",
+			"image": "/brochette-boeuf.jpg",
 			"price": "4,5€",
 			"categorie": "Brochettes"
 		}
 	],
 
 
-	"Snacks Veggies": [
+	"SnacksVeggies": [
 		{
 			"id": 1,
 			"name": "Belcanto Zero Meat",
-			"image": "",
+			"image": "/belcanto-zero-meat.png",
 			"price": "4,5€",
 			"categorie": "Snacks Veggies"
 		},
 		{
 			"id": 2,
 			"name": "Fricadelle Zero Meat",
-			"image": "",
+			"image": "/fricadelle-zero-meat.png",
 			"price": "4€",
 			"categorie": "Snacks Veggies"
 		},
 		{
 			"id": 3,
 			"name": "Hamburger Zero Meat",
-			"image": "",
+			"image": "/hamburger-zero-meat.jpg",
 			"price": "4€",
 			"categorie": "Snacks Veggies"
 		},
 		{
 			"id": 4,
 			"name": "Poulycroc Vegi",
-			"image": "",
+			"image": "/poulycroc-zero-meat.jpg",
 			"price": "4,5€",
 			"categorie": "Snacks Veggies"
 		}
@@ -282,9 +492,32 @@
 			"image": "/samourai.jpg",
 			"price": "0.50€",
 			"categorie": "Sauces"
+		},
+		{
+			"id": 18,
+			"name": "Aucune sauce",
+			"image": "/rien.jpg",
+			"price": "0€",
+			"categorie": "Sauces"
 		}
 	],
 
+	"Frites": [
+		{
+			"id": 1,
+			"name": "Petites frites",
+			"image": "/frites.jpg",
+			"price": "3.50€",
+			"categorie": "Frites"
+		},
+		{
+			"id": 2,
+			"name": "Grandes frites",
+			"image": "/frites.jpg",
+			"price": "4.50€",
+			"categorie": "Frites"
+		}
+	],
 
 	"Boissons": [
 		{
@@ -318,7 +551,7 @@
 		{
 			"id": 5,
 			"name": "Canada Dry",
-			"image": "/canada-dry.jpg",
+			"image": "/canada-dry.jpeg",
 			"price": "1.50€",
 			"categorie": "Boissons"
 		},
@@ -331,7 +564,7 @@
 		},
 		{
 			"id": 7,
-			"name": "Seven up",
+			"name": "Seven up / Sprite",
 			"image": "/seven-up.jpg",
 			"price": "1.50€",
 			"categorie": "Boissons"
@@ -374,7 +607,7 @@
 		{
 			"id": 13,
 			"name": "Eau pétillante",
-			"image": "/eau-petillante.jpg",
+			"image": "/eau-pétillante.jpg",
 			"price": "1.50€",
 			"categorie": "Boissons"
 		},
@@ -395,73 +628,16 @@
 		{
 			"id": 16,
 			"name": "Leffe Ruby",
-			"image": "leffe-ruby.jpg",
+			"image": "/leffe-ruby.jpg",
 			"price": "3.50€",
 			"categorie": "Boissons"
-		}
-	],
-
-
-	"Frites": [
-		{
-			"id": 1,
-			"name": "Petites frites",
-			"image": "/frites.jpg",
-			"price": "3.50€",
-			"categorie": "Frites"
 		},
 		{
-			"id": 2,
-			"name": "Grandes frites",
-			"image": "/frites.jpg",
-			"price": "4.50€",
-			"categorie": "Frites"
-		}
-	],
-
-
-	"Apéro-Box": [
-		{
-			"id": 1,
-			"name": "Fun Box",
-			"image": "/funbox.jpg",
-			"price": "5€",
-			"categorie": "Apéro-Box"
-		},
-		{
-			"id": 2,
-			"name": "Spicy Box",
-			"image": "/spicybox.jpg",
-			"price": "5€",
-			"categorie": "Apéro-Box"
-		},
-		{
-			"id": 3,
-			"name": "Cheese Box",
-			"image": "/cheesebox.jpg",
-			"price": "5€",
-			"categorie": "Apéro-Box"
-		},
-		{
-			"id": 4,
-			"name": "Chicken Box",
-			"image": "/chickenbox.jpg",
-			"price": "5€",
-			"categorie": "Apéro-Box"
-		},
-		{
-			"id": 5,
-			"name": "Vegan Box",
-			"image": "/veganbox.jpg",
-			"price": "5€",
-			"categorie": "Apéro-Box"
-		},
-		{
-			"id": 6,
-			"name": "Party Box",
-			"image": "/partybox.jpg",
-			"price": "11€",
-			"categorie": "Apéro-Box"
+			"id": 17,
+			"name": "Aucune boisson",
+			"image": "/rien.jpg",
+			"price": "0€",
+			"categorie": "Boissons"
 		}
 	],
 
@@ -483,138 +659,75 @@
 		}
 	],
 
-
-	"Mitraillettes": [
+	"Supplements": [
 		{
 			"id": 1,
-			"name": "Classique",
-			"image": "/mitraillette.jpg",
-			"price": "8.50€",
-			"categorie": "Mitraillettes"
+			"name": "Cheddar",
+			"image": "/cheddar.jpg",
+			"price": "1€",
+			"categorie": "Supplements"
 		},
 		{
 			"id": 2,
-			"name": "Filet Américain",
-			"image": "/mitraillette-americain.jpg",
-			"price": "8.50€",
-			"categorie": "Mitraillettes"
+			"name": "Raclette",
+			"image": "/raclette.jpg",
+			"price": "1€",
+			"categorie": "Supplements"
 		},
 		{
 			"id": 3,
-			"name": "Brochette",
-			"image": "/mitraillette-brochette.jpg",
-			"price": "9€",
-			"categorie": "Mitraillettes"
-		}
-	],
-
-
-	"Burgers": [
-		{
-			"id": 1,
-			"name": "Burger",
-			"image": "/burger.jpg",
-			"price": "7€",
-			"categorie": "Burgers"
-		},
-		{
-			"id": 2,
-			"name": "Mexicano Burger",
-			"image": "/mexicano-burger.jpg",
-			"price": "7€",
-			"categorie": "Burgers"
-		},
-		{
-			"id": 3,
-			"name": "Fish Burger",
-			"image": "/fish-burger.jpg",
-			"price": "7€",
-			"categorie": "Burgers"
-		},
-		{
+			"name": "Reblochon",
+			"image": "/reblochon.jpg",
+			"price": "1€",
+			"categorie": "Supplements"
+		},		{
 			"id": 4,
-			"name": "Bicky Burger",
-			"image": "/bicky-burger.jpg",
-			"price": "7€",
-			"categorie": "Burgers"
+			"name": "Chèvre",
+			"image": "/chevre.jpg",
+			"price": "1€",
+			"categorie": "Supplements"
 		},
 		{
 			"id": 5,
-			"name": "Chicken Burger",
-			"image": "/chicken-burger.jpg",
-			"price": "7€",
-			"categorie": "Burgers"
+			"name": "Poitrine fumee",
+			"image": "/poitrine.jpg",
+			"price": "1€",
+			"categorie": "Supplements"
 		},
 		{
 			"id": 6,
-			"name": "Crispy Burger",
-			"image": "/crispy-burger.jpg",
-			"price": "7.5€",
-			"categorie": "Burgers"
-		}
-	],
-
-
-	"Veggies": [
-		{
-			"id": 1,
-			"name": "Veggie Mitraillette",
-			"image": "/veggie-mitraillette.jpg",
-			"price": "8€",
-			"categorie": "Veggies"
+			"name": "Galette de pomme de terre",
+			"image": "/galette-de-pomme-de-terre.jpg",
+			"price": "1€",
+			"categorie": "Supplements"
 		},
 		{
-			"id": 2,
-			"name": "Veggie Burger",
-			"image": "/veggie-burger.jpg",
-			"price": "7€",
-			"categorie": "Veggies"
-		}
-	],
-
-
-	"Desserts": [
-		{
-			"id": 1,
-			"name": "Compote",
-			"image": "/compote.jpg",
-			"price": "",
-			"categorie": "Desserts"
+			"id": 7,
+			"name": "Galette de fromage",
+			"image": "/galette-de-fromage.jpg",
+			"price": "1€",
+			"categorie": "Supplements"
 		},
 		{
-			"id": 2,
-			"name": "Crème au chocolat",
-			"image": "/creme-chocolat.jpg",
-			"price": "",
-			"categorie": "Desserts"
-		}
-	],
-
-
-	"Garnitures": [
-		{
-			"id": 1,
-			"name": "Salade",
-			"image": "/salade.jpg",
-			"categorie": "Garnitures"
+			"id": 8,
+			"name": "Maroille",
+			"image": "/maroille.jpg",
+			"price": "1€",
+			"categorie": "Supplements"
 		},
 		{
-			"id": 2,
-			"name": "Tomate",
-			"image": "/tomate.jpg",
-			"categorie": "Garnitures"
+			"id": 9,
+			"name": "Oeuf",
+			"image": "/oeuf.jpg",
+			"price": "1€",
+			"categorie": "Supplements"
 		},
 		{
-			"id": 3,
-			"name": "Oignons Frit",
-			"image": "/oignons-frit.jpg",
-			"categorie": "Garnitures"
-		},
-		{
-			"id": 4,
-			"name": "Cornichons sucrées",
-			"image": "/cornichons-sucrees.jpg",
-			"categorie": "Garnitures"
+			"id": 10,
+			"name": "Aucuns suppléments",
+			"image": "/rien.jpg",
+			"price": "0€",
+			"categorie": "Supplements"
 		}
 	]
 }

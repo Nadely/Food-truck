@@ -1,9 +1,15 @@
+import Boissons from "./components/Boissons";
 import Brochettes from "./components/Brochettes";
 import Mitraillettes from "./components/Mitraillettes";
 import Sauces from "./components/Sauces";
 import Snacks from "./components/Snacks";
-// import Desserts from "./components/Desserts";
-// import Garnitures from "./components/Garnitures";
+import Enfants from "./components/Enfants";
+import Supplements from "./components/Supplements";
+import SnacksVeggies from "./components/SnacksVeggies";
+import Veggies from "./components/Veggies";
+import Burgers from "./components/Burgers";
+import AperoBox from "./components/AperoBox";
+import Frites from "./components/Frites";
 
 
 const CategoriePage = async ({ params }: { params: { categorie: string } }) => {
@@ -19,10 +25,22 @@ const CategoriePage = async ({ params }: { params: { categorie: string } }) => {
       return <Brochettes />;
     case "Sauces":
       return <Sauces />;
-    // case "Desserts":
-    //   return <Desserts />;
-    // case "Garnitures":
-    //   return <Garnitures />;
+    case "Enfants":
+      return <Enfants />;
+    case "Supplements":
+      return <Supplements />;
+    case "Boissons":
+       return <Boissons />;
+    case "SnacksVeggies":
+      return <SnacksVeggies />;
+    case "Veggies":
+      return <Veggies />;
+    case "Burgers":
+      return <Burgers />;
+    case "AperoBox":
+      return <AperoBox />;
+    case "Frites":
+      return <Frites />;
     default:
       return <div>Catégorie inconnue !</div>;
   }

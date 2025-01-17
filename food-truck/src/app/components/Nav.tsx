@@ -10,10 +10,10 @@ const Nav = () => {
   const composition = segments.includes('nouvelle_commande') ? categories : '';
 
   const linksCompo = [
-    'nouvelle_commande', 'Solos', 'Menus', 'Aperos-box', 'Boissons', 'Frites',
-    'ChoixSauces', 'Brochettes', 'SnacksVeggies', 'Snacks', 'Sauces',
+    'nouvelle_commande', 'AperoBox', 'Boissons', 'Frites',
+    'Brochettes', 'SnacksVeggies', 'Snacks', 'Sauces',
     'Mitraillettes', 'Enfants', 'Supplements', 'Burgers',
-    'ChoixSupplements', 'ChoixBoissons', 'Veggies'
+    'Veggies'
   ];
 
   const renderLink = (href: string, text: string) => (
@@ -64,12 +64,9 @@ const Nav = () => {
         <div className="flex flex-col border-2 animate-fillLeftToRight h-1 bg-red-200 mt-5"></div>
       )}
 
-      {renderLink('Solos', 'Solos')}
-      {renderLink('Menus', 'Menus')}
-      {renderLink('Aperos-box', 'Apéros Box')}
+      {renderLink('AperoBox', 'Apéro Box')}
       {renderLink('Boissons', 'Boissons')}
       {renderLink('Frites', 'Frites')}
-      {renderLink('ChoixSauces', 'Sauces ?')}
       {renderLink('Brochettes', 'Brochettes')}
       {renderLink('SnacksVeggies', 'Snacks Veggies')}
       {renderLink('Snacks', 'Snacks')}
@@ -78,8 +75,6 @@ const Nav = () => {
       {renderLink('Enfants', 'Menus enfants')}
       {renderLink('Supplements', 'Suppléments')}
       {renderLink('Burgers', 'Burgers')}
-      {renderLink('ChoixSupplements', 'Suppléments ?')}
-      {renderLink('ChoixBoissons', 'Boissons ?')}
       {renderLink('Veggies', 'Veggies')}
     </div>
   );

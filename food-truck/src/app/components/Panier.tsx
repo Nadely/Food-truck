@@ -8,7 +8,7 @@ const Panier = () => {
   const total = Array.isArray(data) ? data.reduce((acc: number, produit: any) => acc + produit.price, 0) : 0;
 
   return (
-    <div className="flex flex-col items-center justify-center font-bold font-serif text-2xl mt-2 mb-5">
+    <div className="flex flex-col items-center justify-center font-bold font-serif text-2xl mt-2 mb-auto">
       <h1 className="border-b-2 border-black w-full text-center ml-5 mr-5">Panier</h1>
       <div className="flex flex-col items-center justify-center gap-4 mt-5">
         {Array.isArray(data) && data.map((produit: any, index: number) => (

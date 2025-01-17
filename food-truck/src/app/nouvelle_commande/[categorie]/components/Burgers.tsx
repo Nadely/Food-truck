@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import data from "../../dataProduits.json";
 import { useState } from "react";
 
-const Mitraillettes = () => {
+const Burgers = () => {
   const [menus, setMenus] = useState(false);
   const router = useRouter();
 
@@ -13,29 +13,23 @@ const Mitraillettes = () => {
     setMenus(!menus);
   };
 
-  const handleProduitClick = (product: any) => {
-    const route =
-      product.id === 1
-        ? "Snacks"
-        : product.id === 2
-        ? "Sauces"
-        : product.id === 3
-        ? "Brochettes"
-        : ""; // option par défaut
+	const handleProduitClick = (product: any) => {
+		const validIds = [1, 2, 3, 4, 5, 6]; // Liste des IDs valides
+		const route = validIds.includes(product.id) ? "Supplements" : null;
 
-    if (route) {
-      router.push(`/nouvelle_commande/${route}?viaMitraillette=true`);
-    } else {
-      console.error("Produit invalide ou route manquante");
-    }
-  };
+		if (route) {
+			router.push(`/nouvelle_commande/${route}?viaBurgers=true`);
+		} else {
+			console.error("Produit invalide ou route manquante");
+		}
+	};
 
 
   return (
     <div className="flex flex-col items-center justify-center mt-2 font-bold font-serif text-2xl">
-      <h1 className="border-b-2 border-black w-full text-center">Mitraillettes</h1>
+      <h1 className="border-b-2 border-black w-full text-center">Burgers</h1>
       <div className="inline-block w-full flex flex-row items-center justify-center mt-10 font-serif text-lg gap-4 mb-5">
-        {data.Mitraillettes.map((product) => (
+        {data.Burgers.map((product) => (
           <button
             key={product.id}
             onClick={() => handleProduitClick(product)}
@@ -62,10 +56,18 @@ const Mitraillettes = () => {
             onChange={handleCheckboxChange}
           />
         </label>
+				<label className="flex items-center gap-2 text-lg">
+          Option double garniture ?*
+          <input
+            type="checkbox"
+            checked={menus}
+            onChange={handleCheckboxChange}
+          />
+        </label>
         <div className="flex flex-col items-center justify-center mt-2 gap-4 text-sm">*Cela inclus des frites supplémentaires et 3€ au prix de indiqué.</div>
       </div>
     </div>
   );
 };
 
-export default Mitraillettes;
+export default Burgers;
