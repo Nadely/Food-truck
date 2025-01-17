@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-import data from "../../dataProduits.json";
+import data from "@/data/dataProduits.json";
 
 const Boissons = () => {
   const searchParams = useSearchParams();

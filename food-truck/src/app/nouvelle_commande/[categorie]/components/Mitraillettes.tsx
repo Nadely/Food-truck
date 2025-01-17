@@ -2,15 +2,9 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import data from "../../dataProduits.json";
+import data from "@/data/dataProduits.json";
 import { useState } from "react";
 
-interface Product {
-  id: number;
-  name: string;
-  price: string;
-  image: string;
-}
 
 const Mitraillettes = () => {
   const [menus, setMenus] = useState(false);
@@ -20,7 +14,7 @@ const Mitraillettes = () => {
     setMenus(!menus);
   };
 
-  const handleProduitClick = (product: Product) => {
+  const handleProduitClick = (product: any) => {
     const route =
       product.id === 1
         ? "Snacks"
@@ -28,7 +22,7 @@ const Mitraillettes = () => {
         ? "Sauces"
         : product.id === 3
         ? "Brochettes"
-        : "";
+        : ""; // option par défaut
 
     if (route) {
       router.push(`/nouvelle_commande/${route}?viaMitraillette=true`);

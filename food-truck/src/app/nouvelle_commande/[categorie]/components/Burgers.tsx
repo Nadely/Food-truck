@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import data from "../../dataProduits.json";
+import data from "@/data/dataProduits.json";
 import { useState } from "react";
 
 const Burgers = () => {

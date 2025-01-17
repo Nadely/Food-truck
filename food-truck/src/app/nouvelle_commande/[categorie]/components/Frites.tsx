@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
-import data from "../../dataProduits.json";
+import data from "@/data/dataProduits.json";
 
 const Frites = () => {
   const router = useRouter();
