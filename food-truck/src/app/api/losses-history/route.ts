@@ -4,6 +4,13 @@ import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
 
+export async function GET() {
+  const filePath = path.join(process.cwd(), "src/data/losses-history.json");
+  const fileContent = await fs.readFile(filePath, "utf-8");
+  const data = JSON.parse(fileContent);
+  return NextResponse.json(data);
+}
+
 export async function POST(request: Request) {
   try {
     const data = await request.json();
@@ -44,3 +51,5 @@ export async function POST(request: Request) {
     );
   }
 }
+
+

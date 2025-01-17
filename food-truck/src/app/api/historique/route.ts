@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { Commande, Historique } from '@/app/types/record';
 
 export async function POST(request: Request) {
     try {
         const nouvelleCommande = await request.json();
-        const preparationPath = path.join(process.cwd(), 'src/app/(categories)/commandes/preparation.json');
-        const historiquePath = path.join(process.cwd(), 'src/app/(categories)/historique/historique.json');
+        const preparationPath = path.join(process.cwd(), 'src/data/preparation.json');
+        const historiquePath = path.join(process.cwd(), 'src/data/historique.json');
 
         if (!fs.existsSync(historiquePath)) {
             fs.writeFileSync(historiquePath, JSON.stringify({ historique: [], recettes: [], pertes: [] }, null, 4), 'utf-8');
@@ -16,9 +17,9 @@ export async function POST(request: Request) {
         const commandes = JSON.parse(preparationData);
 
         // Trouver et supprimer la commande de 'pretes'
-        const preteIndex = commandes.pretes.findIndex((c: any) => c.id === nouvelleCommande.id);
+        const preteIndex = commandes.pretes.findIndex((c: Commande) => c.id === nouvelleCommande.id);
         if (preteIndex !== -1) {
-            const [commande] = commandes.pretes.splice(preteIndex, 1);
+            // const [commande] = commandes.pretes.splice(preteIndex, 1);
 
             const historiqueData = fs.readFileSync(historiquePath, 'utf-8');
             const historique = JSON.parse(historiqueData);
@@ -31,7 +32,7 @@ export async function POST(request: Request) {
             const lieu = nouvelleCommande.lieu;
             const price = parseFloat(nouvelleCommande.price.replace('€', '').replace(',', '.'));
 
-            const existingRecette = historique.recettes.find((recette: any) => recette.date === date && recette.lieu === lieu);
+            const existingRecette = historique.recettes.find((recette: Historique) => recette.date === date && recette.lieu === lieu);
             if (existingRecette) {
                 existingRecette.recette = (parseFloat(existingRecette.recette.replace('€', '').replace(',', '.')) + price).toFixed(2) + '€';
             } else {
@@ -48,16 +49,16 @@ export async function POST(request: Request) {
     }
 }
 
-export async function GET(request: Request) {
+export async function GET() {
     try {
-        const historiquePath = path.join(process.cwd(), 'src/app/(categories)/historique/historique.json');
+        const historiquePath = path.join(process.cwd(), 'src/data/historique.json');
 
         if (!fs.existsSync(historiquePath)) {
             fs.writeFileSync(historiquePath, JSON.stringify({ historique: [], recettes: [] }, null, 4), 'utf-8');
         }
 
         const data = fs.readFileSync(historiquePath, 'utf-8');
-        let historique = JSON.parse(data);
+        const historique = JSON.parse(data);
 
         // Vérifier que 'historique.historique' est bien un tableau
         if (!Array.isArray(historique.historique)) {
@@ -83,14 +84,14 @@ export async function GET(request: Request) {
 export async function moveToHistorique(request: Request) {
     try {
         const { commandeId } = await request.json();
-        const preparationPath = path.join(process.cwd(), 'src/app/(categories)/commandes/preparation.json');
-        const historiquePath = path.join(process.cwd(), 'src/app/(categories)/historique/historique.json');
+        const preparationPath = path.join(process.cwd(), 'src/data/preparation.json');
+        const historiquePath = path.join(process.cwd(), 'src/data/historique.json');
 
         const preparationData = fs.readFileSync(preparationPath, 'utf-8');
         const commandes = JSON.parse(preparationData);
 
         // Trouver et supprimer la commande de 'pretes'
-        const preteIndex = commandes.pretes.findIndex((c: any) => c.id === commandeId);
+        const preteIndex = commandes.pretes.findIndex((c: Commande) => c.id === commandeId);
         if (preteIndex !== -1) {
             const [commande] = commandes.pretes.splice(preteIndex, 1);
 

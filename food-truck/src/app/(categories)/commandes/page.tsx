@@ -1,22 +1,11 @@
 "use client"
 
 import Image from 'next/image';
-import data from './preparation.json'; // Assurez-vous que le chemin est correct
+import data from '@/data/preparation.json'; // Assurez-vous que le chemin est correct
 import Link from 'next/link';
 import { useState } from 'react';
+import { Commande } from '@/app/types/record';
 
-export interface Commande {
-	id: number;
-    image: string;
-    items: string[];
-    user_name: string;
-    user_image: string;
-    time: string;
-    price: string;
-    date: string | Date;
-    lieu: string;
-    createdAt: Date;
-}
 
 const listCommandes : Commande[] = data.preparations;
 

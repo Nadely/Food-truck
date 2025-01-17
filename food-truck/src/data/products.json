@@ -3,48 +3,67 @@
     {
       "id": 1,
       "name": "fricadelle",
-      "categories": ["poulet", "viande", "top-vente"],
+      "categories": [
+        "poulet",
+        "viande",
+        "top-vente"
+      ],
       "stock": 81,
       "stockConseil": 11,
       "lost": 0,
-      "stockAnnuel": 1206,
+      "stockAnnuel": 1449,
       "stockLimite": 100
     },
     {
       "id": 2,
       "name": "fricadelle-xxl",
-      "categories": ["poulet", "viande", "top-vente"],
+      "categories": [
+        "poulet",
+        "viande",
+        "top-vente"
+      ],
       "stock": 2,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 889,
+      "stockAnnuel": 895,
       "stockLimite": 100
     },
     {
       "id": 3,
       "name": "pouleycroc",
-      "categories": ["poulet", "viande", "top-vente"],
+      "categories": [
+        "poulet",
+        "viande",
+        "top-vente"
+      ],
       "stock": 42,
       "stockConseil": 13,
       "lost": 0,
-      "stockAnnuel": 1598,
+      "stockAnnuel": 1724,
       "stockLimite": 100
     },
     {
       "id": 4,
       "name": "viandelle",
-      "categories": ["poulet", "viande"],
+      "categories": [
+        "poulet",
+        "viande"
+      ],
       "stock": 112,
       "stockConseil": 14,
       "lost": 0,
-      "stockAnnuel": 1883,
+      "stockAnnuel": 2219,
       "stockLimite": 100
     },
     {
       "id": 5,
       "name": "belcanto",
-      "categories": ["boeuf", "viande", "top-vente"],
-      "stock": 112,
+      "categories": [
+        "boeuf",
+        "viande",
+        "top-vente"
+      ],
+      "stock": 0,
       "stockConseil": 14,
       "lost": 0,
       "stockAnnuel": 1883,
@@ -53,631 +72,828 @@
     {
       "id": 6,
       "name": "cervelas-brun",
-      "categories": ["porc", "viande"],
+      "categories": [
+        "porc",
+        "viande"
+      ],
       "stock": 112,
       "stockConseil": 14,
       "lost": 0,
-      "stockAnnuel": 1883,
+      "stockAnnuel": 2219,
       "stockLimite": 100
     },
     {
       "id": 7,
       "name": "bouffe-feu",
-      "categories": ["poulet", "viande"],
+      "categories": [
+        "poulet",
+        "viande"
+      ],
       "stock": 112,
       "stockConseil": 14,
       "lost": 0,
-      "stockAnnuel": 1883,
+      "stockAnnuel": 2219,
       "stockLimite": 100
     },
     {
       "id": 8,
       "name": "lucifer",
-      "categories": ["poulet", "viande"],
+      "categories": [
+        "poulet",
+        "viande"
+      ],
       "stock": 112,
       "stockConseil": 14,
       "lost": 0,
-      "stockAnnuel": 1883,
+      "stockAnnuel": 2219,
       "stockLimite": 100
     },
     {
       "id": 9,
       "name": "loempia-poulet",
-      "categories": ["poulet", "viande"],
+      "categories": [
+        "poulet",
+        "viande"
+      ],
       "stock": 112,
       "stockConseil": 14,
       "lost": 0,
-      "stockAnnuel": 1883,
+      "stockAnnuel": 2219,
       "stockLimite": 100
     },
     {
       "id": 10,
       "name": "boulette",
-      "categories": ["poulet", "viande"],
+      "categories": [
+        "poulet",
+        "viande"
+      ],
       "stock": 112,
       "stockConseil": 14,
       "lost": 0,
-      "stockAnnuel": 1883,
+      "stockAnnuel": 2219,
       "stockLimite": 100
     },
     {
       "id": 11,
       "name": "cheese-crack",
-      "categories": ["poulet", "viande", "top-vente"],
+      "categories": [
+        "poulet",
+        "viande",
+        "top-vente"
+      ],
       "stock": 112,
       "stockConseil": 14,
       "lost": 0,
-      "stockAnnuel": 1883,
+      "stockAnnuel": 2219,
       "stockLimite": 100
     },
     {
       "id": 12,
       "name": "loempidel",
-      "categories": ["poulet", "viande"],
+      "categories": [
+        "poulet",
+        "viande"
+      ],
       "stock": 112,
       "stockConseil": 14,
       "lost": 0,
-      "stockAnnuel": 1883,
+      "stockAnnuel": 2219,
       "stockLimite": 100
     },
     {
       "id": 13,
       "name": "brochette volaille",
-      "categories": ["poulet", "viande", "brochettes", "top-vente"],
+      "categories": [
+        "poulet",
+        "viande",
+        "brochettes",
+        "top-vente"
+      ],
       "stock": 42,
       "stockConseil": 13,
       "lost": 0,
-      "stockAnnuel": 1598,
+      "stockAnnuel": 1724,
       "stockLimite": 100
     },
     {
       "id": 14,
       "name": "brochette tzigane",
-      "categories": ["poulet", "viande", "brochettes"],
+      "categories": [
+        "poulet",
+        "viande",
+        "brochettes"
+      ],
       "stock": 42,
       "stockConseil": 13,
       "lost": 0,
-      "stockAnnuel": 1598,
+      "stockAnnuel": 1724,
       "stockLimite": 100
     },
     {
       "id": 16,
       "name": "brochette ardennaise",
-      "categories": ["porc", "viande", "brochettes"],
+      "categories": [
+        "porc",
+        "viande",
+        "brochettes"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 17,
       "name": "brochette poisson",
-      "categories": ["poisson", "viande", "brochettes"],
+      "categories": [
+        "poisson",
+        "viande",
+        "brochettes"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 18,
       "name": "brochette porc",
-      "categories": ["porc", "viande", "brochettes"],
+      "categories": [
+        "porc",
+        "viande",
+        "brochettes"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 19,
       "name": "brochette boeuf",
-      "categories": ["boeuf", "viande", "brochettes"],
-      "stock": 4,
+      "categories": [
+        "boeuf",
+        "viande",
+        "brochettes"
+      ],
+      "stock": 0,
       "stockConseil": 12,
-      "lost": 0,
+      "lost": 4,
       "stockAnnuel": 881,
       "stockLimite": 100
     },
     {
       "id": 20,
       "name": "belcanto-zero",
-      "categories": ["zero-meat", "veggie", "frit"],
+      "categories": [
+        "zero-meat",
+        "veggie",
+        "frit"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 21,
       "name": "fricadelle-zero",
-      "categories": ["zero-meat", "veggie", "frit"],
+      "categories": [
+        "zero-meat",
+        "veggie",
+        "frit"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 22,
       "name": "hamburger-zero",
-      "categories": ["zero-meat", "veggie"],
+      "categories": [
+        "zero-meat",
+        "veggie"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 23,
       "name": "poulycroc-vegi",
-      "categories": ["zero-meat", "frit", "veggie"],
+      "categories": [
+        "zero-meat",
+        "frit",
+        "veggie"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 24,
       "name": "ketchup",
-      "categories": ["sauces"],
+      "categories": [
+        "sauces"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 25,
       "name": "mayonnaise",
-      "categories": ["sauces"],
+      "categories": [
+        "sauces"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 26,
       "name": "andalouse",
-      "categories": ["sauces"],
+      "categories": [
+        "sauces"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 27,
       "name": "bicky",
-      "categories": ["sauces"],
+      "categories": [
+        "sauces"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 28,
       "name": "dallas",
-      "categories": ["sauces"],
+      "categories": [
+        "sauces"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 29,
       "name": "hamburger",
-      "categories": ["sauces"],
+      "categories": [
+        "sauces"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 30,
       "name": "pita",
-      "categories": ["sauces"],
+      "categories": [
+        "sauces"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 31,
       "name": "brazil",
-      "categories": ["sauces"],
+      "categories": [
+        "sauces"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 32,
       "name": "hannibale",
-      "categories": ["sauces"],
+      "categories": [
+        "sauces"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 33,
       "name": "hawai",
-      "categories": ["sauces"],
+      "categories": [
+        "sauces"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 34,
       "name": "riche",
-      "categories": ["sauces"],
+      "categories": [
+        "sauces"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 35,
       "name": "sweet-curry-oignon",
-      "categories": ["sauces"],
+      "categories": [
+        "sauces"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 36,
       "name": "chimayo",
-      "categories": ["sauces"],
+      "categories": [
+        "sauces"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 37,
       "name": "ch'ti",
-      "categories": ["sauces"],
+      "categories": [
+        "sauces"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 38,
       "name": "hot-mammouth",
-      "categories": ["sauces"],
+      "categories": [
+        "sauces"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 39,
       "name": "poivre",
-      "categories": ["sauces"],
+      "categories": [
+        "sauces"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 40,
       "name": "samourai",
-      "categories": ["sauces"],
+      "categories": [
+        "sauces"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 41,
       "name": "coca-cola",
-      "categories": ["sans-alcool", "boissons"],
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 42,
       "name": "coca-cola-zero",
-      "categories": ["sans-alcool", "boissons"],
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 43,
       "name": "fanta-citron",
-      "categories": ["sans-alcool", "boissons"],
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 44,
       "name": "fanta-orange",
-      "categories": ["sans-alcool", "boissons"],
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 45,
       "name": "canada-dry / autres",
-      "categories": ["sans-alcool", "boissons"],
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 46,
       "name": "orangina",
-      "categories": ["sans-alcool", "boissons"],
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 47,
       "name": "seven-up / Sprite",
-      "categories": ["sans-alcool", "boissons"],
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 48,
       "name": "capri-sun",
-      "categories": ["sans-alcool", "boissons"],
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 49,
       "name": "ice-tea",
-      "categories": ["sans-alcool", "boissons"],
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 50,
       "name": "oasis",
-      "categories": ["sans-alcool", "boissons"],
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 51,
       "name": "tropico",
-      "categories": ["sans-alcool", "boissons"],
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 52,
       "name": "eau",
-      "categories": ["sans-alcool", "boissons"],
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 53,
       "name": "eau-petillante",
-      "categories": ["sans-alcool", "boissons"],
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 54,
       "name": "leffe",
-      "categories": ["alcool", "boissons"],
+      "categories": [
+        "alcool",
+        "boissons"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 55,
       "name": "leffe-blanche",
-      "categories": ["alcool", "boissons"],
+      "categories": [
+        "alcool",
+        "boissons"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 56,
       "name": "leffe-ruby",
-      "categories": ["alcool", "boissons"],
+      "categories": [
+        "alcool",
+        "boissons"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 57,
       "name": "steaks",
-      "categories": ["boeuf", "viande", "garniture", "frais", "burger", "mitraillette"],
-      "stock": 4,
+      "categories": [
+        "boeuf",
+        "viande",
+        "garniture",
+        "frais",
+        "burger",
+        "mitraillette"
+      ],
+      "stock": 0,
       "stockConseil": 12,
-      "lost": 0,
+      "lost": 4,
       "stockAnnuel": 881,
       "stockLimite": 100
     },
     {
       "id": 58,
       "name": "pains burger",
-      "categories": ["pains", "frais"],
+      "categories": [
+        "pains",
+        "frais"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 59,
       "name": "pains mitraillette",
-      "categories": ["pains", "frais"],
+      "categories": [
+        "pains",
+        "frais"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 64,
       "name": "fish",
-      "categories": ["poisson", "viande", "frit", "garniture", "burger"],
+      "categories": [
+        "poisson",
+        "viande",
+        "frit",
+        "garniture",
+        "burger"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 65,
       "name": "chicken",
-      "categories": ["poulet", "viande", "garniture", "frit", "burger", "top-vente"],
+      "categories": [
+        "poulet",
+        "viande",
+        "garniture",
+        "frit",
+        "burger",
+        "top-vente"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 66,
       "name": "steak crispy",
-      "categories": ["poulet", "viande", "garniture", "frit", "burger", "top-vente"],
+      "categories": [
+        "poulet",
+        "viande",
+        "garniture",
+        "frit",
+        "burger",
+        "top-vente"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 67,
       "name": "steak mexicain",
-      "categories": ["poulet", "viande", "garniture", "frit", "burger"],
+      "categories": [
+        "poulet",
+        "viande",
+        "garniture",
+        "frit",
+        "burger"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 69,
       "name": "compotes",
-      "categories": ["desserts"],
+      "categories": [
+        "desserts"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 70,
       "name": "crèmes au chocolat",
-      "categories": ["desserts"],
+      "categories": [
+        "desserts"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 77,
       "name": "galettes-pomme-de-terre",
-      "categories": ["garniture", "supplément"],
+      "categories": [
+        "garniture",
+        "supplément"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 78,
       "name": "galettes-fromage",
-      "categories": ["garniture", "supplément"],
+      "categories": [
+        "garniture",
+        "supplément"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 79,
       "name": "boulles de fromage",
-      "categories": ["apéro-box"],
+      "categories": [
+        "apéro-box"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     },
     {
       "id": 80,
       "name": "Mini fricadelle",
-      "categories": ["apéro-box"],
+      "categories": [
+        "apéro-box"
+      ],
       "stock": 4,
       "stockConseil": 12,
       "lost": 0,
-      "stockAnnuel": 881,
+      "stockAnnuel": 893,
       "stockLimite": 100
     }
   ]
