@@ -1,4 +1,4 @@
-import { LossRecord, Product } from "@/app/types/record";
+import { LossRecord, Product } from "@/app/types/allTypes";
 
 export const saveLosses = async (lists: Product[]): Promise<boolean> => {
   const currentLosses = lists

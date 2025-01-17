@@ -12,6 +12,7 @@ import AperoBox from "./components/AperoBox";
 import Frites from "./components/Frites";
 
 
+
 const CategoriePage = async ({ params }: { params: { categorie: string } }) => {
   const { categorie } = await params; // Attendre les paramètres
 

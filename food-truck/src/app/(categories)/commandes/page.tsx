@@ -4,7 +4,7 @@ import Image from 'next/image';
 import data from '@/data/preparation.json'; // Assurez-vous que le chemin est correct
 import Link from 'next/link';
 import { useState } from 'react';
-import { Commande } from '@/app/types/record';
+import { Commande } from '@/app/types/allTypes';
 
 
 const listCommandes : Commande[] = data.preparations;

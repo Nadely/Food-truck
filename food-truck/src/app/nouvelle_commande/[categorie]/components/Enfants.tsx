@@ -33,7 +33,7 @@ const Enfants = () => {
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif text-2xl">
       <h1 className="border-b-2 border-black w-full text-center mr-5">Enfants</h1>
-      <div className="inline-block w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
+      <div className="w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
         {/* Produits cliquables */}
         <div className="flex flex-col items-center justify-center">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4">

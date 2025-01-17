@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { Commande, Historique } from '@/app/types/record';
+import { Commande, Historique } from '@/app/types/allTypes';
 
 export async function POST(request: Request) {
     try {

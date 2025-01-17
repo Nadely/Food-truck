@@ -9,6 +9,13 @@ export interface Product {
   stockLimite: number;
 }
 
+export interface dataProduct {
+  id: number;
+  name: string;
+  price: string;
+  image: string;
+}
+
 export interface LossRecord {
   date: string | Date;
   items: {

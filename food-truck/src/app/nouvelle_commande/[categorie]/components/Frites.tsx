@@ -32,7 +32,7 @@ const Frites = () => {
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif mt-2 text-2xl">
       <h1 className="border-b-2 border-black w-full text-center mr-5">Frites</h1>
-      <div className="inline-block w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
+      <div className="w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
         <div className="flex flex-col items-center justify-center">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-4">
             {data.Frites.map((product) => (

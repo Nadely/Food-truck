@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import data from "../../dataProduits.json";
 import React from "react";
+import { dataProduct } from "@/app/types/allTypes";
 
 const Boissons = () => {
   const searchParams = useSearchParams();
@@ -71,7 +72,7 @@ const Boissons = () => {
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif text-2xl">
       <h1 className="border-b-2 border-black w-full text-center mr-5">Boissons</h1>
-      <div className="inline-block w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
+      <div className="w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
         <div className="flex flex-col items-center justify-center">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 mb-5">
             {data.Boissons.filter(

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import data from "../../dataProduits.json";
 import { useState } from "react";
 
+
 const Veggies = () => {
   const [menus, setMenus] = useState(false);
   const router = useRouter();
@@ -32,7 +33,7 @@ const Veggies = () => {
   return (
     <div className="flex flex-col items-center justify-center mt-2 font-bold font-serif text-2xl">
       <h1 className="border-b-2 border-black w-full text-center">Veggies</h1>
-      <div className="inline-block w-full flex flex-row items-center justify-center mt-10 font-serif text-lg gap-8 mb-5">
+      <div className="w-full flex flex-row items-center justify-center mt-10 font-serif text-lg gap-8 mb-5">
         {data.Veggies.map((product) => (
           <button
             key={product.id}

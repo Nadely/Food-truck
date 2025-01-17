@@ -15,7 +15,7 @@ import {
   startOfYear,
   endOfYear,
 } from "date-fns";
-import type { LossRecord, Historique, Recettes } from "@/app/types/record";
+import type { LossRecord, Historique, Recettes } from "@/app/types/allTypes";
 
 registerLocale("fr", fr);
 
