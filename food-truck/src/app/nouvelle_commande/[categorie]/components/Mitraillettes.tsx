@@ -59,11 +59,12 @@ const Mitraillettes = () => {
           Option Menu ?*
           <input
             type="checkbox"
+            style={{transform: "scale(1.5)"}}
             checked={menus}
             onChange={handleCheckboxChange}
           />
         </label>
-        <div className="flex flex-col items-center justify-center mt-2 gap-4 text-sm">*Cela inclus des frites supplémentaires et 3€ au prix de indiqué.</div>
+        <div className="flex flex-col items-center justify-center mt-2 gap-4 text-sm">*Cela inclus des frites supplémentaires + 2.5€ au prix indiqué.</div>
       </div>
     </div>
   );

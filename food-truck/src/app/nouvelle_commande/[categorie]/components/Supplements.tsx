@@ -52,7 +52,7 @@ const Supplements = () => {
               >
                 <div
                   className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center cursor-pointer hover:bg-green-200 hover:scale-105 transition-transform duration-200 hover:shadow-md shadow-sm"
-                  style={{ width: "180px", height: "180px" }}
+                  style={{ width: "200px", height: "200px" }}
                   onClick={() => handleSelectSupplements(product.id)}
                 >
                   <Image

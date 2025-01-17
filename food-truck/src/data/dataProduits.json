@@ -178,20 +178,6 @@
 			"image": "/partybox.jpg",
 			"price": "11€",
 			"categorie": "AperoBox"
-		},
-		{
-			"id": 7,
-			"name": "B.Ball",
-			"image": "/bball.jpg",
-			"price": "5€",
-			"categorie": "AperoBox"
-		},
-		{
-			"id": 8,
-			"name": "Mega Cheese",
-			"image": "/mega-cheese.jpg",
-			"price": "5€",
-			"categorie": "AperoBox"
 		}
 	],
 

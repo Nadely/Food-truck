@@ -4,14 +4,20 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import data from "@/data/dataProduits.json";
 import { useState } from "react";
+import { GraphHelpers } from "next/dist/compiled/webpack/webpack";
 
 
 const Veggies = () => {
   const [menus, setMenus] = useState(false);
+  const [garnitures, setGarnitures] = useState(false);
   const router = useRouter();
 
-  const handleCheckboxChange = () => {
+  const handleCheckboxChangeMenus = () => {
     setMenus(!menus);
+  };
+
+  const handleCheckboxChangeGarnitures = () => {
+  setGarnitures(!garnitures);
   };
 
   const handleProduitClick = (product: any) => {
@@ -57,19 +63,22 @@ const Veggies = () => {
 					Option Menu ?*
           <input
             type="checkbox"
+            style={{transform: "scale(1.5)"}}
             checked={menus}
-            onChange={handleCheckboxChange}
+            onChange={handleCheckboxChangeMenus}
           />
         </label>
 				<label className="flex items-center gap-2 text-lg">
-					Option double garniture ?*
+					Option double garniture ?**
           <input
             type="checkbox"
-            checked={menus}
-            onChange={handleCheckboxChange}
+            style={{transform: "scale(1.5)"}}
+            checked={garnitures}
+            onChange={handleCheckboxChangeGarnitures}
           />
         </label>
-        <div className="flex flex-col items-center justify-center mt-2 gap-4 text-sm">*Cela inclus des frites supplémentaires et 3€ au prix de indiqué.</div>
+        <div className="flex flex-col items-center justify-center mt-2 gap-4 text-sm">*Cela inclus des frites supplémentaires + 2.5€ au prix indiqué.</div>
+        <div className="flex flex-col items-center justify-center mt-2 gap-4 text-sm">**Uniquement pour le burger + 3€ au prix indiqué.</div>
       </div>
     </div>
   );

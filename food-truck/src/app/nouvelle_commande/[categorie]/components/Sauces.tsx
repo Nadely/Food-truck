@@ -48,7 +48,7 @@ const Sauces = () => {
               >
                 <div
                   className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center cursor-pointer hover:bg-green-200 hover:scale-105 transition-transform duration-200 hover:shadow-md shadow-sm"
-                  style={{ width: "180px", height: "180px" }}
+                  style={{ width: "200px", height: "200px" }}
                   onClick={() => handleSelectSauce(product.id, product.name)} // Ajout du nom de la sauce
                 >
                   <Image src={product.image} alt={product.name} width={100} height={100} />

@@ -63,7 +63,7 @@ const Snacks = () => {
               >
                 <div
                   className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center cursor-pointer hover:scale-105 transition-transform duration-200 hover:shadow-md shadow-sm"
-                  style={{ width: "180px", height: "180px" }}
+                  style={{ width: "200px", height: "200px" }}
                   onClick={() => handleSelectSnack(product.id)}
                 >
                   <Image
@@ -78,14 +78,14 @@ const Snacks = () => {
                     <div className="flex flex-row items-center gap-4">
                       <button
                         onClick={() => handleDecrement(product.id)}
-                        className="text-sm"
+                        className="text-sm bg-red-500 focus:ring-4 rounded-lg px-8 py-2 "
                       >
                         -
                       </button>
                       <span className="text-sm">{quantities[product.id]}</span>
                       <button
                         onClick={() => handleIncrement(product.id)}
-                        className="text-sm"
+                        className="text-sm bg-green-500 focus:ring-4 rounded-lg px-8 py-2 "
                       >
                         +
                       </button>
