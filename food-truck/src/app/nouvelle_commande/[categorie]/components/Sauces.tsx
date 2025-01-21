@@ -51,7 +51,13 @@ const Sauces = () => {
                   style={{ width: "200px", height: "200px" }}
                   onClick={() => handleSelectSauce(product.id, product.name)} // Ajout du nom de la sauce
                 >
-                  <Image src={product.image} alt={product.name} width={100} height={100} />
+                  <Image
+                  src={product.image}
+                  alt={product.name}
+                  width={100}
+                  height={100}
+                  className="object-contain"
+                  />
                   <p className="text-sm mt-auto">{product.name}</p>
                 </div>
               </div>

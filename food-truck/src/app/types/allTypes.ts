@@ -12,7 +12,7 @@ export interface Product {
 export interface dataProduct {
   id: number;
   name: string;
-  price: string;
+  price: number;
   image: string;
 }
 

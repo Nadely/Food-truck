@@ -13,7 +13,7 @@ const Nav = () => {
     'nouvelle_commande', 'AperoBox', 'Boissons', 'Frites',
     'Brochettes', 'SnacksVeggies', 'Snacks', 'Sauces',
     'Mitraillettes', 'Enfants', 'Supplements', 'Burgers',
-    'Veggies'
+    'Veggies', 'Panier'
   ];
 
   const renderLink = (href: string, text: string) => (
@@ -53,6 +53,11 @@ const Nav = () => {
       {categories === 'evenements' && (
         <Link href="/evenements" className="text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2">
           Evènements
+        </Link>
+      )}
+      {categories === 'panier' && (
+        <Link href="/Panier" className="text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2">
+          Panier
         </Link>
       )}
       {(composition === 'nouvelle_commande' || linksCompo.includes(composition)) && (

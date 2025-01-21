@@ -6,7 +6,7 @@
 			"image": "/mitraillette.png",
 			"price": "8.50€",
 			"categorie": "Mitraillettes",
-			"garniture": ["Salade", "Tomate", "Oignons Frit"]
+			"garniture": [{"id": 1, "name": "Salade"}, {"id": 2, "name": "Tomate"}, {"id": 3, "name": "Oignons Frit"}]
 		},
 		{
 			"id": 2,
@@ -14,7 +14,7 @@
 			"image": "/americain-filet.jpg",
 			"price": "8.50€",
 			"categorie": "Mitraillettes",
-			"garniture": ["Salade", "Tomate", "Oignons Frit"]
+			"garniture": [{"id": 1, "name": "Salade"}, {"id": 2, "name": "Tomate"}, {"id": 3, "name": "Oignons Frit"}]
 		},
 		{
 			"id": 3,
@@ -22,7 +22,7 @@
 			"image": "/mitraillette-brochette.jpg",
 			"price": "9€",
 			"categorie": "Mitraillettes",
-			"garniture": ["Salade", "Tomate", "Oignons Frit"]
+			"garniture": [{"id": 1, "name": "Salade"}, {"id": 2, "name": "Tomate"}, {"id": 3, "name": "Oignons Frit"}]
 		}
 	],
 
@@ -34,7 +34,7 @@
 			"image": "/burger.jpg",
 			"price": "7€",
 			"categorie": "Burgers",
-			"garniture": ["Salade", "Tomate", "Oignons Frit", "Sauce Hamburger"]
+			"garniture": [{"id": 1, "name": "Salade"}, {"id": 2, "name": "Tomate"}, {"id": 3, "name": "Oignons Frit"}, {"id": 4, "name": "Sauce Hamburger"}]
 		},
 		{
 			"id": 2,
