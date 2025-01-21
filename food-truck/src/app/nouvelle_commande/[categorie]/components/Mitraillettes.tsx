@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import data from "@/data/dataProduits.json";
 import { useState } from "react";
-
+import { dataProduct } from "@/app/types/allTypes";
 
 const Mitraillettes = () => {
   const [menus, setMenus] = useState(false);
@@ -14,7 +14,7 @@ const Mitraillettes = () => {
     setMenus(!menus);
   };
 
-  const handleProduitClick = (product: any) => {
+  const handleProduitClick = (product: dataProduct) => {
     const route =
       product.id === 1
         ? "Snacks"
@@ -31,10 +31,11 @@ const Mitraillettes = () => {
     }
   };
 
-
   return (
     <div className="flex flex-col items-center justify-center mt-2 font-bold font-serif text-2xl">
-      <h1 className="border-b-2 border-black w-full text-center">Mitraillettes</h1>
+      <h1 className="border-b-2 border-black w-full text-center">
+        Mitraillettes
+      </h1>
       <div className="w-full flex flex-row items-center justify-center mt-10 font-serif text-lg gap-4 mb-5">
         {data.Mitraillettes.map((product) => (
           <button
@@ -64,7 +65,13 @@ const Mitraillettes = () => {
             onChange={handleCheckboxChange}
           />
         </label>
+<<<<<<< HEAD
         <div className="flex flex-col items-center justify-center mt-2 gap-4 text-sm">*Cela inclus des frites supplémentaires + 2.5€ au prix indiqué.</div>
+=======
+        <div className="flex flex-col items-center justify-center mt-2 gap-4 text-sm">
+          *Cela inclus des frites supplémentaires et 3€ au prix de indiqué.
+        </div>
+>>>>>>> 6d95db4 (Refactor components to improve type safety and layout consistency)
       </div>
     </div>
   );

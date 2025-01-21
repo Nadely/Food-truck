@@ -4,7 +4,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import data from "@/data/dataProduits.json";
 import { useState } from "react";
+<<<<<<< HEAD
 import { GraphHelpers } from "next/dist/compiled/webpack/webpack";
+=======
+import { dataProduct } from "@/app/types/allTypes";
+>>>>>>> 6d95db4 (Refactor components to improve type safety and layout consistency)
 
 
 const Veggies = () => {
@@ -16,11 +20,15 @@ const Veggies = () => {
     setMenus(!menus);
   };
 
+<<<<<<< HEAD
   const handleCheckboxChangeGarnitures = () => {
   setGarnitures(!garnitures);
   };
 
   const handleProduitClick = (product: any) => {
+=======
+  const handleProduitClick = (product: dataProduct) => {
+>>>>>>> 6d95db4 (Refactor components to improve type safety and layout consistency)
     const route =
       product.id === 1
         ? "SnacksVeggies"
