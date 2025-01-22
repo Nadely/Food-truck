@@ -15,26 +15,26 @@ const Mitraillettes = () => {
     setMenus(!menus);
   };
 
-  const handleProduitClick = async (produit) => {
+  const handleProduitClick = async (product: any) => {
     const menuPrice = menus ? 2.5 : 0;
     const item = {
-      id: produit.id,
-      name: produit.name,
-      price: parseFloat(produit.price) + menuPrice,
+      id: product.id,
+      name: product.name,
+      price: parseFloat(product.price) + menuPrice,
       quantity: 1,
-      uniqueId: `${produit.id}-${Date.now()}`, // Identifiant unique pour chaque article
+      uniqueId: `${product.id}-${Date.now()}`, // Identifiant unique pour chaque article
       menuOption: menus,
       supplementPrice: menuPrice,
       viaMitraillette: true,
-      relatedItems: produit.garniture.map((garniture) => ({
+      relatedItems: product.garniture.map((garniture: any) => ({
         ...garniture,
         isGarniture: true,
-        parentId: produit.id,
+        parentId: product.id,
       })),
     };
     addToCart(item);
 
-    const route = produit.id === 1 ? "Snacks" : produit.id === 2 ? "Sauces" : produit.id === 3 ? "Brochettes" : "";
+    const route = product.id === 1 ? "Snacks" : product.id === 2 ? "Sauces" : product.id === 3 ? "Brochettes" : "";
     if (route) {
       router.push(`/nouvelle_commande/${route}?viaMitraillette=true`);
     } else {
@@ -114,7 +114,7 @@ const Mitraillettes = () => {
           />
         </label>
         <div className="flex flex-col items-center justify-center mt-2 gap-4 text-sm">
-          *Cela inclut des frites supplémentaires + 2.5€ au prix indiqué.
+          *Cela inclut des frites supplémentaires (+ 2.5€ au prix indiqué).
         </div>
       </div>
     </div>

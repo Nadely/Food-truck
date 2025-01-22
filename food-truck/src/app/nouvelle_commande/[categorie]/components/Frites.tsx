@@ -4,9 +4,11 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
 import data from "@/data/dataProduits.json";
+import { useCart } from "@/app/context/CartContext";
 
 const Frites = () => {
   const router = useRouter();
+  const { addToCart } = useCart();
 
   const [quantities, setQuantities] = useState<{ [key: number]: number }>(
     data.Frites.reduce((acc: { [key: number]: number }, product) => {
@@ -25,8 +27,32 @@ const Frites = () => {
   const handleDecrement = (id: number) => {
     setQuantities((prevQuantities) => ({
       ...prevQuantities,
-      [id]: prevQuantities[id] > 0 ? prevQuantities[id] - 1 : 0,
+      [id]: Math.max(prevQuantities[id] - 1, 0),
     }));
+  };
+
+  const handleAddToCart = () => {
+    const itemsToAdd = data.Frites
+      .map((product) => {
+        const quantity = quantities[product.id];
+        if (quantity > 0) {
+          return {
+            id: product.id,
+            name: product.name,
+            price: parseFloat(product.price),
+            quantity,
+          };
+        }
+        return null;
+      })
+      .filter(Boolean);
+
+    if (itemsToAdd.length > 0) {
+      itemsToAdd.forEach((item) => addToCart(item));
+      router.push("Sauces?viaFrites=true");
+    } else {
+      alert("Veuillez sélectionner une quantité avant de valider !");
+    }
   };
 
   return (
@@ -52,14 +78,14 @@ const Frites = () => {
                 <div className="flex flex-row items-center gap-4">
                   <button
                     onClick={() => handleDecrement(product.id)}
-                    className="text-sm px-2 py-1 rounded-lg bg-red-500 focus:ring-4 rounded-lg px-8 py-2 "
+                    className="text-sm px-2 py-1 rounded-lg bg-red-500 focus:ring-4"
                   >
                     -
                   </button>
                   <span className="text-sm">{quantities[product.id]}</span>
                   <button
                     onClick={() => handleIncrement(product.id)}
-                    className="text-sm px-2 py-1 rounded-lg bg-green-500 focus:ring-4 rounded-lg px-8 py-2 "
+                    className="text-sm px-2 py-1 rounded-lg bg-green-500 focus:ring-4"
                   >
                     +
                   </button>
@@ -71,13 +97,7 @@ const Frites = () => {
         <div className="flex flex-col items-center justify-center gap-4">
           <button
             className="button-blue w-40 mt-10 mb-5"
-            onClick={() => {
-              if (Object.values(quantities).some((qty) => qty > 0)) {
-                router.push("Sauces?viaFrites=true");
-              } else {
-                alert("Veuillez sélectionner une quantité avant de valider !");
-              }
-            }}
+            onClick={handleAddToCart}
           >
             Valider
           </button>

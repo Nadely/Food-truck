@@ -14,7 +14,7 @@ const Snacks = () => {
   const { addToCart } = useCart();
 
   const [quantities, setQuantities] = useState<{ [key: number]: number }>(
-    data.Snacks.reduce((acc, product) => {
+    data.Snacks.reduce((acc: { [key: number]: number }, product) => {
       acc[product.id] = 0;
       return acc;
     }, {})

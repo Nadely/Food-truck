@@ -4,10 +4,12 @@ import Image from "next/image";
 import { useState } from "react";
 import data from "@/data/dataProduits.json";
 import { useRouter } from "next/navigation";
+import { useCart } from "@/app/context/CartContext";
 
 const Enfants = () => {
-  const router = useRouter();
+  const route = useRouter();
   const [selectedEnfants, setSelectedEnfants] = useState<number[]>([]);
+	const { addToCart } = useCart();
 
   const handleSelectSnack = (id: number) => {
     setSelectedEnfants((prevSelected) => {
@@ -29,6 +31,46 @@ const Enfants = () => {
       return [...prevSelected, id];
     });
   };
+
+	const handleAddToCart = () => {
+		if (selectedEnfants.length === 0) {
+			alert("Veuillez sélectionner au moins un produit avant de valider !");
+			return;
+		}
+
+		// Filtrer les produits sélectionnés
+		const selectedProducts = data.Enfants.filter((product) =>
+			selectedEnfants.includes(product.id)
+		);
+
+		// Identifier le produit principal (id 1 ou 2) pour le prix et la catégorie
+		const mainProduct = selectedProducts.find(
+			(product) => product.id === 1 || product.id === 2
+		);
+
+		if (!mainProduct) {
+			alert("Veuillez sélectionner un produit principal (id 1 ou 2) !");
+			return;
+		}
+
+		// Construire l'objet à ajouter au panier
+		const item = {
+			categorie: mainProduct.categorie,
+			price: parseFloat(mainProduct.price), // Prix principal
+			quantity: 1,
+			uniqueId: `${mainProduct.id}-${Date.now()}`,
+			relatedItems: selectedProducts.map((product) => ({
+				id: product.id,
+				name: product.name,
+			})), // Produits liés
+		};
+
+		// Ajouter au panier
+		addToCart(item);
+
+		// Redirection vers la page "nouvelle_commande"
+		route.push("/nouvelle_commande");
+	};
 
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif text-2xl">
@@ -89,7 +131,7 @@ const Enfants = () => {
         <div className="flex flex-col items-center justify-center gap-4">
           <button
             className="button-blue w-40 mt-10 mb-5"
-            onClick={() => router.push("/panier.json")}
+            onClick={handleAddToCart}
           >
             Valider
           </button>

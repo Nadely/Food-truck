@@ -42,7 +42,7 @@
 			"image": "/mexicano-burger.jpg",
 			"price": "7€",
 			"categorie": "Burgers",
-			"garniture": ["Salade", "Tomate", "Cornichons sucrées", "Sauce Bicky"]
+			"garniture": [{"id": 1, "name": "Salade"}, {"id": 2, "name": "Tomate"}, {"id": 3, "name": "Cornichons sucrées"}, {"id": 4, "name": "Sauce Bicky"}]
 		},
 		{
 			"id": 3,
@@ -50,7 +50,7 @@
 			"image": "/fish-burger.jpg",
 			"price": "7€",
 			"categorie": "Burgers",
-			"garniture": ["Salade", "Tomate", "Oignons Frit", "Sauce Hamburger"]
+			"garniture": [{"id": 1, "name": "Salade"}, {"id": 2, "name": "Tomate"}, {"id": 3, "name": "Oignons Frit"}, {"id": 4, "name": "Sauce Hamburger"}]
 		},
 		{
 			"id": 4,
@@ -58,7 +58,7 @@
 			"image": "/bicky-burger.png",
 			"price": "7€",
 			"categorie": "Burgers",
-			"garniture": ["Salade", "Tomate", "Cornichons sucrées", "Sauce Bicky"]
+			"garniture": [{"id": 1, "name": "Salade"}, {"id": 2, "name": "Tomate"}, {"id": 3, "name": "Cornichons sucrées"}, {"id": 4, "name": "Sauce Bicky"}]
 		},
 		{
 			"id": 5,
@@ -66,7 +66,7 @@
 			"image": "/chicken-burger.jpg",
 			"price": "7€",
 			"categorie": "Burgers",
-			"garniture": ["Salade", "Tomate", "Oignons Frit", "Sauce Hamburger"]
+			"garniture": [{"id": 1, "name": "Salade"}, {"id": 2, "name": "Tomate"}, {"id": 3, "name": "Oignons Frit"}, {"id": 4, "name": "Sauce Hamburger"}]
 		},
 		{
 			"id": 6,
@@ -74,7 +74,7 @@
 			"image": "/crispy-burger.jpg",
 			"price": "7.5€",
 			"categorie": "Burgers",
-			"garniture": ["Salade", "Tomate", "Oignons Frit", "Sauce Hamburger"]
+			"garniture": [{"id": 1, "name": "Salade"}, {"id": 2, "name": "Tomate"}, {"id": 3, "name": "Oignons Frit"}, {"id": 4, "name": "Sauce Hamburger"}]
 		}
 	],
 
@@ -84,14 +84,16 @@
 			"name": "Veggie Mitraillette",
 			"image": "/mitraillette-veggie.jpg",
 			"price": "8€",
-			"categorie": "Veggies"
+			"categorie": "Veggies",
+			"garniture": [{"id": 1, "name": "Salade"}, {"id": 2, "name": "Tomate"}, {"id": 3, "name": "Oignons Frit"}]
 		},
 		{
 			"id": 2,
 			"name": "Veggie Burger",
 			"image": "/veggi-burger.jpg",
 			"price": "7€",
-			"categorie": "Veggies"
+			"categorie": "Veggies",
+			"garniture": [{"id": 1, "name": "Salade"}, {"id": 2, "name": "Tomate"}, {"id": 3, "name": "Oignons Frit"}, {"id": 4, "name": "Sauce Hamburger"}]
 		}
 	],
 
@@ -359,6 +361,7 @@
 			"categorie": "Snacks Veggies"
 		}
 	],
+
 	"Sauces": [
 		{
 			"id": 1,

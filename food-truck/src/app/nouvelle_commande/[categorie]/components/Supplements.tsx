@@ -4,13 +4,13 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
 import data from "@/data/dataProduits.json";
+import { useCart } from "@/app/context/CartContext";
 
 const Supplements = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  // const viaSnacks = searchParams.get("viaSnacks") === "true";
-  // const viaBrochettes = searchParams.get("viaBrochettes") === "true";
-  // const viaSnacksVeggies = searchParams.get("viaVeggi") === "true";
+  const viaSauces = searchParams.get("viaSauces") === "true";
+  const { addToCart } = useCart();
 
   const [selectedSupplements, setSelectedSupplements] = useState<number[]>([]);
 
@@ -33,6 +33,28 @@ const Supplements = () => {
         ? prevSelected.filter((supplementsId) => supplementsId !== id) // Retirer si déjà sélectionné
         : [...prevSelected, id]; // Ajouter sinon
     });
+  };
+
+  const handleAddToCart = (product: any) => {
+    // Créer un tableau avec les suppléments sélectionnés
+    const relatedItems = data.Supplements.filter((supplement) =>
+      selectedSupplements.includes(supplement.id)
+    ).map((supplement) => ({
+      id: supplement.id,
+      name: supplement.name,
+    }));
+
+    const item = {
+      id: product.id,
+      name: product.name,
+      quantity: 1,
+      uniqueId: `${product.id}-${Date.now()}`, // Identifiant unique pour chaque article
+      relatedItems: relatedItems, // Ajouter les suppléments sélectionnés ici
+    };
+
+    addToCart(item);
+
+    router.push("Boissons?viaSupplements=true");
   };
 
   return (
@@ -68,28 +90,12 @@ const Supplements = () => {
           </div>
         </div>
         <div className="flex flex-col items-center justify-center gap-4">
-        <button
-          className="button-blue w-40 mt-10 mb-5"
-          onClick={() => {
-            if (selectedSupplements.length > 0) {
-              // Récupérer les paramètres existants depuis `searchParams`
-              const params = new URLSearchParams(searchParams);
-
-              // Ajouter ou mettre à jour le paramètre `viaSupplements=true`
-              params.set("viaSupplements", "true");
-
-              // Construire l'URL finale avec tous les paramètres
-              const newUrl = `Boissons/?${params.toString()}`;
-
-              // Rediriger vers la nouvelle URL
-              router.push(newUrl);
-            } else {
-              alert("Veuillez sélectionner au moins un supplément avant de valider !");
-            }
-          }}
-        >
-          Valider
-        </button>
+          <button
+            className="button-blue w-40 mt-10 mb-5"
+            onClick={handleAddToCart}
+          >
+            Valider
+          </button>
         </div>
       </div>
     </div>

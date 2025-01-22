@@ -47,7 +47,7 @@ const Panier = () => {
             <li key={item.id} className="flex justify-between items-center mb-4">
               {/* Affichage des produits */}
               <div>
-                <p className="font-semibold">{item.name}</p>
+                <p className="font-semibold">{item.categorie === "Enfants" ? item.categorie : item.name}</p>
                 <p className="text-sm text-gray-600">
                 {item.price > 0 ? `Prix unitaire : ${parseFloat(item.price || 0).toFixed(2)}€` : ""}
                 </p>

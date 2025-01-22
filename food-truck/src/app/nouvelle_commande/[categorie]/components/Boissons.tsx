@@ -4,11 +4,14 @@ import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import data from "@/data/dataProduits.json";
+import { useCart } from "@/app/context/CartContext";
 
 const Boissons = () => {
   const searchParams = useSearchParams();
   const viaSupplements = searchParams.get("viaSupplements") === "true";
   const router = useRouter();
+  const { addToCart } = useCart();
+  const menus = searchParams.get("menu") === "true"
 
   const [quantities, setQuantities] = useState<{ [key: number]: number }>(
     data.Boissons.reduce((acc: { [key: number]: number }, product) => {
@@ -66,6 +69,37 @@ const Boissons = () => {
     });
   };
 
+  const handleAddToCart = () => {
+    // Vérifiez si des quantités ont été sélectionnées pour ajouter au panier
+    const selectedProducts = data.Boissons.filter(product => quantities[product.id] > 0);
+
+    if (selectedProducts.length === 0) {
+      // Affichez un message d'erreur ou une alerte si aucun produit n'est sélectionné
+      alert("Veuillez sélectionner au moins une boisson.");
+      return;
+    }
+
+    selectedProducts.forEach((product) => {
+      const isMenu = menus;
+      const calculatedPrice = isMenu ? 1 : parseFloat(product.price);
+
+      const item = {
+        id: product.id,
+        name: product.name,
+        price: calculatedPrice,
+        quantity: quantities[product.id],
+        uniqueId: `${product.id}-${Date.now()}`,
+        menuOption: isMenu,
+        supplementPrice: isMenu ? 1 : 0,
+        viaSupplements: true,
+        relatedItems: isMenu ? [{ id: product.id, name: product.name }] : [],
+      };
+
+      addToCart(item); // Ajoute l'article au panier
+    });
+
+    router.push("/nouvelle_commande");
+  };
 
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif text-2xl">
@@ -101,7 +135,7 @@ const Boissons = () => {
                     height={90}
                   />
                   <p className="text-sm mt-auto">{product.name}</p>
-                  {!viaSupplements && <p className="text-sm mt-auto">{product.price}</p>}
+                  {!viaSupplements && <p className="text-sm mt-auto">{menus ? "1€" : `${product.price}`}</p>}
                   {product.name === "Aucune boisson" ? (
                     <></>
                   ) : (
@@ -129,7 +163,7 @@ const Boissons = () => {
         <div className="flex flex-col items-center justify-center gap-4">
           <button
             className="button-blue w-40 mt-10 mb-5"
-            onClick={() => router.push("/panier")}
+            onClick={handleAddToCart}
           >
             Valider
           </button>

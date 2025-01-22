@@ -13,6 +13,13 @@ type CartItem = {
   relatedItems?: CartItem[]; // Liste des produits associés
   isSnack?: boolean; // Indique si c'est un snack lié
   isGarniture?: boolean; // Indique si c'est une garniture
+  viaVeggiMitraillette?: boolean; // Indique si c'est "viaVeggiMitraillette"
+  viaSnacksVeggies?: boolean; // Indique si c'est "viaSnacksVeggies"
+  viaBurgers?: boolean; // Indique si c'est "viaBurgers"
+  categorie?: string; // Indique la catégorie du produit
+  menuOption?: boolean; // Indique si c'est lié à un menu
+  supplementPrice?: number; // Montant du supplément (1€ si menu)
+  viaSupplements?: boolean; // Indique si c'est lié à un supplément
 };
 
 // Type pour le contexte du panier

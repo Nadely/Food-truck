@@ -4,9 +4,11 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
 import data from "@/data/dataProduits.json";
+import { useCart } from "@/app/context/CartContext";
 
 const AperoBox = () => {
   const router = useRouter();
+  const { addToCart } = useCart();
 
   const [quantities, setQuantities] = useState<{ [key: number]: number }>(
     data.AperoBox.reduce((acc: { [key: number]: number }, product) => {
@@ -27,6 +29,28 @@ const AperoBox = () => {
       ...prevQuantities,
       [id]: prevQuantities[id] > 0 ? prevQuantities[id] - 1 : 0,
     }));
+  };
+
+  const handleAddToCart = () => {
+    const itemsToAdd = data.AperoBox
+      .map((product) => {
+        const quantity = quantities[product.id];
+        if (quantity > 0) {
+          return {
+            id: product.id,
+            name: product.name,
+            price: parseFloat(product.price),
+            quantity,
+          };
+        }
+        return null;
+      })
+      .filter(Boolean);
+
+    if (itemsToAdd.length > 0) {
+      itemsToAdd.forEach((item) => addToCart(item));
+      router.push("Sauces?viaAperoBox=true");
+    }
   };
 
   return (
@@ -71,13 +95,7 @@ const AperoBox = () => {
         <div className="flex flex-col items-center justify-center gap-4">
           <button
             className="button-blue w-40 mt-10 mb-5"
-            onClick={() => {
-              if (Object.values(quantities).some((qty) => qty > 0)) {
-                router.push("Sauces?viaAperoBox=true");
-              } else {
-                alert("Veuillez sélectionner au moins une quantité avant de valider !");
-              }
-            }}
+            onClick={handleAddToCart}
           >
             Valider
           </button>

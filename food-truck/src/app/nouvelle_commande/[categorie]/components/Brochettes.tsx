@@ -5,11 +5,13 @@ import Image from "next/image";
 import { useState } from "react";
 import data from "@/data/dataProduits.json";
 import { useRouter } from "next/navigation";
+import { useCart } from "@/app/context/CartContext";
 
 const Brochettes = () => {
   const searchParams = useSearchParams();
   const viaMitraillette = searchParams.get("viaMitraillette") === "true";
   const router = useRouter();
+  const { addToCart } = useCart();
 
   const [quantities, setQuantities] = useState<{ [key: number]: number }>(
     data.Brochettes.reduce((acc: { [key: number]: number }, product) => {
@@ -40,6 +42,38 @@ const Brochettes = () => {
   const handleSelectBrochette = (id: number) => {
     if (viaMitraillette) {
       setSelectedBrochette(id);
+    }
+  };
+  const handleAddToCart = () => {
+    if (viaMitraillette && selectedBrochette !== null) {
+      const produit = data.Brochettes.find(item => item.id === selectedBrochette);
+      if (produit) {
+        addToCart({
+
+          relatedItems: [{ id: produit.id, name: produit.name }],
+        });
+        router.push("Sauces?viaBrochettess=true");
+      }
+    } else {
+      const itemsToAdd = data.Brochettes
+        .map(produit => {
+          const quantity = quantities[produit.id];
+          if (quantity > 0) {
+            return {
+              id: produit.id,
+              name: produit.name,
+              price: parseFloat(produit.price),
+              quantity,
+            };
+          }
+          return null;
+        })
+        .filter(Boolean);
+
+      if (itemsToAdd.length > 0) {
+        itemsToAdd.forEach(item => addToCart(item));
+        router.push("/nouvelle_commande");
+      }
     }
   };
 
@@ -85,11 +119,7 @@ const Brochettes = () => {
         <div className="flex flex-col items-center justify-center gap-4">
           <button
             className="button-blue w-40 mt-10 mb-5"
-            onClick={() =>
-              viaMitraillette
-                ? router.push("Sauces?viaBrochettes=true")
-                : router.push("/panier.json")
-            }
+            onClick={handleAddToCart}
           >
             Valider
           </button>
