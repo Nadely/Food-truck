@@ -15,6 +15,7 @@ const categorieColors: Record<string, string> = {
   "Brochettes": "bg-cyan-200",
   "SnacksVeggies": "bg-lime-200",
   "Snacks": "bg-teal-200",
+  "Sauces": "bg-red-300",
 };
 
 const NouvelleCommande = () => {
@@ -24,13 +25,12 @@ const NouvelleCommande = () => {
   return (
     <div className="font-bold font-serif text-lg mb-5 mt-2">
       <div className="flex flex-col items-center justify-center border-b-2 border-black font-bold font-serif text-2xl gap-4 mb-5">Faites votre choix !</div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5 mb-5">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-5 mb-5">
         {Object.keys(data)
           .filter(
             (categorie) =>
               categorie !== "Supplements" &&
-              categorie !== "Pains" &&
-              categorie !== "Sauces"
+              categorie !== "Pains"
           )
           .map((categorie, index) => (
             <button

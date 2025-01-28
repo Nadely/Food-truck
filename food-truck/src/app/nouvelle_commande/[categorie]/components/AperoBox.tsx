@@ -9,6 +9,7 @@ import { useCart } from "@/app/context/CartContext";
 const AperoBox = () => {
   const router = useRouter();
   const { addToCart } = useCart();
+  const [selectedAperoBoxes, setSelectedAperoBoxes] = useState<string[]>([]); // Tableau pour stocker les AperoBox sélectionnées
 
   const [quantities, setQuantities] = useState<{ [key: number]: number }>(
     data.AperoBox.reduce((acc: { [key: number]: number }, product) => {
@@ -31,6 +32,18 @@ const AperoBox = () => {
     }));
   };
 
+  const handleSelectAperoBox = (name: string) => {
+    setSelectedAperoBoxes((prev) => {
+      if (prev.includes(name)) {
+        // Si AperoBox est déjà sélectionnée, on la désélectionne
+        return prev.filter((box) => box !== name);
+      } else {
+        // Sinon, on l'ajoute
+        return [...prev, name];
+      }
+    });
+  };
+
   const handleAddToCart = () => {
     const itemsToAdd = data.AperoBox
       .map((product) => {
@@ -48,8 +61,15 @@ const AperoBox = () => {
       .filter(Boolean);
 
     if (itemsToAdd.length > 0) {
-      itemsToAdd.forEach((item) => addToCart(item));
-      router.push("Sauces?viaAperoBox=true");
+      itemsToAdd.forEach((item: any) => addToCart(item));
+
+      // Construire l'URL avec toutes les AperoBox sélectionnées
+      const aperoBoxParams = selectedAperoBoxes
+        .map((box) => `selectedAperoBox=${box}`)
+        .join("&")
+
+      // Rediriger vers la page des sauces en incluant toutes les AperoBox sélectionnées dans l'URL
+      router.push(`Sauces?viaAperoBox=true&${aperoBoxParams}`);
     }
   };
 
@@ -64,6 +84,7 @@ const AperoBox = () => {
                 key={product.id}
                 className="flex flex-col items-center justify-center gap-4 border-2 border-black rounded-lg p-2 cursor-pointer hover:scale-105 transition-transform duration-200 hover:shadow-md shadow-sm"
                 style={{ width: "200px", height: "200px" }}
+                onClick={() => handleSelectAperoBox(product.name)} // Sélectionner ou désélectionner
               >
                 <Image
                   src={product.image}

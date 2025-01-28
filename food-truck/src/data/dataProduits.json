@@ -362,134 +362,6 @@
 		}
 	],
 
-	"Sauces": [
-		{
-			"id": 1,
-			"name": "Ketchup",
-			"image": "/ketchup.png",
-			"price": "0,50€",
-			"categorie": "Sauces"
-		},
-		{
-			"id": 2,
-			"name": "Mayonnaise",
-			"image": "/mayonnaise.jpeg",
-			"price": "0.50€",
-			"categorie": "Sauces"
-		},
-		{
-			"id": 3,
-			"name": "Andalouse",
-			"image": "/andalouse.jpg",
-			"price": "0.50€",
-			"categorie": "Sauces"
-		},
-		{
-			"id": 4,
-			"name": "Bicky",
-			"image": "/bicky.jpg",
-			"price": "0.50€",
-			"categorie": "Sauces"
-		},
-		{
-			"id": 5,
-			"name": "Dallas",
-			"image": "/dallas.jpg",
-			"price": "0.50€",
-			"categorie": "Sauces"
-		},
-		{
-			"id": 6,
-			"name": "Hamburger",
-			"image": "/hamburger.jpg",
-			"price": "0.50€",
-			"categorie": "Sauces"
-		},
-		{
-			"id": 7,
-			"name": "Pita",
-			"image": "/pita.jpg",
-			"price": "0.50€",
-			"categorie": "Sauces"
-		},
-		{
-			"id": 8,
-			"name": "Brazil",
-			"image": "/brazil.jpeg",
-			"price": "0.50€",
-			"categorie": "Sauces"
-		},
-		{
-			"id": 9,
-			"name": "Hannibale",
-			"image": "/hannibale.png",
-			"price": "0.50€",
-			"categorie": "Sauces"
-		},
-		{
-			"id": 10,
-			"name": "Hawaï",
-			"image": "/hawai.jpg",
-			"price": "0.50€",
-			"categorie": "Sauces"
-		},
-		{
-			"id": 11,
-			"name": "Riche",
-			"image": "/riche.jpeg",
-			"price": "0.50€",
-			"categorie": "Sauces"
-		},
-		{
-			"id": 12,
-			"name": "Sweet Curry Oignon",
-			"image": "/sweet-curry-oignon.jpg",
-			"price": "0.50€",
-			"categorie": "Sauces"
-		},
-		{
-			"id": 13,
-			"name": "Chimayo",
-			"image": "/chimayo.jpg",
-			"price": "0.50€",
-			"categorie": "Sauces"
-		},
-		{
-			"id": 14,
-			"name": "Ch'ti",
-			"image": "/chti.jpg",
-			"price": "0.50€",
-			"categorie": "Sauces"
-		},
-		{
-			"id": 15,
-			"name": "Hot Mammouth",
-			"image": "/hot-mammouth.jpg",
-			"price": "0.50€",
-			"categorie": "Sauces"
-		},
-		{
-			"id": 16,
-			"name": "Poivre",
-			"image": "/poivre.jpg",
-			"price": "0.50€",
-			"categorie": "Sauces"
-		},
-		{
-			"id": 17,
-			"name": "Samourai",
-			"image": "/samourai.jpg",
-			"price": "0.50€",
-			"categorie": "Sauces"
-		},
-		{
-			"id": 18,
-			"name": "Aucune sauce",
-			"image": "/rien.jpg",
-			"price": "0€",
-			"categorie": "Sauces"
-		}
-	],
 
 	"Frites": [
 		{
@@ -630,6 +502,134 @@
 		}
 	],
 
+	"Sauces": [
+		{
+			"id": 1,
+			"name": "Ketchup",
+			"image": "/ketchup.png",
+			"price": "0,50€",
+			"categorie": "Sauces"
+		},
+		{
+			"id": 2,
+			"name": "Mayonnaise",
+			"image": "/mayonnaise.jpeg",
+			"price": "0.50€",
+			"categorie": "Sauces"
+		},
+		{
+			"id": 3,
+			"name": "Andalouse",
+			"image": "/andalouse.jpg",
+			"price": "0.50€",
+			"categorie": "Sauces"
+		},
+		{
+			"id": 4,
+			"name": "Bicky",
+			"image": "/bicky.jpg",
+			"price": "0.50€",
+			"categorie": "Sauces"
+		},
+		{
+			"id": 5,
+			"name": "Dallas",
+			"image": "/dallas.jpg",
+			"price": "0.50€",
+			"categorie": "Sauces"
+		},
+		{
+			"id": 6,
+			"name": "Hamburger",
+			"image": "/hamburger.jpg",
+			"price": "0.50€",
+			"categorie": "Sauces"
+		},
+		{
+			"id": 7,
+			"name": "Pita",
+			"image": "/pita.jpg",
+			"price": "0.50€",
+			"categorie": "Sauces"
+		},
+		{
+			"id": 8,
+			"name": "Brazil",
+			"image": "/brazil.jpeg",
+			"price": "0.50€",
+			"categorie": "Sauces"
+		},
+		{
+			"id": 9,
+			"name": "Hannibale",
+			"image": "/hannibale.png",
+			"price": "0.50€",
+			"categorie": "Sauces"
+		},
+		{
+			"id": 10,
+			"name": "Hawaï",
+			"image": "/hawai.jpg",
+			"price": "0.50€",
+			"categorie": "Sauces"
+		},
+		{
+			"id": 11,
+			"name": "Riche",
+			"image": "/riche.jpeg",
+			"price": "0.50€",
+			"categorie": "Sauces"
+		},
+		{
+			"id": 12,
+			"name": "Sweet Curry Oignon",
+			"image": "/sweet-curry-oignon.jpg",
+			"price": "0.50€",
+			"categorie": "Sauces"
+		},
+		{
+			"id": 13,
+			"name": "Chimayo",
+			"image": "/chimayo.jpg",
+			"price": "0.50€",
+			"categorie": "Sauces"
+		},
+		{
+			"id": 14,
+			"name": "Ch'ti",
+			"image": "/chti.jpg",
+			"price": "0.50€",
+			"categorie": "Sauces"
+		},
+		{
+			"id": 15,
+			"name": "Hot Mammouth",
+			"image": "/hot-mammouth.jpg",
+			"price": "0.50€",
+			"categorie": "Sauces"
+		},
+		{
+			"id": 16,
+			"name": "Poivre",
+			"image": "/poivre.jpg",
+			"price": "0.50€",
+			"categorie": "Sauces"
+		},
+		{
+			"id": 17,
+			"name": "Samourai",
+			"image": "/samourai.jpg",
+			"price": "0.50€",
+			"categorie": "Sauces"
+		},
+		{
+			"id": 18,
+			"name": "Aucune sauce",
+			"image": "/rien.jpg",
+			"price": "0€",
+			"categorie": "Sauces"
+		}
+	],
 
 	"Pains": [
 		{

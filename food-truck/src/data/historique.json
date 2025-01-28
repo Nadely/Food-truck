@@ -57,6 +57,20 @@
             "lieu": "Neau",
             "price": "60€",
             "createdAt": "2024-12-13T10:20:10.000Z"
+        },
+        {
+            "id": 15,
+            "image": "/images/commande1.jpg",
+            "items": [
+                "Menu Mitraillette, Hot Mammouth, Curry, Maroille, Fanta Orange"
+            ],
+            "user_name": "Erwan",
+            "user_image": "/avatar.jpg",
+            "time": "10h20",
+            "date": "2024-12-13T10:10:10.000Z",
+            "lieu": "Neau",
+            "price": "60€",
+            "createdAt": "2024-12-13T10:10:10.000Z"
         }
     ],
     "recettes": [
@@ -73,7 +87,7 @@
         {
             "date": "2024-12-13T10:10:10.000Z",
             "lieu": "Neau",
-            "recette": "167.48€"
+            "recette": "227.48€"
         }
     ],
     "pertes": []

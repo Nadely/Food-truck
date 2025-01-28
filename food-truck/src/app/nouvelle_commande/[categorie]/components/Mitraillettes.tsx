@@ -19,7 +19,7 @@ const Mitraillettes = () => {
     const menuPrice = menus ? 2.5 : 0;
     const item = {
       id: product.id,
-      name: product.name,
+      name: "Mitraillette " + product.name,
       price: parseFloat(product.price) + menuPrice,
       quantity: 1,
       uniqueId: `${product.id}-${Date.now()}`, // Identifiant unique pour chaque article

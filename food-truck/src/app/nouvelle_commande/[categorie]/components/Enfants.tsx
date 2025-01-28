@@ -55,7 +55,7 @@ const Enfants = () => {
 
 		// Construire l'objet à ajouter au panier
 		const item = {
-			categorie: mainProduct.categorie,
+			name: "Menu Enfants",
 			price: parseFloat(mainProduct.price), // Prix principal
 			quantity: 1,
 			uniqueId: `${mainProduct.id}-${Date.now()}`,
@@ -69,7 +69,7 @@ const Enfants = () => {
 		addToCart(item);
 
 		// Redirection vers la page "nouvelle_commande"
-		route.push("/nouvelle_commande");
+		route.push("Sauces?viaEnfants=true");
 	};
 
   return (

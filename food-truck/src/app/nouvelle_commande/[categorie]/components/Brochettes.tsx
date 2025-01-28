@@ -52,7 +52,7 @@ const Brochettes = () => {
 
           relatedItems: [{ id: produit.id, name: produit.name }],
         });
-        router.push("Sauces?viaBrochettess=true");
+        router.push("Sauces?viaBrochettes=true");
       }
     } else {
       const itemsToAdd = data.Brochettes

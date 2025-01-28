@@ -16,46 +16,58 @@ const Supplements = () => {
 
   const ID_NONE = 10;
 
+  // Produit principal (exemple)
+  const mainProduct = {
+    id: 1, // Remplace par l'ID du produit principal
+    name: "Produit Principal",
+    price: "10.00", // Prix du produit principal
+  };
+
   const handleSelectSupplements = (id: number) => {
     setSelectedSupplements((prevSelected) => {
-      // Si "aucun" est sélectionné, empêcher toute autre sélection
       if (id === ID_NONE) {
-        return prevSelected.includes(ID_NONE) ? [] : [ID_NONE]; // Toggle "aucun"
+        return prevSelected.includes(ID_NONE) ? [] : [ID_NONE];
       }
 
-      // Si un autre supplément est sélectionné et "aucun" est actif, désactiver "aucun"
       if (prevSelected.includes(ID_NONE)) {
         return [id];
       }
 
-      // Sinon, gérer la sélection normale
       return prevSelected.includes(id)
-        ? prevSelected.filter((supplementsId) => supplementsId !== id) // Retirer si déjà sélectionné
-        : [...prevSelected, id]; // Ajouter sinon
+        ? prevSelected.filter((supplementsId) => supplementsId !== id)
+        : [...prevSelected, id];
     });
   };
 
-  const handleAddToCart = (product: any) => {
-    // Créer un tableau avec les suppléments sélectionnés
-    const relatedItems = data.Supplements.filter((supplement) =>
-      selectedSupplements.includes(supplement.id)
-    ).map((supplement) => ({
-      id: supplement.id,
-      name: supplement.name,
-    }));
-
-    const item = {
+  const handleAddToCart = () => {
+    // Filtre les suppléments sélectionnés
+    const relatedItems = data.Supplements.filter((product) =>
+      selectedSupplements.includes(product.id)
+    ).map((product) => ({
       id: product.id,
       name: product.name,
+      price: parseFloat(product.price), // Convertir en nombre
+    }));
+
+    // Calcul du prix total uniquement des suppléments
+    const supplementsPrice = relatedItems.reduce((acc, product) => acc + product.price, 0);
+
+    // Création de l'objet à ajouter au panier
+    const item = {
+      id: `supplements-${Date.now()}`, // ID unique pour les suppléments // Nom général pour les suppléments
+      price: supplementsPrice, // Prix total des suppléments
       quantity: 1,
-      uniqueId: `${product.id}-${Date.now()}`, // Identifiant unique pour chaque article
-      relatedItems: relatedItems, // Ajouter les suppléments sélectionnés ici
+      uniqueId: `supplements-${Date.now()}`, // ID unique pour cet article
+      relatedItems, // Liste des suppléments sélectionnés
     };
 
+    // Ajoute l'article au panier
     addToCart(item);
 
+    // Redirige vers la page des boissons
     router.push("Boissons?viaSupplements=true");
   };
+
 
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif mt-2 text-2xl">
