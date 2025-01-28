@@ -22,21 +22,37 @@ const Veggies = () => {
 
     const item = {
       id: product.id,
-      name: product.name,
+      name: menus === true ? `Menu Burger ${product.name}` : `Burger ${product.name}`,
       price: parseFloat(product.price) + menuPrice + garniturePrice,
       quantity: 1,
       uniqueId: `${product.id}-${Date.now()}`,
       menuOption: menus,
       garnitureOption: garnitures,
       supplementPrice: menuPrice + garniturePrice,
-      viaVeggiMitraillette: true,
-      relatedItems: product.garniture
-        ? product.garniture.map((garniture: any) => ({
-            ...garniture,
-            isGarniture: true,
-            parentId: product.id,
-          }))
-        : [],
+      viaMitraillette: true,
+      relatedItems: [
+        ...product.garniture.map((garniture: any) => ({
+          ...garniture,
+          isGarniture: true,
+          parentId: product.id,
+        })),
+        ...(garnitures // Vérifie si "Double Garniture" est activé
+          ? [{
+              isGarniture: true,
+              name: "Double Garniture", // Indique que l'option double garniture est activée
+              parentId: product.id,
+            }]
+          : []),
+        ...(menus === true
+          ? [{
+              ...product.frites,
+              isFrites: true,
+              name: "Frites",
+              isFritesCategory: true,
+              parentId: product.id,
+            }]
+          : []),
+      ],
     };
 
     addToCart(item);
@@ -49,11 +65,19 @@ const Veggies = () => {
         : ""; // Default option
 
     if (route) {
-      router.push(`/nouvelle_commande/${route}?viaVeggiMitraillette=true`);
-    } else {
-      console.error("Produit invalide ou route manquante");
-    }
-  };
+      // Si le produit a une route valide, construire l'URL
+      const url = `/nouvelle_commande/${route}?viaVeggiMitraillette=true`;
+
+      // Ajouter l'option menu si nécessaire
+      if (menus === true) {
+        router.push(`${url}&menu=true`);
+        } else {
+          router.push(url);
+        }
+      } else {
+          console.error("Produit invalide ou route manquante");
+        }
+    };
 
   return (
     <div className="flex flex-col items-center justify-center mt-2 font-bold font-serif text-2xl">

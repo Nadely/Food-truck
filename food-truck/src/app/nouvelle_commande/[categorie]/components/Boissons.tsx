@@ -11,7 +11,7 @@ const Boissons = () => {
   const viaSupplements = searchParams.get("viaSupplements") === "true";
   const router = useRouter();
   const { addToCart } = useCart();
-  const menus = searchParams.get("menu") === "true"
+  const menus = searchParams.get("menu") === "true"; // Lecture du paramètre 'menu' de l'URL
 
   const [quantities, setQuantities] = useState<{ [key: number]: number }>(
     data.Boissons.reduce((acc: { [key: number]: number }, product) => {
@@ -70,32 +70,56 @@ const Boissons = () => {
   };
 
   const handleAddToCart = () => {
-    // Vérifiez si des quantités ont été sélectionnées pour ajouter au panier
+    const aucuneBoisson = data.Boissons.find(product => product.name === "Aucune boisson") ?? { id: -1, name: "Aucune boisson" };
+    const aucuneBoissonId = aucuneBoisson.id;
+
+    // Si "Aucune boisson" est sélectionnée, validez sans vérifier les quantités
+    if (selectedBoissons === aucuneBoissonId) {
+      const item = {
+        id: aucuneBoisson.id,
+        name: aucuneBoisson.name,
+        price: 0, // Prix de "Aucune boisson" est toujours 0
+        quantity: 1, // Peut être considéré comme sélectionné une fois
+        uniqueId: `${aucuneBoisson.id}-${Date.now()}`,
+        menuOption: menus,
+        supplementPrice: 0,
+        viaSupplements: true,
+        relatedItems: [],
+      };
+
+      addToCart(item);
+      router.push("/nouvelle_commande");
+      return;
+    }
+
+    // Sinon, vérifiez les quantités pour les autres boissons
     const selectedProducts = data.Boissons.filter(product => quantities[product.id] > 0);
 
     if (selectedProducts.length === 0) {
-      // Affichez un message d'erreur ou une alerte si aucun produit n'est sélectionné
       alert("Veuillez sélectionner au moins une boisson.");
       return;
     }
 
-    selectedProducts.forEach((product) => {
+    selectedProducts.forEach((product, index) => {
       const isMenu = menus;
-      const calculatedPrice = isMenu ? 1 : parseFloat(product.price);
+
+      // Si c'est un menu et que c'est la première boisson (index === 0), on applique le prix de 1€ et on masque le nom
+      const calculatedPrice = (isMenu && index === 0) ? 1 : parseFloat(product.price);
+      const supplementPrice = (isMenu && index === 0) ? 1 : 0; // Supplément uniquement pour la première boisson dans un menu
 
       const item = {
         id: product.id,
-        name: product.name,
+        name: (isMenu && index === 0) ? "" : product.name, // Masquer le nom uniquement pour la 1ère boisson du menu
         price: calculatedPrice,
         quantity: quantities[product.id],
         uniqueId: `${product.id}-${Date.now()}`,
         menuOption: isMenu,
-        supplementPrice: isMenu ? 1 : 0,
+        supplementPrice: supplementPrice,
         viaSupplements: true,
-        relatedItems: isMenu ? [{ id: product.id, name: product.name }] : [],
+        relatedItems: (isMenu && index === 0) ? [{ id: product.id, name: product.name }] : [], // Ajouter la première boisson au relatedItems
       };
 
-      addToCart(item); // Ajoute l'article au panier
+      addToCart(item);
     });
 
     router.push("/nouvelle_commande");
@@ -108,14 +132,14 @@ const Boissons = () => {
         <div className="flex flex-col items-center justify-center">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 mb-5">
             {data.Boissons.filter(
-							(product) =>
-              viaSupplements || product.name !== "Aucune boisson"
+              (product) =>
+                viaSupplements || product.name !== "Aucune boisson"
             ).map((product) => (
               <div
                 key={product.id}
                 className={`flex flex-col items-center justify-center gap-4 ${
                   selectedBoissons === product.id
-                  ? "bg-green-200 border-4 border-green-500 rounded-lg"
+                    ? "bg-green-200 border-4 border-green-500 rounded-lg"
                     : ""
                 }`}
               >

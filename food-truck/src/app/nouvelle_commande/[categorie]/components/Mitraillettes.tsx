@@ -19,28 +19,51 @@ const Mitraillettes = () => {
     const menuPrice = menus ? 2.5 : 0;
     const item = {
       id: product.id,
-      name: "Mitraillette " + product.name,
+      name: menus === true ? ` Menue Mitraillette ${product.name}` : `Mitraillette ${product.name}`,
       price: parseFloat(product.price) + menuPrice,
       quantity: 1,
       uniqueId: `${product.id}-${Date.now()}`, // Identifiant unique pour chaque article
       menuOption: menus,
       supplementPrice: menuPrice,
       viaMitraillette: true,
-      relatedItems: product.garniture.map((garniture: any) => ({
-        ...garniture,
-        isGarniture: true,
-        parentId: product.id,
-      })),
+      relatedItems: [
+        ...product.garniture.map((garniture: any) => ({
+          ...garniture,
+          isGarniture: true,
+          parentId: product.id,
+        })),
+        ...(menus === true
+          ? [{
+            ...product.frites,
+            isFrites: true,
+            name: "Frites",
+              isFritesCategory: true,
+              parentId: product.id
+            }] : []),
+      ],
     };
     addToCart(item);
 
-    const route = product.id === 1 ? "Snacks" : product.id === 2 ? "Sauces" : product.id === 3 ? "Brochettes" : "";
+    const route =
+              product.id === 1 ? "Snacks"
+             : product.id === 2 ? "Sauces"
+             : product.id === 3 ? "Brochettes"
+             : "";
+
     if (route) {
-      router.push(`/nouvelle_commande/${route}?viaMitraillette=true`);
-    } else {
-      console.error("Produit invalide ou route manquante");
-    }
-  };
+      // Si le produit a une route valide, construire l'URL
+      const url = `/nouvelle_commande/${route}?viaMitraillette=true`;
+
+      // Ajouter l'option menu si nécessaire
+      if (menus === true) {
+        router.push(`${url}&menu=true`);
+        } else {
+          router.push(url);
+        }
+      } else {
+          console.error("Produit invalide ou route manquante");
+        }
+    };
 
 
   //   try {

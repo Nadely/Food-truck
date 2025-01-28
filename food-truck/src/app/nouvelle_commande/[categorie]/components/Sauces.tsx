@@ -5,17 +5,19 @@ import Image from "next/image";
 import { useState } from "react";
 import data from "@/data/dataProduits.json";
 import { useCart } from "@/app/context/CartContext";
-import { fr, vi } from "date-fns/locale";
+
 
 const Sauces = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const viaSnacksVeggies = searchParams.get("viaSnacksVeggies");
+  const isMenu = searchParams.get("menu") === "true";
   const viaFrites = searchParams.get("viaFrites");
   const viaEnfants = searchParams.get("viaEnfants");
   const viaSnacks = searchParams.get("viaSnacks");
   const viaBrochettes = searchParams.get("viaBrochettes");
   const viaAperoBox = searchParams.get("viaAperoBox");
+  const viaMitraillette = searchParams.get("viaMitraillette");
   const { addToCart } = useCart();
 
   const [selectedSauces, setSelectedSauces] = useState<number[]>([]);
@@ -38,31 +40,39 @@ const Sauces = () => {
       name: product.name,
     }));
 
-    console.log("Related Items:", relatedItems); // Debugging pour vérifier le contenu
-
     let price = 0;
     let freeSauces = 0;
 
-    const selectedAperoBoxes = searchParams.getAll("selectedAperoBox"); // Récupère toutes les boîtes sélectionnées
+    // Récupérer toutes les boîtes et leurs quantités depuis les paramètres de recherche
+    const selectedAperoBoxes = searchParams.getAll("selectedAperoBox");
+    const aperoBoxQuantities = selectedAperoBoxes.reduce((acc, boxName) => {
+      const box = data.AperoBox.find((item) => item.name === boxName);
+      return box ? acc + 1 : acc; // Compte chaque box présente dans l'URL
+    }, 0);
 
-
-    selectedAperoBoxes.forEach((box) => {
-      if (box === "Party Box") {
-        freeSauces += 2; // 2 sauces gratuites par Party Box
-      } else {
-        freeSauces += 1; // 1 sauce gratuite par autre AperoBox
+    // Ajouter les sauces gratuites en fonction des ApéroBox
+    data.AperoBox.forEach((box) => {
+      const quantity = parseInt(searchParams.get(box.name) || "0");
+      if (quantity > 0) {
+        freeSauces += quantity * (box.name === "Party Box" ? 2 : 1); // Party Box = 2 gratuites, autres = 1 gratuite
       }
     });
 
-    // Ajouter une sauce gratuite pour chaque portion de frites
-    if (viaFrites === "true") freeSauces += 1; // Exemple : 1 sauce gratuite pour "Frites"
+    // Ajouter les sauces gratuites pour les frites
+    data.Frites.forEach((frites) => {
+      const quantity = parseInt(searchParams.get(frites.name) || "0");
+      if (quantity > 0) {
+        freeSauces += quantity; // 1 sauce gratuite par portion de frites
+      }
+    });
 
-     // Ajouter une sauce gratuite pour les autres produits
+    // Ajouter les sauces gratuites pour les autres produits
     if (viaSnacks === "true") freeSauces += 1;
     if (viaSnacksVeggies === "true") freeSauces += 1;
     if (viaEnfants === "true") freeSauces += 1;
     if (viaBrochettes === "true") freeSauces += 1;
 
+    // Calculer les sauces payantes
     const saucesPaid = Math.max(0, selectedSauces.length - freeSauces);
     price = saucesPaid * 0.5;
 
@@ -78,14 +88,22 @@ const Sauces = () => {
 
     addToCart(item);
 
-    // Redirection vers la page suivante
-    if (viaSnacks === "true" || viaSnacksVeggies === "true" || viaBrochettes === "true") {
-      router.push("Supplements?viaSauces=true");
-    } else {
-      router.push("/nouvelle_commande");
-    }
-  };
+    // Determine the next route based on the parameters and append `menu=true` if needed
+    let nextRoute = "";
 
+    if (viaSnacks === "true" || viaSnacksVeggies === "true" || viaBrochettes === "true" || viaMitraillette === "true") {
+      nextRoute = "Supplements?viaSauces=true";
+    } else {
+      nextRoute = "/nouvelle_commande";
+    }
+
+    // Add `&menu=true` if menu option is selected
+    if (isMenu && nextRoute.includes("?")) {
+      nextRoute += (nextRoute.includes("?") ? "&" : "?") + "menu=true";
+    }
+
+    router.push(nextRoute);
+  };
 
 
   return (

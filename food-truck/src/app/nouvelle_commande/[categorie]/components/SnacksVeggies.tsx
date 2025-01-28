@@ -10,6 +10,7 @@ import { useCart } from "@/app/context/CartContext";
 const SnacksVeggies = () => {
   const searchParams = useSearchParams();
   const viaVeggiMitraillette = searchParams.get("viaVeggiMitraillette") === "true";
+  const isMenu = searchParams.get("menu") === "true"; // Check for menu query parameter
   const router = useRouter();
   const { addToCart } = useCart();
 
@@ -44,7 +45,7 @@ const SnacksVeggies = () => {
         addToCart({
           relatedItems: [{ id: product.id, name: product.name }],
         });
-        router.push("Sauces?viaSnacks=true");
+        router.push(`Sauces?viaSnacks=true${isMenu ? "&menu=true" : ""}`);
       }
     } else {
       const itemsToAdd = data.SnacksVeggies
@@ -64,7 +65,7 @@ const SnacksVeggies = () => {
 
       if (itemsToAdd.length > 0) {
         itemsToAdd.forEach(item => addToCart(item));
-        router.push("/nouvelle_commande");
+        router.push(`/nouvelle_commande${isMenu ? "/SnacksVeggies?menu=true" : ""}`);
       }
     }
   };
@@ -78,9 +79,7 @@ const SnacksVeggies = () => {
             {data.SnacksVeggies.filter(product => viaVeggiMitraillette || product.name !== "Steack haché").map((product) => (
               <div
                 key={product.id}
-                className={`flex flex-col items-center justify-center gap-4 ${
-                  viaVeggiMitraillette && selectedSnackVeggie === product.id ? "bg-green-200 border-4 border-green-500 rounded-lg" : ""
-                }`}
+                className={`flex flex-col items-center justify-center gap-4 ${viaVeggiMitraillette && selectedSnackVeggie === product.id ? "bg-green-200 border-4 border-green-500 rounded-lg" : ""}`}
               >
                 <div
                   className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center cursor-pointer hover:scale-105 transition-transform duration-200 hover:shadow-md shadow-sm"

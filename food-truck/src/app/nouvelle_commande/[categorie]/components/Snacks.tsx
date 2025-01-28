@@ -10,6 +10,7 @@ import { useCart } from "@/app/context/CartContext";
 const Snacks = () => {
   const searchParams = useSearchParams();
   const viaMitraillette = searchParams.get("viaMitraillette") === "true";
+  const isMenu = searchParams.get("menu") === "true";
   const router = useRouter();
   const { addToCart } = useCart();
 
@@ -42,10 +43,9 @@ const Snacks = () => {
       const produit = data.Snacks.find(item => item.id === selectedSnack);
       if (produit) {
         addToCart({
-
           relatedItems: [{ id: produit.id, name: produit.name }],
         });
-        router.push("Sauces?viaSnacks=true");
+        router.push(`Sauces?viaSnacks=true${isMenu ? "&menu=true" : ""}`);
       }
     } else {
       const itemsToAdd = data.Snacks
@@ -65,11 +65,10 @@ const Snacks = () => {
 
       if (itemsToAdd.length > 0) {
         itemsToAdd.forEach(item => addToCart(item));
-        router.push("/nouvelle_commande");
+        router.push(`/nouvelle_commande${isMenu ? "/Snacks?menu=true" : ""}`);
       }
     }
   };
-
 
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif text-2xl">

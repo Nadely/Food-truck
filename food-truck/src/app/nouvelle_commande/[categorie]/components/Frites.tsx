@@ -49,11 +49,22 @@ const Frites = () => {
 
     if (itemsToAdd.length > 0) {
       itemsToAdd.forEach((item) => addToCart(item));
-      router.push("Sauces?viaFrites=true");
+
+      // Ajouter les quantités de frites dans l'URL
+      const fritesParams = Object.entries(quantities)
+        .filter(([_, quantity]) => quantity > 0)
+        .map(([id, quantity]) => {
+          const frites = data.Frites.find((product) => product.id === parseInt(id));
+          return frites ? `${frites.name}=${quantity}` : "";
+        })
+        .join("&");
+
+      router.push(`Sauces?viaFrites=true&${fritesParams}`);
     } else {
       alert("Veuillez sélectionner une quantité avant de valider !");
     }
   };
+
 
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif mt-2 text-2xl">

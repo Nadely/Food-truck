@@ -10,6 +10,7 @@ import { useCart } from "@/app/context/CartContext";
 const Brochettes = () => {
   const searchParams = useSearchParams();
   const viaMitraillette = searchParams.get("viaMitraillette") === "true";
+  const isMenu = searchParams.get("menu") === "true";  // Retrieve 'menu' parameter
   const router = useRouter();
   const { addToCart } = useCart();
 
@@ -44,15 +45,17 @@ const Brochettes = () => {
       setSelectedBrochette(id);
     }
   };
+
   const handleAddToCart = () => {
     if (viaMitraillette && selectedBrochette !== null) {
       const produit = data.Brochettes.find(item => item.id === selectedBrochette);
       if (produit) {
         addToCart({
-
           relatedItems: [{ id: produit.id, name: produit.name }],
         });
-        router.push("Sauces?viaBrochettes=true");
+
+        // Redirect to Sauces with viaBrochettes=true
+        router.push("Sauces?viaBrochettes=true" + (isMenu ? "&menu=true" : ""));
       }
     } else {
       const itemsToAdd = data.Brochettes
@@ -72,7 +75,14 @@ const Brochettes = () => {
 
       if (itemsToAdd.length > 0) {
         itemsToAdd.forEach(item => addToCart(item));
-        router.push("/nouvelle_commande");
+
+        // Determine the next route and append `menu=true` if needed
+        let nextRoute = "/nouvelle_commande";
+        if (isMenu) {
+          nextRoute += nextRoute.includes("?") ? "&menu=true" : "?menu=true";
+        }
+
+        router.push(nextRoute);
       }
     }
   };
@@ -102,11 +112,11 @@ const Brochettes = () => {
                   {!viaMitraillette && <p className="text-sm mt-auto">{product.price}</p>}
                   {!viaMitraillette && (
                     <div className="flex flex-row items-center gap-4">
-                      <button onClick={() => handleDecrement(product.id)} className="text-sm bg-red-500 focus:ring-4 rounded-lg px-8 py-2 ">
+                      <button onClick={() => handleDecrement(product.id)} className="text-sm bg-red-500 focus:ring-4 rounded-lg px-8 py-2">
                         -
                       </button>
                       <span className="text-sm">{quantities[product.id]}</span>
-                      <button onClick={() => handleIncrement(product.id)} className="text-sm bg-green-500 focus:ring-4 rounded-lg px-8 py-2 ">
+                      <button onClick={() => handleIncrement(product.id)} className="text-sm bg-green-500 focus:ring-4 rounded-lg px-8 py-2">
                         +
                       </button>
                     </div>
@@ -117,10 +127,7 @@ const Brochettes = () => {
           </div>
         </div>
         <div className="flex flex-col items-center justify-center gap-4">
-          <button
-            className="button-blue w-40 mt-10 mb-5"
-            onClick={handleAddToCart}
-          >
+          <button className="button-blue w-40 mt-10 mb-5" onClick={handleAddToCart}>
             Valider
           </button>
         </div>

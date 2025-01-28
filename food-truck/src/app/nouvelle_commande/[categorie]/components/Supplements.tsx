@@ -10,6 +10,7 @@ const Supplements = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const viaSauces = searchParams.get("viaSauces") === "true";
+  const viaBurgers = searchParams.get("viaBurgers") === "true";
   const { addToCart } = useCart();
 
   const [selectedSupplements, setSelectedSupplements] = useState<number[]>([]);
@@ -54,7 +55,7 @@ const Supplements = () => {
 
     // Création de l'objet à ajouter au panier
     const item = {
-      id: `supplements-${Date.now()}`, // ID unique pour les suppléments // Nom général pour les suppléments
+      id: `supplements-${Date.now()}`, // ID unique pour les suppléments
       price: supplementsPrice, // Prix total des suppléments
       quantity: 1,
       uniqueId: `supplements-${Date.now()}`, // ID unique pour cet article
@@ -64,10 +65,17 @@ const Supplements = () => {
     // Ajoute l'article au panier
     addToCart(item);
 
-    // Redirige vers la page des boissons
-    router.push("Boissons?viaSupplements=true");
-  };
+    // Determine the next route based on the parameters and append `menu=true` if needed
+    let nextRoute = "Boissons?viaSupplements=true";
 
+    // Add `&menu=true` if menu option is selected
+    if (searchParams.get("menu") === "true") {
+      nextRoute += "&menu=true";
+    }
+
+    // Redirige vers la page des boissons
+    router.push(nextRoute);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif mt-2 text-2xl">

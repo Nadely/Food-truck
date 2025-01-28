@@ -61,14 +61,18 @@ const AperoBox = () => {
       .filter(Boolean);
 
     if (itemsToAdd.length > 0) {
-      itemsToAdd.forEach((item: any) => addToCart(item));
+      itemsToAdd.forEach((item) => addToCart(item));
 
-      // Construire l'URL avec toutes les AperoBox sélectionnées
-      const aperoBoxParams = selectedAperoBoxes
-        .map((box) => `selectedAperoBox=${box}`)
-        .join("&")
+      // Construire l'URL avec toutes les AperoBox sélectionnées et leurs quantités
+      const aperoBoxParams = Object.entries(quantities)
+        .filter(([_, quantity]) => quantity > 0)
+        .map(([id, quantity]) => {
+          const box = data.AperoBox.find((product) => product.id === parseInt(id));
+          return box ? `${box.name}=${quantity}` : "";
+        })
+        .join("&");
 
-      // Rediriger vers la page des sauces en incluant toutes les AperoBox sélectionnées dans l'URL
+      // Rediriger vers la page des sauces
       router.push(`Sauces?viaAperoBox=true&${aperoBoxParams}`);
     }
   };
