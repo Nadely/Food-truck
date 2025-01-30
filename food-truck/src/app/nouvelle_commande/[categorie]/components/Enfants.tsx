@@ -9,7 +9,7 @@ import { useCart } from "@/app/context/CartContext";
 const Enfants = () => {
   const route = useRouter();
   const [selectedEnfants, setSelectedEnfants] = useState<number[]>([]);
-	const { addToCart } = useCart();
+  const { addToCart } = useCart();
 
   const handleSelectSnack = (id: number) => {
     setSelectedEnfants((prevSelected) => {
@@ -32,54 +32,58 @@ const Enfants = () => {
     });
   };
 
-	const handleAddToCart = () => {
-		if (selectedEnfants.length === 0) {
-			alert("Veuillez sélectionner au moins un produit avant de valider !");
-			return;
-		}
+  const handleAddToCart = () => {
+    if (selectedEnfants.length === 0) {
+      alert("Veuillez sélectionner au moins un produit avant de valider !");
+      return;
+    }
 
-		// Filtrer les produits sélectionnés
-		const selectedProducts = data.Enfants.filter((product) =>
-			selectedEnfants.includes(product.id)
-		);
+    // Filtrer les produits sélectionnés
+    const selectedProducts = data.Enfants.filter((product) =>
+      selectedEnfants.includes(product.id)
+    );
 
-		// Identifier le produit principal (id 1 ou 2) pour le prix et la catégorie
-		const mainProduct = selectedProducts.find(
-			(product) => product.id === 1 || product.id === 2
-		);
+    // Identifier le produit principal (id 1 ou 2) pour le prix et la catégorie
+    const mainProduct = selectedProducts.find(
+      (product) => product.id === 1 || product.id === 2
+    );
 
-		if (!mainProduct) {
-			alert("Veuillez sélectionner un produit principal (id 1 ou 2) !");
-			return;
-		}
+    if (!mainProduct) {
+      alert("Veuillez sélectionner un produit principal (id 1 ou 2) !");
+      return;
+    }
 
-		// Construire l'objet à ajouter au panier
-		const item = {
-			name: "Menu Enfants",
-			price: parseFloat(mainProduct.price), // Prix principal
-			quantity: 1,
-			uniqueId: `${mainProduct.id}-${Date.now()}`,
-			relatedItems: selectedProducts.map((product) => ({
-				id: product.id,
-				name: product.name,
-			})), // Produits liés
-		};
+    // Construire l'objet à ajouter au panier
+    const item = {
+      name: "Menu Enfants",
+      price: parseFloat(mainProduct.price), // Prix principal
+      quantity: 1,
+      uniqueId: `${mainProduct.id}-${Date.now()}`,
+      relatedItems: selectedProducts.map((product) => ({
+        id: product.id,
+        name: product.name,
+      })), // Produits liés
+    };
 
-		// Ajouter au panier
-		addToCart(item);
+    // Ajouter au panier
+    addToCart(item);
 
-		// Redirection vers la page "nouvelle_commande"
-		route.push("Sauces?viaEnfants=true");
-	};
+    // Redirection vers la page "nouvelle_commande"
+    route.push("Sauces?viaEnfants=true");
+  };
 
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif text-2xl">
-      <h1 className="border-b-2 border-black w-full text-center mr-5">Enfants</h1>
+      <h1 className="border-b-2 border-black w-full text-center mr-5">
+        Enfants
+      </h1>
       <div className="w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
         {/* Produits cliquables */}
         <div className="flex flex-col items-center justify-center">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4">
-            {data.Enfants.filter((product) => product.id !== 5 && product.id !== 6).map((product) => (
+            {data.Enfants.filter(
+              (product) => product.id !== 5 && product.id !== 6
+            ).map((product) => (
               <div
                 key={product.id}
                 className={`flex flex-col items-center justify-center gap-4 ${
@@ -108,11 +112,18 @@ const Enfants = () => {
 
         {/* Produits non cliquables (id 5 et 6) */}
         <div className="flex flex-row items-center justify-center mt-8 gap-4">
-          {data.Enfants.filter((product) => product.id === 5 || product.id === 6).map((product) => (
+          {data.Enfants.filter(
+            (product) => product.id === 5 || product.id === 6
+          ).map((product) => (
             <div
               key={product.id}
               className="border-2 border-gray-400 rounded-lg p-2 flex flex-col items-center justify-center"
-              style={{ width: "180px", height: "180px", backgroundColor: "#f0f0f0", cursor: "not-allowed" }}
+              style={{
+                width: "180px",
+                height: "180px",
+                backgroundColor: "#f0f0f0",
+                cursor: "not-allowed",
+              }}
             >
               <Image
                 src={product.image}
@@ -124,9 +135,9 @@ const Enfants = () => {
             </div>
           ))}
         </div>
-				<div>
-					<p className="text-sm mt-2">* Ce produit est inclus dans le menu</p>
-				</div>
+        <div>
+          <p className="text-sm mt-2">* Ce produit est inclus dans le menu</p>
+        </div>
 
         <div className="flex flex-col items-center justify-center gap-4">
           <button

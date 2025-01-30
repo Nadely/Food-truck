@@ -20,6 +20,58 @@ const Veggies = () => {
   };
 
   const handleProduitClick = (product: any) => {
+<<<<<<< HEAD
+=======
+    const menuPrice = menus ? 2.5 : 0;
+    // Double garniture uniquement si le produit est "Veggie Burger"
+    const garniturePrice =
+      product.name === "Veggie Burger" && garnitures ? 3 : 0;
+
+    const item = {
+      id: product.id,
+      name:
+        menus === true
+          ? `Menu Burger ${product.name}`
+          : `Burger ${product.name}`,
+      price: parseFloat(product.price) + menuPrice + garniturePrice,
+      quantity: 1,
+      uniqueId: `${product.id}-${Date.now()}`,
+      menuOption: menus,
+      garnitureOption: garnitures,
+      supplementPrice: menuPrice + garniturePrice,
+      viaMitraillette: true,
+      relatedItems: [
+        ...product.garniture.map((garniture: any) => ({
+          ...garniture,
+          isGarniture: true,
+          parentId: product.id,
+        })),
+        ...(garnitures // Vérifie si "Double Garniture" est activé
+          ? [
+              {
+                isGarniture: true,
+                name: "Double Garniture", // Indique que l'option double garniture est activée
+                parentId: product.id,
+              },
+            ]
+          : []),
+        ...(menus === true
+          ? [
+              {
+                ...product.frites,
+                isFrites: true,
+                name: "Frites",
+                isFritesCategory: true,
+                parentId: product.id,
+              },
+            ]
+          : []),
+      ],
+    };
+
+    addToCart(item);
+
+>>>>>>> panierNad2
     const route =
       product.id === 1
         ? "SnacksVeggies"
