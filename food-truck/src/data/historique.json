@@ -12,7 +12,7 @@
             "user_image": "/avatar.jpg",
             "time": "10h00",
             "date": "2024-12-13T10:00:00.000Z",
-            "lieu": "Neau",
+            "lieu": "Maison",
             "price": "50,99€",
             "createdAt": "2024-12-13T10:00:00.000Z"
         },
@@ -26,7 +26,7 @@
             "user_image": "/avatar.jpg",
             "time": "10h00",
             "date": "2024-12-13T10:10:10.000Z",
-            "lieu": "Neau",
+            "lieu": "Maison",
             "price": "9,50€",
             "createdAt": "2024-12-13T10:10:10.000Z"
         },
@@ -40,7 +40,7 @@
             "user_image": "/avatar.jpg",
             "time": "10h20",
             "date": "2024-12-13T10:10:10.000Z",
-            "lieu": "Neau",
+            "lieu": "Maison",
             "price": "46,99€",
             "createdAt": "2024-12-13T10:11:10.000Z"
         },
@@ -54,11 +54,12 @@
             "user_image": "/avatar.jpg",
             "time": "10h20",
             "date": "2024-12-13T10:10:10.000Z",
-            "lieu": "Neau",
+            "lieu": "Maison",
             "price": "60€",
             "createdAt": "2024-12-13T10:20:10.000Z"
         },
         {
+<<<<<<< HEAD:food-truck/src/data/historique.json
             "id": 15,
             "image": "/images/commande1.jpg",
             "items": [
@@ -71,6 +72,34 @@
             "lieu": "Neau",
             "price": "60€",
             "createdAt": "2024-12-13T10:10:10.000Z"
+=======
+            "id": 10,
+            "image": "/images/nouvelle_commande.jpg",
+            "items": [
+                "Menu enfant"
+            ],
+            "user_name": "Marion",
+            "user_image": "/avatar.jpg",
+            "time": "14h00",
+            "date": "2024-12-16T13:27:25.547Z",
+            "lieu": "Maison",
+            "price": "30€",
+            "createdAt": "2024-12-16T13:27:25.548Z"
+        },
+        {
+            "id": 11,
+            "image": "/images/nouvelle_commande.jpg",
+            "items": [
+                "Menu enfant"
+            ],
+            "user_name": "Nouveau Client",
+            "user_image": "/avatar.jpg",
+            "time": "14h00",
+            "date": "2024-12-16T13:27:25.547Z",
+            "lieu": "Maison",
+            "price": "30€",
+            "createdAt": "2024-12-16T13:27:25.548Z"
+>>>>>>> homepageNad1:food-truck/src/app/(categories)/historique/historique.json
         }
     ],
     "recettes": [
@@ -87,7 +116,16 @@
         {
             "date": "2024-12-13T10:10:10.000Z",
             "lieu": "Neau",
+<<<<<<< HEAD:food-truck/src/data/historique.json
             "recette": "227.48€"
+=======
+            "recette": "167.48€"
+        },
+        {
+            "date": "2024-12-16T13:27:25.547Z",
+            "lieu": "St-Suzanne",
+            "recette": "60.00€"
+>>>>>>> homepageNad1:food-truck/src/app/(categories)/historique/historique.json
         }
     ],
     "pertes": []

@@ -7,16 +7,32 @@ import { useState } from 'react';
 import { Commande } from '@/app/types/allTypes';
 
 
-const listCommandes : Commande[] = data.preparations;
+const listCommandes : Commande[] = data.preparations.map(commande => ({
+	...commande,
+	createdAt: new Date(commande.createdAt)
+}));
 
 const Commandes = () => {
 	const [preparations, setPreparations] = useState<Commande[]>([...listCommandes]);
 	const [pretes, setPretes] = useState<Commande[]>([]);
 	const [historique, setHistorique] = useState<Commande[]>([]);
 
+	const loadLocalStorage = () => {
+		const storageValue = localStorage.getItem('selectedLieu');
+		return storageValue || "Maison";
+	};
+
+	const loadLieu = loadLocalStorage();
+
 	const handlePrête = async (commandeId: number) => {
 		const commande = preparations.find(c => c.id === commandeId);
+		console.log(commande);
+		console.log(commande?.lieu);
+		console.log(loadLieu);
+
+
 		if (commande) {
+			commande.lieu = loadLieu;
 			try {
 				const response = await fetch('/api/commandes', {
 					method: 'POST',
@@ -41,6 +57,7 @@ const Commandes = () => {
 	const handleServie = async (commandeId: number) => {
 		const commande = pretes.find(c => c.id === commandeId);
 		if (commande) {
+			commande.lieu = loadLieu;
 			try {
 				const response = await fetch('/api/historique', {
 					method: 'POST',

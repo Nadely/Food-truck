@@ -1,19 +1,27 @@
 {
+<<<<<<< HEAD:food-truck/src/data/preparation.json
     "preparations": [],
     "pretes": [
         {
             "id": 15,
             "image": "/images/commande1.jpg",
+=======
+    "preparations": [ {
+            "id": 11,
+            "image": "/images/nouvelle_commande.jpg",
+>>>>>>> homepageNad1:food-truck/src/app/(categories)/commandes/preparation.json
             "items": [
-                "Menu Mitraillette, Hot Mammouth, Curry, Maroille, Fanta Orange"
+                "Menu enfant"
             ],
-            "user_name": "Erwan",
+            "user_name": "Nouveau Client",
             "user_image": "/avatar.jpg",
-            "time": "10h20",
-            "date": "2024-12-13T10:10:10.000Z",
-            "lieu": "Neau",
-            "price": "60€",
-            "createdAt": "2024-12-13T10:10:10.000Z"
-        }
+            "time": "14h00",
+            "date": "2024-12-16T13:27:25.547Z",
+            "lieu": "Maison",
+            "price": "30€",
+            "createdAt": "2024-12-16T13:27:25.548Z"
+        }],
+    "pretes": [
+
     ]
 }

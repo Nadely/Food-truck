@@ -49,7 +49,12 @@ export async function POST(request: Request) {
     }
 }
 
+<<<<<<< HEAD
 export async function GET() {
+=======
+export async function GET(request: Request) {
+
+>>>>>>> homepageNad1
     try {
         const historiquePath = path.join(process.cwd(), 'src/data/historique.json');
 
