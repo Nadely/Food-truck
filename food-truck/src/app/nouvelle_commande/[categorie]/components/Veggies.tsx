@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import data from "@/data/dataProduits.json";
 import { useState } from "react";
+import { useCart } from "@/app/context/CartContext";
 
 const Veggies = () => {
   const [menus, setMenus] = useState(false);
@@ -20,8 +21,6 @@ const Veggies = () => {
   };
 
   const handleProduitClick = (product: any) => {
-<<<<<<< HEAD
-=======
     const menuPrice = menus ? 2.5 : 0;
     // Double garniture uniquement si le produit est "Veggie Burger"
     const garniturePrice =
@@ -71,7 +70,6 @@ const Veggies = () => {
 
     addToCart(item);
 
->>>>>>> panierNad2
     const route =
       product.id === 1
         ? "SnacksVeggies"

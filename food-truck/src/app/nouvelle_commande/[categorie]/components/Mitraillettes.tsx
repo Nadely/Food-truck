@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import data from "@/data/dataProduits.json";
 import { useState } from "react";
+import { useCart } from "@/app/context/CartContext";
 
 const Mitraillettes = () => {
   const [menus, setMenus] = useState(false);
@@ -14,16 +15,13 @@ const Mitraillettes = () => {
     setMenus(!menus);
   };
 
-<<<<<<< HEAD
-  const handleProduitClick = (product: any) => {
-=======
   const handleProduitClick = async (product: any) => {
     const menuPrice = menus ? 2.5 : 0;
     const item = {
       id: product.id,
       name:
         menus === true
-          ? ` Menue Mitraillette ${product.name}`
+          ? ` Menu Mitraillette ${product.name}`
           : `Mitraillette ${product.name}`,
       price: parseFloat(product.price) + menuPrice,
       quantity: 1,
@@ -52,7 +50,6 @@ const Mitraillettes = () => {
     };
     addToCart(item);
 
->>>>>>> panierNad2
     const route =
       product.id === 1
         ? "Snacks"
@@ -63,9 +60,6 @@ const Mitraillettes = () => {
         : "";
 
     if (route) {
-<<<<<<< HEAD
-      router.push(`/nouvelle_commande/${route}?viaMitraillette=true`);
-=======
       // Si le produit a une route valide, construire l'URL
       const url = `/nouvelle_commande/${route}?viaMitraillette=true`;
 
@@ -75,13 +69,10 @@ const Mitraillettes = () => {
       } else {
         router.push(url);
       }
->>>>>>> panierNad2
     } else {
       console.error("Produit invalide ou route manquante");
     }
   };
-<<<<<<< HEAD
-=======
 
   //   try {
   //     const response = await fetch("/api/panier", {
@@ -112,7 +103,6 @@ const Mitraillettes = () => {
   //     console.error("Erreur lors de l'ajout au panier :", error);
   //   }
   // };
->>>>>>> panierNad2
 
   return (
     <div className="flex flex-col items-center justify-center mt-2 font-bold font-serif text-2xl">

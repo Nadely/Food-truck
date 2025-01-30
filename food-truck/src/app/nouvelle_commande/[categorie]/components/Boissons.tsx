@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import data from "@/data/dataProduits.json";
 import { useCart } from "@/app/context/CartContext";
-import { dataProduct } from "@/app/types/allTypes";
 
 const Boissons = () => {
   const searchParams = useSearchParams();
@@ -15,13 +14,10 @@ const Boissons = () => {
   const menus = searchParams.get("menu") === "true"; // Lecture du paramètre 'menu' de l'URL
 
   const [quantities, setQuantities] = useState<{ [key: number]: number }>(
-    data.Boissons.reduce(
-      (acc: { [key: number]: number }, product: dataProduct) => {
-        acc[product.id] = 0;
-        return acc;
-      },
-      {}
-    )
+    data.Boissons.reduce((acc: { [key: number]: number }, product) => {
+      acc[product.id] = 0;
+      return acc;
+    }, {})
   );
   const [selectedBoissons, setSelectedBoissons] = useState<number | null>(null);
 
@@ -32,15 +28,12 @@ const Boissons = () => {
       "Aucune boisson"
     ) {
       setQuantities(
-        data.Boissons.reduce(
-          (acc: { [key: number]: number }, product: dataProduct) => {
-            if (product.id !== id) {
-              acc[product.id] = 0; // Réinitialisez les quantités des autres boissons
-            }
-            return acc;
-          },
-          {}
-        )
+        data.Boissons.reduce((acc: any, product: any) => {
+          if (product.id !== id) {
+            acc[product.id] = 0; // Réinitialisez les quantités des autres boissons
+          }
+          return acc;
+        }, {})
       );
     }
 
@@ -87,7 +80,7 @@ const Boissons = () => {
       return newQuantities;
     });
   };
-
+  //je fais une modification ici
   const handleAddToCart = () => {
     const aucuneBoisson = data.Boissons.find(
       (product) => product.name === "Aucune boisson"

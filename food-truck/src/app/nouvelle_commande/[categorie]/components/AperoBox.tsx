@@ -45,20 +45,18 @@ const AperoBox = () => {
   };
 
   const handleAddToCart = () => {
-    const itemsToAdd = data.AperoBox
-      .map((product) => {
-        const quantity = quantities[product.id];
-        if (quantity > 0) {
-          return {
-            id: product.id,
-            name: product.name,
-            price: parseFloat(product.price),
-            quantity,
-          };
-        }
-        return null;
-      })
-      .filter(Boolean);
+    const itemsToAdd = data.AperoBox.map((product) => {
+      const quantity = quantities[product.id];
+      if (quantity > 0) {
+        return {
+          id: product.id,
+          name: product.name,
+          price: parseFloat(product.price),
+          quantity,
+        };
+      }
+      return null;
+    }).filter(Boolean);
 
     if (itemsToAdd.length > 0) {
       itemsToAdd.forEach((item) => addToCart(item));
@@ -67,7 +65,9 @@ const AperoBox = () => {
       const aperoBoxParams = Object.entries(quantities)
         .filter(([_, quantity]) => quantity > 0)
         .map(([id, quantity]) => {
-          const box = data.AperoBox.find((product) => product.id === parseInt(id));
+          const box = data.AperoBox.find(
+            (product) => product.id === parseInt(id)
+          );
           return box ? `${box.name}=${quantity}` : "";
         })
         .join("&");
@@ -76,7 +76,6 @@ const AperoBox = () => {
       router.push(`Sauces?viaAperoBox=true&${aperoBoxParams}`);
     }
   };
-
 
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif mt-2 text-2xl">
@@ -123,19 +122,7 @@ const AperoBox = () => {
         <div className="flex flex-col items-center justify-center gap-4">
           <button
             className="button-blue w-40 mt-10 mb-5"
-<<<<<<< HEAD
             onClick={handleAddToCart}
-=======
-            onClick={() => {
-              if (Object.values(quantities).some((qty) => qty > 0)) {
-                router.push("Sauces?viaAperoBox=true");
-              } else {
-                alert(
-                  "Veuillez sélectionner au moins une quantité avant de valider !"
-                );
-              }
-            }}
->>>>>>> 6b6d5e3 (Refactor and clean up styling in AperoBox and Brochettes components)
           >
             Valider
           </button>
