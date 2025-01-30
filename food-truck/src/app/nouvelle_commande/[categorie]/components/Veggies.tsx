@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import data from "@/data/dataProduits.json";
 import { useState } from "react";
-import { useCart } from "@/app/context/CartContext";
 
 const Veggies = () => {
   const [menus, setMenus] = useState(false);
@@ -12,51 +11,15 @@ const Veggies = () => {
   const router = useRouter();
   const { addToCart } = useCart();
 
-  const handleCheckboxChangeMenus = () => setMenus(!menus);
-  const handleCheckboxChangeGarnitures = () => setGarnitures(!garnitures);
+  const handleCheckboxChangeMenus = () => {
+    setMenus(!menus);
+  };
+
+  const handleCheckboxChangeGarnitures = () => {
+    setGarnitures(!garnitures);
+  };
 
   const handleProduitClick = (product: any) => {
-    const menuPrice = menus ? 2.5 : 0;
-    // Double garniture uniquement si le produit est "Veggie Burger"
-    const garniturePrice = product.name === "Veggie Burger" && garnitures ? 3 : 0;
-
-    const item = {
-      id: product.id,
-      name: menus === true ? `Menu Burger ${product.name}` : `Burger ${product.name}`,
-      price: parseFloat(product.price) + menuPrice + garniturePrice,
-      quantity: 1,
-      uniqueId: `${product.id}-${Date.now()}`,
-      menuOption: menus,
-      garnitureOption: garnitures,
-      supplementPrice: menuPrice + garniturePrice,
-      viaMitraillette: true,
-      relatedItems: [
-        ...product.garniture.map((garniture: any) => ({
-          ...garniture,
-          isGarniture: true,
-          parentId: product.id,
-        })),
-        ...(garnitures // Vérifie si "Double Garniture" est activé
-          ? [{
-              isGarniture: true,
-              name: "Double Garniture", // Indique que l'option double garniture est activée
-              parentId: product.id,
-            }]
-          : []),
-        ...(menus === true
-          ? [{
-              ...product.frites,
-              isFrites: true,
-              name: "Frites",
-              isFritesCategory: true,
-              parentId: product.id,
-            }]
-          : []),
-      ],
-    };
-
-    addToCart(item);
-
     const route =
       product.id === 1
         ? "SnacksVeggies"
@@ -71,13 +34,13 @@ const Veggies = () => {
       // Ajouter l'option menu si nécessaire
       if (menus === true) {
         router.push(`${url}&menu=true`);
-        } else {
-          router.push(url);
-        }
       } else {
-          console.error("Produit invalide ou route manquante");
-        }
-    };
+        router.push(url);
+      }
+    } else {
+      console.error("Produit invalide ou route manquante");
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center mt-2 font-bold font-serif text-2xl">
@@ -132,7 +95,8 @@ const Veggies = () => {
           *Cela inclut des frites supplémentaires (+ 2.5€ au prix indiqué).
         </div>
         <div className="flex flex-col items-center justify-center mt-2 gap-4 text-sm">
-          **Double garniture uniquement pour le "Veggie Burger" (+ 3€ au prix indiqué).
+          **Double garniture uniquement pour le "Veggie Burger" (+ 3€ au prix
+          indiqué).
         </div>
       </div>
     </div>

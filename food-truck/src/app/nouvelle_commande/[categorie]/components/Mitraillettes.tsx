@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import data from "@/data/dataProduits.json";
 import { useState } from "react";
-import { useCart } from "@/app/context/CartContext";
 
 const Mitraillettes = () => {
   const [menus, setMenus] = useState(false);
@@ -15,86 +14,22 @@ const Mitraillettes = () => {
     setMenus(!menus);
   };
 
-  const handleProduitClick = async (product: any) => {
-    const menuPrice = menus ? 2.5 : 0;
-    const item = {
-      id: product.id,
-      name: menus === true ? ` Menue Mitraillette ${product.name}` : `Mitraillette ${product.name}`,
-      price: parseFloat(product.price) + menuPrice,
-      quantity: 1,
-      uniqueId: `${product.id}-${Date.now()}`, // Identifiant unique pour chaque article
-      menuOption: menus,
-      supplementPrice: menuPrice,
-      viaMitraillette: true,
-      relatedItems: [
-        ...product.garniture.map((garniture: any) => ({
-          ...garniture,
-          isGarniture: true,
-          parentId: product.id,
-        })),
-        ...(menus === true
-          ? [{
-            ...product.frites,
-            isFrites: true,
-            name: "Frites",
-              isFritesCategory: true,
-              parentId: product.id
-            }] : []),
-      ],
-    };
-    addToCart(item);
-
+  const handleProduitClick = (product: any) => {
     const route =
-              product.id === 1 ? "Snacks"
-             : product.id === 2 ? "Sauces"
-             : product.id === 3 ? "Brochettes"
-             : "";
+      product.id === 1
+        ? "Snacks"
+        : product.id === 2
+        ? "Sauces"
+        : product.id === 3
+        ? "Brochettes"
+        : "";
 
     if (route) {
-      // Si le produit a une route valide, construire l'URL
-      const url = `/nouvelle_commande/${route}?viaMitraillette=true`;
-
-      // Ajouter l'option menu si nécessaire
-      if (menus === true) {
-        router.push(`${url}&menu=true`);
-        } else {
-          router.push(url);
-        }
-      } else {
-          console.error("Produit invalide ou route manquante");
-        }
-    };
-
-
-  //   try {
-  //     const response = await fetch("/api/panier", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         id: Date.now(),
-  //         image: "/images/default.jpg",
-  //         items: [item],
-  //         user_name: "User",
-  //         user_image: "/avatar.jpg",
-  //         time: new Date().toLocaleTimeString(),
-  //         date: new Date().toISOString(),
-  //         lieu: "Lieu de commande",
-  //       }),
-  //     });
-
-  //     if (!response.ok) {
-  //       const errorMessage = await response.text();
-  //       throw new Error(errorMessage || "Erreur lors de l'enregistrement du panier");
-  //     }
-
-  //     const data = await response.json();
-  //     console.log("Panier mis à jour :", data);
-  //   } catch (error) {
-  //     console.error("Erreur lors de l'ajout au panier :", error);
-  //   }
-  // };
+      router.push(`/nouvelle_commande/${route}?viaMitraillette=true`);
+    } else {
+      console.error("Produit invalide ou route manquante");
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center mt-2 font-bold font-serif text-2xl">
@@ -137,7 +72,7 @@ const Mitraillettes = () => {
           />
         </label>
         <div className="flex flex-col items-center justify-center mt-2 gap-4 text-sm">
-          *Cela inclut des frites supplémentaires (+ 2.5€ au prix indiqué).
+          *Cela inclus des frites supplémentaires + 2.5€ au prix indiqué.
         </div>
       </div>
     </div>
