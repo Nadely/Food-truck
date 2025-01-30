@@ -6,7 +6,6 @@ import { useState } from "react";
 import data from "@/data/dataProduits.json";
 import { useCart } from "@/app/context/CartContext";
 
-
 const Sauces = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -91,7 +90,12 @@ const Sauces = () => {
     // Determine the next route based on the parameters and append `menu=true` if needed
     let nextRoute = "";
 
-    if (viaSnacks === "true" || viaSnacksVeggies === "true" || viaBrochettes === "true" || viaMitraillette === "true") {
+    if (
+      viaSnacks === "true" ||
+      viaSnacksVeggies === "true" ||
+      viaBrochettes === "true" ||
+      viaMitraillette === "true"
+    ) {
       nextRoute = "Supplements?viaSauces=true";
     } else {
       nextRoute = "/nouvelle_commande";
@@ -104,7 +108,6 @@ const Sauces = () => {
 
     router.push(nextRoute);
   };
-
 
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif mt-2 text-2xl">
@@ -150,7 +153,11 @@ const Sauces = () => {
             </p>
           )}
 
-          {(viaFrites === "true" || viaSnacksVeggies === "true" || viaSnacks === "true" || viaBrochettes === "true" || viaEnfants === "true") && (
+          {(viaFrites === "true" ||
+            viaSnacksVeggies === "true" ||
+            viaSnacks === "true" ||
+            viaBrochettes === "true" ||
+            viaEnfants === "true") && (
             <p className="text-sm text-right mb-5">
               * La première est gratuite.
             </p>

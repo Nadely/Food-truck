@@ -51,7 +51,10 @@ const Supplements = () => {
     }));
 
     // Calcul du prix total uniquement des suppléments
-    const supplementsPrice = relatedItems.reduce((acc, product) => acc + product.price, 0);
+    const supplementsPrice = relatedItems.reduce(
+      (acc, product) => acc + product.price,
+      0
+    );
 
     // Création de l'objet à ajouter au panier
     const item = {
@@ -79,7 +82,9 @@ const Supplements = () => {
 
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif mt-2 text-2xl">
-      <h1 className="border-b-2 border-black w-full text-center mr-5">Suppléments</h1>
+      <h1 className="border-b-2 border-black w-full text-center mr-5">
+        Suppléments
+      </h1>
       <div className="w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
         <div className="flex flex-col items-center justify-center">
           <div className="grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-4">

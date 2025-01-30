@@ -47,4 +47,5 @@ const CategoriePage = async ({ params }: { params: { categorie: string } }) => {
   }
 };
 
+
 export default CategoriePage;

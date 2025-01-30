@@ -19,7 +19,10 @@ const Mitraillettes = () => {
     const menuPrice = menus ? 2.5 : 0;
     const item = {
       id: product.id,
-      name: menus === true ? ` Menue Mitraillette ${product.name}` : `Mitraillette ${product.name}`,
+      name:
+        menus === true
+          ? ` Menue Mitraillette ${product.name}`
+          : `Mitraillette ${product.name}`,
       price: parseFloat(product.price) + menuPrice,
       quantity: 1,
       uniqueId: `${product.id}-${Date.now()}`, // Identifiant unique pour chaque article
@@ -33,22 +36,28 @@ const Mitraillettes = () => {
           parentId: product.id,
         })),
         ...(menus === true
-          ? [{
-            ...product.frites,
-            isFrites: true,
-            name: "Frites",
-              isFritesCategory: true,
-              parentId: product.id
-            }] : []),
+          ? [
+              {
+                ...product.frites,
+                isFrites: true,
+                name: "Frites",
+                isFritesCategory: true,
+                parentId: product.id,
+              },
+            ]
+          : []),
       ],
     };
     addToCart(item);
 
     const route =
-              product.id === 1 ? "Snacks"
-             : product.id === 2 ? "Sauces"
-             : product.id === 3 ? "Brochettes"
-             : "";
+      product.id === 1
+        ? "Snacks"
+        : product.id === 2
+        ? "Sauces"
+        : product.id === 3
+        ? "Brochettes"
+        : "";
 
     if (route) {
       // Si le produit a une route valide, construire l'URL
@@ -57,14 +66,13 @@ const Mitraillettes = () => {
       // Ajouter l'option menu si nécessaire
       if (menus === true) {
         router.push(`${url}&menu=true`);
-        } else {
-          router.push(url);
-        }
       } else {
-          console.error("Produit invalide ou route manquante");
-        }
-    };
-
+        router.push(url);
+      }
+    } else {
+      console.error("Produit invalide ou route manquante");
+    }
+  };
 
   //   try {
   //     const response = await fetch("/api/panier", {

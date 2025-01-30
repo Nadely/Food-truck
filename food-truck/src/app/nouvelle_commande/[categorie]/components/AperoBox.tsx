@@ -77,6 +77,7 @@ const AperoBox = () => {
     }
   };
 
+
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif mt-2 text-2xl">
       <h1 className="border-b-2 border-black w-full text-center mr-5">

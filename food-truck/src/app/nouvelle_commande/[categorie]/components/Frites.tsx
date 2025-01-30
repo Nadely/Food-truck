@@ -32,20 +32,18 @@ const Frites = () => {
   };
 
   const handleAddToCart = () => {
-    const itemsToAdd = data.Frites
-      .map((product) => {
-        const quantity = quantities[product.id];
-        if (quantity > 0) {
-          return {
-            id: product.id,
-            name: product.name,
-            price: parseFloat(product.price),
-            quantity,
-          };
-        }
-        return null;
-      })
-      .filter(Boolean);
+    const itemsToAdd = data.Frites.map((product) => {
+      const quantity = quantities[product.id];
+      if (quantity > 0) {
+        return {
+          id: product.id,
+          name: product.name,
+          price: parseFloat(product.price),
+          quantity,
+        };
+      }
+      return null;
+    }).filter(Boolean);
 
     if (itemsToAdd.length > 0) {
       itemsToAdd.forEach((item) => addToCart(item));
@@ -54,7 +52,9 @@ const Frites = () => {
       const fritesParams = Object.entries(quantities)
         .filter(([_, quantity]) => quantity > 0)
         .map(([id, quantity]) => {
-          const frites = data.Frites.find((product) => product.id === parseInt(id));
+          const frites = data.Frites.find(
+            (product) => product.id === parseInt(id)
+          );
           return frites ? `${frites.name}=${quantity}` : "";
         })
         .join("&");
@@ -65,10 +65,11 @@ const Frites = () => {
     }
   };
 
-
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif mt-2 text-2xl">
-      <h1 className="border-b-2 border-black w-full text-center mr-5">Frites</h1>
+      <h1 className="border-b-2 border-black w-full text-center mr-5">
+        Frites
+      </h1>
       <div className="w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
         <div className="flex flex-col items-center justify-center">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-4">

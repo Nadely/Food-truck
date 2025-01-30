@@ -15,7 +15,6 @@ const Burgers = () => {
   const handleCheckboxChangeMenus = () => setMenus(!menus);
   const handleCheckboxChangeGarnitures = () => setGarnitures(!garnitures);
 
-
   const handleProduitClick = (product: any) => {
     const menuPrice = menus ? 2.5 : 0;
     const garniturePrice = garnitures ? 3 : 0;
@@ -37,20 +36,24 @@ const Burgers = () => {
           parentId: product.id,
         })),
         ...(garnitures // Vérifie si "Double Garniture" est activé
-          ? [{
-              isGarniture: true,
-              name: "Double Garniture", // Indique que l'option double garniture est activée
-              parentId: product.id,
-            }]
+          ? [
+              {
+                isGarniture: true,
+                name: "Double Garniture", // Indique que l'option double garniture est activée
+                parentId: product.id,
+              },
+            ]
           : []),
         ...(menus === true
-          ? [{
-              ...product.frites,
-              isFrites: true,
-              name: "Frites",
-              isFritesCategory: true,
-              parentId: product.id,
-            }]
+          ? [
+              {
+                ...product.frites,
+                isFrites: true,
+                name: "Frites",
+                isFritesCategory: true,
+                parentId: product.id,
+              },
+            ]
           : []),
       ],
     };
@@ -67,13 +70,13 @@ const Burgers = () => {
       // Ajouter l'option menu si nécessaire
       if (menus === true) {
         router.push(`${url}&menu=true`);
-        } else {
-          router.push(url);
-        }
       } else {
-          console.error("Produit invalide ou route manquante");
-        }
-    };
+        router.push(url);
+      }
+    } else {
+      console.error("Produit invalide ou route manquante");
+    }
+  };
 
   return (
     <div className="flex flex-col items-center justify-center mt-2 font-bold font-serif text-2xl">
