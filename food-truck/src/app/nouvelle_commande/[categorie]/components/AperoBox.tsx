@@ -79,7 +79,9 @@ const AperoBox = () => {
 
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif mt-2 text-2xl">
-      <h1 className="border-b-2 border-black w-full text-center mr-5">AperoBox</h1>
+      <h1 className="border-b-2 border-black w-full text-center mr-5">
+        AperoBox
+      </h1>
       <div className="w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
         <div className="flex flex-col items-center justify-center">
           <div className="grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-4">
@@ -101,7 +103,7 @@ const AperoBox = () => {
                 <div className="flex flex-row items-center gap-4">
                   <button
                     onClick={() => handleDecrement(product.id)}
-                    className="text-sm px-2 py-1 rounded-lg bg-red-500 focus:ring-4 rounded-lg px-8 py-2 "
+                    className="text-sm px-2 py-1  bg-red-500 focus:ring-4 rounded-lg px-8 py-2 "
                   >
                     -
                   </button>
@@ -120,7 +122,19 @@ const AperoBox = () => {
         <div className="flex flex-col items-center justify-center gap-4">
           <button
             className="button-blue w-40 mt-10 mb-5"
+<<<<<<< HEAD
             onClick={handleAddToCart}
+=======
+            onClick={() => {
+              if (Object.values(quantities).some((qty) => qty > 0)) {
+                router.push("Sauces?viaAperoBox=true");
+              } else {
+                alert(
+                  "Veuillez sélectionner au moins une quantité avant de valider !"
+                );
+              }
+            }}
+>>>>>>> 6b6d5e3 (Refactor and clean up styling in AperoBox and Brochettes components)
           >
             Valider
           </button>
