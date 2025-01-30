@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import data from "@/data/dataProduits.json";
+import { useCart } from "@/app/context/CartContext";
+import { dataProduct } from "@/app/types/allTypes";
 
 const Boissons = () => {
   const searchParams = useSearchParams();
@@ -44,7 +46,7 @@ const Boissons = () => {
 
     setSelectedBoissons(id);
   };
-
+  //
   const handleIncrement = (id: number) => {
     setQuantities((prevQuantities) => {
       const newQuantities = { ...prevQuantities, [id]: prevQuantities[id] + 1 };
@@ -86,6 +88,68 @@ const Boissons = () => {
     });
   };
 
+  const handleAddToCart = () => {
+    const aucuneBoisson = data.Boissons.find(
+      (product) => product.name === "Aucune boisson"
+    ) ?? { id: -1, name: "Aucune boisson" };
+    const aucuneBoissonId = aucuneBoisson.id;
+
+    // Si "Aucune boisson" est sélectionnée, validez sans vérifier les quantités
+    if (selectedBoissons === aucuneBoissonId) {
+      const item = {
+        id: aucuneBoisson.id,
+        name: aucuneBoisson.name,
+        price: 0, // Prix de "Aucune boisson" est toujours 0
+        quantity: 1, // Peut être considéré comme sélectionné une fois
+        uniqueId: `${aucuneBoisson.id}-${Date.now()}`,
+        menuOption: menus,
+        supplementPrice: 0,
+        viaSupplements: true,
+        relatedItems: [],
+      };
+
+      addToCart(item);
+      router.push("/nouvelle_commande");
+      return;
+    }
+
+    // Sinon, vérifiez les quantités pour les autres boissons
+    const selectedProducts = data.Boissons.filter(
+      (product) => quantities[product.id] > 0
+    );
+
+    if (selectedProducts.length === 0) {
+      alert("Veuillez sélectionner au moins une boisson.");
+      return;
+    }
+
+    selectedProducts.forEach((product, index) => {
+      const isMenu = menus;
+
+      // Si c'est un menu et que c'est la première boisson (index === 0), on applique le prix de 1€ et on masque le nom
+      const calculatedPrice =
+        isMenu && index === 0 ? 1 : parseFloat(product.price);
+      const supplementPrice = isMenu && index === 0 ? 1 : 0; // Supplément uniquement pour la première boisson dans un menu
+
+      const item = {
+        id: product.id,
+        name: isMenu && index === 0 ? "" : product.name, // Masquer le nom uniquement pour la 1ère boisson du menu
+        price: calculatedPrice,
+        quantity: quantities[product.id],
+        uniqueId: `${product.id}-${Date.now()}`,
+        menuOption: isMenu,
+        supplementPrice: supplementPrice,
+        viaSupplements: true,
+        relatedItems:
+          isMenu && index === 0 ? [{ id: product.id, name: product.name }] : [], // Ajouter la première boisson au relatedItems
+      };
+
+      addToCart(item);
+    });
+
+    router.push("/nouvelle_commande");
+  };
+
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif text-2xl">
       <h1 className="border-b-2 border-black w-full text-center mr-5">
@@ -122,7 +186,9 @@ const Boissons = () => {
                   />
                   <p className="text-sm mt-auto">{product.name}</p>
                   {!viaSupplements && (
-                    <p className="text-sm mt-auto">{product.price}</p>
+                    <p className="text-sm mt-auto">
+                      {menus ? "1€" : `${product.price}`}
+                    </p>
                   )}
                   {product.name === "Aucune boisson" ? (
                     <></>
