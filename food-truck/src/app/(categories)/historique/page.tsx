@@ -17,31 +17,7 @@ import {
 } from "date-fns";
 import type { LossRecord, Historique, Recettes } from "@/app/types/allTypes";
 
-<<<<<<< HEAD
 registerLocale("fr", fr);
-=======
-registerLocale('fr', fr);
-
-export interface Historique {
-    id: number;
-    image: string;
-    items: string[];
-    user_name: string;
-    user_image: string;
-    time: string;
-    price: string;
-    date: string | Date; // Ajout du champ date
-    lieu: string;
-    recette: string;
-    createdAt: number;
-}
-
-export interface Recettes {
-    date: string | Date;
-    lieu: string;
-    recette: string;
-}
->>>>>>> homepageNad1
 
 const Historique = () => {
   const [historique, setHistorique] = useState<Historique[]>([]);
@@ -65,7 +41,6 @@ const Historique = () => {
     });
   };
 
-<<<<<<< HEAD
   {
     /* Fonction asynchrone pour récupérer l'historique des commandes et des recettes */
   }
@@ -74,33 +49,6 @@ const Historique = () => {
       .then((response) => {
         if (!response.ok) {
           throw new Error("Récupération des données impossible");
-=======
-    const loadLocalStorage = () => {
-		const storageValue = localStorage.getItem('selectedLieu');
-		return storageValue || "Maison";
-	};
-
-    const loadLieu = loadLocalStorage();
-
-    const fetchHistorique = async () => {
-        try {
-            const response = await fetch('/api/historique');
-            if (response.ok) {
-                const data = await response.json();
-                const sortedHistorique = Array.isArray(data.historique) ? data.historique.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()) : [];
-                setHistorique(sortedHistorique);
-                console.log(loadLieu);
-                setRecettes(Array.isArray(data.recettes) ? data.recettes : []);
-            } else {
-                console.error('Erreur lors de la récupération de l\'historique.');
-                setHistorique([]);
-                setRecettes([]);
-            }
-        } catch (error) {
-            console.error('Erreur:', error);
-            setHistorique([]);
-            setRecettes([]);
->>>>>>> homepageNad1
         }
         return response.json();
       })

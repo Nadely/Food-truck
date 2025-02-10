@@ -83,7 +83,7 @@ const Supplements = () => {
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif mt-2 text-2xl">
       <h1 className="border-b-2 border-black w-full text-center mr-5">
-        Suppléments
+        Suppléments *
       </h1>
       <div className="w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
         <div className="flex flex-col items-center justify-center">
@@ -122,6 +122,7 @@ const Supplements = () => {
             Valider
           </button>
         </div>
+        <p className="text-center text-sm">* 1€ par suppléments</p>
       </div>
     </div>
   );

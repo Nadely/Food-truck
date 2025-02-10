@@ -45,13 +45,26 @@ type CartContextType = {
   deleteRelatedItem: (uniqueId: string) => void;
   deleteRelatedItems: (uniqueId: string[]) => void;
   getRelatedItemsVia: (viaMitraillette: boolean) => CartItem[];
-  updateRelatedItemsVia: (viaMitraillette: boolean, relatedItems: CartItem[]) => void;
+  updateRelatedItemsVia: (
+    viaMitraillette: boolean,
+    relatedItems: CartItem[]
+  ) => void;
   clearRelatedItemsVia: (viaMitraillette: boolean) => void;
-  addRelatedItemVia: (viaMitraillette: boolean, item: Omit<CartItem, "uniqueId">) => void;
+  addRelatedItemVia: (
+    viaMitraillette: boolean,
+    item: Omit<CartItem, "uniqueId">
+  ) => void;
   removeRelatedItemVia: (viaMitraillette: boolean, uniqueId: string) => void;
-  updateRelatedItemVia: (viaMitraillette: boolean, uniqueId: string, quantity: number) => void;
+  updateRelatedItemVia: (
+    viaMitraillette: boolean,
+    uniqueId: string,
+    quantity: number
+  ) => void;
   clearRelatedItemVia: (viaMitraillette: boolean, uniqueId: string) => void;
-  getRelatedItemVia: (viaMitraillette: boolean, uniqueId: string) => CartItem | undefined;
+  getRelatedItemVia: (
+    viaMitraillette: boolean,
+    uniqueId: string
+  ) => CartItem | undefined;
   deleteRelatedItemVia: (viaMitraillette: boolean, uniqueId: string) => void;
   deleteRelatedItemsVia: (viaMitraillette: boolean, uniqueId: string[]) => void;
 };
@@ -60,7 +73,8 @@ type CartContextType = {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 // Générateur d'ID unique
-const generateUniqueId = () => `cart-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+const generateUniqueId = () =>
+  `cart-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
 // Provider pour le contexte du panier
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
@@ -82,19 +96,18 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     console.log("Données reçues dans la requête :", cart);
   };
 
-
   // Retirer un produit et ses éléments liés
   const removeFromCart = (uniqueId: string) => {
-  setCart((prevCart) =>
-    prevCart.filter((item) => {
-      // On supprime l'élément principal et les éléments liés
-      if (item.uniqueId === uniqueId) return false;
-      if (item.relatedItems?.some((related) => related.uniqueId === uniqueId)) return false;
-      return true;
-    })
-  );
-};
-
+    setCart((prevCart) =>
+      prevCart.filter((item) => {
+        // On supprime l'élément principal et les éléments liés
+        if (item.uniqueId === uniqueId) return false;
+        if (item.relatedItems?.some((related) => related.uniqueId === uniqueId))
+          return false;
+        return true;
+      })
+    );
+  };
 
   const getRelatedItemsVia = (parentId: string) => {
     return cart.find((item) => item.uniqueId === parentId)?.relatedItems || [];
@@ -120,13 +133,11 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const updateQuantity = (uniqueId: string, quantity: number) => {
     setCart((prevCart) =>
       prevCart.map((item) => {
-        // Mise à jour de l'élément principal
         if (item.uniqueId === uniqueId) {
           return { ...item, quantity };
         }
 
-        // Mise à jour des éléments liés
-        if (item.relatedItems?.some((related) => related.uniqueId === uniqueId)) {
+        if (item.relatedItems) {
           return {
             ...item,
             relatedItems: item.relatedItems.map((related) =>
@@ -140,42 +151,42 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
-
   return (
-    <CartContext.Provider value={{
-      cart,
-      addToCart,
-      removeFromCart,
-      updateQuantity,
-      setCart,
-      setViaMitraillette: () => {}, // Ajoutez un comportement ou laissez-le vide si non nécessaire
-      setRelatedItems: () => {},    // Idem ici
-      getViaMitraillette: () => false, // Ou un comportement par défaut
-      getRelatedItems: () => [],
-      updateRelatedItems: () => {},
-      clearRelatedItems: () => {},
-      addRelatedItem: () => {},
-      removeRelatedItem: () => {},
-      updateRelatedItem: () => {},
-      clearRelatedItem: () => {},
-      getRelatedItem: () => undefined,
-      deleteRelatedItem: () => {},
-      deleteRelatedItems: () => {},
-      getRelatedItemsVia: () => [],
-      updateRelatedItemsVia: () => {},
-      clearRelatedItemsVia: () => {},
-      addRelatedItemVia: () => {},
-      removeRelatedItemVia: () => {},
-      updateRelatedItemVia: () => {},
-      clearRelatedItemVia: () => {},
-      getRelatedItemVia: () => undefined,
-      deleteRelatedItemVia: () => {},
-      deleteRelatedItemsVia: () => {},
-    }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        setCart,
+        setViaMitraillette: () => {}, // Ajoutez un comportement ou laissez-le vide si non nécessaire
+        setRelatedItems: () => {}, // Idem ici
+        getViaMitraillette: () => false, // Ou un comportement par défaut
+        getRelatedItems: () => [],
+        updateRelatedItems: () => {},
+        clearRelatedItems: () => {},
+        addRelatedItem: () => {},
+        removeRelatedItem: () => {},
+        updateRelatedItem: () => {},
+        clearRelatedItem: () => {},
+        getRelatedItem: () => undefined,
+        deleteRelatedItem: () => {},
+        deleteRelatedItems: () => {},
+        getRelatedItemsVia: () => [],
+        updateRelatedItemsVia: () => {},
+        clearRelatedItemsVia: () => {},
+        addRelatedItemVia: () => {},
+        removeRelatedItemVia: () => {},
+        updateRelatedItemVia: () => {},
+        clearRelatedItemVia: () => {},
+        getRelatedItemVia: () => undefined,
+        deleteRelatedItemVia: () => {},
+        deleteRelatedItemsVia: () => {},
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
-
 };
 
 // Hook pour utiliser le contexte du panier

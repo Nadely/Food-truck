@@ -1,18 +1,19 @@
 {
-  "preparations": [
-    {
-      "id": 11,
-      "image": "/images/nouvelle_commande.jpg",
-      "items": ["Menu enfant"],
-      "user_name": "Nouveau Client",
-      "user_image": "/avatar.jpg",
-      "time": "14h00",
-      "date": "2024-12-16T13:27:25.547Z",
-      "lieu": "Maison",
-      "price": "30€",
-      "createdAt": "2024-12-16T13:27:25.548Z"
-    }
-  ],
-
-  "pretes": []
+    "preparations": [],
+    "pretes": [
+        {
+            "id": 11,
+            "image": "/images/nouvelle_commande.jpg",
+            "items": [
+                "Menu enfant"
+            ],
+            "user_name": "Nouveau Client",
+            "user_image": "/avatar.jpg",
+            "time": "14h00",
+            "date": "2024-12-16T13:27:25.547Z",
+            "lieu": "Maison",
+            "price": "30€",
+            "createdAt": "2024-12-16T13:27:25.548Z"
+        }
+    ]
 }

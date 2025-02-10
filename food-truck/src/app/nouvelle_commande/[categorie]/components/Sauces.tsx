@@ -23,10 +23,20 @@ const Sauces = () => {
 
   const handleSelectSauce = (id: number) => {
     setSelectedSauces((prevSelected) => {
-      if (prevSelected.includes(id)) {
-        return prevSelected.filter((sauceId) => sauceId !== id);
+      if (id === 18) {
+        // Vérifie si "Aucune sauce" est sélectionnée
+        return prevSelected.includes(id) ? [] : [id]; // Si déjà sélectionnée, déselectionne toutes les sauces
       } else {
-        return [...prevSelected, id];
+        if (prevSelected.includes(18)) {
+          // Si "Aucune sauce" est sélectionnée, déselectionne tout
+          return [id]; // Si une autre sauce est sélectionnée après "Aucune sauce", remplace-la
+        }
+        // Sinon, sélectionne/déselectionne la sauce normalement
+        if (prevSelected.includes(id)) {
+          return prevSelected.filter((sauceId) => sauceId !== id);
+        } else {
+          return [...prevSelected, id];
+        }
       }
     });
   };
@@ -42,22 +52,22 @@ const Sauces = () => {
     let price = 0;
     let freeSauces = 0;
 
-    // Récupérer toutes les boîtes et leurs quantités depuis les paramètres de recherche
+    // Calcul des sauces gratuites basées sur les paramètres
     const selectedAperoBoxes = searchParams.getAll("selectedAperoBox");
     const aperoBoxQuantities = selectedAperoBoxes.reduce((acc, boxName) => {
       const box = data.AperoBox.find((item) => item.name === boxName);
-      return box ? acc + 1 : acc; // Compte chaque box présente dans l'URL
+      return box ? acc + 1 : acc;
     }, 0);
 
-    // Ajouter les sauces gratuites en fonction des ApéroBox
+    // Appliquer les sauces gratuites selon les ApéroBox
     data.AperoBox.forEach((box) => {
       const quantity = parseInt(searchParams.get(box.name) || "0");
       if (quantity > 0) {
-        freeSauces += quantity * (box.name === "Party Box" ? 2 : 1); // Party Box = 2 gratuites, autres = 1 gratuite
+        freeSauces += quantity * (box.name === "Party Box" ? 2 : 1);
       }
     });
 
-    // Ajouter les sauces gratuites pour les frites
+    // Sauces gratuites pour les frites
     data.Frites.forEach((frites) => {
       const quantity = parseInt(searchParams.get(frites.name) || "0");
       if (quantity > 0) {
@@ -70,8 +80,9 @@ const Sauces = () => {
     if (viaSnacksVeggies === "true") freeSauces += 1;
     if (viaEnfants === "true") freeSauces += 1;
     if (viaBrochettes === "true") freeSauces += 1;
+    if (viaMitraillette === "true") freeSauces += 1;
 
-    // Calculer les sauces payantes
+    // Calculer le nombre de sauces payantes
     const saucesPaid = Math.max(0, selectedSauces.length - freeSauces);
     price = saucesPaid * 0.5;
 
@@ -87,7 +98,7 @@ const Sauces = () => {
 
     addToCart(item);
 
-    // Determine the next route based on the parameters and append `menu=true` if needed
+    // Déterminer la prochaine route
     let nextRoute = "";
 
     if (
@@ -101,7 +112,7 @@ const Sauces = () => {
       nextRoute = "/nouvelle_commande";
     }
 
-    // Add `&menu=true` if menu option is selected
+    // Ajouter `&menu=true` si menu est sélectionné
     if (isMenu && nextRoute.includes("?")) {
       nextRoute += (nextRoute.includes("?") ? "&" : "?") + "menu=true";
     }
@@ -140,6 +151,7 @@ const Sauces = () => {
             </div>
           ))}
         </div>
+
         <div className="flex flex-col items-center justify-center gap-4">
           <button
             className="button-blue w-40 mt-10 mb-5"
@@ -152,12 +164,12 @@ const Sauces = () => {
               * La première est gratuite, sauf pour Party Box (2 gratuites).
             </p>
           )}
-
           {(viaFrites === "true" ||
             viaSnacksVeggies === "true" ||
             viaSnacks === "true" ||
             viaBrochettes === "true" ||
-            viaEnfants === "true") && (
+            viaEnfants === "true" ||
+            viaMitraillette === "true") && (
             <p className="text-sm text-right mb-5">
               * La première est gratuite.
             </p>
