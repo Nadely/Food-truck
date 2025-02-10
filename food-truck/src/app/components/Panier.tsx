@@ -136,7 +136,7 @@ const Panier = () => {
       <div className="flex flex-col items-center justify-center gap-4">
         <button
           className="button-blue w-40 mt-10 mb-5"
-          onClick={() => router.push("/panier")}
+          onClick={() => router.push("/horaires")}
         >
           Valider
         </button>

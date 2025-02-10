@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import CategorieNav from "./components/CategorieNav";
 import Nav from "./components/Nav";
 import Panier from "./components/Panier";
+import Horaires from "./components/Horaires";
 import { usePathname } from "next/navigation";
 import { CartProvider } from "@/app/context/CartContext";
 
@@ -38,8 +39,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   <div className="flex-[2] w-3/4 p-2">
                     <Panier />
                   </div>
+                ) : pathname && pathname.startsWith("/horaires") ? (
+                  <div className="flex-[2] w-full p-2">
+                    <Horaires />
+                  </div>
                 ) : (
-                  <div className="flex-[2] w-full p-2">{children}</div>
+                  <div className="flex-[2] w-full p-2">
+                    {children}
+                  </div>
                 )}
 
                 {/* Panier : 1/3 */}

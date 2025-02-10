@@ -60,6 +60,11 @@ const Nav = () => {
           Panier
         </Link>
       )}
+      {categories === 'horaires' && (
+        <Link href="/horaires" className="text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2">
+          Horaires
+        </Link>
+      )}
       {(composition === 'nouvelle_commande' || linksCompo.includes(composition)) && (
         <Link href="/nouvelle_commande" className="whitespace-nowrap text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2 w-auto">
           Nouvelle Commande
