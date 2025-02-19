@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 import CategorieNav from "./components/CategorieNav";
 import Nav from "./components/Nav";
 import Panier from "./components/Panier";
-import Horaires from "./components/Horaires";
+import Horaires from "./(categories)/horaires/page";
 import { usePathname } from "next/navigation";
 import { CartProvider } from "@/app/context/CartContext";
 

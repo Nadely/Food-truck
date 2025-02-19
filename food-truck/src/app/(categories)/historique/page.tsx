@@ -198,8 +198,14 @@ const Historique = () => {
                           </span>
                         </div>
                         <ul className="list-disc list-inside font-serif">
-                          {commande.items.map((item: string, index: number) => (
-                            <li key={index}>{item}</li>
+                        {commande.items.map((item, index) => (
+													<li key={index}>
+														{item.quantity ? item.quantity !== 1 ? `${item.quantity} x ` : '' : null}
+														<span style={{ marginRight: '5px' }}>{item.name}</span>
+														{item.relatedItems && item.relatedItems.length > 0
+															? item.relatedItems.map(related => related).join(', ')
+															: ' '}
+													</li>
                           ))}
                         </ul>
                       </div>

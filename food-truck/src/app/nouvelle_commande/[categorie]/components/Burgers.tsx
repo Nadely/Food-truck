@@ -21,7 +21,7 @@ const Burgers = () => {
 
     const item = {
       id: product.id,
-      name: menus === true ? `Menu ${product.name}` : `Burger ${product.name}`,
+      name: menus === true ? `Menu ${product.name}` : `${product.name}`,
       price: parseFloat(product.price) + menuPrice + garniturePrice,
       quantity: 1,
       uniqueId: `${product.id}-${Date.now()}`,

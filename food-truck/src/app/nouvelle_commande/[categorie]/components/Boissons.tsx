@@ -80,7 +80,7 @@ const Boissons = () => {
       return newQuantities;
     });
   };
-  //je fais une modification ici
+
   const handleAddToCart = () => {
     const aucuneBoisson = data.Boissons.find(
       (product) => product.name === "Aucune boisson"
@@ -122,7 +122,9 @@ const Boissons = () => {
       // Si c'est un menu et que c'est la première boisson (index === 0), on applique le prix de 1€ et on masque le nom
       const calculatedPrice =
         isMenu && index === 0 ? 1 : parseFloat(product.price);
-      const supplementPrice = isMenu && index === 0 ? 1 : 0; // Supplément uniquement pour la première boisson dans un menu
+
+      // Si la boisson est dans un menu, on applique le supplément de 1€ seulement pour la première boisson
+      const supplementPrice = isMenu && index === 0 ? 1 : 0;
 
       const item = {
         id: product.id,
@@ -142,6 +144,7 @@ const Boissons = () => {
 
     router.push("/nouvelle_commande");
   };
+
 
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif text-2xl">

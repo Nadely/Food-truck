@@ -74,19 +74,12 @@ const Panier = () => {
                     <ul className="ml-4 text-sm">
                       {item.relatedItems.map((related, index) => (
                         <li key={index} className="text-gray-600">
-                          {related.name
-                            ? `- ${related.name}`
-                            : "- Produit sans nom"}
+                          {related.name ? `- ${related.name}` : "- Produit sans nom"}
 
                           {/* Si c'est une garniture, afficher le bouton supprimer */}
                           {related.isGarniture && (
                             <button
-                              onClick={() =>
-                                handleRemoveGarniture(
-                                  related.uniqueId,
-                                  item.uniqueId
-                                )
-                              }
+                              onClick={() => handleRemoveGarniture(related.uniqueId, item.uniqueId)}
                               className="bg-gray-500 text-white px-2 rounded ml-2"
                             >
                               Supprimer
@@ -96,6 +89,7 @@ const Panier = () => {
                       ))}
                     </ul>
                   )}
+
                 </div>
 
                 {/* Actions pour ajuster la quantité ou supprimer le produit principal */}

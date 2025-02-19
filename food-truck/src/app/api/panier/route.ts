@@ -1,82 +1,105 @@
-import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { NextResponse } from "next/server";
+import fs from "fs";
+import path from "path";
 
-export async function POST(request) {
+const panierFilePath = path.join(process.cwd(), "src/data/panier.json");
+const preparationFilePath = path.join(process.cwd(), "src/data/preparation.json");
+
+export async function POST(request: Request) {
   try {
-    const cart = await request.json();
-    const panierFilePath = path.join(process.cwd(), 'src/data/panier.json');
-    const preparationFilePath = path.join(process.cwd(), 'src/data/preparation.json');
+    const { items, user_name, user_image, time, date, lieu, price } = await request.json();
 
-    // Formatage du panier reçu
-    const formattedCart = {
-      id: cart.id || Date.now(),
-      image: cart.image || "/images/default.jpg",
-      items: cart.items.map((item) => ({
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity,
-        total: (item.price * item.quantity).toFixed(2),
-        relatedItems: item.relatedItems ? item.relatedItems.map(relatedItem => ({
-          name: relatedItem.name,
-          price: relatedItem.price,
-          quantity: relatedItem.quantity,
-          total: (relatedItem.price * relatedItem.quantity).toFixed(2),
-        })) : [],
-      })),
-      user_name: cart.user_name || "Inconnu",
-      user_image: cart.user_image || "/avatar.jpg",
-      time: cart.time || new Date().toLocaleTimeString(),
-      date: cart.date || new Date().toISOString(),
-      lieu: cart.lieu || "Non spécifié",
-      price: cart.items.reduce((acc, item) => acc + item.price * item.quantity, 0).toFixed(2) + "€",
-      createdAt: cart.createdAt || new Date().toISOString(),
-    };
-
-    // Vérification de l'existence du fichier panier
-    let existingCartData = { panier: [] };
-    if (fs.existsSync(panierFilePath)) {
-      const existingData = fs.readFileSync(panierFilePath, 'utf-8');
-      existingCartData = JSON.parse(existingData);
+    // Vérifier si l'heure est bien définie
+    if (!time) {
+      return NextResponse.json({ message: "L'horaire est requis." }, { status: 400 });
     }
 
-    // Ajout du panier formaté aux données existantes
-    existingCartData.panier.push(formattedCart);
+    const panierData = fs.existsSync(panierFilePath)
+      ? fs.readFileSync(panierFilePath, "utf-8")
+      : '{"Panier": []}';
 
-    // Sauvegarde des données dans panier.json
-    fs.writeFileSync(panierFilePath, JSON.stringify(existingCartData, null, 2));
+    const panier = JSON.parse(panierData);
 
-    return NextResponse.json({ message: 'Panier sauvegardé avec succès.', cart: formattedCart }, { status: 200 });
+    const newCommande = {
+      id: Date.now(),
+      items,
+      user_name,
+      user_image,
+      time,
+      date,
+      lieu,
+      price,
+      createdAt: new Date().toISOString(),
+    };
 
+    panier.Panier.push(newCommande);
+
+    fs.writeFileSync(panierFilePath, JSON.stringify(panier, null, 2), "utf-8");
+
+    return NextResponse.json({ message: "Commande ajoutée au panier.", panier }, { status: 200 });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ message: 'Erreur lors de la sauvegarde du panier.', error }, { status: 500 });
+    console.error("Erreur POST panier :", error);
+    return NextResponse.json({ message: "Erreur serveur", error }, { status: 500 });
   }
 }
 
-export async function PUT(request) {
+
+export async function PUT(request: Request) {
   try {
-    const panierFilePath = path.join(process.cwd(), 'src/data/panier.json');
-    const preparationFilePath = path.join(process.cwd(), 'src/data/preparation.json');
+    console.log("Début de la requête PUT");
 
-    // Lire les données du panier
-    const panierData = fs.readFileSync(panierFilePath, 'utf-8');
+    // Log des chemins de fichiers
+    console.log("Chemins de fichiers : ", panierFilePath, preparationFilePath);
+
+    // Lire les fichiers JSON
+    const panierData = fs.existsSync(panierFilePath)
+      ? fs.readFileSync(panierFilePath, "utf-8")
+      : '{"Panier": [{}]}';  // Ici, la clé doit être "Panier"
+    const preparationData = fs.existsSync(preparationFilePath)
+      ? fs.readFileSync(preparationFilePath, "utf-8")
+      : '{"preparations": [{}]}';
+
+    // Log des données lues
+    console.log("Données lues : ", panierData, preparationData);
+
     const panier = JSON.parse(panierData);
+    const preparation = JSON.parse(preparationData);
 
-    // Lire les données de préparation
-    const preparationData = fs.readFileSync(preparationFilePath, 'utf-8');
-    const preparation = JSON.parse(preparationData) || { preparation: [] };
+    // Vérification de la présence de la clé 'Panier' et si c'est un tableau
+    if (!Array.isArray(panier.Panier)) {
+      console.error("Erreur : panier.Panier n'est pas un tableau valide.");
+      return NextResponse.json({ message: "Erreur dans la structure du panier.", error: "panier.Panier est invalide" }, { status: 500 });
+    }
 
-    // Ajouter les paniers à la préparation
-    preparation.preparation.push(...panier.panier);
+    if (!panier.Panier.length) {
+      return NextResponse.json({ message: "Aucune commande à transférer." }, { status: 400 });
+    }
 
-    // Sauvegarder dans préparation.json
-    fs.writeFileSync(preparationFilePath, JSON.stringify(preparation, null, 2));
+    // Ajouter les commandes du panier à preparation.json
+    preparation.preparations.push(...panier.Panier);
+    console.log("Commandes ajoutées à preparation : ", preparation.preparations);
 
-    return NextResponse.json({ message: 'Panier transféré vers préparation.json' }, { status: 200 });
+    // Vider panier.json
+    try {
+      fs.writeFileSync(panierFilePath, JSON.stringify({ Panier: [] }, null, 2), "utf-8");
+      console.log("panier.json vidé avec succès");
+    } catch (writeError) {
+      console.error("Erreur d'écriture dans panier.json : ", writeError);
+      return NextResponse.json({ message: "Erreur lors de l'écriture dans panier.json", error: writeError }, { status: 500 });
+    }
 
+    // Sauvegarder les nouvelles préparations dans preparation.json
+    try {
+      fs.writeFileSync(preparationFilePath, JSON.stringify(preparation, null, 2), "utf-8");
+      console.log("preparation.json sauvegardé avec succès");
+    } catch (writeError) {
+      console.error("Erreur d'écriture dans preparation.json : ", writeError);
+      return NextResponse.json({ message: "Erreur lors de l'écriture dans preparation.json", error: writeError }, { status: 500 });
+    }
+
+    return NextResponse.json({ message: "Commande transférée vers préparation.json." }, { status: 200 });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json({ message: 'Erreur lors du transfert dans préparation.json.', error }, { status: 500 });
+    console.error("Erreur côté serveur : ", error.message, error.stack);
+    return NextResponse.json({ message: "Erreur lors du transfert.", error: error.message }, { status: 500 });
   }
 }

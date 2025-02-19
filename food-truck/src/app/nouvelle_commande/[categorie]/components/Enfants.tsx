@@ -75,7 +75,7 @@ const Enfants = () => {
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif text-2xl">
       <h1 className="border-b-2 border-black w-full text-center mr-5">
-        Enfants
+        Enfants*
       </h1>
       <div className="w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
         {/* Produits cliquables */}
@@ -136,7 +136,8 @@ const Enfants = () => {
           ))}
         </div>
         <div>
-          <p className="text-sm mt-2">* Ce produit est inclus dans le menu</p>
+          <p className="text-sm mt-2 item-center justify-center text-center">* 6.5€</p>
+          <p className="text-sm mt-2">** Ce produit est inclus dans le menu</p>
         </div>
 
         <div className="flex flex-col items-center justify-center gap-4">

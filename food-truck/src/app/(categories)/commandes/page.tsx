@@ -81,8 +81,13 @@ const Commandes = () => {
 
 	const formatPrice = (price: string) => {
 		const numberPrice = parseFloat(price.replace('€', '').replace(',', '.'));
+		if (isNaN(numberPrice)) {
+			console.error('Prix mal formaté:', price);
+			return 'Prix inconnu';
+		}
 		return numberPrice.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
 	};
+
 
 	return (
 		<div className="flex flex-col mt-2">
@@ -119,9 +124,15 @@ const Commandes = () => {
 														<span className="text-black font-serif">{commande.user_name}</span>
 													</div>
 													<ul className="list-disc list-inside font-serif">
-														{commande.items.map((item: string, index: number) => (
-															<li key={index}>{item}</li>
-														))}
+													{commande.items.map((item, index) => (
+													<li key={index}>
+														{item.quantity ? item.quantity !== 1 ? `${item.quantity} x ` : '' : null}
+														<span style={{ marginRight: '5px' }}>{item.name}</span>
+														{item.relatedItems && item.relatedItems.length > 0
+															? item.relatedItems.map(related => related).join(', ')
+															: ' '}
+													</li>
+													))}
 													</ul>
 												</div>
 												<div className="flex flex-col items-end">
@@ -135,7 +146,8 @@ const Commandes = () => {
 													</div>
 													<button
 														onClick={() => handlePrête(commande.id)}
-														className="button-green">
+														className="button-green"
+													>
 														Prête
 													</button>
 												</div>
@@ -172,9 +184,15 @@ const Commandes = () => {
 														<span className="text-black font-serif">{commande.user_name}</span>
 													</div>
 													<ul className="list-disc list-inside font-serif">
-														{commande.items.map((item: string, index: number) => (
-															<li key={index}>{item}</li>
-														))}
+													{commande.items.map((item, index) => (
+													<li key={index}>
+														{item.quantity ? item.quantity !== 1 ? `${item.quantity} x ` : '' : null}
+														<span style={{ marginRight: '5px' }}>{item.name}</span>
+														{item.relatedItems && item.relatedItems.length > 0
+															? item.relatedItems.map(related => related).join(', ')
+															: ' '}
+													</li>
+													))}
 													</ul>
 												</div>
 												<div className="flex flex-col items-end">
@@ -188,7 +206,8 @@ const Commandes = () => {
 													</div>
 													<button
 														onClick={() => handleServie(commande.id)}
-														className="button-red">
+														className="button-red"
+													>
 														Servie
 													</button>
 												</div>

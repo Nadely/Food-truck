@@ -17,15 +17,25 @@ const Mitraillettes = () => {
 
   const handleProduitClick = async (product: any) => {
     const menuPrice = menus ? 2.5 : 0;
+
+    // Assurez-vous que product.price est un nombre
+    const basePrice = parseFloat(product.price);
+    if (isNaN(basePrice)) {
+      console.error("Erreur de prix pour le produit", product.name);
+      return;
+    }
+
+    const totalPrice = basePrice + menuPrice;
+
     const item = {
       id: product.id,
       name:
         menus === true
-          ? ` Menu Mitraillette ${product.name}`
+          ? `Menu Mitraillette ${product.name}`
           : `Mitraillette ${product.name}`,
-      price: parseFloat(product.price) + menuPrice,
+      price: totalPrice,
       quantity: 1,
-      uniqueId: `${product.id}-${Date.now()}`, // Identifiant unique pour chaque article
+      uniqueId: `${product.id}-${Date.now()}`,
       menuOption: menus,
       supplementPrice: menuPrice,
       viaMitraillette: true,
@@ -48,6 +58,7 @@ const Mitraillettes = () => {
           : []),
       ],
     };
+
     addToCart(item);
 
     const route =
@@ -60,10 +71,8 @@ const Mitraillettes = () => {
         : "";
 
     if (route) {
-      // Si le produit a une route valide, construire l'URL
       const url = `/nouvelle_commande/${route}?viaMitraillette=true`;
 
-      // Ajouter l'option menu si nécessaire
       if (menus === true) {
         router.push(`${url}&menu=true`);
       } else {
@@ -73,6 +82,7 @@ const Mitraillettes = () => {
       console.error("Produit invalide ou route manquante");
     }
   };
+
 
   //   try {
   //     const response = await fetch("/api/panier", {
