@@ -3,6 +3,30 @@ import fs from "fs";
 import path from "path";
 import { Commande, Historique } from "@/app/types/allTypes";
 
+// Fonction utilitaire pour nettoyer l'historique
+function nettoyerHistorique(historiquePath: string) {
+  const TWELVE_HOURS_IN_MS = 12 * 60 * 60 * 1000;
+
+   if (!fs.existsSync(historiquePath)) {
+    return;
+   }
+
+   const data = fs.readFileSync(historiquePath, 'utf-8');
+   const historique = JSON.parse(data);
+
+   const now = new Date().getTime();
+
+   // Nettoyer uniquement les commandes historiques (moins de 12 heures)
+   historique.historique = historique.historique.filter((entry: any) => {
+    const entryTime = new Date(entry.createdAt).getTime();
+    return now - entryTime <= TWELVE_HOURS_IN_MS;
+   });
+
+   // Écrire les données nettoyées
+   fs.writeFileSync(historiquePath, JSON.stringify(historique, null, 4), 'utf-8');
+  }
+
+
 export async function POST(request: Request) {
   try {
     const nouvelleCommande = await request.json();
@@ -36,17 +60,26 @@ export async function POST(request: Request) {
       // Ajouter la nouvelle commande au tableau des historiques
       historique.historique.push(nouvelleCommande);
 
-      // Calculer le total des recettes pour la date de la nouvelle commande
-      const date = nouvelleCommande.date;
+      // Fonction pour extraire la date sans l'heure
+      const extractDate = (dateTime) => {
+        const date = new Date(dateTime);
+        return date.toISOString().split("T")[0]; // Formater en yyyy-mm-dd
+      };
+
+      // Puis dans la logique de gestion des recettes :
+
+      const date = extractDate(nouvelleCommande.date); // Extraire uniquement la date sans l'heure
       const lieu = nouvelleCommande.lieu;
       const price = parseFloat(
         nouvelleCommande.price.replace("€", "").replace(",", ".")
       );
 
       const existingRecette = historique.recettes.find(
-        (recette: Historique) => recette.date === date && recette.lieu === lieu
+        (recette: Historique) => extractDate(recette.date) === date && recette.lieu === lieu
       );
+
       if (existingRecette) {
+        // Ajouter à la recette existante
         existingRecette.recette =
           (
             parseFloat(
@@ -54,12 +87,14 @@ export async function POST(request: Request) {
             ) + price
           ).toFixed(2) + "€";
       } else {
+        // Créer une nouvelle entrée de recette pour cette date et ce lieu
         historique.recettes.push({
           date,
           lieu,
           recette: price.toFixed(2) + "€",
         });
       }
+
 
       fs.writeFileSync(
         historiquePath,
@@ -93,22 +128,17 @@ export async function GET(request: Request) {
       );
     }
 
+    // Nettoyer les anciennes données de l'historique
+    nettoyerHistorique(historiquePath);
+
     const data = fs.readFileSync(historiquePath, "utf-8");
     const historique = JSON.parse(data);
 
-    // Vérifier que 'historique.historique' est bien un tableau
+    // Vérification et réécriture des données
     if (!Array.isArray(historique.historique)) {
-      console.warn(
-        'La clé "historique" n\'est pas un tableau. Réinitialisation avec un tableau vide.'
-      );
       historique.historique = [];
     }
-
-    // Vérifier que 'historique.recettes' est bien un tableau
     if (!Array.isArray(historique.recettes)) {
-      console.warn(
-        'La clé "recettes" n\'est pas un tableau. Réinitialisation avec un tableau vide.'
-      );
       historique.recettes = [];
     }
 

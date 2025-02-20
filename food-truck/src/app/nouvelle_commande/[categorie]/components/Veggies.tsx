@@ -30,8 +30,8 @@ const Veggies = () => {
       id: product.id,
       name:
         menus === true
-          ? `Menu Burger ${product.name}`
-          : `Burger ${product.name}`,
+          ? `Menu ${product.name}`
+          : `${product.name}`,
       price: parseFloat(product.price) + menuPrice + garniturePrice,
       quantity: 1,
       uniqueId: `${product.id}-${Date.now()}`,

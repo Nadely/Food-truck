@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 // Type pour les éléments du panier
 type CartItem = {
@@ -74,26 +74,30 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 // Générateur d'ID unique
 const generateUniqueId = () =>
-  `cart-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  `cart-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`;
 
 // Provider pour le contexte du panier
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
 
+  useEffect(() => {
+    console.log("Cart updated:", cart);
+  }, [cart]);
+
+
   // Ajouter un produit au panier
   const addToCart = (item: Omit<CartItem, "uniqueId">) => {
-    const uniqueId = generateUniqueId(); // ID unique pour l'élément principal
+    const uniqueId = generateUniqueId();
     const relatedItemsWithIds = item.relatedItems?.map((related) => ({
       ...related,
-      uniqueId: generateUniqueId(), // Génération d'ID pour chaque élément lié
+      uniqueId: generateUniqueId(),
+      parentId: uniqueId, // Lier les éléments au produit principal
     }));
 
     setCart((prevCart) => [
       ...prevCart,
       { ...item, uniqueId, relatedItems: relatedItemsWithIds || [] },
     ]);
-
-    console.log("Données reçues dans la requête :", cart);
   };
 
   // Retirer un produit et ses éléments liés
@@ -109,9 +113,16 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
-  const getRelatedItemsVia = (parentId: string) => {
-    return cart.find((item) => item.uniqueId === parentId)?.relatedItems || [];
+  const getRelatedItemsVia = (parentId: string, viaMitraillette?: boolean) => {
+    return (
+      cart
+        .find((item) => item.uniqueId === parentId)
+        ?.relatedItems?.filter((related) =>
+          viaMitraillette !== undefined ? related.viaMitraillette === viaMitraillette : true
+        ) || []
+    );
   };
+
 
   const removeRelatedItemVia = (parentId: string, relatedUniqueId: string) => {
     setCart((prevCart) =>

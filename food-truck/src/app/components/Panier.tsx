@@ -2,16 +2,45 @@
 
 import { useCart } from "@/app/context/CartContext";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const Panier = () => {
   const { cart, removeFromCart, updateQuantity, setCart } = useCart();
   const router = useRouter();
+  const [refreshKey, setRefreshKey] = useState(0);
 
   // Calcul du total global
   const total = cart.reduce(
     (acc, item) => acc + (item.price || 0) * (item.quantity || 1),
     0
   );
+
+const handleTransferCommandes = async () => {
+  try {
+    const response = await fetch("/api/panier", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ cart }),
+    });
+
+    if (response.ok) {
+      setCart([]); // Vider le panier
+      setRefreshKey((prevKey) => prevKey + 1); // Forcer un re-rendu
+    } else {
+      const data = await response.json();
+      console.error("Erreur:", data.message);
+    }
+  } catch (error) {
+    console.error("Erreur réseau:", error);
+  }
+};
+
+  useEffect(() => {
+    setRefreshKey((prevKey) => prevKey + 1);
+  }, [cart]); // Déclenche un re-render quand `cart` est modifié
+
 
   // Supprimer une garniture spécifiquement sans toucher au produit principal
   const handleRemoveGarniture = (
@@ -35,7 +64,7 @@ const Panier = () => {
   };
 
   return (
-    <div>
+    <div key={refreshKey}>
       <h2 className="flex text-xl items-center justify-center font-bold border-b-2 border-black mb-4">
         Panier
       </h2>
@@ -57,11 +86,7 @@ const Panier = () => {
                     {item.categorie === "Enfants" ? item.categorie : item.name}
                   </p>
                   <p className="text-sm text-gray-600">
-                    {item.price > 0
-                      ? `Prix unitaire : ${parseFloat(item.price || 0).toFixed(
-                          2
-                        )}€`
-                      : ""}
+                  {item.price && item.price > 0 ? `Prix unitaire : ${item.price.toFixed(2)}€` : ""}
                   </p>
                   {item.quantity > 1 && (
                     <p className="text-sm text-gray-600">
@@ -128,12 +153,15 @@ const Panier = () => {
         <p className="text-lg">Total du panier : {total.toFixed(2)}€</p>
       </div>
       <div className="flex flex-col items-center justify-center gap-4">
-        <button
-          className="button-blue w-40 mt-10 mb-5"
-          onClick={() => router.push("/horaires")}
-        >
-          Valider
-        </button>
+      <button
+        className="button-blue w-40 mt-10 mb-5"
+        onClick={async () => {
+          await handleTransferCommandes(); // Envoyer le panier
+          router.push("/horaires"); // Puis rediriger
+        }}
+      >
+        Valider
+      </button>
       </div>
     </div>
   );

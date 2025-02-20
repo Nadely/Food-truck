@@ -68,11 +68,8 @@ const Horaires = () => {
       });
 
       if (response.ok) {
-        alert("Commande validée et envoyée !");
         router.push("/commandes"); // Redirection après validation
-      } else {
-        alert("Erreur lors de la validation.");
-      }
+      } 
     } catch (error) {
       console.error(error);
       alert("Une erreur est survenue.");
