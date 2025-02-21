@@ -238,7 +238,7 @@
       "id": 1,
       "name": "Fricadelle",
       "image": "/fricadelle.jpg",
-      "price": "3,5€",
+      "price": "3.5€",
       "categorie": "Snacks"
     },
     {
@@ -252,14 +252,14 @@
       "id": 3,
       "name": "Poulycroc",
       "image": "/poulycroc.jpg",
-      "price": "3,5€",
+      "price": "3.5€",
       "categorie": "Snacks"
     },
     {
       "id": 4,
       "name": "Viandelle",
       "image": "/viandelle.jpeg",
-      "price": "3,5€",
+      "price": "3.5€",
       "categorie": "Snacks"
     },
     {
@@ -294,14 +294,14 @@
       "id": 9,
       "name": "Loempia poulet",
       "image": "/loempia-poulet.jpg",
-      "price": "4,5€",
+      "price": "4.5€",
       "categorie": "Snacks"
     },
     {
       "id": 10,
       "name": "Boulettes",
       "image": "/boulette.jpeg",
-      "price": "3,5€",
+      "price": "3.5€",
       "categorie": "Snacks"
     },
     {
@@ -339,42 +339,42 @@
       "id": 1,
       "name": "Volaille",
       "image": "/brochette-volaille.jpg",
-      "price": "4,5€",
+      "price": "4.5€",
       "categorie": "Brochettes"
     },
     {
       "id": 2,
       "name": "Tzigane",
       "image": "/brochette-tzigane.jpeg",
-      "price": "4,5€",
+      "price": "4.5€",
       "categorie": "Brochettes"
     },
     {
       "id": 3,
       "name": "Ardennaise",
       "image": "/brochette-ardennaise.jpg",
-      "price": "4,5€",
+      "price": "4.5€",
       "categorie": "Brochettes"
     },
     {
       "id": 4,
       "name": "Poisson",
       "image": "/brochette-poisson.jpg",
-      "price": "4,5€",
+      "price": "4.5€",
       "categorie": "Brochettes"
     },
     {
       "id": 5,
       "name": "Porc",
       "image": "/brochette-porc.jpg",
-      "price": "4,5€",
+      "price": "4.5€",
       "categorie": "Brochettes"
     },
     {
       "id": 6,
       "name": "Boeuf",
       "image": "/brochette-boeuf.jpg",
-      "price": "4,5€",
+      "price": "4.5€",
       "categorie": "Brochettes"
     }
   ],
@@ -384,7 +384,7 @@
       "id": 1,
       "name": "Belcanto Zero Meat",
       "image": "/belcanto-zero-meat.png",
-      "price": "4,5€",
+      "price": "4.5€",
       "categorie": "Snacks Veggies"
     },
     {
@@ -405,7 +405,7 @@
       "id": 4,
       "name": "Poulycroc Vegi",
       "image": "/poulycroc-zero-meat.jpg",
-      "price": "4,5€",
+      "price": "4.5€",
       "categorie": "Snacks Veggies"
     }
   ],
@@ -554,7 +554,7 @@
       "id": 1,
       "name": "Ketchup",
       "image": "/ketchup.png",
-      "price": "0,50€",
+      "price": "0.50€",
       "categorie": "Sauces"
     },
     {

@@ -7,7 +7,7 @@ type CartItem = {
   name: string;
   price: number;
   quantity: number;
-  categories: string[];
+  categorie?: string; // Indique la catégorie du produit
   isMenu?: boolean; // Indique si l'option menu est sélectionnée
   viaMitraillette?: boolean; // Indique si c'est "viaMitraillette"
   relatedItems?: CartItem[]; // Liste des produits associés
@@ -16,7 +16,6 @@ type CartItem = {
   viaVeggiMitraillette?: boolean; // Indique si c'est "viaVeggiMitraillette"
   viaSnacksVeggies?: boolean; // Indique si c'est "viaSnacksVeggies"
   viaBurgers?: boolean; // Indique si c'est "viaBurgers"
-  categorie?: string; // Indique la catégorie du produit
   menuOption?: boolean; // Indique si c'est lié à un menu
   supplementPrice?: number; // Montant du supplément (1€ si menu)
   viaSupplements?: boolean; // Indique si c'est lié à un supplément
