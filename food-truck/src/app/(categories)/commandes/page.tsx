@@ -79,14 +79,22 @@ const Commandes = () => {
 		}
 	};
 
-	const formatPrice = (price: string) => {
-		const numberPrice = parseFloat(price.replace('€', '').replace(',', '.'));
-		if (isNaN(numberPrice)) {
-			console.error('Prix mal formaté:', price);
-			return 'Prix inconnu';
-		}
-		return numberPrice.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' });
-	};
+	const formatPrice = (price: string | null | undefined) => {
+    if (!price || typeof price !== "string") {
+        console.error("Prix invalide reçu:", price);
+        return "Prix inconnu";
+    }
+
+    const cleanedPrice = price.replace("€", "").replace(",", ".").trim();
+    const numberPrice = parseFloat(cleanedPrice);
+
+    if (isNaN(numberPrice)) {
+        console.error("Prix mal formaté:", price, "-> après nettoyage:", cleanedPrice);
+        return "Prix inconnu";
+    }
+
+    return numberPrice.toLocaleString("fr-FR", { style: "currency", currency: "EUR" });
+};
 
 
 	return (

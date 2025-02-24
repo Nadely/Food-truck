@@ -14,6 +14,7 @@ export interface dataProduct {
   name: string;
   price: number;
   image: string;
+  categorie: string[];
 }
 
 export interface LossRecord {
@@ -29,6 +30,7 @@ export interface Historique {
   id: number;
   image: string;
   items: string[];
+  categorie: string[];
   user_name: string;
   user_image: string;
   time: string;
@@ -49,6 +51,7 @@ export interface Commande {
 	id: number;
     image: string;
     items: string[];
+    categorie: string[];
     user_name: string;
     user_image: string;
     time: string;

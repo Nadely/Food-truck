@@ -18,11 +18,17 @@ const Mitraillettes = () => {
   const handleProduitClick = async (product: any) => {
     const menuPrice = menus ? 2.5 : 0;
 
-    // Assurez-vous que product.price est un nombre
-    const basePrice = parseFloat(product.price);
+    // Nettoyer et convertir le prix
+    const cleanedPrice = product.price.replace("€", "").replace(",", ".").trim();
+    const basePrice = parseFloat(cleanedPrice);
+
+    console.log("Prix brut:", product.price); // Log du prix brut
+    console.log("Prix nettoyé:", cleanedPrice); // Log du prix nettoyé
+    console.log("Prix de base:", basePrice); // Log du prix de base
+
     if (isNaN(basePrice)) {
-      console.error("Erreur de prix pour le produit", product.name);
-      return;
+        console.error("Erreur de prix pour le produit", product.name);
+        return;
     }
 
     const totalPrice = basePrice + menuPrice;

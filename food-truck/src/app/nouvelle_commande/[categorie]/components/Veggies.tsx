@@ -22,9 +22,20 @@ const Veggies = () => {
 
   const handleProduitClick = (product: any) => {
     const menuPrice = menus ? 2.5 : 0;
-    // Double garniture uniquement si le produit est "Veggie Burger"
-    const garniturePrice =
-      product.name === "Veggie Burger" && garnitures ? 3 : 0;
+    const garniturePrice = product.name === "Veggie Burger" && garnitures ? 3 : 0;
+
+    // Nettoyer et convertir le prix
+    const cleanedPrice = product.price.replace("€", "").replace(",", ".").trim();
+    const basePrice = parseFloat(cleanedPrice);
+
+    console.log("Prix brut:", product.price); // Log du prix brut
+    console.log("Prix nettoyé:", cleanedPrice); // Log du prix nettoyé
+    console.log("Prix de base:", basePrice); // Log du prix de base
+
+    if (isNaN(basePrice)) {
+        console.error("Erreur de prix pour le produit", product.name);
+        return;
+    }
 
     const item = {
       id: product.id,
@@ -32,7 +43,7 @@ const Veggies = () => {
         menus === true
           ? `Menu ${product.name}`
           : `${product.name}`,
-      price: parseFloat(product.price) + menuPrice + garniturePrice,
+      price: basePrice + menuPrice + garniturePrice,
       quantity: 1,
       uniqueId: `${product.id}-${Date.now()}`,
       menuOption: menus,

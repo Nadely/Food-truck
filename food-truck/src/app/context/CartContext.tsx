@@ -7,12 +7,13 @@ type CartItem = {
   name: string;
   price: number;
   quantity: number;
-  categorie?: string; // Indique la catégorie du produit
+  categorie?: string[]; // Indique la catégorie du produit
   isMenu?: boolean; // Indique si l'option menu est sélectionnée
   viaMitraillette?: boolean; // Indique si c'est "viaMitraillette"
   relatedItems?: CartItem[]; // Liste des produits associés
   isSnack?: boolean; // Indique si c'est un snack lié
-  isGarniture?: boolean; // Indique si c'est une garniture
+  isGarniture?: boolean; // Indique si c'est une garniture*
+  isRelateItem?: boolean;
   viaVeggiMitraillette?: boolean; // Indique si c'est "viaVeggiMitraillette"
   viaSnacksVeggies?: boolean; // Indique si c'est "viaSnacksVeggies"
   viaBurgers?: boolean; // Indique si c'est "viaBurgers"
@@ -93,9 +94,13 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
       parentId: uniqueId, // Lier les éléments au produit principal
     }));
 
+    const newItem = { ...item, uniqueId, relatedItems: relatedItemsWithIds || [] };
+
+    console.log("Ajout au panier:", newItem); // Log des données ajoutées au panier
+
     setCart((prevCart) => [
       ...prevCart,
-      { ...item, uniqueId, relatedItems: relatedItemsWithIds || [] },
+      newItem,
     ]);
   };
 
@@ -159,6 +164,26 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         return item;
       })
     );
+  };
+
+  // Exemple de fonction pour enregistrer le panier
+  const saveCartToFile = async () => {
+    try {
+      const response = await fetch("/api/panier", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(cart), // Assurez-vous que le panier est correctement formaté ici
+      });
+
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        console.error("Erreur lors de l'enregistrement du panier:", errorMessage);
+      }
+    } catch (error) {
+      console.error("Erreur réseau lors de l'enregistrement du panier:", error);
+    }
   };
 
   return (

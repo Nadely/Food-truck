@@ -1,5 +1,51 @@
 {
-    "historique": [],
+    "historique": [
+        {
+            "id": 1740142265894,
+            "items": [
+                {
+                    "name": "Menu Enfants",
+                    "quantity": 1,
+                    "relatedItems": [
+                        "Crème au chocolat",
+                        "Nuggets"
+                    ]
+                },
+                {
+                    "quantity": 1,
+                    "relatedItems": [
+                        "Hannibale"
+                    ]
+                },
+                {
+                    "name": "Chicken Box",
+                    "quantity": 9,
+                    "relatedItems": []
+                },
+                {
+                    "quantity": 1,
+                    "relatedItems": [
+                        "Mayonnaise",
+                        "Bicky",
+                        "Dallas",
+                        "Pita",
+                        "Hawaï",
+                        "Riche",
+                        "Sweet Curry Oignon",
+                        "Ch'ti",
+                        "Hot Mammouth"
+                    ]
+                }
+            ],
+            "user_name": "Nouveau Client",
+            "user_image": "/avatar.jpg",
+            "time": "19h30",
+            "date": "2025-02-21T12:51:05.880Z",
+            "lieu": "Maison",
+            "price": "51.5€",
+            "createdAt": "2025-02-21T12:51:05.894Z"
+        }
+    ],
     "recettes": [
         {
             "date": "2024-12-02T10:00:00.000Z",
@@ -35,6 +81,11 @@
             "date": "2025-02-20",
             "lieu": "Montsûrs",
             "recette": "201.00€"
+        },
+        {
+            "date": "2025-02-21",
+            "lieu": "Maison",
+            "recette": "51.50€"
         }
     ],
     "pertes": []

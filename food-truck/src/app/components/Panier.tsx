@@ -14,14 +14,47 @@ const Panier = () => {
     0
   );
 
+  const cleanPrice = (price: string) => {
+    // Enlever l'euro, les espaces et convertir en nombre
+    const cleanedPrice = price.replace("€", "").replace(",", ".").trim();
+    const numericPrice = parseFloat(cleanedPrice);
+
+    if (isNaN(numericPrice)) {
+        console.error("Erreur de conversion du prix:", price);
+    }
+
+    return numericPrice;
+  };
+
   const handleTransferCommandes = async () => {
     try {
+      // Nettoyer le total avant l'envoi
+      const cleanedPrice = cleanPrice(total.toFixed(2) + "€");
+      console.log("Données envoyées à l'API :", {
+        items: cart,
+        user_name: "Nom Utilisateur", // À remplacer par la vraie valeur
+        user_image: "URL Image", // À remplacer par la vraie valeur
+        time: "12:00", // À remplacer par la vraie valeur
+        date: "2025-02-24", // À remplacer par la vraie valeur
+        lieu: "Adresse", // À remplacer par la vraie valeur
+        price: cleanedPrice + "€", // Utiliser le prix nettoyé
+      });
+
       const response = await fetch("/api/panier", {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
+          // Assurez-vous que le corps de la requête est correctement formaté
+          body: JSON.stringify({
+            items: cart,
+            user_name: "Nom Utilisateur",
+            user_image: "URL Image",
+            time: "12:00",
+            date: "2025-02-24",
+            lieu: "Adresse",
+            price: cleanedPrice + "€",
+          }),
         },
-        body: JSON.stringify({ cart }),
       });
 
       if (response.ok) {
@@ -78,6 +111,7 @@ const Panier = () => {
                   <p className="text-sm text-gray-600">Quantité : {item.quantity}</p>
                 )}
 
+                {/* Afficher les relatedItems avec leurs boutons de suppression, mais pas pour le produit principal */}
                 {item.relatedItems && item.relatedItems.length > 0 && (
                   <ul className="ml-4 text-sm">
                     {item.relatedItems.map((related, index) => (
@@ -98,48 +132,47 @@ const Panier = () => {
                 )}
               </div>
 
-              {(!item.relatedItems || item.relatedItems.length === 0) && (
+              {/* Afficher le bouton "Supprimer" pour les produits */}
+              {item.categorie && ["Mittaillettes", "Burgers", "Veggies", "Enfants"].includes(item.categorie) || item.relatedItems ? (
                 <div>
-                  {["Mitraillettes", "Burgers", "Veggies", "Menu_Enfants"].includes(item.categorie) ? (
-                    // Afficher uniquement le bouton "Supprimer"
-                    <button
-                      onClick={() => removeFromCart(item.uniqueId)}
-                      className="bg-gray-500 text-white px-2 rounded ml-4"
-                    >
-                      Supprimer
-                    </button>
-                  ) : (
-                    // Afficher les boutons +, -, et "Supprimer"
-                    <>
-                      <button
-                        onClick={() => updateQuantity(item.uniqueId, item.quantity - 1)}
-                        className="bg-red-500 text-white px-2 rounded"
-                      >
-                        -
-                      </button>
-                      <button
-                        onClick={() => updateQuantity(item.uniqueId, item.quantity + 1)}
-                        className="bg-green-500 text-white px-2 rounded ml-2"
-                      >
-                        +
-                      </button>
-                      <button
-                        onClick={() => removeFromCart(item.uniqueId)}
-                        className="bg-gray-500 text-white px-2 rounded ml-4"
-                      >
-                        Supprimer
-                      </button>
-                    </>
-                  )}
+                  <button
+                    onClick={() => removeFromCart(item.uniqueId)}
+                    className="bg-gray-500 text-white px-2 rounded ml-4"
+                  >
+                    Supprimer
+                  </button>
+                </div>
+              ) : null}
+
+              {!item.relatedItems && (
+                <div>
+                  <button
+                    onClick={() => updateQuantity(item.uniqueId, item.quantity - 1)}
+                    className="bg-red-500 text-white px-2 rounded"
+                  >
+                    -
+                  </button>
+                  <button
+                    onClick={() => updateQuantity(item.uniqueId, item.quantity + 1)}
+                    className="bg-green-500 text-white px-2 rounded ml-2"
+                  >
+                    +
+                  </button>
+                  <button
+                    onClick={() => removeFromCart(item.uniqueId)}
+                    className="bg-gray-500 text-white px-2 rounded ml-4"
+                  >
+                    Supprimer
+                  </button>
                 </div>
               )}
-
             </li>
           ))}
+
         </ul>
       )}
       <div className="flex flex-col items-center justify-center gap-4">
-        <p className="text-lg">Total du panier : {total.toFixed(2)}€</p>
+        <p className="text-lg">Total du panier : {parseFloat(total.toFixed(2))}€</p>
       </div>
       <div className="flex flex-col items-center justify-center gap-4">
         <button
