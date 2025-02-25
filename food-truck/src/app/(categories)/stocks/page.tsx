@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Product } from "@/app/types/allTypes";
-import { saveCurrentStocks, saveLosses, saveHistoryStocks } from "./stockService";
+import { saveCurrentStocks, saveLosses } from "./stockService";
 
 const Stocks = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -72,7 +72,6 @@ const Stocks = () => {
     }));
 
     const stocksSaved = await saveCurrentStocks(updatedProducts);
-    await saveHistoryStocks(updatedProducts);
 
     if (stocksSaved) {
       setProducts(updatedProducts);

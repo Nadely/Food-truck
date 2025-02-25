@@ -307,5 +307,73 @@
         "quantite": 24
       }
     ]
+  },
+  {
+    "date": "2025-02-10T16:11:12.810Z",
+    "items": [
+      {
+        "categories": [
+          "boeuf",
+          "viande",
+          "brochettes"
+        ],
+        "produit": "brochette boeuf",
+        "quantite": 4
+      },
+      {
+        "categories": [
+          "boeuf",
+          "viande",
+          "garniture",
+          "frais",
+          "burger",
+          "mitraillette"
+        ],
+        "produit": "steaks",
+        "quantite": 4
+      }
+    ]
+  },
+  {
+    "date": "2025-02-10T16:11:40.019Z",
+    "items": [
+      {
+        "categories": [
+          "poulet",
+          "viande",
+          "top-vente"
+        ],
+        "produit": "fricadelle",
+        "quantite": 2
+      }
+    ]
+  },
+  {
+    "date": "2025-02-10T16:21:32.703Z",
+    "items": [
+      {
+        "categories": [
+          "poulet",
+          "viande",
+          "top-vente"
+        ],
+        "produit": "fricadelle",
+        "quantite": 5
+      }
+    ]
+  },
+  {
+    "date": "2025-02-10T16:23:49.698Z",
+    "items": [
+      {
+        "categories": [
+          "poulet",
+          "viande",
+          "top-vente"
+        ],
+        "produit": "fricadelle",
+        "quantite": 5
+      }
+    ]
   }
 ]
