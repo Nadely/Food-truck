@@ -21,8 +21,14 @@ const Horaires = () => {
 			quantity: 1,
 		});
 
+
 		// Calculer le prix total du panier
-		const totalPrice = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+		const totalPrice = cart.reduce((acc, item) => {
+      if (item.price > 0) {
+        return acc + item.price * item.quantity;
+      }
+      return acc;
+    }, 0);
 
 		// 🔥 Envoi à l'API panier pour l'enregistrer
 		try {
@@ -69,7 +75,7 @@ const Horaires = () => {
 
       if (response.ok) {
         router.push("/commandes"); // Redirection après validation
-      } 
+      }
     } catch (error) {
       console.error(error);
       alert("Une erreur est survenue.");

@@ -87,6 +87,8 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
   // Ajouter un produit au panier
   const addToCart = (item: Omit<CartItem, "uniqueId">) => {
+    console.log("Avant ajout au panier:", item); // Log des données juste avant l'ajout
+
     const uniqueId = generateUniqueId();
     const relatedItemsWithIds = item.relatedItems?.map((related) => ({
       ...related,
@@ -95,13 +97,9 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     }));
 
     const newItem = { ...item, uniqueId, relatedItems: relatedItemsWithIds || [] };
+    setCart((prevCart) => [...prevCart, newItem]);
 
-    console.log("Ajout au panier:", newItem); // Log des données ajoutées au panier
-
-    setCart((prevCart) => [
-      ...prevCart,
-      newItem,
-    ]);
+    console.log("Après ajout au panier:", newItem); // Vérifiez si le prix est modifié ici
   };
 
   // Retirer un produit et ses éléments liés

@@ -6,6 +6,7 @@ import { useState } from "react";
 import data from "@/data/dataProduits.json";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/app/context/CartContext";
+import { parse } from "path";
 
 const Snacks = () => {
   const searchParams = useSearchParams();
@@ -42,19 +43,51 @@ const Snacks = () => {
     if (viaMitraillette && selectedSnack !== null) {
       const produit = data.Snacks.find((item) => item.id === selectedSnack);
       if (produit) {
+        // Si le prix n'est pas un nombre valide, on le force à 0
+        console.log("Type de produit:", typeof produit.price);
+
+        let cleanPrice = viaMitraillette && produit.categorie === "Snacks"
+          ? 0
+          : parseFloat(produit.price.replace(/[^\d,.]/g, "").replace(",", "."));
+
+        console.log(`Produit : ${produit.name}`);
+        console.log(`Prix après vérification : ${cleanPrice}`);
+
+        // Si la conversion échoue et donne NaN, on affecte 0
+        if (isNaN(cleanPrice)) {
+          console.error("Prix invalide, affectation à 0");
+          cleanPrice = 0;
+        }
+
+        console.log("Prix brut:", produit.price);
+        console.log("Type après conversion:", typeof cleanPrice);
+        console.log("Prix après conversion:", cleanPrice);
+
         addToCart({
-          relatedItems: [{ id: produit.id, name: produit.name }],
-        });
+          relatedItems: [{ id: produit.id, name: produit.name, price: cleanPrice, quantity: 1, viaMitraillette: true }],
+        })
+        console.log("Commande ajoutée à la liste de courses :", produit.name, cleanPrice);
+
         router.push(`Sauces?viaSnacks=true${isMenu ? "&menu=true" : ""}`);
       }
     } else {
       const itemsToAdd = data.Snacks.map((produit) => {
         const quantity = quantities[produit.id];
         if (quantity > 0) {
+          let cleanPrice = viaMitraillette
+            ? 0
+            : parseFloat(produit.price.replace(/[^\d,.]/g, "").replace(",", "."));
+
+          // Vérifier si le prix est un nombre valide, sinon le forcer à 0
+          if (isNaN(cleanPrice)) {
+            console.error(`Prix invalide pour ${produit.name}, valeur forcée à 0`);
+            cleanPrice = 0;
+          }
+
           return {
             id: produit.id,
             name: produit.name,
-            price: parseFloat(produit.price),
+            price: cleanPrice,
             quantity,
           };
         }
@@ -62,11 +95,11 @@ const Snacks = () => {
       }).filter(Boolean);
 
       if (itemsToAdd.length > 0) {
-        itemsToAdd.forEach((item) => addToCart(item));
+        itemsToAdd.forEach((item: any) => addToCart(item));
         router.push(`/nouvelle_commande${isMenu ? "/Snacks?menu=true" : ""}`);
       }
     }
-  };
+};
 
   return (
     <div className="flex flex-col items-center justify-center font-bold font-serif text-2xl">
@@ -100,9 +133,9 @@ const Snacks = () => {
                     className="object-contain"
                   />
                   <p className="text-sm mt-auto">{product.name}</p>
-                  {!viaMitraillette && (
-                    <p className="text-sm mt-auto">{product.price}</p>
-                  )}
+                  <p className="text-sm mt-auto">
+                    {viaMitraillette ? 'Gratuit' : product.price}
+                  </p>
                   {!viaMitraillette && (
                     <div className="flex flex-row items-center gap-4">
                       <button
