@@ -9,59 +9,74 @@ const Horaires = () => {
   const [selectedHoraire, setSelectedHoraire] = useState<string | null>(null);
   const { addToCart, cart } = useCart(); // Ajout du panier
 
-	const handleSelectHours = async (hour: string) => {
-		setSelectedHoraire(hour);
+  const handleSelectHours = async (hour: string) => {
+    setSelectedHoraire(hour);
 
-		// Simuler l'ajout d'un choix au panier (prix fictif par exemple)
-		const choicePrice = 0;  // Exemple de prix pour "Commande pour {hour}"
-		addToCart({
-			id: "horaire",
-			name: `Commande pour ${hour}`,
-			price: choicePrice,
-			quantity: 1,
-		});
+    // Chercher une commande avec le même id (par exemple "horaire")
+    const existingOrderIndex = cart.findIndex(item => item.id === "horaire");
+
+    if (existingOrderIndex !== -1) {
+      // Si l'horaire existe déjà, on met à jour l'heure
+      cart[existingOrderIndex] = {
+        id: "horaire", // Conserver le même id
+        name: "",
+        price: 0, // Prix fictif
+        quantity: 1
+        // Pas de relatedItems ni d'objet vide
+      };
+    } else {
+      // Si l'horaire n'existe pas encore, on n'ajoute pas un objet vide
+      if (name !== "") { // Vérifie si le nom n'est pas vide
+        addToCart({
+          id: "horaire", // Conserver le même id
+          name: "",
+          price: 0,
+          quantity: 1
+          // Pas de relatedItems ici
+        });
+      }
+    }
 
 
-		// Calculer le prix total du panier
-		const totalPrice = cart.reduce((acc, item) => {
+    // Calculer le prix total du panier
+    const totalPrice = cart.reduce((acc, item) => {
       if (item.price > 0) {
         return acc + item.price * item.quantity;
       }
       return acc;
     }, 0);
 
-		// 🔥 Envoi à l'API panier pour l'enregistrer
-		try {
-			const res = await fetch("/api/panier", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					id: Date.now(),
-					image: "/images/nouvelle_commande.jpg",
-					items: cart.map((item) => ({
+    // 🔥 Envoi à l'API panier pour l'enregistrer
+    try {
+      const res = await fetch("/api/panier", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          id: Date.now(),
+          image: "/images/nouvelle_commande.jpg",
+          items: cart.map((item) => ({
             name: item.name,
             quantity: item.quantity,
-            relatedItems: item.relatedItems ? item.relatedItems.map(related => related.name) : [], // Si relatedItems est défini
+            relatedItems: item.relatedItems ? item.relatedItems.map(related => related.name) : [],
           })),
-           // Liste des choix
-					user_name: "Nouveau Client",
-					user_image: "/avatar.jpg",
-					time: hour,
-					date: new Date().toISOString(),
-					lieu: "Maison",
-					price: `${totalPrice}€`, // Prix total calculé
-					createdAt: new Date().toISOString(),
-				}),
-			});
+          user_name: "Nouveau Client",
+          user_image: "/avatar.jpg",
+          time: hour,
+          date: new Date().toISOString(),
+          lieu: "Maison",
+          price: `${totalPrice}€`,
+          createdAt: new Date().toISOString(),
+        }),
+      });
 
-			const data = await res.json();
-			if (!res.ok) throw new Error(data.message || "Erreur lors de l'ajout");
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Erreur lors de l'ajout");
 
-			console.log("Commande ajoutée au panier :", data);
-		} catch (error) {
-			console.error("Erreur lors de l'ajout au panier :", error);
-		}
-	};
+      console.log("Commande ajoutée au panier :", data);
+    } catch (error) {
+      console.error("Erreur lors de l'ajout au panier :", error);
+    }
+  };
 
 
   const handleValidate = async () => {

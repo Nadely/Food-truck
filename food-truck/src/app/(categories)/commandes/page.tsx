@@ -138,7 +138,7 @@ const Commandes = () => {
 														<span style={{ marginRight: '5px' }}>{item.name}</span>
 														{item.relatedItems && item.relatedItems.length > 0
 															? item.relatedItems.map(related => related).join(', ')
-															: ' '}
+															: ''}
 													</li>
 													))}
 													</ul>
