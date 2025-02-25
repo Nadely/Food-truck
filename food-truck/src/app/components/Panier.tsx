@@ -35,7 +35,7 @@ const Panier = () => {
       const cleanedPrice = cleanPrice(total.toFixed(2) + "€");
       console.log("Données envoyées à l'API :", {
         items: cart,
-        user_name: "Nom Utilisateur", // À remplacer par la vraie valeur
+        user_name: "", // À remplacer par la vraie valeur
         user_image: "URL Image", // À remplacer par la vraie valeur
         time: "12:00", // À remplacer par la vraie valeur
         date: "2025-02-24", // À remplacer par la vraie valeur
@@ -50,7 +50,7 @@ const Panier = () => {
           // Assurez-vous que le corps de la requête est correctement formaté
           body: JSON.stringify({
             items: cart,
-            user_name: "Nom Utilisateur",
+            user_name: "",
             user_image: "URL Image",
             time: "12:00",
             date: "2025-02-24",

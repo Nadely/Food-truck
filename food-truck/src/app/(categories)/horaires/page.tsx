@@ -7,6 +7,7 @@ import { useCart } from "@/app/context/CartContext";
 const Horaires = () => {
   const router = useRouter();
   const [selectedHoraire, setSelectedHoraire] = useState<string | null>(null);
+  const [userName, setUserName] = useState(""); // Ajout de l'état pour le nom de l'utilisateur avec valeur initiale vide
   const { addToCart, cart } = useCart(); // Ajout du panier
 
   const handleSelectHours = async (hour: string) => {
@@ -22,7 +23,6 @@ const Horaires = () => {
         name: "",
         price: 0, // Prix fictif
         quantity: 1
-        // Pas de relatedItems ni d'objet vide
       };
     } else {
       // Si l'horaire n'existe pas encore, on n'ajoute pas un objet vide
@@ -32,11 +32,9 @@ const Horaires = () => {
           name: "",
           price: 0,
           quantity: 1
-          // Pas de relatedItems ici
         });
       }
     }
-
 
     // Calculer le prix total du panier
     const totalPrice = cart.reduce((acc, item) => {
@@ -59,7 +57,7 @@ const Horaires = () => {
             quantity: item.quantity,
             relatedItems: item.relatedItems ? item.relatedItems.map(related => related.name) : [],
           })),
-          user_name: "Nouveau Client",
+          user_name: userName, // Utilisation du nom de l'utilisateur modifiable
           user_image: "/avatar.jpg",
           time: hour,
           date: new Date().toISOString(),
@@ -77,7 +75,6 @@ const Horaires = () => {
       console.error("Erreur lors de l'ajout au panier :", error);
     }
   };
-
 
   const handleValidate = async () => {
     if (!selectedHoraire) return;
@@ -138,8 +135,17 @@ const Horaires = () => {
         ))}
       </div>
 
-      {/* Bouton de validation */}
+      {/* Champ de saisie pour le nom de l'utilisateur */}
       <div className="flex flex-col items-center justify-center mt-4">
+        <input
+          type="text"
+          className="border-2 border-black rounded-md p-2 mb-4 w-80 text-center"
+          placeholder="Entrez votre nom"
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+        />
+
+        {/* Bouton de validation */}
         <button
           className={`button-blue w-40 mt-10 mb-5 ${
             !selectedHoraire ? "opacity-50 cursor-not-allowed" : ""
