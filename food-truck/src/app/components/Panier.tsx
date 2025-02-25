@@ -14,6 +14,9 @@ const Panier = () => {
     0
   );
 
+  console.log("Nous voulons le total de", total);
+  console.log(typeof total);
+
   const cleanPrice = (price: string) => {
     // Enlever l'euro, les espaces et convertir en nombre
     const cleanedPrice = price.replace("€", "").replace(",", ".").trim();
@@ -133,7 +136,7 @@ const Panier = () => {
               </div>
 
               {/* Afficher le bouton "Supprimer" pour les produits */}
-              {item.categorie && ["Mittaillettes", "Burgers", "Veggies", "Enfants"].includes(item.categorie) || item.relatedItems ? (
+              {item.categorie && ["Mitraillettes", "Burgers", "Veggies", "Enfants"].includes(item.categorie) || item.relatedItems ? (
                 <div>
                   <button
                     onClick={() => removeFromCart(item.uniqueId)}
