@@ -50,25 +50,25 @@ export const saveCurrentStocks = async (items: Product[]): Promise<boolean> => {
   }
 };
 
-export const saveHistoryStocks = async (
-  items: Product[]
-): Promise<boolean> => {
-  try {
-    const stockData = {
-      date: new Date().toISOString(),
-      stocks: items
-    };
+// export const saveHistoryStocks = async (
+//   items: Product[]
+// ): Promise<boolean> => {
+//   try {
+//     const stockData = {
+//       date: new Date().toISOString(),
+//       stocks: items
+//     };
     
-    const response = await fetch("/api/stocks-history", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({stockData}),
-    });
-    return response.ok;
-  } catch (error) {
-    console.error("Erreur lors de la sauvegarde des stocks:", error);
-    return false;
-  }
-};
+//     const response = await fetch("/api/stocks-history", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({stockData}),
+//     });
+//     return response.ok;
+//   } catch (error) {
+//     console.error("Erreur lors de la sauvegarde des stocks:", error);
+//     return false;
+//   }
+// };
