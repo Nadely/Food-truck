@@ -134,7 +134,7 @@ const Snacks = () => {
                   />
                   <p className="text-sm mt-auto">{product.name}</p>
                   <p className="text-sm mt-auto">
-                    {viaMitraillette ? 'Gratuit' : product.price}
+                    {!viaMitraillette && (product.price)}
                   </p>
                   {!viaMitraillette && (
                     <div className="flex flex-row items-center gap-4">

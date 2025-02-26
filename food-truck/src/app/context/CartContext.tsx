@@ -14,6 +14,7 @@ type CartItem = {
   isSnack?: boolean; // Indique si c'est un snack lié
   isGarniture?: boolean; // Indique si c'est une garniture*
   isRelateItem?: boolean;
+  isSauce?: boolean; // Indique si c'est un sauce
   viaVeggiMitraillette?: boolean; // Indique si c'est "viaVeggiMitraillette"
   viaSnacksVeggies?: boolean; // Indique si c'est "viaSnacksVeggies"
   viaBurgers?: boolean; // Indique si c'est "viaBurgers"
@@ -27,6 +28,7 @@ type CartContextType = {
   cart: CartItem[];
   addToCart: (item: Omit<CartItem, "uniqueId">) => void; // uniqueId est généré automatiquement
   removeFromCart: (uniqueId: string) => void;
+  remove: (uniqueId: string) => void;
   updateQuantity: (uniqueId: string, quantity: number) => void;
   clearCart: () => void;
   getCart: () => CartItem[];
@@ -103,7 +105,13 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   // Retirer un produit et ses éléments liés
-  const removeFromCart = (uniqueId: string) => {
+  const removeFromCart = () => {
+    setCart((prevCart) =>
+      prevCart.filter((item) => !item.relatedItems || item.relatedItems.length === 0)
+    );
+  };
+
+  const remove = (uniqueId: string) => {
     setCart((prevCart) =>
       prevCart.filter((item) => {
         // On supprime l'élément principal et les éléments liés
@@ -190,6 +198,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         cart,
         addToCart,
         removeFromCart,
+        remove,
         updateQuantity,
         setCart,
         setViaMitraillette: () => {}, // Ajoutez un comportement ou laissez-le vide si non nécessaire

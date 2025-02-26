@@ -3,16 +3,27 @@
 import { useCart } from "@/app/context/CartContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Sauces } from "@/data/dataProduits.json";
 
 const Panier = () => {
-  const { cart, removeFromCart, updateQuantity, setCart } = useCart();
+  const { cart, removeFromCart, updateQuantity, setCart, remove } = useCart();
   const router = useRouter();
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const total = cart.reduce(
-    (acc, item) => acc + (item.price || 0) * (item.quantity || 1),
-    0
-  );
+  // Calcul du total en prenant en compte les sauces
+  const total = cart.reduce((acc, item) => {
+    let itemTotal = (item.price || 0) * (item.quantity || 1);
+
+    if (item.relatedItems) {
+      item.relatedItems.forEach((relatedItem) => {
+        if (relatedItem.isSauce) {
+          itemTotal += relatedItem.price || 0;
+        }
+      });
+    }
+
+    return acc + itemTotal;
+  }, 0);
 
   console.log("Nous voulons le total de", total);
   console.log(typeof total);
@@ -92,6 +103,12 @@ const Panier = () => {
     });
   };
 
+  const sauce: string[] = Sauces.map(sauce => sauce.name);
+
+  const handleModify = () => {
+
+  };
+
   return (
     <div key={refreshKey}>
       <h2 className="flex text-xl items-center justify-center font-bold border-b-2 border-black mb-4">
@@ -117,37 +134,51 @@ const Panier = () => {
                 {/* Afficher les relatedItems avec leurs boutons de suppression, mais pas pour le produit principal */}
                 {item.relatedItems && item.relatedItems.length > 0 && (
                   <ul className="ml-4 text-sm">
-                    {item.relatedItems.map((related, index) => (
-                      <li key={index} className="text-gray-600">
-                        {related.name ? `- ${related.name}` : "- Produit sans nom"}
+                    {item.relatedItems.map((related) => {
+                      console.log("related item:", related);  // Log pour inspecter la structure
+                      return (
+                        <li key={related.uniqueId || related.id} className="text-gray-600">
+                          {related.name ? `- ${related.name}` : "- Produit sans nom"}
 
-                        {related.isGarniture && (
-                          <button
-                            onClick={() => handleRemoveGarniture(related.uniqueId, item.uniqueId)}
-                            className="bg-gray-500 text-white px-2 rounded ml-2"
-                          >
-                            Supprimer
-                          </button>
-                        )}
-                      </li>
-                    ))}
+{/*
+                          { sauce && !related.isGarniture && (
+                            <button
+                              onClick={() => handleModify(related.uniqueId, item.uniqueId)}
+                              className="bg-gray-500 text-white px-2 rounded ml-2"
+                            >
+                              X
+                            </button>
+                          )} */}
+
+                          {/* Vérifier si c'est une garniture */}
+                          {related.isGarniture && (
+                            <button
+                              onClick={() => handleRemoveGarniture(related.uniqueId, item.uniqueId)}
+
+                              className="border-2 border-black text-black px-2 rounded ml-2"
+                            >
+                              X
+                            </button>
+                          )}
+                        </li>
+                      );
+                    })}
                   </ul>
                 )}
               </div>
 
               {/* Afficher le bouton "Supprimer" pour les produits */}
-              {item.categorie && ["Mitraillettes", "Burgers", "Veggies", "Enfants"].includes(item.categorie) || item.relatedItems ? (
+              {item.name && (["Mitraillette", "Burger", "Veggie", "Enfants"].some(keyword => item.name.includes(keyword))) ? (
                 <div>
                   <button
                     onClick={() => removeFromCart(item.uniqueId)}
-                    className="bg-gray-500 text-white px-2 rounded ml-4"
+                    className="bg-red-500 text-white px-2 rounded ml-4"
                   >
                     Supprimer
                   </button>
                 </div>
-              ) : null}
-
-              {!item.relatedItems && (
+              ) : (
+                !item.relatedItems || item.relatedItems.length === 0 && (
                 <div>
                   <button
                     onClick={() => updateQuantity(item.uniqueId, item.quantity - 1)}
@@ -162,13 +193,13 @@ const Panier = () => {
                     +
                   </button>
                   <button
-                    onClick={() => removeFromCart(item.uniqueId)}
+                    onClick={() => remove(item.uniqueId)}
                     className="bg-gray-500 text-white px-2 rounded ml-4"
                   >
                     Supprimer
                   </button>
                 </div>
-              )}
+              ))}
             </li>
           ))}
 
