@@ -50,21 +50,13 @@ const Snacks = () => {
           ? 0
           : parseFloat(produit.price.replace(/[^\d,.]/g, "").replace(",", "."));
 
-        console.log(`Produit : ${produit.name}`);
-        console.log(`Prix après vérification : ${cleanPrice}`);
-
         // Si la conversion échoue et donne NaN, on affecte 0
         if (isNaN(cleanPrice)) {
           console.error("Prix invalide, affectation à 0");
           cleanPrice = 0;
         }
-
-        console.log("Prix brut:", produit.price);
-        console.log("Type après conversion:", typeof cleanPrice);
-        console.log("Prix après conversion:", cleanPrice);
-
         addToCart({
-          relatedItems: [{ id: produit.id, name: produit.name, price: cleanPrice, quantity: 1, viaMitraillette: true }],
+          relatedItems: [{ id: produit.id, name: produit.name, image: produit.image, price: cleanPrice, quantity: 1, viaMitraillette: true }],
         })
         console.log("Commande ajoutée à la liste de courses :", produit.name, cleanPrice);
 

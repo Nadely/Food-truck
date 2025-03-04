@@ -5,6 +5,7 @@ type CartItem = {
   uniqueId: string; // ID unique pour chaque instance ajoutée au panier
   id: number; // ID du produit de base
   name: string;
+  image: string;
   price: number;
   quantity: number;
   categorie?: string[]; // Indique la catégorie du produit

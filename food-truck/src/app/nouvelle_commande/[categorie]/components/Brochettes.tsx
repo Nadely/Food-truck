@@ -55,7 +55,7 @@ const Brochettes = () => {
       );
       if (produit) {
         addToCart({
-          relatedItems: [{ id: produit.id, name: produit.name }],
+          relatedItems: [{ id: produit.id, name: produit.name, image: produit.image }],
         });
 
         // Redirect to Sauces with viaBrochettes=true
@@ -68,6 +68,7 @@ const Brochettes = () => {
           return {
             id: produit.id,
             name: produit.name,
+            image: produit.image,
             price: parseFloat(produit.price),
             quantity,
           };

@@ -28,10 +28,6 @@ const Veggies = () => {
     const cleanedPrice = product.price.replace("€", "").replace(",", ".").trim();
     const basePrice = parseFloat(cleanedPrice);
 
-    console.log("Prix brut:", product.price); // Log du prix brut
-    console.log("Prix nettoyé:", cleanedPrice); // Log du prix nettoyé
-    console.log("Prix de base:", basePrice); // Log du prix de base
-
     if (isNaN(basePrice)) {
         console.error("Erreur de prix pour le produit", product.name);
         return;
@@ -43,6 +39,7 @@ const Veggies = () => {
         menus === true
           ? `Menu ${product.name}`
           : `${product.name}`,
+      image: product.image,
       price: basePrice + menuPrice + garniturePrice,
       quantity: 1,
       uniqueId: `${product.id}-${Date.now()}`,

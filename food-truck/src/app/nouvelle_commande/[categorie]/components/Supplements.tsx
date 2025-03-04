@@ -47,6 +47,7 @@ const Supplements = () => {
     ).map((product) => ({
       id: product.id,
       name: product.name,
+      image: product.image,
       price: parseFloat(product.price), // Convertir en nombre
     }));
 

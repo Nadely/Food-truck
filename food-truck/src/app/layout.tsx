@@ -9,6 +9,7 @@ import Panier from "./components/Panier";
 import Horaires from "./(categories)/horaires/page";
 import { usePathname } from "next/navigation";
 import { CartProvider } from "@/app/context/CartContext";
+import Image from "next/image";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -51,7 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
                 {/* Panier : 1/3 */}
                 {pathname && pathname.startsWith("/nouvelle_commande") && (
-                  <div className="flex-[1] w-1/4 bg-gray-200 rounded-md p-2">
+                  <div className="flex-[1] w-1/4 bg-white opacity-80 rounded-md p-2">
                     <Panier />
                   </div>
                 )}

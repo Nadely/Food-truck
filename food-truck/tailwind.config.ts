@@ -11,6 +11,9 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        brown: {
+          80: 'rgba(241, 226, 210, 0.8)',
+        },
       },
       keyframes: {
         borderChange: {
@@ -21,6 +24,9 @@ export default {
       },
       animation: {
         colorChange: 'borderChange 2s ease-in-out',
+      },
+       boxShadow: {
+        'dark': '1px 4px 6px -1px rgba(0, 0, 0, 0.7), 0 2px 4px -2px rgba(0, 0, 0, 0.7)',
       },
     },
   },

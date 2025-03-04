@@ -59,6 +59,7 @@ const SnacksVeggies = () => {
           return {
             id: product.id,
             name: product.name,
+            image: product.image,
             price: parseFloat(product.price),
             quantity,
           };

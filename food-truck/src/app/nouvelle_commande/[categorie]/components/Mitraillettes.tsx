@@ -22,10 +22,6 @@ const Mitraillettes = () => {
     const cleanedPrice = product.price.replace("€", "").replace(",", ".").trim();
     const basePrice = parseFloat(cleanedPrice);
 
-    console.log("Prix brut:", product.price); // Log du prix brut
-    console.log("Prix nettoyé:", cleanedPrice); // Log du prix nettoyé
-    console.log("Prix de base:", basePrice); // Log du prix de base
-
     if (isNaN(basePrice)) {
         console.error("Erreur de prix pour le produit", product.name);
         return;
@@ -39,6 +35,7 @@ const Mitraillettes = () => {
         menus === true
           ? `Menu Mitraillette ${product.name}`
           : `Mitraillette ${product.name}`,
+      image: product.image,
       price: totalPrice,
       quantity: 1,
       uniqueId: `${product.id}-${Date.now()}`,
@@ -57,6 +54,7 @@ const Mitraillettes = () => {
                 ...product.frites,
                 isFrites: true,
                 name: "Frites",
+                image: "/frites.jpg",
                 isFritesCategory: true,
                 parentId: product.id,
               },

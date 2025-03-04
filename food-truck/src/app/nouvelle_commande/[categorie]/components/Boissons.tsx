@@ -129,6 +129,7 @@ const Boissons = () => {
       const item = {
         id: product.id,
         name: isMenu && index === 0 ? "" : product.name, // Masquer le nom uniquement pour la 1ère boisson du menu
+        image: product.image,
         price: calculatedPrice,
         quantity: quantities[product.id],
         uniqueId: `${product.id}-${Date.now()}`,
@@ -136,7 +137,7 @@ const Boissons = () => {
         supplementPrice: supplementPrice,
         viaSupplements: true,
         relatedItems:
-          isMenu && index === 0 ? [{ id: product.id, name: product.name }] : [], // Ajouter la première boisson au relatedItems
+          isMenu && index === 0 ? [{ id: product.id, name: product.name, image: product.image }] : [], // Ajouter la première boisson au relatedItems
       };
 
       addToCart(item);

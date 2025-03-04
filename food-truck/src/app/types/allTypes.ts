@@ -15,6 +15,7 @@ export interface dataProduct {
   price: number;
   image: string;
   categorie: string[];
+  garniture: string[];
 }
 
 export interface LossRecord {

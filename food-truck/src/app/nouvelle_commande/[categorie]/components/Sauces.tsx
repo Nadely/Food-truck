@@ -1,181 +1,195 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
 import data from "@/data/dataProduits.json";
+import { useRouter } from "next/navigation";
 import { useCart } from "@/app/context/CartContext";
 
 const Sauces = () => {
   const searchParams = useSearchParams();
-  const router = useRouter();
-  const viaSnacksVeggies = searchParams.get("viaSnacksVeggies");
+  const viaSnacks = searchParams.get("viaSnacks") === "true";
+  const viaSnacksVeggies = searchParams.get("viaSnacksVeggies") === "true";
+  const viaEnfants = searchParams.get("viaEnfants") === "true";
+  const viaBrochettes = searchParams.get("viaBrochettes") === "true";
+  const viaMitraillette = searchParams.get("viaMitraillette") === "true";
+  const viaAperoBox = searchParams.get("viaAperoBox") === "true";
+  const viaFrites = searchParams.get("viaFrites") === "true";
   const isMenu = searchParams.get("menu") === "true";
-  const viaFrites = searchParams.get("viaFrites");
-  const viaEnfants = searchParams.get("viaEnfants");
-  const viaSnacks = searchParams.get("viaSnacks");
-  const viaBrochettes = searchParams.get("viaBrochettes");
-  const viaAperoBox = searchParams.get("viaAperoBox");
-  const viaMitraillette = searchParams.get("viaMitraillette");
+  const router = useRouter();
   const { addToCart } = useCart();
 
-  const [selectedSauces, setSelectedSauces] = useState<number[]>([]);
+  let freeSauces = 0;
+  data.AperoBox.forEach((box) => {
+    const quantity = parseInt(searchParams.get(box.name) || "0");
+    if (quantity > 0) {
+      freeSauces += quantity * (box.name === "Party Box" ? 2 : 1);
+    }
+  });
+  data.Frites.forEach((frites) => {
+    const quantity = parseInt(searchParams.get(frites.name) || "0");
+    if (quantity > 0) {
+      freeSauces += quantity;
+    }
+  });
+  if (viaSnacks) freeSauces += 1;
+  if (viaSnacksVeggies) freeSauces += 1;
+  if (viaEnfants) freeSauces += 1;
+  if (viaBrochettes) freeSauces += 1;
+  if (viaMitraillette) freeSauces += 1;
 
-  const handleSelectSauce = (id: number) => {
-    setSelectedSauces((prevSelected) => {
-      if (id === 18) {
-        // Vérifie si "Aucune sauce" est sélectionnée
-        return prevSelected.includes(id) ? [] : [id]; // Si déjà sélectionnée, déselectionne toutes les sauces
-      } else {
-        if (prevSelected.includes(18)) {
-          // Si "Aucune sauce" est sélectionnée, déselectionne tout
-          return [id]; // Si une autre sauce est sélectionnée après "Aucune sauce", remplace-la
-        }
-        // Sinon, sélectionne/déselectionne la sauce normalement
-        if (prevSelected.includes(id)) {
-          return prevSelected.filter((sauceId) => sauceId !== id);
-        } else {
-          return [...prevSelected, id];
-        }
-      }
-    });
+  // On initialise les quantités pour la sélection (pour les cas non via ou viaAperoBox)
+  const [quantities, setQuantities] = useState<{ [key: number]: number }>(
+    data.Sauces.reduce((acc: { [key: number]: number }, sauce) => {
+      acc[sauce.id] = 0;
+      return acc;
+    }, {})
+  );
+  // Pour les autres via (ex. viaSnacks, viaMitraillette), on utilise une sélection simple (1 clic)
+  const [selectedSauce, setSelectedSauce] = useState<number | null>(null);
+
+  const handleIncrement = (id: number) => {
+    setQuantities((prev) => ({
+        ...prev,
+        [id]: (prev[id] || 0) + 1,
+    }));
+  };
+
+  const handleDecrement = (id: number) => {
+    setQuantities((prev) => ({
+        ...prev,
+        [id]: Math.max((prev[id] || 0) - 1, 0), // Ne pas descendre en dessous de 0
+    }));
+  };
+
+  const handleSelectSauce = (sauce: any) => {
+    // Pour les modes via (sauf viaAperoBox) : sélection par clic unique
+    if (viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette) {
+      setSelectedSauce(sauce.id);
+    }
   };
 
   const handleAddToCart = () => {
-    const relatedItems = data.Sauces.filter((product) =>
-      selectedSauces.includes(product.id)
-    ).map((product) => ({
-      id: product.id,
-      name: product.name,
-    }));
-
-    let price = 0;
-    let freeSauces = 0;
-
-    // Calcul des sauces gratuites basées sur les paramètres
-    const selectedAperoBoxes = searchParams.getAll("selectedAperoBox");
-    const aperoBoxQuantities = selectedAperoBoxes.reduce((acc, boxName) => {
-      const box = data.AperoBox.find((item) => item.name === boxName);
-      return box ? acc + 1 : acc;
-    }, 0);
-
-    // Appliquer les sauces gratuites selon les ApéroBox
-    data.AperoBox.forEach((box) => {
-      const quantity = parseInt(searchParams.get(box.name) || "0");
-      if (quantity > 0) {
-        freeSauces += quantity * (box.name === "Party Box" ? 2 : 1);
-      }
-    });
-
-    // Sauces gratuites pour les frites
-    data.Frites.forEach((frites) => {
-      const quantity = parseInt(searchParams.get(frites.name) || "0");
-      if (quantity > 0) {
-        freeSauces += quantity; // 1 sauce gratuite par portion de frites
-      }
-    });
-
-    // Ajouter les sauces gratuites pour les autres produits
-    if (viaSnacks === "true") freeSauces += 1;
-    if (viaSnacksVeggies === "true") freeSauces += 1;
-    if (viaEnfants === "true") freeSauces += 1;
-    if (viaBrochettes === "true") freeSauces += 1;
-    if (viaMitraillette === "true") freeSauces += 1;
-
-    // Calculer le nombre de sauces payantes
-    const saucesPaid = Math.max(0, selectedSauces.length - freeSauces);
-    price = saucesPaid * 0.5;
-
-    console.log("Prix total des sauces supplémentaires :", price);
-
-    const item = {
-      id: "sauces",
-      price: price,
-      quantity: 1,
-      uniqueId: `sauces-${Date.now()}`,
-      relatedItems: relatedItems,
+    // Fonction pour calculer le nombre de sauces gratuites par produit
+    const calculateFreeSauces = (product: string, quantity: number): number => {
+        if (product=== "Party Box") {
+            return Math.min(quantity * 2, 1); // 2 sauces gratuites pour Party Box, mais pas plus que la quantité choisie
+        }
+        return Math.min(quantity, 1); // 1 sauce gratuite pour les autres produits, pas plus que la quantité choisie
     };
 
-    addToCart(item);
+    // Cas pour viaAperoBox ou viaFrites
+    if (viaAperoBox || viaFrites) {
+      const itemsToAdd = data.Sauces.map((sauce) => {
+        const quantity = quantities[sauce.id];
+        if (quantity > 0) {
+          const paidCount = Math.max(0, quantity - calculateFreeSauces(sauce.name, quantity)); // Sauces payantes
+          const totalPrice = paidCount * 0.5;
+          const effectiveUnitPrice = paidCount > 0 ? totalPrice : 0.5;
+          return {
+            id: sauce.id,
+            name: sauce.name,
+            image: sauce.image,
+            price: effectiveUnitPrice, // Prix unitaire effectif pour chaque sauce payante
+            quantity: quantity, // Quantité totale ajoutée au panier
+          };
+        }
+        return null;
+      }).filter(Boolean);
 
-    // Déterminer la prochaine route
+        if (itemsToAdd.length > 0) {
+            addToCart({
+                relatedItems: itemsToAdd, // On ajoute toutes les sauces avec leur quantité
+            });
+            console.log("Ajout au panier (viaAperoBox/viaFrites) :", itemsToAdd);
+        }
+    }
+    // Autres cas (viaSnacks, viaSnacksVeggies, etc.)
+    else if (viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette) {
+        if (selectedSauce !== null) {
+            const sauce = data.Sauces.find((item) => item.id === selectedSauce);
+            if (sauce) {
+                addToCart({
+                    relatedItems: [{
+                        id: sauce.id,
+                        name: sauce.name,
+                        image: sauce.image,
+                        price: 0.5, // Prix fixe pour une sauce sélectionnée
+                        quantity: 1,
+                    }],
+                });
+                console.log(`Ajout au panier (via) : ${sauce.name}, Prix: 0.5€`);
+            }
+        }
+    }
+    // Cas par défaut (sélection classique)
+    else {
+        const itemsToAdd = data.Sauces.map((sauce) => {
+            const quantity = quantities[sauce.id];
+            if (quantity > 0) {
+                // Calcul du nombre de sauces gratuites pour ce produit
+                const paidCount = Math.max(0, quantity); // Sauces payantes
+                const totalPrice = paidCount * 0.5; // Prix total des sauces payantes
+                const effectiveUnitPrice = paidCount > 0 ? totalPrice / paidCount : 0; // Prix unitaire effectif
+                return {
+                    id: sauce.id,
+                    name: sauce.name,
+                    image: sauce.image,
+                    price: effectiveUnitPrice,
+                    quantity, // Quantité incluse
+                };
+            }
+            return null;
+        }).filter(Boolean);
+
+        if (itemsToAdd.length > 0) {
+            itemsToAdd.forEach((item) => addToCart(item)); // Ajoute chaque sauce avec sa quantité au panier
+            console.log("Ajout au panier (sélection classique) :", itemsToAdd);
+        }
+    }
+
+    // Redirection après ajout au panier
     let nextRoute = "";
-
-    if (
-      viaSnacks === "true" ||
-      viaSnacksVeggies === "true" ||
-      viaBrochettes === "true" ||
-      viaMitraillette === "true"
-    ) {
-      nextRoute = "Supplements?viaSauces=true";
+    if (viaSnacks || viaSnacksVeggies || viaBrochettes || viaMitraillette) {
+        nextRoute = "Supplements?viaSauces=true";
     } else {
-      nextRoute = "/nouvelle_commande";
+        nextRoute = "/nouvelle_commande";
     }
-
-    // Ajouter `&menu=true` si menu est sélectionné
-    if (isMenu && nextRoute.includes("?")) {
-      nextRoute += (nextRoute.includes("?") ? "&" : "?") + "menu=true";
+    if (isMenu) {
+        nextRoute += "&menu=true";
     }
-
     router.push(nextRoute);
-  };
+};
 
   return (
-    <div className="flex flex-col items-center justify-center font-bold font-serif mt-2 text-2xl">
-      <h1 className="border-b-2 border-black w-full text-center">Sauces *</h1>
+    <div className="flex flex-col items-center justify-center font-bold font-serif text-2xl">
+      <h1 className="border-b-2 border-black w-full text-center">Sauces</h1>
       <div className="w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
-        <div className="grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-4">
-          {data.Sauces.map((product) => (
+        <div className="grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+          {data.Sauces.map((sauce) => (
             <div
-              key={product.id}
-              className={`flex flex-col items-center justify-center gap-4 ${
-                selectedSauces.includes(product.id)
-                  ? "bg-green-200 border-4 border-green-500 rounded-lg"
-                  : ""
+              key={sauce.id}
+              className={`flex flex-col items-center cursor-pointer p-4 border-2 border-black rounded-lg hover:scale-105 transition-transform duration-200 hover:shadow-md ${
+                // En mode via classique (hors viaAperoBox), on affiche la sélection en un clic
+                (viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette) && selectedSauce === sauce.id ? "bg-green-200 border-green-500" : ""
               }`}
+              onClick={() => handleSelectSauce(sauce)}
             >
-              <div
-                className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center cursor-pointer hover:bg-green-200 hover:scale-105 transition-transform duration-200 hover:shadow-md shadow-sm"
-                style={{ width: "200px", height: "200px" }}
-                onClick={() => handleSelectSauce(product.id)}
-              >
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  width={100}
-                  height={100}
-                  className="object-contain"
-                />
-                <p className="text-sm mt-auto">{product.name}</p>
-              </div>
+              <Image src={sauce.image} alt={sauce.name} width={100} height={100} className="object-contain" />
+              <p className="text-sm mt-auto">{sauce.name}</p>
+              {!(viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette) && <p className="text-sm mt-auto">{parseFloat(sauce.price)}€</p>}
+              {!(viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette) && (
+                <div className="flex flex-row items-center gap-4">
+                  <button onClick={() => handleDecrement(sauce.id)} className="text-sm bg-red-500 focus:ring-4 rounded-lg px-8 py-2">-</button>
+                  <span className="text-sm">{quantities[sauce.id]}</span>
+                  <button onClick={() => handleIncrement(sauce.id)} className="text-sm bg-green-500 focus:ring-4 rounded-lg px-8 py-2">+</button>
+                </div>
+              )}
             </div>
           ))}
         </div>
-
-        <div className="flex flex-col items-center justify-center gap-4">
-          <button
-            className="button-blue w-40 mt-10 mb-5"
-            onClick={handleAddToCart}
-          >
-            Valider
-          </button>
-          {viaAperoBox === "true" && (
-            <p className="text-sm text-right mb-5">
-              * La première est gratuite, sauf pour Party Box (2 gratuites).
-            </p>
-          )}
-          {(viaFrites === "true" ||
-            viaSnacksVeggies === "true" ||
-            viaSnacks === "true" ||
-            viaBrochettes === "true" ||
-            viaEnfants === "true" ||
-            viaMitraillette === "true") && (
-            <p className="text-sm text-right mb-5">
-              * La première est gratuite.
-            </p>
-          )}
-          <p className="text-sm text-right mb-5">* 0.50€/sauce.</p>
-        </div>
+        <button className="button-blue w-40 mt-10 mb-5" onClick={handleAddToCart}>Valider</button>
       </div>
     </div>
   );

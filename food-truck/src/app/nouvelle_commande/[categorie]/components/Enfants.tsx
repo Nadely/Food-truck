@@ -56,12 +56,14 @@ const Enfants = () => {
     // Construire l'objet à ajouter au panier
     const item = {
       name: "Menu Enfants",
+      image: mainProduct.image,
       price: parseFloat(mainProduct.price), // Prix principal
       quantity: 1,
       uniqueId: `${mainProduct.id}-${Date.now()}`,
       relatedItems: selectedProducts.map((product) => ({
         id: product.id,
         name: product.name,
+        image: product.image,
       })), // Produits liés
     };
 

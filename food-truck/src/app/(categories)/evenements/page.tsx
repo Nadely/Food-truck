@@ -1,7 +1,7 @@
 const Evenements = () => {
     return (
-        <div>
-            <h1>Boutons pour Evènement</h1>
+        <div className="text-white">
+            <h1>En Cours de création ...</h1>
         </div>
     );
 };

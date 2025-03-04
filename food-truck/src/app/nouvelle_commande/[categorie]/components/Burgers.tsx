@@ -22,6 +22,7 @@ const Burgers = () => {
     const item = {
       id: product.id,
       name: menus === true ? `Menu ${product.name}` : `${product.name}`,
+      image: product.image,
       price: parseFloat(product.price) + menuPrice + garniturePrice,
       quantity: 1,
       uniqueId: `${product.id}-${Date.now()}`,
@@ -50,6 +51,7 @@ const Burgers = () => {
                 ...product.frites,
                 isFrites: true,
                 name: "Frites",
+                image: product.frites.image,
                 isFritesCategory: true,
                 parentId: product.id,
               },
