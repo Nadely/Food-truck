@@ -3,6 +3,7 @@ const fs = require('fs');
 
 // Charger les données JSON
 const data = JSON.parse(fs.readFileSync("src/data/dataProduits.json", "utf-8"));
+const dataStock = JSON.parse(fs.readFileSync("src/data/products.json", "utf-8"));
 
 // Connexion à la base de données
 const dbConfig = {
@@ -17,17 +18,27 @@ async function insertData() {
   try {
     connection = await mysql.createConnection(dbConfig);
 
+    // Insertion des produits
     for (const [categorie, produits] of Object.entries(data)) {
       for (const produit of produits) {
-        // Si garniture existe, on la convertit en format texte pour l'insertion
+        // Convertir la garniture en JSON string si elle existe
         const garnitureText = produit.garniture ? JSON.stringify(produit.garniture) : null;
 
-        const [result] = await connection.query(
+        await connection.query(
           "INSERT INTO dataProduits (name, image, price, categorie, garniture) VALUES (?, ?, ?, ?, ?)",
           [produit.name, produit.image, produit.price, categorie, garnitureText]
         );
-        // On peut ajouter d'autres champs si nécessaire ici
       }
+    }
+
+    // Insertion des stocks
+    for (const produit of dataStock.products) {
+      const categoriesText = produit.categories ? JSON.stringify(produit.categories) : null;
+
+      await connection.query(
+        "INSERT INTO products (name, stock, stockConseil, lost, stockAnnuel, stockLimit, categories) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [produit.name, produit.stock, produit.stockConseil, produit.lost, produit.stockAnnuel, produit.stockLimit, categoriesText]
+      );
     }
 
     console.log("Import terminé !");

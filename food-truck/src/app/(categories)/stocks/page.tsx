@@ -114,7 +114,7 @@ const Stocks = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4">
+    <div className="flex flex-col text-white text-lg mb-5 mt-2">
       <div className="w-full flex justify-end mb-4">
         <button
           onClick={handleSaveLosses}
@@ -132,7 +132,7 @@ const Stocks = () => {
       <table className="border-separate border-spacing-2 border border-slate-500 rounded-lg">
         <thead>
           <tr>
-            <th className="border border-slate-600 text-center px-2 rounded-tl-lg bg-slate-200 ">
+            <th className="border border-slate-600 text-black text-center px-2 rounded-tl-lg bg-slate-200 ">
               Produits
             </th>
             <th className="border border-slate-600 px-2 bg-slate-200">
@@ -140,27 +140,27 @@ const Stocks = () => {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="bg-transparent"
+                className="bg-transparent text-black"
               >
                 {categories.map((categories, index) => (
                   <option key={index} value={categories}>
                     {categories === "all"
-                      ? "Toutes les catégories"
+                      ? "Toutes les categories"
                       : categories}
                   </option>
                 ))}
               </select>
             </th>
-            <th className="border border-slate-600 px-2 bg-slate-200">
-              Quantité en stock
+            <th className="text-black border border-slate-600 px-2 bg-slate-200">
+              Quantite en stock
             </th>
-            <th className="border border-slate-600 px-2 bg-slate-200">
-              Quantité conseillée
+            <th className=" text-black border border-slate-600 px-2 bg-slate-200">
+              Quantite conseillee
             </th>
-            <th className="border border-slate-600 px-2 bg-slate-200">
+            <th className="text-black border border-slate-600 px-2 bg-slate-200">
               Pertes
             </th>
-            <th className="border border-slate-600 px-2 rounded-tr-lg bg-slate-200">
+            <th className="text-black border border-slate-600 px-2 rounded-tr-lg bg-slate-200">
               Stock annuel
             </th>
           </tr>
