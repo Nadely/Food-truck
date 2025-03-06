@@ -87,68 +87,38 @@ const Mitraillettes = () => {
     }
   };
 
-
-  //   try {
-  //     const response = await fetch("/api/panier", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         id: Date.now(),
-  //         image: "/images/default.jpg",
-  //         items: [item],
-  //         user_name: "User",
-  //         user_image: "/avatar.jpg",
-  //         time: new Date().toLocaleTimeString(),
-  //         date: new Date().toISOString(),
-  //         lieu: "Lieu de commande",
-  //       }),
-  //     });
-
-  //     if (!response.ok) {
-  //       const errorMessage = await response.text();
-  //       throw new Error(errorMessage || "Erreur lors de l'enregistrement du panier");
-  //     }
-
-  //     const data = await response.json();
-  //     console.log("Panier mis à jour :", data);
-  //   } catch (error) {
-  //     console.error("Erreur lors de l'ajout au panier :", error);
-  //   }
-  // };
-
   return (
-    <div className="flex flex-col items-center justify-center mt-2 font-bold font-serif text-2xl">
-      <h1 className="border-b-2 border-black w-full text-center">
+    <div className="style-pen text-xl mb-5 mt-2">
+      <div className="flex flex-col items-center justify-center border-b-2 border-white text-white text-2xl gap-4 mb-5">
         Mitraillettes
-      </h1>
-      <div className="w-full flex flex-row items-center justify-center mt-10 font-serif text-lg gap-4 mb-5">
+      </div>
+      <div className="w-full flex flex-row items-center justify-center mt-10 style-pen text-lg gap-4 mb-5">
         {data.Mitraillettes.map((product) => {
           const price = parseFloat(product.price);
           const totalPrice = menus ? price + 2.5 : price;
 
           return (
-            <button
-              key={product.id}
-              onClick={() => handleProduitClick(product)}
-              className="flex flex-col items-center justify-center gap-4 border-2 border-black rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:scale-105 transition-transform duration-200 hover:shadow-md shadow-sm"
-              style={{ width: "200px", height: "200px" }}
-            >
-              <Image
-                src={product.image}
-                alt={product.name}
-                width={100}
-                height={100}
-                className="object-contain"
-              />
-              <span>{product.name}</span>
-              <span>{totalPrice.toFixed(2)}€</span>
-            </button>
+            <div key={product.id} className="flex flex-col items-center gap-2">
+              <button
+                onClick={() => handleProduitClick(product)}
+                className="relative shadow-light flex flex-col items-center justify-center gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md"
+                style={{ width: "200px", height: "200px" }}
+              >
+                <Image src={product.image} alt={product.name} width={200} height={200} />
+                <div className="absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-2 text-center border-t border-black rounded-b-lg">
+                  <p>{product.name}</p>
+                </div>
+              </button>
+
+              <p className="text-sm text-white border-2 border-white w-full text-center rounded-md mt-auto">
+                {totalPrice.toFixed(2)} €
+              </p>
+            </div>
           );
         })}
       </div>
-      <div className="flex flex-col items-center justify-center mt-10 gap-4">
+
+      <div className="flex flex-col items-center text-white justify-center mt-10 gap-4">
         <label className="flex items-center gap-2 text-lg">
           Option Menu ?*
           <input
@@ -159,7 +129,7 @@ const Mitraillettes = () => {
           />
         </label>
         <div className="flex flex-col items-center justify-center mt-2 gap-4 text-sm">
-          *Cela inclus des frites supplémentaires + 2.5€ au prix indiqué.
+          * Cela inclus des frites (2.5€ au prix indique).
         </div>
       </div>
     </div>

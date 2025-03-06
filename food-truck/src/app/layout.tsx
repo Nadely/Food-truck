@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Nav />
 
               {/* Section pour children et Panier */}
-              <div className="flex mt-2 gap-4 font-bold font-serif">
+              <div className="flex mt-2 gap-4 font-bold style-pen">
                 {/* children : 2/3 */}
                 {pathname && pathname.startsWith("/nouvelle_commande") ? (
                   <div className="flex-[2] w-3/4 p-2">{children}</div>

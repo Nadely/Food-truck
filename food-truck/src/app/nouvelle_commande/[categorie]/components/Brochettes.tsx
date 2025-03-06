@@ -91,11 +91,11 @@ const Brochettes = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center font-bold font-serif text-2xl">
-      <h1 className="border-b-2 border-black w-full text-center mr-5">
+    <div className="font-bold style-pen text-lg mb-5 mt-2">
+      <div className="flex flex-col items-center justify-center border-b-2 border-white text-white text-2xl gap-4 mb-5">
         Brochettes
-      </h1>
-      <div className="w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
+      </div>
+      <div className="w-full flex flex-col items-center justify-center mt-4 style-pen text-lg mb-5">
         <div className="flex flex-col items-center justify-center">
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
             {data.Brochettes.map((product) => (
@@ -108,45 +108,48 @@ const Brochettes = () => {
                 }`}
               >
                 <div
-                  className="border-2 border-black rounded-lg p-2 flex flex-col items-center justify-center cursor-pointer hover:scale-105 transition-transform duration-200 hover:shadow-md shadow-sm"
+                  className="relative shadow-light flex flex-col items-center justify-center gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md"
                   style={{ width: "200px", height: "200px" }}
                   onClick={() => handleSelectBrochette(product.id)}
                 >
                   <Image
                     src={product.image}
                     alt={product.name}
-                    width={90}
-                    height={90}
+                    width={200}
+                    height={200}
                   />
-                  <p className="text-sm mt-auto mb-1">{product.name}</p>
-                  {!viaMitraillette && (
-                    <p className="text-sm mt-auto">{product.price}</p>
-                  )}
-                  {!viaMitraillette && (
-                    <div className="flex flex-row items-center gap-4">
-                      <button
-                        onClick={() => handleDecrement(product.id)}
-                        className="text-sm bg-red-500 focus:ring-4 rounded-lg px-8 py-2"
-                      >
-                        -
-                      </button>
-                      <span className="text-sm">{quantities[product.id]}</span>
-                      <button
-                        onClick={() => handleIncrement(product.id)}
-                        className="text-sm bg-green-500 focus:ring-4 rounded-lg px-8 py-2"
-                      >
-                        +
-                      </button>
-                    </div>
-                  )}
+                  <div className="absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-2 text-center border-t border-black rounded-b-lg">
+                    <p className="text-sm mt-auto mb-1">{product.name}</p>
+                    {!viaMitraillette && (
+                      <div className="flex flex-row items-center gap-4">
+                        <button
+                          onClick={() => handleDecrement(product.id)}
+                          className="text-sm bg-red-500 focus:ring-4 rounded-lg px-8 py-2 ml-3"
+                          >
+                          -
+                        </button>
+                        <span className="text-sm">{quantities[product.id]}</span>
+                        <button
+                          onClick={() => handleIncrement(product.id)}
+                          className="text-sm bg-green-500 focus:ring-4 rounded-lg px-8 py-2"
+                          >
+                          +
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
+                    {!viaMitraillette && (
+                      <p className="text-sm text-white border-2 border-white w-full text-center rounded-md mt-auto">
+                        {product.price}</p>
+                    )}
               </div>
             ))}
           </div>
         </div>
         <div className="flex flex-col items-center justify-center gap-4">
           <button
-            className="button-blue w-40 mt-10 mb-5"
+            className="bg-yellow-100 rounded-md bg-opacity-80 w-40 mt-10 mb-5"
             onClick={handleAddToCart}
           >
             Valider

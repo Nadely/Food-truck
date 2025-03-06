@@ -13,7 +13,7 @@ const CategorieNav = () => {
             height={150}
             className="rounded-lg border-2 border-black object-cover"
           />
-          <div className="absolute inset-0 flex justify-center items-center text-xl font-bold font-serif text-black">
+          <div className="absolute inset-0 flex justify-center items-center text-xl style-pen text-black">
             Commandes
           </div>
         </div>
@@ -27,7 +27,7 @@ const CategorieNav = () => {
             height={150}
             className="rounded-lg border-2 border-black object-cover"
           />
-          <div className="absolute inset-0 flex justify-center items-center text-xl font-bold font-serif text-black">
+          <div className="absolute inset-0 flex justify-center items-center text-xl style-pen text-black">
             Stocks
           </div>
         </div>
@@ -41,7 +41,7 @@ const CategorieNav = () => {
             height={150}
             className="rounded-lg border-2 border-black object-cover"
           />
-          <div className="absolute inset-0 flex justify-center items-center text-xl font-bold font-serif text-black">
+          <div className="absolute inset-0 flex justify-center items-center text-xl style-pen text-black">
             Historique
           </div>
         </div>
@@ -55,8 +55,8 @@ const CategorieNav = () => {
             height={150}
             className="rounded-lg border-2 border-black object-cover"
           />
-          <div className="absolute inset-0 flex justify-center items-center text-xl font-bold font-serif text-black">
-            Evènements
+          <div className="absolute inset-0 flex justify-center items-center text-xl style-pen text-black">
+            Evenements
           </div>
         </div>
       </Link>

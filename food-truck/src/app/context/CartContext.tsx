@@ -8,6 +8,7 @@ type CartItem = {
   image: string;
   price: number;
   quantity: number;
+  phone: string;
   categorie?: string[]; // Indique la catégorie du produit
   isMenu?: boolean; // Indique si l'option menu est sélectionnée
   viaMitraillette?: boolean; // Indique si c'est "viaMitraillette"

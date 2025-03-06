@@ -34,6 +34,7 @@ export interface Historique {
   categorie: string[];
   user_name: string;
   user_image: string;
+  user_phone: string;
   time: string;
   price: string;
   date: string | Date;
@@ -55,6 +56,7 @@ export interface Commande {
     categorie: string[];
     user_name: string;
     user_image: string;
+    user_phone: string;
     time: string;
     price: string;
     date: string | Date;

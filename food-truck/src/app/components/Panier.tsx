@@ -105,7 +105,7 @@ const Panier = () => {
 
   return (
     <div key={refreshKey}>
-      <h2 className="flex text-xl items-center justify-center font-bold border-b-2 border-black mb-4">
+      <h2 className="flex text-xl items-center justify-center style-pen border-b-2 border-black mb-4">
         Panier
       </h2>
       {cart.length === 0 ? (
@@ -135,7 +135,7 @@ const Panier = () => {
                       />
                     )
                   )}
-                  <p className="font-semibold ml-2">
+                  <p className="style-pen ml-2">
                     {item.categorie === "Enfants" ? item.categorie : item.name}
                   </p>
                 </div>
@@ -231,7 +231,7 @@ const Panier = () => {
       </div>
       <div className="flex flex-col items-center justify-center gap-4">
         <button
-          className="button-blue w-40 mt-10 mb-5"
+          className="bg-yellow-100 border-2 border-black rounded-md bg-opacity-80 w-40 mt-10 mb-5"
           onClick={async () => {
             await handleTransferCommandes();
             router.push("/horaires");

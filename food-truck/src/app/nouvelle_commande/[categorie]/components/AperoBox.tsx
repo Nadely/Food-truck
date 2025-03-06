@@ -79,50 +79,56 @@ const AperoBox = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center font-bold font-serif mt-2 text-2xl">
-      <h1 className="border-b-2 border-black w-full text-center mr-5">
-        AperoBox
-      </h1>
-      <div className="w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
+    <div className="style-pen text-xl mb-5 mt-2">
+      <div className="flex flex-col items-center justify-center border-b-2 border-white text-white text-2xl gap-4 mb-5">
+        Apero Box
+      </div>
+      <div className="w-full flex flex-col items-center justify-center mt-4 style-pen text-lg mb-5">
         <div className="flex flex-col items-center justify-center">
           <div className="grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-5 gap-4">
             {data.AperoBox.map((product) => (
               <div
                 key={product.id}
-                className="flex flex-col items-center justify-center gap-4 border-2 border-black rounded-lg p-2 cursor-pointer hover:scale-105 transition-transform duration-200 hover:shadow-md shadow-sm"
+                className="flex flex-col items-center justify-center gap-4"
+                >
+                <div
+                className="relative shadow-light flex flex-col items-center justify-center gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md"
                 style={{ width: "200px", height: "200px" }}
                 onClick={() => handleSelectAperoBox(product.name)} // Sélectionner ou désélectionner
               >
                 <Image
                   src={product.image}
                   alt={product.name}
-                  width={80}
-                  height={80}
+                  width={200}
+                  height={200}
                 />
-                <p className="text-sm mt-auto">{product.name}</p>
-                <p className="text-sm mt-auto">{product.price}</p>
-                <div className="flex flex-row items-center gap-4">
-                  <button
-                    onClick={() => handleDecrement(product.id)}
-                    className="text-sm px-2 py-1  bg-red-500 focus:ring-4 rounded-lg px-8 py-2 "
-                  >
-                    -
-                  </button>
-                  <span className="text-sm">{quantities[product.id]}</span>
-                  <button
-                    onClick={() => handleIncrement(product.id)}
-                    className="text-sm px-2 py-1 rounded-lg bg-green-500 focus:ring-4 rounded-lg px-8 py-2 "
-                  >
-                    +
-                  </button>
+                <div className="absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-2 text-center border-t border-black rounded-b-lg ">
+                  <p className="text-sm mt-auto">{product.name}</p>
+                  <div className="flex flex-row items-center gap-4">
+                    <button
+                      onClick={() => handleDecrement(product.id)}
+                      className="text-sm px-2 py-1  bg-red-500 focus:ring-4 rounded-lg px-8 py-2 "
+                    >
+                      -
+                    </button>
+                    <span className="text-sm">{quantities[product.id]}</span>
+                    <button
+                      onClick={() => handleIncrement(product.id)}
+                      className="text-sm px-2 py-1 rounded-lg bg-green-500 focus:ring-4 rounded-lg px-8 py-2 "
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
+                  </div>
+                <p className="text-sm text-white border-2 border-white w-full text-center rounded-md p-1">{product.price}</p>
               </div>
             ))}
           </div>
         </div>
         <div className="flex flex-col items-center justify-center gap-4">
           <button
-            className="button-blue w-40 mt-10 mb-5"
+            className="bg-yellow-100 rounded-md bg-opacity-80 w-40 mt-10 mb-5"
             onClick={handleAddToCart}
           >
             Valider

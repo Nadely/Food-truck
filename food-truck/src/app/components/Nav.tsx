@@ -20,7 +20,7 @@ const Nav = () => {
     composition === href && (
       <Link
         href={`/${href}`}
-        className="whitespace-nowrap text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2 w-auto"
+        className="whitespace-nowrap text-md style-pen text-black bg-red-200 border-2 border-black rounded-lg p-2 w-auto"
       >
         {text}
       </Link>
@@ -29,44 +29,44 @@ const Nav = () => {
 
   return (
     <div className="flex w-[500px]">
-      <Link href="/" className="text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2">
+      <Link href="/" className="text-md style-pen text-black bg-red-200 border-2 border-black rounded-lg p-2">
         Accueil
       </Link>
       {categories !== '' && (
         <div className="flex flex-col border-2 animate-fillLeftToRight h-1 bg-red-200 mt-5"></div>
       )}
       {categories === 'commandes' && (
-        <Link href="/commandes" className="text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2">
+        <Link href="/commandes" className="text-md style-pen text-black bg-red-200 border-2 border-black rounded-lg p-2">
           Commandes
         </Link>
       )}
       {categories === 'stocks' && (
-        <Link href="/stocks" className="text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2">
+        <Link href="/stocks" className="text-md style-pen text-black bg-red-200 border-2 border-black rounded-lg p-2">
           Stocks
         </Link>
       )}
       {categories === 'historique' && (
-        <Link href="/historique" className="text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2">
+        <Link href="/historique" className="text-md style-pen text-black bg-red-200 border-2 border-black rounded-lg p-2">
           Historique
         </Link>
       )}
       {categories === 'evenements' && (
-        <Link href="/evenements" className="text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2">
+        <Link href="/evenements" className="text-md style-pen text-black bg-red-200 border-2 border-black rounded-lg p-2">
           Evènements
         </Link>
       )}
       {categories === 'panier' && (
-        <Link href="/Panier" className="text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2">
+        <Link href="/Panier" className="text-md style-pen text-black bg-red-200 border-2 border-black rounded-lg p-2">
           Panier
         </Link>
       )}
       {categories === 'horaires' && (
-        <Link href="/horaires" className="text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2">
+        <Link href="/horaires" className="text-md style-pen text-black bg-red-200 border-2 border-black rounded-lg p-2">
           Horaires
         </Link>
       )}
       {(composition === 'nouvelle_commande' || linksCompo.includes(composition)) && (
-        <Link href="/nouvelle_commande" className="whitespace-nowrap text-md font-bold font-serif text-black bg-red-200 border-2 border-black rounded-lg p-2 w-auto">
+        <Link href="/nouvelle_commande" className="whitespace-nowrap text-md style-pen text-black bg-red-200 border-2 border-black rounded-lg p-2 w-auto">
           Nouvelle Commande
         </Link>
       )}

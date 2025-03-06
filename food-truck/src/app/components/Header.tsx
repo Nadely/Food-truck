@@ -10,8 +10,8 @@ const Header = () => {
         objectFit="cover"
         className="object-cover"
       />
-      <div className="absolute inset-0 flex items-center justify-center text-white text-4xl font-bold font-serif">
-        La petite Belgique des coëvrons - Admin
+      <div className="absolute inset-0 flex items-center justify-center text-white text-4xl style-pen">
+        La petite Belgique des coevrons - Admin
       </div>
       <Image
         src="/Micka.png"

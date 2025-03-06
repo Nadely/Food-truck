@@ -175,10 +175,10 @@ const Historique = () => {
     <div className="flex flex-row w-full mt-3 space-x-1">
       <div className="flex flex-col w-1/2">
         <div className="border-black bg-gray-300 rounded-md p-1">
-          <h2 className="font-serif text-center">Historique des commandes</h2>
+          <h2 className="style-pen text-center">Historique des commandes</h2>
         </div>
         <div className="max-h-[600px] overflow-y-auto">
-          <table className="border-2 border-black w-full font-serif bg-gray-300">
+          <table className="border-2 border-black w-full style-pen bg-gray-300">
             <tbody>
               {historique.map((commande) => (
                 <tr key={commande.id}>
@@ -193,11 +193,11 @@ const Historique = () => {
                             height={50}
                             className="rounded-full"
                           />
-                          <span className="text-black font-serif">
+                          <span className="text-black style-pen">
                             {commande.user_name}
                           </span>
                         </div>
-                        <ul className="list-disc list-inside font-serif">
+                        <ul className="list-disc list-inside style-pen">
                         {commande.items.map((item, index) => (
 													<li key={index}>
 														{item.quantity ? item.quantity !== 1 ? `${item.quantity} x ` : '' : null}
@@ -211,10 +211,10 @@ const Historique = () => {
                       </div>
                       <div className="flex flex-col items-end">
                         <div className="flex flex-row items-end gap-2">
-                          <div className="text-black font-serif text-sm bg-white p-1 rounded-md mb-2">
+                          <div className="text-black style-pen text-sm bg-white p-1 rounded-md mb-2">
                             {commande.time}
                           </div>
-                          <div className="text-black font-serif text-sm bg-gray-300 p-1 rounded-md mb-2">
+                          <div className="text-black style-pen text-sm bg-gray-300 p-1 rounded-md mb-2">
                             {formatPrice(commande.price)}
                           </div>
                         </div>
@@ -226,7 +226,7 @@ const Historique = () => {
             </tbody>
           </table>
         </div>
-        <div className="flex justify-end items-center p-2 border-b-2 border-black rounded-md border-2 bg-gray-300 w-full mb-2 font-serif font-bold">
+        <div className="flex justify-end items-center p-2 border-b-2 border-black rounded-md border-2 bg-gray-300 w-full mb-2 style-pen font-bold">
           Recette du jour :
           <div className="text-black bg-white rounded-md">
             {formatPrice(totalPrice.toString())}
@@ -236,12 +236,12 @@ const Historique = () => {
       <div className="flex flex-col w-1/2">
         <div className="flex flex-col h-full">
           <div className="flex-1 border-2 border-black bg-gray-300 rounded-md p-1">
-            <h2 className="font-serif text-center border-b-2 border-black">
+            <h2 className="style-pen text-center border-b-2 border-black">
               Historique des Recettes
             </h2>
             <div className="flex flex-row items-center justify-center gap-2 p-2">
-              <label className="block font-serif text-black mr-2">
-                Date de début :
+              <label className="block style-pen text-black mr-2">
+                Date de debut :
               </label>
               <DatePicker
                 selected={startDateRecettes}
@@ -252,9 +252,9 @@ const Historique = () => {
                 locale="fr"
                 dateFormat="dd/MM/yyyy"
                 isClearable
-                placeholderText="Date de début"
+                placeholderText="Date de debut"
               />
-              <label className="block font-serif text-black mr-2">
+              <label className="block style-pen text-black mr-2">
                 Date de fin :
               </label>
               <DatePicker
@@ -272,7 +272,7 @@ const Historique = () => {
               />
             </div>
             <table className="border-2 border-black w-full bg-white">
-              <thead className="font-serif font-bold border-b-2 border-black text-center">
+              <thead className="style-pen font-bold border-b-2 border-black text-center">
                 <tr>
                   <th>Date</th>
                   <th>Lieu</th>
@@ -299,26 +299,26 @@ const Historique = () => {
                 ) : (
                   <tr>
                     <td colSpan={3} className="text-center">
-                      Sélectionnez une période
+                      Selectionnez une periode
                     </td>
                   </tr>
                 )}
               </tbody>
             </table>
-            <div className="flex justify-end items-center p-2 border-b-2 border-black rounded-md border-2 bg-gray-300 w-full mb-2 font-serif font-bold">
-              Recette totale pour la période :
+            <div className="flex justify-end items-center p-2 border-b-2 border-black rounded-md border-2 bg-gray-300 w-full mb-2 style-pen font-bold">
+              Recette totale pour la periode :
               <div className="text-black bg-white rounded-md">
                 {totalRecettes}
               </div>
             </div>
           </div>
           <div className="flex-1 border-2 border-black bg-gray-300 rounded-md p-1 mt-2">
-            <h2 className="font-serif text-center border-b-2 border-black">
+            <h2 className="style-pen text-center border-b-2 border-black">
               Historique des Pertes
             </h2>
             <div className="flex flex-row items-center justify-center gap-2 p-2">
-              <label className="block font-serif text-black mr-2">
-                Date de début :
+              <label className="block style-pen text-black mr-2">
+                Date de debut :
               </label>
               <DatePicker
                 selected={startDatePertes}
@@ -329,9 +329,9 @@ const Historique = () => {
                 locale="fr"
                 dateFormat="dd/MM/yyyy"
                 isClearable
-                placeholderText="Date de début"
+                placeholderText="Date de debut"
               />
-              <label className="block font-serif text-black mr-2">
+              <label className="block style-pen text-black mr-2">
                 Date de fin :
               </label>
               <DatePicker
@@ -345,7 +345,7 @@ const Historique = () => {
                 dateFormat="dd/MM/yyyy"
                 isClearable
                 placeholderText="Date de fin"
-                className="w-full"
+                className="w-full style-pen"
               />
             </div>
             {startDatePertes && endDatePertes && (
@@ -357,18 +357,18 @@ const Historique = () => {
                 >
                   {categories.map((category, index) => (
                     <option key={index} value={category}>
-                      {category === "all" ? "Toutes les catégories" : category}
+                      {category === "all" ? "Toutes les categories" : category}
                     </option>
                   ))}
                 </select>
               </div>
             )}
             <table className="border-2 border-black w-full bg-white">
-              <thead className="font-serif font-bold border-b-2 border-black text-center">
+              <thead className="style-pen font-bold border-b-2 border-black text-center">
                 <tr>
                   <th>Date</th>
                   <th>Produit</th>
-                  <th>Quantité perdue</th>
+                  <th>Quantite perdue</th>
                 </tr>
               </thead>
               <tbody>
@@ -400,14 +400,14 @@ const Historique = () => {
                   ) : (
                     <tr>
                       <td colSpan={3} className="text-center">
-                        Aucune perte sur cette période
+                        Aucune perte sur cette periode
                       </td>
                     </tr>
                   )
                 ) : (
                   <tr>
                     <td colSpan={3} className="text-center">
-                      Sélectionnez une période
+                      Selectionnez une periode
                     </td>
                   </tr>
                 )}

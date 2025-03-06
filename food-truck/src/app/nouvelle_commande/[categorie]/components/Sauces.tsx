@@ -163,33 +163,47 @@ const Sauces = () => {
 };
 
   return (
-    <div className="flex flex-col items-center justify-center font-bold font-serif text-2xl">
-      <h1 className="border-b-2 border-black w-full text-center">Sauces</h1>
-      <div className="w-full flex flex-col items-center justify-center mt-4 font-serif text-lg mb-5">
+    <div className="font-bold style-pen text-lg mb-5 mt-2">
+      <h1 className="flex flex-col items-center justify-center border-b-2 border-white text-white text-2xl gap-4 mb-5">Sauces *</h1>
+      <div className="w-full flex flex-col items-center justify-center mt-4 style-pen text-lg mb-5">
+        {(viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette) ? (
+          <p className="text-sm text-white mb-5 mt-auto">* Sauce gratuite</p>
+        ) : viaFrites ? (
+          <p className="text-sm text-white mb-5 mt-auto">* La première sauce gratuite puis 0.50€ l'unité</p>
+        ) : viaAperoBox ? (
+          <p className="text-sm text-white mb-5 mt-auto">* La première sauce gratuite puis 0.50€ l'unité sauf pour Party Box (deux sauces gratuites)</p>
+        ) : (
+          <p className="text-sm text-white mb-5 mt-auto">* Sauces à 0.50€ l'unité</p>
+        )}
         <div className="grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {data.Sauces.map((sauce) => (
+          {data.Sauces
+          .filter(sauce =>
+            (viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette) || sauce.name !== "Aucune sauce"
+          ).map((sauce) => (
             <div
               key={sauce.id}
-              className={`flex flex-col items-center cursor-pointer p-4 border-2 border-black rounded-lg hover:scale-105 transition-transform duration-200 hover:shadow-md ${
+              className={`relative shadow-light flex flex-col items-center justify-center gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md ${
                 // En mode via classique (hors viaAperoBox), on affiche la sélection en un clic
                 (viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette) && selectedSauce === sauce.id ? "bg-green-200 border-green-500" : ""
               }`}
               onClick={() => handleSelectSauce(sauce)}
             >
-              <Image src={sauce.image} alt={sauce.name} width={100} height={100} className="object-contain" />
-              <p className="text-sm mt-auto">{sauce.name}</p>
-              {!(viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette) && <p className="text-sm mt-auto">{parseFloat(sauce.price)}€</p>}
-              {!(viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette) && (
-                <div className="flex flex-row items-center gap-4">
-                  <button onClick={() => handleDecrement(sauce.id)} className="text-sm bg-red-500 focus:ring-4 rounded-lg px-8 py-2">-</button>
-                  <span className="text-sm">{quantities[sauce.id]}</span>
-                  <button onClick={() => handleIncrement(sauce.id)} className="text-sm bg-green-500 focus:ring-4 rounded-lg px-8 py-2">+</button>
-                </div>
-              )}
+              <Image src={sauce.image} alt={sauce.name} width={150} height={150} className="object-contain mb-auto" />
+              <div className={`absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-2 text-center border-t border-black ${!(viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette) ? 'rounded-b-lg' : 'absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-2 text-center border-t border-black rounded-b-lg'}`}>
+                <p className="text-sm mt-auto">{sauce.name}</p>
+                {/* {!(viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette) && <p className="text-sm mt-auto">{parseFloat(sauce.price)}€</p>} */}
+                {!(viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette) && (
+                  <div className="flex flex-row items-center gap-4">
+                    <button onClick={() => handleDecrement(sauce.id)} className="text-sm bg-red-500 focus:ring-4 rounded-lg ml-auto px-8 py-2">-</button>
+                    <span className="text-sm">{quantities[sauce.id]}</span>
+                    <button onClick={() => handleIncrement(sauce.id)} className="text-sm bg-green-500 focus:ring-4 rounded-lg mr-auto px-8 py-2">+</button>
+                  </div>
+                )}
+              </div>
             </div>
           ))}
         </div>
-        <button className="button-blue w-40 mt-10 mb-5" onClick={handleAddToCart}>Valider</button>
+        <button className="bg-yellow-100 rounded-md bg-opacity-80 w-40 mt-10 mb-5" onClick={handleAddToCart}>Valider</button>
       </div>
     </div>
   );

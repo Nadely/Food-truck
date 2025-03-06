@@ -100,10 +100,10 @@ const Commandes = () => {
 	return (
 		<div className="flex flex-col mt-2">
 			<div className="flex flex-row justify-end items-center mr-20 gap-4">
-				<Link href="/nouvelle_commande" className="button-yellow">
+				<Link href="/nouvelle_commande" className="button-yellow style-pen">
 					Nouvelle Commande
 				</Link>
-				<Link href="/historique" className="button-blue">
+				<Link href="/historique" className="button-blue style-pen">
 					Historique
 				</Link>
 			</div>
@@ -111,10 +111,10 @@ const Commandes = () => {
 				{/* Commandes en préparation */}
 				<div className="flex flex-col w-1/2">
 					<div className="border-black bg-gray-200 rounded-md p-1">
-						<h2 className="font-serif text-center">Commandes en préparation</h2>
+						<h2 className="style-pen text-center">Commandes en preparation</h2>
 					</div>
 					<div className="max-h-[600px] overflow-y-auto">
-						<table className="border-2 border-black w-full font-serif bg-gray-200">
+						<table className="border-2 border-black w-full style-pen bg-gray-200">
 							<tbody>
 								{preparations.map((commande) => (
 									<tr key={commande.id}>
@@ -129,9 +129,10 @@ const Commandes = () => {
 															height={50}
 															className="rounded-full"
 														/>
-														<span className="text-black font-serif">{commande.user_name}</span>
+														<span className="text-black style-pen text-sm">{commande.user_name}</span>
+														<span className="text-black style-pen text-sm">{commande.user_phone}</span>
 													</div>
-													<ul className="list-disc list-inside font-serif">
+													<ul className="list-disc list-inside style-pen">
 													{commande.items.map((item, index) => (
 													<li key={index}>
 														{item.quantity ? item.quantity !== 1 ? `${item.quantity} x ` : '' : null}
@@ -145,18 +146,18 @@ const Commandes = () => {
 												</div>
 												<div className="flex flex-col items-end">
 													<div className="flex flex-row items-end gap-2">
-														<div className="text-black font-serif text-sm bg-white p-1 rounded-md mb-2">
+														<div className="text-black style-pen text-sm bg-white p-1 rounded-md mb-2">
 															{commande.time}
 														</div>
-														<div className="text-black font-serif text-sm bg-gray-300 p-1 rounded-md mb-2">
+														<div className="text-black style-pen text-sm bg-gray-300 p-1 rounded-md mb-2">
 															{formatPrice(commande.price)}
 														</div>
 													</div>
 													<button
 														onClick={() => handlePrête(commande.id)}
-														className="button-green"
+														className="button-green style-pen"
 													>
-														Prête
+														Prete
 													</button>
 												</div>
 											</div>
@@ -171,10 +172,10 @@ const Commandes = () => {
 				{/* Commandes prêtes */}
 				<div className="flex flex-col w-1/2">
 					<div className="border-black bg-gray-100 rounded-md p-1">
-						<h2 className="font-serif text-center">Commandes prêtes</h2>
+						<h2 className="style-pen text-center">Commandes pretes</h2>
 					</div>
 					<div className="max-h-[600px] overflow-y-auto">
-						<table className="border-2 border-black rounded-md w-full font-serif bg-gray-100">
+						<table className="border-2 border-black rounded-md w-full style-pen bg-gray-100">
 							<tbody>
 								{pretes.map((commande) => (
 									<tr key={commande.id}>
@@ -189,9 +190,10 @@ const Commandes = () => {
 															height={50}
 															className="rounded-full"
 														/>
-														<span className="text-black font-serif">{commande.user_name}</span>
+														<span className="text-black style-pen text-sm">{commande.user_name}</span>
+														<span className="text-black style-pen text-sm">{commande.user_phone}</span>
 													</div>
-													<ul className="list-disc list-inside font-serif">
+													<ul className="list-disc list-inside style-pen">
 													{commande.items.map((item, index) => (
 													<li key={index}>
 														{item.quantity ? item.quantity !== 1 ? `${item.quantity} x ` : '' : null}
@@ -205,16 +207,16 @@ const Commandes = () => {
 												</div>
 												<div className="flex flex-col items-end">
 													<div className="flex flex-row items-end gap-2">
-														<div className="text-black font-serif text-sm bg-white p-1 rounded-md mb-2">
+														<div className="text-black style-pen text-sm bg-white p-1 rounded-md mb-2">
 															{commande.time}
 														</div>
-														<div className="text-black font-serif text-sm bg-gray-300 p-1 rounded-md mb-2">
+														<div className="text-black style-pen text-sm bg-gray-300 p-1 rounded-md mb-2">
 															{formatPrice(commande.price)}
 														</div>
 													</div>
 													<button
 														onClick={() => handleServie(commande.id)}
-														className="button-red"
+														className="button-red style-pen"
 													>
 														Servie
 													</button>

@@ -19,34 +19,6 @@ const HomePage = () => {
         setSelectedLieu(lieu);
         localStorage.setItem("selectedLieu", lieu);
         console.log(`Lieu sélectionné: `, lieu);
-
-        // Envoyer le lieu sélectionné à l'API
-        // try {
-        //     console.log(lieu);
-        //     const response = await fetch('/api/commandes', {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json',
-        //         },
-        //         body: JSON.stringify({ lieu }),
-        //     });
-
-        //     if (!response.ok) {
-        //         throw new Error('Erreur lors de l\'envoi du lieu');
-        //     }
-
-    //         const contentType = response.headers.get("content-type");
-    //         if (contentType && contentType.includes("application/json")) {
-    //             const data = await response.json();
-    //             console.log('Réponse de l\'API:', data);
-    //         } else {
-    //             throw new Error('Réponse non JSON reçue');
-    //         }
-
-    //         console.log('Lieu envoyé avec succès');
-    //     } catch (error) {
-    //         console.error('Erreur:', error);
-    //     }
     };
 
     // Gérer le bouton "Fermer"
@@ -58,16 +30,16 @@ const HomePage = () => {
     return (
         <div>
             <div className="flex flex-col items-center justify-center mt-20">
-                <h6 className="text-center text-2xl font-bold font-serif text-black">
+                <h6 className="text-center text-4xl text-white style-pen text-black">
                     Bienvenue sur ton tableau de bord
                 </h6>
                 {!selectedLieu ? (
-                    <p className="text-center text-sm font-bold font-serif text-black mt-5">
+                    <p className="text-center text-xl style-pen text-white text-black mt-5">
                         Choisis une ville pour ouvrir les commandes en ce lieu.
                     </p>
                 ) : (
-                    <p className="text-center text-sm font-bold font-serif text-black mt-5">
-                        Lieu sélectionné : {selectedLieu}
+                    <p className="text-center text-white text-lg style-pen text-black mt-5">
+                        Lieu selectionne : {selectedLieu}
                     </p>
                 )}
             </div>
@@ -77,30 +49,34 @@ const HomePage = () => {
                 <div className="flex flex-col 2xl:flex-row justify-center items-center mt-20">
                     <div className="flex flex-row items-center justify-center mb-5 mr-5 gap-8">
                         <button
-                            className="bg-blue-500 border-2 border-black text-black font-bold font-serif h-48 w-48 rounded-md w-1/2"
+                            className="relative shadow-light flex flex-col items-center justify-center text-xl text-white gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:text-black hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md"
+                            style={{ width: "200px", height: "200px" }}
                             onClick={() => handleLieuClick("Neau")}
                         >
-                            <Link href="/commandes">Ouvert à Neau</Link>
+                            <Link href="/commandes">Ouverture a Neau</Link>
                         </button>
                         <button
-                            className="bg-yellow-500 border-2 border-black text-black font-bold font-serif h-48 w-48 rounded-md w-1/2"
+                            className="relative shadow-light flex flex-col items-center justify-center text-xl text-white gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:text-black hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md"
+                            style={{ width: "200px", height: "200px" }}
                             onClick={() => handleLieuClick("Montsûrs")}
                         >
-                            <Link href="/commandes">Ouvert à Montsûrs</Link>
+                            <Link href="/commandes">Ouverture a Montsurs</Link>
                         </button>
                     </div>
                     <div className="flex flex-row items-center justify-center mb-5 mr-5 gap-8">
                         <button
-                            className="bg-green-500 border-2 border-black text-black font-bold font-serif h-48 w-48 rounded-md w-1/2"
+                            className="relative shadow-light flex flex-col items-center justify-center text-xl text-white gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:text-black hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md"
+                            style={{ width: "200px", height: "200px" }}
                             onClick={() => handleLieuClick("St-Suzanne")}
                         >
-                            <Link href="/commandes">Ouvert à St-Suzanne</Link>
+                            <Link href="/commandes">Ouverture a St-Suzanne</Link>
                         </button>
                         <button
-                            className="bg-red-500 border-2 border-black text-black font-bold font-serif h-48 w-48 rounded-md w-1/2"
+                            className="relative shadow-light flex flex-col items-center justify-center text-xl text-white gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:text-black hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md"
+                            style={{ width: "200px", height: "200px" }}
                             onClick={() => handleLieuClick("Châtre-la-forêt")}
                         >
-                            <Link href="/commandes">Ouvert à Châtre-la-forêt</Link>
+                            <Link href="/commandes">Ouverture a Chatre-la-foret</Link>
                         </button>
                     </div>
                 </div>
@@ -108,7 +84,8 @@ const HomePage = () => {
                 // Afficher le bouton "Fermer" si un lieu est sélectionné
                 <div className="flex flex-col items-center justify-center mt-20">
                     <button
-                        className="bg-gray-200 border-2 border-black text-black font-bold font-serif h-16 w-48 h-48 rounded-md"
+                        className="relative shadow-light flex flex-col items-center justify-center text-xl text-white gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:text-black hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md"
+                        style={{ width: "200px", height: "200px" }}
                         onClick={handleClose}
                     >
                         Fermer {selectedLieu}
