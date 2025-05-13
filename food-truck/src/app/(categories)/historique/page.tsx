@@ -197,17 +197,25 @@ const Historique = () => {
                             {commande.user_name}
                           </span>
                         </div>
-                        <ul className="list-disc list-inside style-pen">
-                        {commande.items.map((item, index) => (
-													<li key={index}>
-														{item.quantity ? item.quantity !== 1 ? `${item.quantity} x ` : '' : null}
-														<span style={{ marginRight: '5px' }}>{item.name}</span>
-														{item.relatedItems && item.relatedItems.length > 0
-															? item.relatedItems.map(related => related).join(', ')
-															: ' '}
-													</li>
-                          ))}
-                        </ul>
+                        <ul className="list-none list-inside style-pen">
+														{commande.items.map((item, index) => (
+															<li key={index}>
+																<div className="flex items-center">
+																	{item.quantity && item.quantity !== 1 ? `${item.quantity} x ` : ''}
+																	<span style={{ marginRight: '5px' }}>
+																		{item.name && item.name.length > 0 ? item.name : ''}
+																	</span>
+																</div>
+																{item.relatedItems && item.relatedItems.length > 0 && (
+																	<ul className="list-disc list-inside ml-5">
+																		{item.relatedItems.map((related, idx) => (
+																			<li key={idx}>{related}</li>
+																		))}
+																	</ul>
+																)}
+															</li>
+														))}
+													</ul>
                       </div>
                       <div className="flex flex-col items-end">
                         <div className="flex flex-row items-end gap-2">

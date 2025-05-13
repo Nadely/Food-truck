@@ -107,7 +107,7 @@ const AperoBox = () => {
                   <div className="flex flex-row items-center gap-4">
                     <button
                       onClick={() => handleDecrement(product.id)}
-                      className="text-sm px-2 py-1  bg-red-500 focus:ring-4 rounded-lg px-8 py-2 "
+                      className="text-sm px-2 py-1  bg-red-500 focus:ring-4 rounded-lg px-8 py-2 ml-3"
                     >
                       -
                     </button>

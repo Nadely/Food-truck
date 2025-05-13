@@ -79,6 +79,7 @@ const Snacks = () => {
           return {
             id: produit.id,
             name: produit.name,
+            image: produit.image,
             price: cleanPrice,
             quantity,
           };
@@ -124,7 +125,7 @@ const Snacks = () => {
                     height={200}
                     className="object-contain"
                   />
-                  <div className="absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-2 text-center border-t border-black rounded-b-lg ">
+                  <div className="absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-2 text-center border-t border-black rounded-b-lg">
                     <p className="text-sm mt-auto">{product.name}</p>
                     {!viaMitraillette && (
                       <div className="flex flex-row items-center gap-4">

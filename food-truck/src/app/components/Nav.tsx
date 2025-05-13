@@ -52,7 +52,7 @@ const Nav = () => {
       )}
       {categories === 'evenements' && (
         <Link href="/evenements" className="text-md style-pen text-black bg-red-200 border-2 border-black rounded-lg p-2">
-          Evènements
+          Evenements
         </Link>
       )}
       {categories === 'panier' && (
@@ -74,7 +74,7 @@ const Nav = () => {
         <div className="flex flex-col border-2 animate-fillLeftToRight h-1 bg-red-200 mt-5"></div>
       )}
 
-      {renderLink('AperoBox', 'Apéro Box')}
+      {renderLink('AperoBox', 'Apero Box')}
       {renderLink('Boissons', 'Boissons')}
       {renderLink('Frites', 'Frites')}
       {renderLink('Brochettes', 'Brochettes')}
@@ -83,7 +83,7 @@ const Nav = () => {
       {renderLink('Sauces', 'Sauces')}
       {renderLink('Mitraillettes', 'Mitraillettes')}
       {renderLink('Enfants', 'Menus enfants')}
-      {renderLink('Supplements', 'Suppléments')}
+      {renderLink('Supplements', 'Supplements')}
       {renderLink('Burgers', 'Burgers')}
       {renderLink('Veggies', 'Veggies')}
     </div>

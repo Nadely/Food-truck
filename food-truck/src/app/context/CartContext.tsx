@@ -8,7 +8,6 @@ type CartItem = {
   image: string;
   price: number;
   quantity: number;
-  phone: string;
   categorie?: string[]; // Indique la catégorie du produit
   isMenu?: boolean; // Indique si l'option menu est sélectionnée
   viaMitraillette?: boolean; // Indique si c'est "viaMitraillette"
@@ -23,6 +22,8 @@ type CartItem = {
   menuOption?: boolean; // Indique si c'est lié à un menu
   supplementPrice?: number; // Montant du supplément (1€ si menu)
   viaSupplements?: boolean; // Indique si c'est lié à un supplément
+  updatedCart?: CartItem;
+  isFrites?: boolean; // Indique si c'est un frites
 };
 
 // Type pour le contexte du panier
@@ -91,20 +92,28 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
   // Ajouter un produit au panier
   const addToCart = (item: Omit<CartItem, "uniqueId">) => {
-    console.log("Avant ajout au panier:", item); // Log des données juste avant l'ajout
+    console.log("Avant ajout au panier:", item);
 
     const uniqueId = generateUniqueId();
     const relatedItemsWithIds = item.relatedItems?.map((related) => ({
       ...related,
       uniqueId: generateUniqueId(),
-      parentId: uniqueId, // Lier les éléments au produit principal
+      parentId: uniqueId,
     }));
 
     const newItem = { ...item, uniqueId, relatedItems: relatedItemsWithIds || [] };
-    setCart((prevCart) => [...prevCart, newItem]);
 
-    console.log("Après ajout au panier:", newItem); // Vérifiez si le prix est modifié ici
+    // Ajoute toujours un nouvel article au panier
+    setCart((prevCart) => {
+        const updatedCart = [...prevCart, newItem];
+        console.log("Nouvel article ajouté:", updatedCart);
+        return updatedCart;
+    });
+
+    console.log("Après ajout au panier:", newItem);
   };
+
+
 
   // Retirer un produit et ses éléments liés
   const removeFromCart = () => {
@@ -116,14 +125,14 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const remove = (uniqueId: string) => {
     setCart((prevCart) =>
       prevCart.filter((item) => {
-        // On supprime l'élément principal et les éléments liés
+        // Supprimer l'élément principal et les éléments associés
         if (item.uniqueId === uniqueId) return false;
-        if (item.relatedItems?.some((related) => related.uniqueId === uniqueId))
-          return false;
+        if (item.relatedItems?.some((related) => related.uniqueId === uniqueId)) return false;
         return true;
       })
     );
   };
+
 
   const getRelatedItemsVia = (parentId: string, viaMitraillette?: boolean) => {
     return (
@@ -174,6 +183,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
+
   // Exemple de fonction pour enregistrer le panier
   const saveCartToFile = async () => {
     try {
@@ -202,6 +212,8 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         removeFromCart,
         remove,
         updateQuantity,
+        clearCart: () => setCart([]),
+        getCart: () => cart,
         setCart,
         setViaMitraillette: () => {}, // Ajoutez un comportement ou laissez-le vide si non nécessaire
         setRelatedItems: () => {}, // Idem ici

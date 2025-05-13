@@ -3,37 +3,37 @@
     {
       "id": 1,
       "name": "Classique",
-      "image": "/mitraillette.png",
-      "price": "8.50€",
+      "image": "/Mitraillettes.png",
+      "price": "6.5€",
       "categorie": "Mitraillettes",
       "garniture": [
-        { "id": 1, "name": "Salade" },
-        { "id": 2, "name": "Tomate" },
-        { "id": 3, "name": "Oignons Frit" }
+        { "id": 1, "name": "Salade", "image": "/salade.png" },
+        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
+        { "id": 3, "name": "Oignons Frit", "image": "/oignons-frit.png" }
       ]
     },
     {
       "id": 2,
-      "name": "Filet Américain",
-      "image": "/americain-filet.jpg",
-      "price": "8.50€",
+      "name": "Filet Americain",
+      "image": "/americain-filet.png",
+      "price": "6.5€",
       "categorie": "Mitraillettes",
       "garniture": [
-        { "id": 1, "name": "Salade" },
-        { "id": 2, "name": "Tomate" },
-        { "id": 3, "name": "Oignons Frit" }
+        { "id": 1, "name": "Salade", "image": "/salade.png" },
+        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
+        { "id": 3, "name": "Oignons Frit", "image": "/oignons-frit.png" }
       ]
     },
     {
       "id": 3,
       "name": "Brochette",
-      "image": "/mitraillette-brochette.jpg",
-      "price": "9€",
+      "image": "/mitraillette-brochette.png",
+      "price": "7€",
       "categorie": "Mitraillettes",
       "garniture": [
-        { "id": 1, "name": "Salade" },
-        { "id": 2, "name": "Tomate" },
-        { "id": 3, "name": "Oignons Frit" }
+        { "id": 1, "name": "Salade", "image": "/salade.png" },
+        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
+        { "id": 3, "name": "Oignons Frit", "image": "/oignons-frit.png" }
       ]
     }
   ],
@@ -42,79 +42,79 @@
     {
       "id": 1,
       "name": "Burger",
-      "image": "/burger.jpg",
-      "price": "7€",
+      "image": "/burger.png",
+      "price": "7.5€",
       "categorie": "Burgers",
       "garniture": [
-        { "id": 1, "name": "Salade" },
-        { "id": 2, "name": "Tomate" },
-        { "id": 3, "name": "Oignons Frit" },
-        { "id": 4, "name": "Sauce Hamburger" }
+        { "id": 1, "name": "Salade", "image": "/salade.png" },
+        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
+        { "id": 3, "name": "Oignons Frit", "image": "/oignons-frit.png" },
+        { "id": 4, "name": "Sauce Hamburger", "image": "/hamburger.png" }
       ]
     },
     {
       "id": 2,
       "name": "Mexicano Burger",
-      "image": "/mexicano-burger.jpg",
-      "price": "7€",
+      "image": "/mexicano-burger.png",
+      "price": "7.5€",
       "categorie": "Burgers",
       "garniture": [
-        { "id": 1, "name": "Salade" },
-        { "id": 2, "name": "Tomate" },
-        { "id": 3, "name": "Cornichons sucrées" },
-        { "id": 4, "name": "Sauce Bicky" }
+        { "id": 1, "name": "Salade", "image": "/salade.png" },
+        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
+        { "id": 3, "name": "Cornichons sucrées", "image": "/cornichons-sucrees.png" },
+        { "id": 4, "name": "Sauce Bicky", "image": "/bicky.png" }
       ]
     },
     {
       "id": 3,
       "name": "Fish Burger",
-      "image": "/fish-burger.jpg",
-      "price": "7€",
+      "image": "/fish-burger.png",
+      "price": "7.5€",
       "categorie": "Burgers",
       "garniture": [
-        { "id": 1, "name": "Salade" },
-        { "id": 2, "name": "Tomate" },
-        { "id": 3, "name": "Oignons Frit" },
-        { "id": 4, "name": "Sauce Hamburger" }
+        { "id": 1, "name": "Salade", "image": "/salade.png" },
+        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
+        { "id": 3, "name": "Oignons Frit", "image": "/oignons-frit.png" },
+        { "id": 4, "name": "Sauce Hamburger", "image": "/hamburger.png" }
       ]
     },
     {
       "id": 4,
       "name": "Bicky Burger",
       "image": "/bicky-burger.png",
-      "price": "7€",
+      "price": "7.5€",
       "categorie": "Burgers",
       "garniture": [
-        { "id": 1, "name": "Salade" },
-        { "id": 2, "name": "Tomate" },
-        { "id": 3, "name": "Cornichons sucrées" },
-        { "id": 4, "name": "Sauce Bicky" }
+        { "id": 1, "name": "Salade", "image": "/salade.png" },
+        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
+        { "id": 3, "name": "Cornichons sucrées", "image": "/cornichons-sucrees.png" },
+        { "id": 4, "name": "Sauce Bicky", "image": "/bicky.png" }
       ]
     },
     {
       "id": 5,
       "name": "Chicken Burger",
-      "image": "/chicken-burger.jpg",
-      "price": "7€",
+      "image": "/chicken-burger.png",
+      "price": "7.5€",
       "categorie": "Burgers",
       "garniture": [
-        { "id": 1, "name": "Salade" },
-        { "id": 2, "name": "Tomate" },
-        { "id": 3, "name": "Oignons Frit" },
-        { "id": 4, "name": "Sauce Hamburger" }
+        { "id": 1, "name": "Salade", "image": "/salade.png" },
+        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
+        { "id": 3, "name": "Oignons Frit", "image": "/oignons-frit.png" },
+        { "id": 4, "name": "Sauce Hamburger", "image": "/hamburger.png" }
       ]
     },
     {
       "id": 6,
       "name": "Crispy Burger",
-      "image": "/crispy-burger.jpg",
-      "price": "7.5€",
+      "image": "/crispy-burger.png",
+      "price": "8.5€",
       "categorie": "Burgers",
       "garniture": [
-        { "id": 1, "name": "Salade" },
-        { "id": 2, "name": "Tomate" },
-        { "id": 3, "name": "Oignons Frit" },
-        { "id": 4, "name": "Sauce Hamburger" }
+        { "id": 1, "name": "Salade", "image": "/salade.png" },
+        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
+        { "id": 3, "name": "Oignons Frit", "image": "/oignons-frit.png" },
+        { "id": 4, "name": "Sauce Hamburger", "image": "/hamburger.png" }
       ]
     }
   ],
@@ -123,26 +123,26 @@
     {
       "id": 1,
       "name": "Veggie Mitraillette",
-      "image": "/mitraillette-veggie.jpg",
-      "price": "8€",
+      "image": "/mitraillette-veggie.png",
+      "price": "6.5€",
       "categorie": "Veggies",
       "garniture": [
-        { "id": 1, "name": "Salade" },
-        { "id": 2, "name": "Tomate" },
-        { "id": 3, "name": "Oignons Frit" }
+        { "id": 1, "name": "Salade", "image": "/salade.png" },
+        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
+        { "id": 3, "name": "Oignons Frit", "image": "/oignons-frit.png" }
       ]
     },
     {
       "id": 2,
       "name": "Veggie Burger",
-      "image": "/veggi-burger.jpg",
-      "price": "7€",
+      "image": "/veggi-burger.png",
+      "price": "7.5€",
       "categorie": "Veggies",
       "garniture": [
-        { "id": 1, "name": "Salade" },
-        { "id": 2, "name": "Tomate" },
-        { "id": 3, "name": "Oignons Frit" },
-        { "id": 4, "name": "Sauce Hamburger" }
+        { "id": 1, "name": "Salade", "image": "/salade.png" },
+        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
+        { "id": 3, "name": "Oignons Frit", "image": "/oignons-frit.png" },
+        { "id": 4, "name": "Sauce Hamburger", "image": "/hamburger.png" }
       ]
     }
   ],
@@ -151,13 +151,13 @@
     {
       "id": 1,
       "name": "Compote",
-      "image": "/compote.jpg",
+      "image": "/compote.png",
       "price": "6.5€",
       "categorie": "Menu_Enfants"
     },
     {
       "id": 2,
-      "name": "Crème au chocolat",
+      "name": "Creme au chocolat",
       "image": "/creme-chocolat.png",
       "price": "6.5€",
       "categorie": "Menu_Enfants"
@@ -171,19 +171,19 @@
     {
       "id": 4,
       "name": "Poulycroc",
-      "image": "/poulycroc.jpg",
+      "image": "/poulycroc.png",
       "categorie": "Menu_Enfants"
     },
     {
       "id": 5,
       "name": "Capri-Sun",
-      "image": "/capri-sun.jpg",
+      "image": "/capri-sun.png",
       "categorie": "Menu_Enfants"
     },
     {
       "id": 6,
       "name": "Frites",
-      "image": "/frites.jpg",
+      "image": "/frites.png",
       "categorie": "Menu_Enfants"
     }
   ],
@@ -192,43 +192,43 @@
     {
       "id": 1,
       "name": "Fun Box",
-      "image": "/funbox.jpg",
-      "price": "5€",
+      "image": "/funbox.png",
+      "price": "5.5€",
       "categorie": "AperoBox"
     },
     {
       "id": 2,
       "name": "Spicy Box",
-      "image": "/spicybox.jpg",
-      "price": "5€",
+      "image": "/spicybox.png",
+      "price": "5.5€",
       "categorie": "AperoBox"
     },
     {
       "id": 3,
       "name": "Cheese Box",
-      "image": "/cheesebox.jpg",
-      "price": "5€",
+      "image": "/cheesebox.png",
+      "price": "5.5€",
       "categorie": "AperoBox"
     },
     {
       "id": 4,
       "name": "Chicken Box",
-      "image": "/chickenbox.jpg",
-      "price": "5€",
+      "image": "/chickenbox.png",
+      "price": "5.5€",
       "categorie": "AperoBox"
     },
     {
       "id": 5,
       "name": "Vegan Box",
-      "image": "/veganbox.jpg",
-      "price": "5€",
+      "image": "/veganbox.png",
+      "price": "5.5€",
       "categorie": "AperoBox"
     },
     {
       "id": 6,
       "name": "Party Box",
-      "image": "/partybox.jpg",
-      "price": "11€",
+      "image": "/partybox.png",
+      "price": "12€",
       "categorie": "AperoBox"
     }
   ],
@@ -237,85 +237,85 @@
     {
       "id": 1,
       "name": "Fricadelle",
-      "image": "/fricadelle.jpg",
-      "price": "3.5€",
+      "image": "/fricadelle.png",
+      "price": "4€",
       "categorie": "Snacks"
     },
     {
       "id": 2,
       "name": "Fricadelle XXL",
-      "image": "/fricadelle.jpg",
-      "price": "6€",
+      "image": "/fricadelle.png",
+      "price": "6.5€",
       "categorie": "Snacks"
     },
     {
       "id": 3,
       "name": "Poulycroc",
-      "image": "/poulycroc.jpg",
-      "price": "3.5€",
+      "image": "/poulycroc.png",
+      "price": "4€",
       "categorie": "Snacks"
     },
     {
       "id": 4,
       "name": "Viandelle",
-      "image": "/viandelle.jpeg",
-      "price": "3.5€",
+      "image": "/viandelle.png",
+      "price": "4€",
       "categorie": "Snacks"
     },
     {
       "id": 5,
       "name": "Belcanto",
-      "image": "/belcanto.jpg",
-      "price": "4€",
+      "image": "/belcanto.png",
+      "price": "4.5€",
       "categorie": "Snacks"
     },
     {
       "id": 6,
       "name": "Cervelas brun",
-      "image": "/cervelas-brun.jpeg",
-      "price": "4€",
+      "image": "/cervelas-brun.png",
+      "price": "4.5€",
       "categorie": "Snacks"
     },
     {
       "id": 7,
       "name": "Bouffe feu",
-      "image": "/bouffe-feu.jpg",
-      "price": "4€",
+      "image": "/bouffe-feu.png",
+      "price": "4.5€",
       "categorie": "Snacks"
     },
     {
       "id": 8,
       "name": "Lucifer",
-      "image": "/lucifer.jpg",
-      "price": "4€",
+      "image": "/lucifer.png",
+      "price": "4.5€",
       "categorie": "Snacks"
     },
     {
       "id": 9,
       "name": "Loempia poulet",
-      "image": "/loempia-poulet.jpg",
-      "price": "4.5€",
+      "image": "/loempia-poulet.png",
+      "price": "5€",
       "categorie": "Snacks"
     },
     {
       "id": 10,
       "name": "Boulettes",
-      "image": "/boulette.jpeg",
-      "price": "3.5€",
+      "image": "/boulette.png",
+      "price": "4€",
       "categorie": "Snacks"
     },
     {
       "id": 11,
       "name": "Cheese crack",
-      "image": "/cheese-crack.jpg",
-      "price": "4€",
+      "image": "/cheese-crack.png",
+      "price": "4.5€",
       "categorie": "Snacks"
     },
     {
       "id": 12,
       "name": "Loempidel",
-      "image": "/loempidel.jpeg",
-      "price": "4€",
+      "image": "/loempidel.png",
+      "price": "4.5€",
       "categorie": "Snacks"
     },
     {
@@ -328,7 +328,7 @@
     {
       "id": 14,
       "name": "Belcanto XXL",
-      "image": "/belcanto.jpg",
+      "image": "/belcanto.png",
       "price": "0€",
       "categorie": "Snacks"
     }
@@ -338,43 +338,43 @@
     {
       "id": 1,
       "name": "Volaille",
-      "image": "/brochette-volaille.jpg",
-      "price": "4.5€",
+      "image": "/brochette-volaille.png",
+      "price": "5€",
       "categorie": "Brochettes"
     },
     {
       "id": 2,
       "name": "Tzigane",
-      "image": "/brochette-tzigane.jpeg",
-      "price": "4.5€",
+      "image": "/brochette-tzigane.png",
+      "price": "5€",
       "categorie": "Brochettes"
     },
     {
       "id": 3,
       "name": "Ardennaise",
-      "image": "/brochette-ardennaise.jpg",
-      "price": "4.5€",
+      "image": "/brochette-ardennaise.png",
+      "price": "5€",
       "categorie": "Brochettes"
     },
     {
       "id": 4,
       "name": "Poisson",
-      "image": "/brochette-poisson.jpg",
-      "price": "4.5€",
+      "image": "/brochette-poisson.png",
+      "price": "5€",
       "categorie": "Brochettes"
     },
     {
       "id": 5,
       "name": "Porc",
-      "image": "/brochette-porc.jpg",
-      "price": "4.5€",
+      "image": "/brochette-porc.png",
+      "price": "5€",
       "categorie": "Brochettes"
     },
     {
       "id": 6,
       "name": "Boeuf",
-      "image": "/brochette-boeuf.jpg",
-      "price": "4.5€",
+      "image": "/brochette-boeuf.png",
+      "price": "5.5€",
       "categorie": "Brochettes"
     }
   ],
@@ -384,27 +384,27 @@
       "id": 1,
       "name": "Belcanto Zero Meat",
       "image": "/belcanto-zero-meat.png",
-      "price": "4.5€",
+      "price": "5€",
       "categorie": "Snacks Veggies"
     },
     {
       "id": 2,
       "name": "Fricadelle Zero Meat",
       "image": "/fricadelle-zero-meat.png",
-      "price": "4€",
+      "price": "4.5€",
       "categorie": "Snacks Veggies"
     },
     {
       "id": 3,
       "name": "Hamburger Zero Meat",
-      "image": "/hamburger-zero-meat.jpg",
-      "price": "4€",
+      "image": "/hamburger-zero-meat.png",
+      "price": "4.5€",
       "categorie": "Snacks Veggies"
     },
     {
       "id": 4,
       "name": "Poulycroc Vegi",
-      "image": "/poulycroc-zero-meat.jpg",
+      "image": "/poulycroc-zero-meat.png",
       "price": "4.5€",
       "categorie": "Snacks Veggies"
     }
@@ -414,15 +414,15 @@
     {
       "id": 1,
       "name": "Petites frites",
-      "image": "/frites.jpg",
-      "price": "3.50€",
+      "image": "/frites.png",
+      "price": "4€",
       "categorie": "Frites"
     },
     {
       "id": 2,
       "name": "Grandes frites",
-      "image": "/frites.jpg",
-      "price": "4.50€",
+      "image": "/frites.png",
+      "price": "5€",
       "categorie": "Frites"
     }
   ],
@@ -431,7 +431,7 @@
     {
       "id": 1,
       "name": "Coca Cola",
-      "image": "/coca-cola.jpg",
+      "image": "/coca-cola.png",
       "price": "1.50€",
       "categorie": "Boissons"
     },
@@ -452,35 +452,35 @@
     {
       "id": 4,
       "name": "Fanta orange",
-      "image": "/fanta-orange.jpg",
+      "image": "/fanta-orange.png",
       "price": "1.50€",
       "categorie": "Boissons"
     },
     {
       "id": 5,
       "name": "Canada Dry",
-      "image": "/canada-dry.jpeg",
+      "image": "/canada-dry.png",
       "price": "1.50€",
       "categorie": "Boissons"
     },
     {
       "id": 6,
       "name": "Orangina",
-      "image": "/orangina.jpg",
+      "image": "/orangina.png",
       "price": "1.50€",
       "categorie": "Boissons"
     },
     {
       "id": 7,
       "name": "Seven up / Sprite",
-      "image": "/seven-up.jpg",
+      "image": "/seven-up.png",
       "price": "1.50€",
       "categorie": "Boissons"
     },
     {
       "id": 8,
       "name": "Capri-Sun",
-      "image": "/capri-sun.jpg",
+      "image": "/capri-sun.png",
       "price": "1€",
       "categorie": "Boissons"
     },
@@ -494,56 +494,56 @@
     {
       "id": 10,
       "name": "Oasis",
-      "image": "/oasis.jpg",
+      "image": "/oasis.png",
       "price": "1.50€",
       "categorie": "Boissons"
     },
     {
       "id": 11,
       "name": "Tropico",
-      "image": "/tropico.jpg",
+      "image": "/tropico.png",
       "price": "1.50€",
       "categorie": "Boissons"
     },
     {
       "id": 12,
       "name": "Eau",
-      "image": "/eau.jpg",
+      "image": "/eau.png",
       "price": "1€",
       "categorie": "Boissons"
     },
     {
       "id": 13,
-      "name": "Eau pétillante",
-      "image": "/eau-pétillante.jpg",
+      "name": "Eau petillante",
+      "image": "/eau-pétillante.png",
       "price": "1.50€",
       "categorie": "Boissons"
     },
     {
       "id": 14,
       "name": "Leffe",
-      "image": "/leffe.jpg",
+      "image": "/leffe.png",
       "price": "3.50€",
       "categorie": "Boissons"
     },
     {
       "id": 15,
       "name": "Leffe Blanche",
-      "image": "/leffe-blanche.jpg",
+      "image": "/leffe-blanche.png",
       "price": "3.50€",
       "categorie": "Boissons"
     },
     {
       "id": 16,
       "name": "Leffe Ruby",
-      "image": "/leffe-ruby.jpg",
+      "image": "/leffe-ruby.png",
       "price": "3.50€",
       "categorie": "Boissons"
     },
     {
       "id": 17,
       "name": "Aucune boisson",
-      "image": "/rien.jpg",
+      "image": "/rien.png",
       "price": "0€",
       "categorie": "Boissons"
     }
@@ -560,49 +560,49 @@
     {
       "id": 2,
       "name": "Mayonnaise",
-      "image": "/mayonnaise.jpeg",
+      "image": "/mayonnaise.png",
       "price": "0.50€",
       "categorie": "Sauces"
     },
     {
       "id": 3,
       "name": "Andalouse",
-      "image": "/andalouse.jpg",
+      "image": "/andalouse.png",
       "price": "0.50€",
       "categorie": "Sauces"
     },
     {
       "id": 4,
       "name": "Bicky",
-      "image": "/bicky.jpg",
+      "image": "/bicky.png",
       "price": "0.50€",
       "categorie": "Sauces"
     },
     {
       "id": 5,
       "name": "Dallas",
-      "image": "/dallas.jpg",
+      "image": "/dallas.png",
       "price": "0.50€",
       "categorie": "Sauces"
     },
     {
       "id": 6,
       "name": "Hamburger",
-      "image": "/hamburger.jpg",
+      "image": "/hamburger.png",
       "price": "0.50€",
       "categorie": "Sauces"
     },
     {
       "id": 7,
       "name": "Pita",
-      "image": "/pita.jpg",
+      "image": "/pita.png",
       "price": "0.50€",
       "categorie": "Sauces"
     },
     {
       "id": 8,
       "name": "Brazil",
-      "image": "/brazil.jpeg",
+      "image": "/brazil.png",
       "price": "0.50€",
       "categorie": "Sauces"
     },
@@ -615,83 +615,66 @@
     },
     {
       "id": 10,
-      "name": "Hawaï",
-      "image": "/hawai.jpg",
+      "name": "Hawai",
+      "image": "/hawai.png",
       "price": "0.50€",
       "categorie": "Sauces"
     },
     {
       "id": 11,
       "name": "Riche",
-      "image": "/riche.jpeg",
+      "image": "/riche.png",
       "price": "0.50€",
       "categorie": "Sauces"
     },
     {
       "id": 12,
       "name": "Sweet Curry Oignon",
-      "image": "/sweet-curry-oignon.jpg",
+      "image": "/sweet-curry-oignon.png",
       "price": "0.50€",
       "categorie": "Sauces"
     },
     {
       "id": 13,
       "name": "Chimayo",
-      "image": "/chimayo.jpg",
+      "image": "/chimayo.png",
       "price": "0.50€",
       "categorie": "Sauces"
     },
     {
       "id": 14,
       "name": "Ch'ti",
-      "image": "/chti.jpg",
+      "image": "/chti.png",
       "price": "0.50€",
       "categorie": "Sauces"
     },
     {
       "id": 15,
       "name": "Hot Mammouth",
-      "image": "/hot-mammouth.jpg",
+      "image": "/hot-mammouth.png",
       "price": "0.50€",
       "categorie": "Sauces"
     },
     {
       "id": 16,
       "name": "Poivre",
-      "image": "/poivre.jpg",
+      "image": "/poivre.png",
       "price": "0.50€",
       "categorie": "Sauces"
     },
     {
       "id": 17,
       "name": "Samourai",
-      "image": "/samourai.jpg",
+      "image": "/samourai.png",
       "price": "0.50€",
       "categorie": "Sauces"
     },
     {
       "id": 18,
       "name": "Aucune sauce",
-      "image": "/rien.jpg",
+      "image": "/rien.png",
       "price": "0€",
       "categorie": "Sauces"
-    }
-  ],
-
-  "Pains": [
-    {
-      "id": 1,
-      "name": "Pain mitraillette",
-      "image": "/pain-mitraillette.jpg",
-      "price": "",
-      "categorie": "Pains"
-    },
-    {
-      "id": 2,
-      "name": "Pain burger",
-      "image": "/pain-burger.jpg",
-      "price": "",
-      "categorie": "Pains"
     }
   ],
 
@@ -699,70 +682,70 @@
     {
       "id": 1,
       "name": "Cheddar",
-      "image": "/cheddar.jpg",
+      "image": "/cheddar.png",
       "price": "1€",
       "categorie": "Supplements"
     },
     {
       "id": 2,
       "name": "Raclette",
-      "image": "/raclette.jpg",
+      "image": "/raclette.png",
       "price": "1€",
       "categorie": "Supplements"
     },
     {
       "id": 3,
       "name": "Reblochon",
-      "image": "/reblochon.jpg",
+      "image": "/reblochon.png",
       "price": "1€",
       "categorie": "Supplements"
     },
     {
       "id": 4,
-      "name": "Chèvre",
-      "image": "/chevre.jpg",
+      "name": "Chevre",
+      "image": "/chevre.png",
       "price": "1€",
       "categorie": "Supplements"
     },
     {
       "id": 5,
       "name": "Poitrine fumee",
-      "image": "/poitrine.jpg",
+      "image": "/poitrine.png",
       "price": "1€",
       "categorie": "Supplements"
     },
     {
       "id": 6,
       "name": "Galette de pomme de terre",
-      "image": "/galette-de-pomme-de-terre.jpg",
+      "image": "/galette-de-pomme-de-terre.png",
       "price": "1€",
       "categorie": "Supplements"
     },
     {
       "id": 7,
       "name": "Galette de fromage",
-      "image": "/galette-de-fromage.jpg",
+      "image": "/galette-de-fromage.png",
       "price": "1€",
       "categorie": "Supplements"
     },
     {
       "id": 8,
       "name": "Maroille",
-      "image": "/maroille.jpg",
+      "image": "/maroille.png",
       "price": "1€",
       "categorie": "Supplements"
     },
     {
       "id": 9,
       "name": "Oeuf",
-      "image": "/oeuf.jpg",
+      "image": "/oeuf.png",
       "price": "1€",
       "categorie": "Supplements"
     },
     {
       "id": 10,
-      "name": "Aucuns suppléments",
-      "image": "/rien.jpg",
+      "name": "Aucuns supplements",
+      "image": "/rien.png",
       "price": "0€",
       "categorie": "Supplements"
     }

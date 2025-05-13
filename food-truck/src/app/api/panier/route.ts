@@ -7,11 +7,11 @@ const preparationFilePath = path.join(process.cwd(), "src/data/preparation.json"
 
 export async function POST(request: Request) {
   try {
-    const { items, user_name, user_image, time, date, lieu, price } = await request.json();
+    const { items, user_name, user_phone, user_image, time, date, lieu, price } = await request.json();
 
     // Vérifier si l'heure est bien définie
-    if (!time) {
-      return NextResponse.json({ message: "L'horaire est requis." }, { status: 400 });
+    if (!time || !user_name || !user_phone) {
+      return NextResponse.json({ message: "L'horaire, le nom et le téléphone sont requis." }, { status: 400 });
     }
 
     const panierData = fs.existsSync(panierFilePath)
@@ -20,31 +20,20 @@ export async function POST(request: Request) {
 
     const panier = JSON.parse(panierData);
 
-    // Si le panier n'est pas vide, on met à jour l'horaire de la première commande
-    if (panier.Panier.length > 0) {
-      panier.Panier[0].time = time;  // Mettre à jour l'horaire de la première commande
-      panier.Panier[0].items = items;
-      panier.Panier[0].user_name = user_name;
-      panier.Panier[0].user_image = user_image;
-      panier.Panier[0].date = date;
-      panier.Panier[0].lieu = lieu;
-      panier.Panier[0].price = price;
-      panier.Panier[0].createdAt = new Date().toISOString();
-    } else {
-      // Ajouter une nouvelle commande si le panier est vide
-      const newCommande = {
-        id: Date.now(),
-        items,
-        user_name,
-        user_image,
-        time,
-        date,
-        lieu,
-        price,
-        createdAt: new Date().toISOString(),
-      };
-      panier.Panier.push(newCommande);
-    }
+    const newCommande = {
+      id: Date.now(),
+      items,
+      user_name,
+      user_phone,
+      user_image,
+      time,
+      date,
+      lieu,
+      price,
+      createdAt: new Date().toISOString(),
+    };
+
+    panier.Panier.push(newCommande);
 
     // Sauvegarder les changements dans panier.json
     fs.writeFileSync(panierFilePath, JSON.stringify(panier, null, 2), "utf-8");
@@ -55,7 +44,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Erreur serveur", error }, { status: 500 });
   }
 }
-
 
 export async function PUT(request: Request) {
   try {

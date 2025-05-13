@@ -92,6 +92,7 @@ const Boissons = () => {
       const item = {
         id: aucuneBoisson.id,
         name: aucuneBoisson.name,
+        image: aucuneBoisson.image,
         price: 0, // Prix de "Aucune boisson" est toujours 0
         quantity: 1, // Peut être considéré comme sélectionné une fois
         uniqueId: `${aucuneBoisson.id}-${Date.now()}`,
@@ -180,8 +181,8 @@ const Boissons = () => {
                   <Image
                     src={product.image}
                     alt={product.name}
-                    width={200}
-                    height={200}
+                    width={50}
+                    height={50}
                   />
                   <div className="absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-2 text-center border-t border-black rounded-b-lg ">
                     <p className="text-sm mt-auto">{product.name}</p>
