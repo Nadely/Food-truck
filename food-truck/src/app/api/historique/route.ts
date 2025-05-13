@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
-import { Commande, Historique } from "@/app/types/allTypes";
+import { Commande, Historique } from "../../types/allTypes";
 
 // Fonction utilitaire pour nettoyer l'historique
 function nettoyerHistorique(historiquePath: string) {

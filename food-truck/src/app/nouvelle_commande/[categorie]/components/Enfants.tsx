@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import data from "@/data/dataProduits.json";
+import data from "../../../../data/dataProduits.json";
 import { useRouter } from "next/navigation";
-import { useCart } from "@/app/context/CartContext";
+import { useCart } from "../../../context/CartContext";
 
 const Enfants = () => {
   const route = useRouter();

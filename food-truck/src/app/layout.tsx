@@ -8,7 +8,7 @@ import Nav from "./components/Nav";
 import Panier from "./components/Panier";
 import Horaires from "./(categories)/horaires/page";
 import { usePathname } from "next/navigation";
-import { CartProvider } from "@/app/context/CartContext";
+import { CartProvider } from "./context/CartContext";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();

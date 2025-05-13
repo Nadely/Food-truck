@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import data from "@/data/dataProduits.json";
+import data from "../../../../data/dataProduits.json";
 import { useState } from "react";
-import { useCart } from "@/app/context/CartContext";
+import { useCart } from "../../../context/CartContext";
 
 const Veggies = () => {
   const [menus, setMenus] = useState(false);

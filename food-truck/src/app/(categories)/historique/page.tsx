@@ -8,14 +8,14 @@ import { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { formatDate } from "date-fns";
 import {
-  isAfter,
-  isBefore,
-  isEqual,
-  startOfDay,
-  startOfYear,
-  endOfYear,
+    isAfter,
+    isBefore,
+    isEqual,
+    startOfDay,
+    startOfYear,
+    endOfYear,
 } from "date-fns";
-import type { LossRecord, Historique, Recettes } from "@/app/types/allTypes";
+import type { LossRecord, Historique, Recettes } from "../../types/allTypes";
 
 registerLocale("fr", fr);
 

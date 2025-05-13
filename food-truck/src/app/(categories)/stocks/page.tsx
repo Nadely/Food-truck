@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Product } from "@/app/types/allTypes";
+import { Product } from "../../types/allTypes";
 import { saveCurrentStocks, saveLosses } from "./stockService";
 
 const Stocks = () => {

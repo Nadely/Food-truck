@@ -1,4 +1,4 @@
-import { LossRecord, Product } from "@/app/types/allTypes";
+import { LossRecord, Product } from "../../types/allTypes";
 
 export const saveLosses = async (lists: Product[]): Promise<boolean> => {
   const currentLosses = lists
@@ -58,7 +58,7 @@ export const saveCurrentStocks = async (items: Product[]): Promise<boolean> => {
 //       date: new Date().toISOString(),
 //       stocks: items
 //     };
-    
+
 //     const response = await fetch("/api/stocks-history", {
 //       method: "POST",
 //       headers: {

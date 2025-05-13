@@ -3,8 +3,8 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
-import data from "@/data/dataProduits.json";
-import { useCart } from "@/app/context/CartContext";
+import data from "../../../../data/dataProduits.json";
+import { useCart } from "../../../context/CartContext";
 
 const Frites = () => {
   const router = useRouter();

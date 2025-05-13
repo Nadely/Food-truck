@@ -1,23 +1,56 @@
-"use client";
-
-import { useCart } from "@/app/context/CartContext";
+import { useCart } from "../context/CartContext";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+
+// Composant du popup
+const ProductPopup = ({ isOpen, relatedItems, onClose, onSelect }: { isOpen: boolean; relatedItems: any[]; onClose: () => void; onSelect: (relatedItem: any) => void; }) => {
+  const [selectedItem, setSelectedItem] = useState<{ parentId: string; relatedItems: any[]; allItemsInCategory?: any[] } | null>(null);
+
+  return (
+    isOpen && (
+      <div className="fixed inset-0 bg-black flex justify-center items-center z-50">
+        <div className="bg-white p-5 rounded w-96">
+          <h3 className="text-lg font-semibold">Selectionner un autre produit</h3>
+          <ul className="mt-4">
+            {selectedItem?.allItemsInCategory?.map((product) => (
+              <div key={product.id} className="product-item">
+                <img src={product.image} alt={product.name} className="product-image" />
+                <p>{product.name}</p>
+                <button onClick={() => onSelect(product)}>
+                  Selectionner
+                </button>
+              </div>
+            ))}
+          </ul>
+          <button
+            className="mt-4 bg-gray-500 text-white px-4 py-2 rounded"
+            onClick={onClose}
+          >
+            Fermer
+          </button>
+        </div>
+      </div>
+    )
+  );
+};
 
 const Panier = () => {
   const { cart, removeFromCart, updateQuantity, setCart, remove } = useCart();
   const router = useRouter();
   const [refreshKey, setRefreshKey] = useState(0);
   const pathname = usePathname();
+  const [selectedItem, setSelectedItem] = useState<{ parentUniqueId: string; relatedItems: any[] } | null>(null); // State pour gérer la sélection de produit
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [products, setProducts] = useState<any[]>([]); // Liste des produits récupérés
 
   // Fonction pour vérifier si la route est /nouvelle_commande
   const isNouvelleCommande = () => {
-    return pathname ==="/nouvelle_commande";
+    return pathname === "/nouvelle_commande";
   };
 
-  // Calcul du total en prenant en compte les sauces
+  // Calcul du total avec gestion des sauces
   const total = cart.reduce((acc, item) => {
     let itemTotal = (item.price || 0) * (item.quantity || 1);
 
@@ -33,7 +66,6 @@ const Panier = () => {
   }, 0);
 
   const cleanPrice = (price: string) => {
-    // Enlever l'euro, les espaces et convertir en nombre
     const cleanedPrice = price.replace("€", "").replace(",", ".").trim();
     const numericPrice = parseFloat(cleanedPrice);
 
@@ -103,6 +135,61 @@ const Panier = () => {
         return item;
       });
     });
+  };
+
+  // Charger les produits depuis le fichier JSON
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("src/data/dataProduct.json");
+        const data = await response.json();
+        console.log("Produits chargés:", data);
+
+        setProducts(data); // Mise à jour de l'état avec les produits récupérés
+      } catch (error) {
+        console.error("Erreur lors du chargement des produits:", error);
+      }
+    };
+
+    fetchProducts(); // Appeler la fonction pour récupérer les produits au démarrage
+  }, []);
+
+  // Gérer la modification du produit
+  const handleModify = (relatedItemId: string, parentItemId: string) => {
+    const parentItem = cart.find((item) => item.id === parentItemId);
+    if (!parentItem) return;
+
+    const parentItemCategory = parentItem.categorie; // Récupérer la catégorie de l'élément parent
+
+    // Filtrer les produits selon la catégorie, en excluant l'élément en cours de modification
+    const filteredProducts = products.filter((product) =>
+      product.categorie === parentItemCategory && product.id !== relatedItemId // Assurez-vous que le produit ne correspond pas à celui que vous modifiez
+    );
+
+    console.log("Produits possibles à modifier:", filteredProducts);
+
+    setSelectedItem({
+      parentItemId,
+      relatedItems: parentItem.relatedItems || [],
+      allItemsInCategory: filteredProducts, // Afficher les produits filtrés
+    });
+    setIsPopupOpen(true); // Ouvrir le popup pour afficher les options
+  };
+
+  const handleSelectItem = (relatedItem: any) => {
+    setCart((prevCart) => {
+      return prevCart.map((item) => {
+        if (item.id === selectedItem?.parentItemId) {
+          const updatedRelatedItems = item.relatedItems?.map((related) =>
+            related.id === relatedItem.id ? relatedItem : related // Remplacer l'élément modifié
+          );
+
+          return { ...item, relatedItems: updatedRelatedItems };
+        }
+        return item;
+      });
+    });
+    setIsPopupOpen(false); // Fermer le popup après sélection
   };
 
   return (
@@ -196,7 +283,7 @@ const Panier = () => {
                           </span>
                           {!related.isGarniture && !related.isFrites && (
                             <button className="border-2 border-yellow-500 text-black px-2 rounded-full ml-5"
-                            onClick={() => handleModify(related.uniqueId, item.uniqueId)}>
+                            onClick={() => handleModify(item.relatedItems[0].id, item.id)}>
                               Modifier
                             </button>)}
                           {related.isGarniture && (
@@ -223,21 +310,32 @@ const Panier = () => {
           </ul>
         )}
       </div>
-      {/* Bloc total et bouton Valider qui reste en bas */}
-      <div className="flex flex-col items-center justify-center mt-auto">
-        <p className="text-lg">Total du panier : {parseFloat(total.toFixed(2))}€</p>
-        {isNouvelleCommande() && (
+
+      <div className="border-t-2 p-4">
+        <p>Total : {total.toFixed(2)}€</p>
+        {isNouvelleCommande() ? (
           <button
-            className="bg-yellow-100 border-2 border-black rounded-md bg-opacity-80 w-40 mt-2 mb-5"
-            onClick={async () => {
-              await handleTransferCommandes();
-              router.push("/horaires");
-            }}
+            onClick={handleTransferCommandes}
+            className="bg-green-500 text-white px-4 py-2 rounded"
           >
-            Valider
+            Valider la commande
+          </button>
+        ) : (
+          <button
+            onClick={() => router.push("/")}
+            className="bg-gray-500 text-white px-4 py-2 rounded"
+          >
+            Retour à l'accueil
           </button>
         )}
       </div>
+
+      <ProductPopup
+        isOpen={isPopupOpen}
+        relatedItems={selectedItem?.relatedItems || []}
+        onClose={() => setIsPopupOpen(false)}
+        onSelect={handleSelectItem}
+      />
     </div>
   );
 };

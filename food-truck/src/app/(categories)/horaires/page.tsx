@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useCart } from "@/app/context/CartContext";
+import { useCart } from "../../context/CartContext";
 
 const Horaires = () => {
   const router = useRouter();

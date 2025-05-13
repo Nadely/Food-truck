@@ -3,10 +3,9 @@
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
-import data from "@/data/dataProduits.json";
+import data from "../../../../data/dataProduits.json";
 import { useRouter } from "next/navigation";
-import { useCart } from "@/app/context/CartContext";
-import { parse } from "path";
+import { useCart } from "../../../context/CartContext";
 
 const Snacks = () => {
   const searchParams = useSearchParams();

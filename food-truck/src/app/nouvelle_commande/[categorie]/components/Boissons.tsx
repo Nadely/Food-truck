@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-import data from "@/data/dataProduits.json";
-import { useCart } from "@/app/context/CartContext";
+import data from "../../../../data/dataProduits.json";
+import { useCart } from "../../../context/CartContext";
 
 const Boissons = () => {
   const searchParams = useSearchParams();

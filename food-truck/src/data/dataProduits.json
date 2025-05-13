@@ -421,7 +421,7 @@
     {
       "id": 2,
       "name": "Grandes frites",
-      "image": "/frites.png",
+      "image": "/Frites.png",
       "price": "5€",
       "categorie": "Frites"
     }
