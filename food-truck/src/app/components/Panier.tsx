@@ -4,74 +4,76 @@ import { useCart } from "/src/app/context/CartContext.tsx";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import dataProduits from "/src/data/dataProduits.json";
 
 const Panier = () => {
   const { cart, removeFromCart, updateQuantity, setCart, remove } = useCart();
   const router = useRouter();
   const pathname = usePathname();
-  const [refreshKey, setRefreshKey] = useState(0);
 
-  // Vérifie si la route active est "/nouvelle_commande"
+  const [refreshKey, setRefreshKey] = useState(0);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [currentParentId, setCurrentParentId] = useState<string | null>(null);
+  const [currentRelatedId, setCurrentRelatedId] = useState<string | null>(null);
+  const [availableOptions, setAvailableOptions] = useState<
+    { id: number; name: string; image: string; price?: number; uniqueId?: string }[]
+  >([]);
+
   const isNouvelleCommande = () => pathname === "/nouvelle_commande";
 
-  // Fonction pour nettoyer les prix sous forme de chaîne (ex: "10,00€")
-  const cleanPrice = (priceString:any) => {
+  const cleanPrice = (priceString: string | number) => {
     if (!priceString) return 0;
-    return parseFloat(
-      priceString.toString().replace("€", "").replace(",", ".")
-    );
+    return parseFloat(priceString.toString().replace("€", "").replace(",", "."));
   };
 
-  // Calcul du total en tenant compte des quantités et relatedItems
-  const total = cart.reduce((acc:any, item:any) => {
+  // Calcul total en tenant compte des quantités et prix des relatedItems *quantité*
+  const total = cart.reduce((acc, item) => {
     const itemPrice = item.price || 0;
-    const itemTotal = itemPrice * (item.quantity || 1);
+    const quantity = item.quantity || 1;
 
+    // Somme des relatedItems * quantité du parent
     const relatedItemsTotal = item.relatedItems
-      ? item.relatedItems.reduce((sum:any, related:any) => {
+      ? item.relatedItems.reduce((sum, related) => {
           const relatedPrice = related.price || 0;
           return sum + relatedPrice;
         }, 0)
       : 0;
 
-    return acc + itemTotal + relatedItemsTotal;
+    return acc + (itemPrice + relatedItemsTotal) * quantity;
   }, 0);
 
-  // Simule l'envoi de la commande (à personnaliser selon ton backend)
   const handleTransferCommandes = async () => {
     try {
-      // Nettoyer le total avant l'envoi
       const cleanedPrice = cleanPrice(total.toFixed(2) + "€");
       console.log("Données envoyées à l'API :", {
         items: cart,
-        user_name: "", // À remplacer par la vraie valeur
-        user_image: "URL Image", // À remplacer par la vraie valeur
-        time: "12:00", // À remplacer par la vraie valeur
-        date: "2025-02-24", // À remplacer par la vraie valeur
-        lieu: "Adresse", // À remplacer par la vraie valeur
-        price: cleanedPrice + "€", // Utiliser le prix nettoyé
+        user_name: "", // Remplacer
+        user_image: "URL Image", // Remplacer
+        time: "12:00", // Remplacer
+        date: "2025-02-24", // Remplacer
+        lieu: "Adresse", // Remplacer
+        price: cleanedPrice + "€",
       });
 
       const response = await fetch("/api/panier", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          // Assurez-vous que le corps de la requête est correctement formaté
-          body: JSON.stringify({
-            items: cart,
-            user_name: "",
-            user_image: "URL Image",
-            time: "12:00",
-            date: "2025-02-24",
-            lieu: "Adresse",
-            price: cleanedPrice + "€",
-          }),
         },
+        body: JSON.stringify({
+          items: cart,
+          user_name: "",
+          user_image: "URL Image",
+          time: "12:00",
+          date: "2025-02-24",
+          lieu: "Adresse",
+          price: cleanedPrice + "€",
+        }),
       });
 
       if (response.ok) {
         setCart([]);
-        setRefreshKey((prevKey) => prevKey + 1);
+        setRefreshKey((prev) => prev + 1);
       } else {
         const data = await response.json();
         console.error("Erreur:", data.message);
@@ -82,21 +84,89 @@ const Panier = () => {
   };
 
   useEffect(() => {
-    setRefreshKey((prevKey) => prevKey + 1);
+    setRefreshKey((prev) => prev + 1);
   }, [cart]);
-  // Fonctions fictives pour éviter les erreurs
-  const handleModify = (relatedId:any, parentId:any) => {
-    console.log("Modifier :", relatedId, "de", parentId);
-    // Rediriger ou modifier selon logique de ton projet
+
+  const handleModify = (relatedId: string, parentId: string) => {
+    setCurrentParentId(parentId);
+    setCurrentRelatedId(relatedId);
+
+    const baseItem = cart.find((item) => item.uniqueId === parentId);
+    if (!baseItem) return;
+
+    const allProducts = Object.values(dataProduits).flat();
+
+    const relatedProduct = baseItem.relatedItems.find(
+      (rel) => rel.uniqueId === relatedId
+    );
+    if (!relatedProduct) return;
+
+    const baseName = relatedProduct.name;
+
+    const fullProductData = allProducts.find(
+      (prod) => prod.name.trim().toLowerCase() === baseName.trim().toLowerCase()
+    );
+
+    const rawCategorie = baseItem?.categorie || fullProductData?.categorie;
+
+    const categoriesCibles = [
+      "sauces",
+      "snacks",
+      "menu_enfants",
+      "snacks veggies",
+      "supplements",
+      "boissons",
+    ];
+
+    let options = [];
+
+    if (typeof rawCategorie === "string") {
+      const normalizedCategorie = rawCategorie.trim().toLowerCase();
+
+      if (categoriesCibles.includes(normalizedCategorie)) {
+        options = allProducts
+          .filter(
+            (product) =>
+              typeof product.categorie === "string" &&
+              product.categorie.trim().toLowerCase() === normalizedCategorie
+          )
+          .map(({ id, name, image, price, uniqueId }) => ({
+            id,
+            name,
+            image,
+            price,
+            uniqueId,
+          }));
+      } else {
+        options = allProducts.map(({ id, name, image, price, uniqueId }) => ({
+          id,
+          name,
+          image,
+          price,
+          uniqueId,
+        }));
+      }
+    } else {
+      options = allProducts.map(({ id, name, image, price, uniqueId }) => ({
+        id,
+        name,
+        image,
+        price,
+        uniqueId,
+      }));
+    }
+
+    setAvailableOptions(options);
+    setIsPopupOpen(true);
   };
 
-  const handleRemoveGarniture = (relatedId:any, parentId:any) => {
-    const updatedCart = cart.map((item:any) => {
+  const handleRemoveGarniture = (relatedId: string, parentId: string) => {
+    const updatedCart = cart.map((item) => {
       if (item.uniqueId === parentId) {
         return {
           ...item,
           relatedItems: item.relatedItems.filter(
-            (related:any) => related.uniqueId !== relatedId
+            (related: any) => related.uniqueId !== relatedId
           ),
         };
       }
@@ -115,7 +185,7 @@ const Panier = () => {
           <p>Votre panier est vide.</p>
         ) : (
           <ul>
-            {cart.map((item:any) => (
+            {cart.map((item) => (
               <li key={item.uniqueId} className="flex flex-col mb-4">
                 <div className="flex justify-between items-center mb-2">
                   <div className="flex items-center">
@@ -128,7 +198,8 @@ const Panier = () => {
                         className="object-cover rounded-full"
                       />
                     ) : (
-                      item.image && item.name && (
+                      item.image &&
+                      item.name && (
                         <Image
                           src={item.image}
                           alt={item.name || ""}
@@ -139,9 +210,7 @@ const Panier = () => {
                       )
                     )}
                     <p className="style-pen ml-2">
-                      {item.categorie === "Enfants"
-                        ? item.categorie
-                        : item.name}
+                      {item.categorie === "Enfants" ? item.categorie : item.name}
                     </p>
                   </div>
                   {item.name &&
@@ -188,13 +257,13 @@ const Panier = () => {
                 </div>
 
                 <div className="ml-4 text-sm text-black">
-                  {item.price && item.price > 0 ? (
+                  {item.price && item.price > 0 && (
                     <p>Prix unitaire : {item.price.toFixed(2)}€</p>
-                  ) : null}
+                  )}
                   {item.quantity > 1 && <p>Quantité : {item.quantity}</p>}
                   {item.relatedItems && item.relatedItems.length > 0 && (
                     <ul className="ml-4">
-                      {item.relatedItems.map((related:any) => (
+                      {item.relatedItems.map((related) => (
                         <li
                           key={related.uniqueId || related.id}
                           className="flex items-center text-black"
@@ -207,10 +276,9 @@ const Panier = () => {
                             className="object-cover rounded-full"
                           />
                           <span className="ml-2">
-                            {related.name
-                              ? `- ${related.name}`
-                              : "- Produit sans nom"}
+                            {related.name ? `- ${related.name}` : "- Produit sans nom"}
                           </span>
+
                           {!related.isGarniture && !related.isFrites && (
                             <button
                               className="border-2 border-yellow-500 text-black px-2 rounded-full ml-5"
@@ -221,23 +289,15 @@ const Panier = () => {
                               Modifier
                             </button>
                           )}
+
                           {related.isGarniture && (
                             <button
                               onClick={() =>
-                                handleRemoveGarniture(
-                                  related.uniqueId,
-                                  item.uniqueId
-                                )
+                                handleRemoveGarniture(related.uniqueId, item.uniqueId)
                               }
-                              className="border-2 border-red-500 px-2 rounded-full ml-5"
+                              className="border-2 border-red-500 text-red-700 px-2 rounded-full ml-2"
                             >
-                              <Image
-                                src="/poubelle.png"
-                                alt="Supprimer"
-                                width={15}
-                                height={15}
-                                className="rounded-full"
-                              />
+                              X
                             </button>
                           )}
                         </li>
@@ -250,23 +310,89 @@ const Panier = () => {
           </ul>
         )}
       </div>
-      {/* Bloc total et bouton Valider */}
-      <div className="flex flex-col items-center justify-center mt-auto">
-        <p className="text-lg">
-          Total du panier : {parseFloat(total.toFixed(2))}€
-        </p>
-        {isNouvelleCommande() && (
-          <button
-            className="bg-yellow-100 border-2 border-black rounded-md bg-opacity-80 w-40 mt-2 mb-5"
-            onClick={async () => {
-              await handleTransferCommandes();
-              router.refresh();
-              router.push("/horaires");
-            }}
+
+      {/* Popup pour modifier les garnitures */}
+      {isPopupOpen && currentParentId && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+          onClick={() => setIsPopupOpen(false)}
+        >
+          <div
+            className="bg-white p-6 rounded shadow-lg max-w-lg w-full"
+            onClick={(e) => e.stopPropagation()}
           >
-            Valider
-          </button>
-        )}
+            <h3 className="text-xl mb-4">Modifier garniture</h3>
+            <ul>
+              {availableOptions.map((option) => (
+                <li key={option.id} className="flex items-center mb-2">
+                  <Image
+                    src={option.image}
+                    alt={option.name}
+                    width={40}
+                    height={40}
+                    className="object-cover rounded-full"
+                  />
+                  <span className="ml-2 flex-grow">{option.name}</span>
+                  <button
+                    className="bg-green-500 text-white px-2 py-1 rounded"
+                    onClick={() => {
+                      const updatedCart = cart.map((item: any) => {
+                        if (item.uniqueId === currentParentId) {
+                          // Remplacer la garniture avec uniqueId == currentRelatedId
+                          const updatedRelatedItems = item.relatedItems.map((related: any) =>
+                            related.uniqueId === currentRelatedId
+                              ? {
+                                  uniqueId: option.uniqueId, // nouveau uniqueId
+                                  id: option.id,
+                                  name: option.name,
+                                  image: option.image,
+                                  price: option.price || 0,
+                                }
+                              : related
+                          );
+                          return { ...item, relatedItems: updatedRelatedItems };
+                        }
+                        return item;
+                      });
+
+                      setCart(updatedCart);
+                      setIsPopupOpen(false);
+                      setCurrentParentId(null);
+                      setCurrentRelatedId(null);
+                    }}
+                    >
+                      Selectionner
+                    </button>
+
+                </li>
+              ))}
+            </ul>
+            <button
+              onClick={() => {
+                setIsPopupOpen(false);
+                setCurrentParentId(null);
+              }}
+              className="mt-4 bg-gray-400 text-white px-4 py-2 rounded"
+            >
+              Fermer
+            </button>
+          </div>
+        </div>
+      )}
+
+      <div className="border-t border-black p-2 mt-auto flex justify-between items-center">
+        <p className="text-xl font-bold">
+          Total : {total.toFixed(2)}€
+        </p>
+        <button
+          onClick={handleTransferCommandes}
+          disabled={cart.length === 0}
+          className={`bg-green-600 text-white px-4 py-2 rounded ${
+            cart.length === 0 ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+        >
+          Valider commande
+        </button>
       </div>
     </div>
   );

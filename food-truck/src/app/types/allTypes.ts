@@ -12,9 +12,9 @@ export interface Product {
 export interface dataProduct {
   id: number;
   name: string;
-  price: number;
+  price: number | string;
   image: string;
-  categorie: string[];
+  categorie: string;
   garniture: string[];
 }
 
