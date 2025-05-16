@@ -58,7 +58,7 @@ const HomePage = () => {
                         <button
                             className="relative shadow-light flex flex-col items-center justify-center text-xl text-white gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:text-black hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md"
                             style={{ width: "200px", height: "200px" }}
-                            onClick={() => handleLieuClick("Montsûrs")}
+                            onClick={() => handleLieuClick("Montsurs")}
                         >
                             <Link href="/commandes">Ouverture a Montsurs</Link>
                         </button>
@@ -74,7 +74,7 @@ const HomePage = () => {
                         <button
                             className="relative shadow-light flex flex-col items-center justify-center text-xl text-white gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:text-black hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md"
                             style={{ width: "200px", height: "200px" }}
-                            onClick={() => handleLieuClick("Châtre-la-forêt")}
+                            onClick={() => handleLieuClick("Chatre-la-foret")}
                         >
                             <Link href="/commandes">Ouverture a Chatre-la-foret</Link>
                         </button>

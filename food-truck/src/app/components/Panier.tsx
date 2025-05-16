@@ -1,20 +1,21 @@
 "use client";
 
-import { useCart } from "@/app/context/CartContext";
+import { useCart } from "/src/app/context/CartContext.tsx";
 import { useRouter, usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 const Panier = () => {
   const { cart, removeFromCart, updateQuantity, setCart, remove } = useCart();
   const router = useRouter();
   const pathname = usePathname();
+  const [refreshKey, setRefreshKey] = useState(0);
 
   // Vérifie si la route active est "/nouvelle_commande"
   const isNouvelleCommande = () => pathname === "/nouvelle_commande";
 
   // Fonction pour nettoyer les prix sous forme de chaîne (ex: "10,00€")
-  const cleanPrice = (priceString) => {
+  const cleanPrice = (priceString:any) => {
     if (!priceString) return 0;
     return parseFloat(
       priceString.toString().replace("€", "").replace(",", ".")
@@ -22,12 +23,12 @@ const Panier = () => {
   };
 
   // Calcul du total en tenant compte des quantités et relatedItems
-  const total = cart.reduce((acc, item) => {
+  const total = cart.reduce((acc:any, item:any) => {
     const itemPrice = item.price || 0;
     const itemTotal = itemPrice * (item.quantity || 1);
 
     const relatedItemsTotal = item.relatedItems
-      ? item.relatedItems.reduce((sum, related) => {
+      ? item.relatedItems.reduce((sum:any, related:any) => {
           const relatedPrice = related.price || 0;
           return sum + relatedPrice;
         }, 0)
@@ -39,30 +40,63 @@ const Panier = () => {
   // Simule l'envoi de la commande (à personnaliser selon ton backend)
   const handleTransferCommandes = async () => {
     try {
-      const cleanedTotal = cleanPrice(total.toFixed(2) + "€");
+      // Nettoyer le total avant l'envoi
+      const cleanedPrice = cleanPrice(total.toFixed(2) + "€");
       console.log("Données envoyées à l'API :", {
         items: cart,
-        total: cleanedTotal,
+        user_name: "", // À remplacer par la vraie valeur
+        user_image: "URL Image", // À remplacer par la vraie valeur
+        time: "12:00", // À remplacer par la vraie valeur
+        date: "2025-02-24", // À remplacer par la vraie valeur
+        lieu: "Adresse", // À remplacer par la vraie valeur
+        price: cleanedPrice + "€", // Utiliser le prix nettoyé
       });
-      // Ici tu peux faire un fetch() vers ton backend
+
+      const response = await fetch("/api/panier", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Assurez-vous que le corps de la requête est correctement formaté
+          body: JSON.stringify({
+            items: cart,
+            user_name: "",
+            user_image: "URL Image",
+            time: "12:00",
+            date: "2025-02-24",
+            lieu: "Adresse",
+            price: cleanedPrice + "€",
+          }),
+        },
+      });
+
+      if (response.ok) {
+        setCart([]);
+        setRefreshKey((prevKey) => prevKey + 1);
+      } else {
+        const data = await response.json();
+        console.error("Erreur:", data.message);
+      }
     } catch (error) {
-      console.error("Erreur lors de l'envoi de la commande :", error);
+      console.error("Erreur réseau:", error);
     }
   };
 
+  useEffect(() => {
+    setRefreshKey((prevKey) => prevKey + 1);
+  }, [cart]);
   // Fonctions fictives pour éviter les erreurs
-  const handleModify = (relatedId, parentId) => {
+  const handleModify = (relatedId:any, parentId:any) => {
     console.log("Modifier :", relatedId, "de", parentId);
     // Rediriger ou modifier selon logique de ton projet
   };
 
-  const handleRemoveGarniture = (relatedId, parentId) => {
-    const updatedCart = cart.map((item) => {
+  const handleRemoveGarniture = (relatedId:any, parentId:any) => {
+    const updatedCart = cart.map((item:any) => {
       if (item.uniqueId === parentId) {
         return {
           ...item,
           relatedItems: item.relatedItems.filter(
-            (related) => related.uniqueId !== relatedId
+            (related:any) => related.uniqueId !== relatedId
           ),
         };
       }
@@ -72,7 +106,7 @@ const Panier = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div key={refreshKey} className="flex flex-col h-screen">
       <div className="flex-grow">
         <h2 className="flex text-xl items-center justify-center style-pen border-b-2 border-black mb-4">
           Panier
@@ -81,7 +115,7 @@ const Panier = () => {
           <p>Votre panier est vide.</p>
         ) : (
           <ul>
-            {cart.map((item) => (
+            {cart.map((item:any) => (
               <li key={item.uniqueId} className="flex flex-col mb-4">
                 <div className="flex justify-between items-center mb-2">
                   <div className="flex items-center">
@@ -160,7 +194,7 @@ const Panier = () => {
                   {item.quantity > 1 && <p>Quantité : {item.quantity}</p>}
                   {item.relatedItems && item.relatedItems.length > 0 && (
                     <ul className="ml-4">
-                      {item.relatedItems.map((related) => (
+                      {item.relatedItems.map((related:any) => (
                         <li
                           key={related.uniqueId || related.id}
                           className="flex items-center text-black"
@@ -226,6 +260,7 @@ const Panier = () => {
             className="bg-yellow-100 border-2 border-black rounded-md bg-opacity-80 w-40 mt-2 mb-5"
             onClick={async () => {
               await handleTransferCommandes();
+              router.refresh();
               router.push("/horaires");
             }}
           >

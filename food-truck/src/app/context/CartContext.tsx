@@ -183,6 +183,10 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
+  const clearCart = () => {
+    console.log("Panier vidé");
+    setCart([]);
+  };
 
   // Exemple de fonction pour enregistrer le panier
   const saveCartToFile = async () => {
