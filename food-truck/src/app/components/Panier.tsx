@@ -1,195 +1,74 @@
-import { useCart } from "../context/CartContext";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+"use client";
+
+import { useCart } from "@/app/context/CartContext";
+import { useRouter, usePathname } from "next/navigation";
+import { useState } from "react";
 import Image from "next/image";
-
-// Composant du popup
-const ProductPopup = ({ isOpen, relatedItems, onClose, onSelect }: { isOpen: boolean; relatedItems: any[]; onClose: () => void; onSelect: (relatedItem: any) => void; }) => {
-  const [selectedItem, setSelectedItem] = useState<{ parentId: string; relatedItems: any[]; allItemsInCategory?: any[] } | null>(null);
-
-  return (
-    isOpen && (
-      <div className="fixed inset-0 bg-black flex justify-center items-center z-50">
-        <div className="bg-white p-5 rounded w-96">
-          <h3 className="text-lg font-semibold">Selectionner un autre produit</h3>
-          <ul className="mt-4">
-            {selectedItem?.allItemsInCategory?.map((product) => (
-              <div key={product.id} className="product-item">
-                <img src={product.image} alt={product.name} className="product-image" />
-                <p>{product.name}</p>
-                <button onClick={() => onSelect(product)}>
-                  Selectionner
-                </button>
-              </div>
-            ))}
-          </ul>
-          <button
-            className="mt-4 bg-gray-500 text-white px-4 py-2 rounded"
-            onClick={onClose}
-          >
-            Fermer
-          </button>
-        </div>
-      </div>
-    )
-  );
-};
 
 const Panier = () => {
   const { cart, removeFromCart, updateQuantity, setCart, remove } = useCart();
   const router = useRouter();
-  const [refreshKey, setRefreshKey] = useState(0);
   const pathname = usePathname();
-  const [selectedItem, setSelectedItem] = useState<{ parentUniqueId: string; relatedItems: any[] } | null>(null); // State pour gérer la sélection de produit
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [products, setProducts] = useState<any[]>([]); // Liste des produits récupérés
 
-  // Fonction pour vérifier si la route est /nouvelle_commande
-  const isNouvelleCommande = () => {
-    return pathname === "/nouvelle_commande";
+  // Vérifie si la route active est "/nouvelle_commande"
+  const isNouvelleCommande = () => pathname === "/nouvelle_commande";
+
+  // Fonction pour nettoyer les prix sous forme de chaîne (ex: "10,00€")
+  const cleanPrice = (priceString) => {
+    if (!priceString) return 0;
+    return parseFloat(
+      priceString.toString().replace("€", "").replace(",", ".")
+    );
   };
 
-  // Calcul du total avec gestion des sauces
+  // Calcul du total en tenant compte des quantités et relatedItems
   const total = cart.reduce((acc, item) => {
-    let itemTotal = (item.price || 0) * (item.quantity || 1);
+    const itemPrice = item.price || 0;
+    const itemTotal = itemPrice * (item.quantity || 1);
 
-    if (item.relatedItems) {
-      item.relatedItems.forEach((relatedItem) => {
-        if (relatedItem.isSauce) {
-          itemTotal += relatedItem.price || 0;
-        }
-      });
-    }
+    const relatedItemsTotal = item.relatedItems
+      ? item.relatedItems.reduce((sum, related) => {
+          const relatedPrice = related.price || 0;
+          return sum + relatedPrice;
+        }, 0)
+      : 0;
 
-    return acc + itemTotal;
+    return acc + itemTotal + relatedItemsTotal;
   }, 0);
 
-  const cleanPrice = (price: string) => {
-    const cleanedPrice = price.replace("€", "").replace(",", ".").trim();
-    const numericPrice = parseFloat(cleanedPrice);
-
-    if (isNaN(numericPrice)) {
-      console.error("Erreur de conversion du prix:", price);
-    }
-
-    return numericPrice;
-  };
-
+  // Simule l'envoi de la commande (à personnaliser selon ton backend)
   const handleTransferCommandes = async () => {
     try {
-      const cleanedPrice = cleanPrice(total.toFixed(2) + "€");
+      const cleanedTotal = cleanPrice(total.toFixed(2) + "€");
       console.log("Données envoyées à l'API :", {
         items: cart,
-        user_name: "", // Remplacer par la vraie valeur
-        user_image: "URL Image", // Remplacer par la vraie valeur
-        time: "12:00", // Remplacer par la vraie valeur
-        date: "2025-02-24", // Remplacer par la vraie valeur
-        lieu: "Adresse", // Remplacer par la vraie valeur
-        price: cleanedPrice + "€", // Utiliser le prix nettoyé
+        total: cleanedTotal,
       });
-
-      const response = await fetch("/api/panier", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          items: cart,
-          user_name: "", // Remplacer par la vraie valeur
-          user_image: "URL Image", // Remplacer par la vraie valeur
-          time: "12:00", // Remplacer par la vraie valeur
-          date: "2025-02-24", // Remplacer par la vraie valeur
-          lieu: "Adresse", // Remplacer par la vraie valeur
-          price: cleanedPrice + "€", // Utiliser le prix nettoyé
-        }),
-      });
-
-      if (response.ok) {
-        setCart([]);
-        setRefreshKey((prevKey) => prevKey + 1);
-      } else {
-        const data = await response.json();
-        console.error("Erreur:", data.message);
-      }
+      // Ici tu peux faire un fetch() vers ton backend
     } catch (error) {
-      console.error("Erreur réseau:", error);
+      console.error("Erreur lors de l'envoi de la commande :", error);
     }
   };
 
-  useEffect(() => {
-    setRefreshKey((prevKey) => prevKey + 1);
-  }, [cart]);
-
-  const handleRemoveGarniture = (garnitureUniqueId: string, parentUniqueId: string) => {
-    setCart((prevCart) => {
-      return prevCart.map((item: any) => {
-        if (item.uniqueId === parentUniqueId) {
-          return {
-            ...item,
-            relatedItems: item.relatedItems?.filter(
-              (related: any) => related.uniqueId !== garnitureUniqueId
-            ) || [],
-          };
-        }
-        return item;
-      });
-    });
+  // Fonctions fictives pour éviter les erreurs
+  const handleModify = (relatedId, parentId) => {
+    console.log("Modifier :", relatedId, "de", parentId);
+    // Rediriger ou modifier selon logique de ton projet
   };
 
-  // Charger les produits depuis le fichier JSON
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch("src/data/dataProduct.json");
-        const data = await response.json();
-        console.log("Produits chargés:", data);
-
-        setProducts(data); // Mise à jour de l'état avec les produits récupérés
-      } catch (error) {
-        console.error("Erreur lors du chargement des produits:", error);
+  const handleRemoveGarniture = (relatedId, parentId) => {
+    const updatedCart = cart.map((item) => {
+      if (item.uniqueId === parentId) {
+        return {
+          ...item,
+          relatedItems: item.relatedItems.filter(
+            (related) => related.uniqueId !== relatedId
+          ),
+        };
       }
-    };
-
-    fetchProducts(); // Appeler la fonction pour récupérer les produits au démarrage
-  }, []);
-
-  // Gérer la modification du produit
-  const handleModify = (relatedItemId: string, parentItemId: string) => {
-    const parentItem = cart.find((item) => item.id === parentItemId);
-    if (!parentItem) return;
-
-    const parentItemCategory = parentItem.categorie; // Récupérer la catégorie de l'élément parent
-
-    // Filtrer les produits selon la catégorie, en excluant l'élément en cours de modification
-    const filteredProducts = products.filter((product) =>
-      product.categorie === parentItemCategory && product.id !== relatedItemId // Assurez-vous que le produit ne correspond pas à celui que vous modifiez
-    );
-
-    console.log("Produits possibles à modifier:", filteredProducts);
-
-    setSelectedItem({
-      parentItemId,
-      relatedItems: parentItem.relatedItems || [],
-      allItemsInCategory: filteredProducts, // Afficher les produits filtrés
+      return item;
     });
-    setIsPopupOpen(true); // Ouvrir le popup pour afficher les options
-  };
-
-  const handleSelectItem = (relatedItem: any) => {
-    setCart((prevCart) => {
-      return prevCart.map((item) => {
-        if (item.id === selectedItem?.parentItemId) {
-          const updatedRelatedItems = item.relatedItems?.map((related) =>
-            related.id === relatedItem.id ? relatedItem : related // Remplacer l'élément modifié
-          );
-
-          return { ...item, relatedItems: updatedRelatedItems };
-        }
-        return item;
-      });
-    });
-    setIsPopupOpen(false); // Fermer le popup après sélection
+    setCart(updatedCart);
   };
 
   return (
@@ -206,7 +85,7 @@ const Panier = () => {
               <li key={item.uniqueId} className="flex flex-col mb-4">
                 <div className="flex justify-between items-center mb-2">
                   <div className="flex items-center">
-                    {(item.name === "Menu Enfants") ? (
+                    {item.name === "Menu Enfants" ? (
                       <Image
                         src="/Enfants.png"
                         alt={item.name || "Menu enfant"}
@@ -226,10 +105,15 @@ const Panier = () => {
                       )
                     )}
                     <p className="style-pen ml-2">
-                      {item.categorie === "Enfants" ? item.categorie : item.name}
+                      {item.categorie === "Enfants"
+                        ? item.categorie
+                        : item.name}
                     </p>
                   </div>
-                  {item.name && (["Mitraillette", "Burger", "Veggie", "Enfants"].some(keyword => item.name.includes(keyword))) ? (
+                  {item.name &&
+                  ["Mitraillette", "Burger", "Veggie", "Enfants"].some((kw) =>
+                    item.name.includes(kw)
+                  ) ? (
                     <button
                       onClick={() => removeFromCart(item.uniqueId)}
                       className="bg-red-500 text-white px-2 rounded ml-4"
@@ -237,16 +121,23 @@ const Panier = () => {
                       Supprimer
                     </button>
                   ) : (
-                    !item.relatedItems || item.relatedItems.length === 0 && (
+                    (!item.relatedItems || item.relatedItems.length === 0) && (
                       <div className="flex items-center">
                         <button
-                          onClick={() => updateQuantity(item.uniqueId, Math.max(1, item.quantity - 1))}
+                          onClick={() =>
+                            updateQuantity(
+                              item.uniqueId,
+                              Math.max(1, item.quantity - 1)
+                            )
+                          }
                           className="bg-red-500 text-white px-2 rounded"
                         >
                           -
                         </button>
                         <button
-                          onClick={() => updateQuantity(item.uniqueId, item.quantity + 1)}
+                          onClick={() =>
+                            updateQuantity(item.uniqueId, item.quantity + 1)
+                          }
                           className="bg-green-500 text-white px-2 rounded ml-2"
                         >
                           +
@@ -263,14 +154,17 @@ const Panier = () => {
                 </div>
 
                 <div className="ml-4 text-sm text-black">
-                  {item.price && item.price > 0 ? `Prix unitaire : ${item.price.toFixed(2)}€` : ""}
-                  {item.quantity > 1 && (
-                    <p>Quantité : {item.quantity}</p>
-                  )}
+                  {item.price && item.price > 0 ? (
+                    <p>Prix unitaire : {item.price.toFixed(2)}€</p>
+                  ) : null}
+                  {item.quantity > 1 && <p>Quantité : {item.quantity}</p>}
                   {item.relatedItems && item.relatedItems.length > 0 && (
                     <ul className="ml-4">
                       {item.relatedItems.map((related) => (
-                        <li key={related.uniqueId || related.id} className="flex items-center text-black">
+                        <li
+                          key={related.uniqueId || related.id}
+                          className="flex items-center text-black"
+                        >
                           <Image
                             src={related.image}
                             alt={related.name || ""}
@@ -279,16 +173,28 @@ const Panier = () => {
                             className="object-cover rounded-full"
                           />
                           <span className="ml-2">
-                            {related.name ? `- ${related.name}` : "- Produit sans nom"}
+                            {related.name
+                              ? `- ${related.name}`
+                              : "- Produit sans nom"}
                           </span>
                           {!related.isGarniture && !related.isFrites && (
-                            <button className="border-2 border-yellow-500 text-black px-2 rounded-full ml-5"
-                            onClick={() => handleModify(item.relatedItems[0].id, item.id)}>
+                            <button
+                              className="border-2 border-yellow-500 text-black px-2 rounded-full ml-5"
+                              onClick={() =>
+                                handleModify(related.uniqueId, item.uniqueId)
+                              }
+                            >
                               Modifier
-                            </button>)}
+                            </button>
+                          )}
                           {related.isGarniture && (
                             <button
-                              onClick={() => handleRemoveGarniture(related.uniqueId, item.uniqueId)}
+                              onClick={() =>
+                                handleRemoveGarniture(
+                                  related.uniqueId,
+                                  item.uniqueId
+                                )
+                              }
                               className="border-2 border-red-500 px-2 rounded-full ml-5"
                             >
                               <Image
@@ -310,32 +216,23 @@ const Panier = () => {
           </ul>
         )}
       </div>
-
-      <div className="border-t-2 p-4">
-        <p>Total : {total.toFixed(2)}€</p>
-        {isNouvelleCommande() ? (
+      {/* Bloc total et bouton Valider */}
+      <div className="flex flex-col items-center justify-center mt-auto">
+        <p className="text-lg">
+          Total du panier : {parseFloat(total.toFixed(2))}€
+        </p>
+        {isNouvelleCommande() && (
           <button
-            onClick={handleTransferCommandes}
-            className="bg-green-500 text-white px-4 py-2 rounded"
+            className="bg-yellow-100 border-2 border-black rounded-md bg-opacity-80 w-40 mt-2 mb-5"
+            onClick={async () => {
+              await handleTransferCommandes();
+              router.push("/horaires");
+            }}
           >
-            Valider la commande
-          </button>
-        ) : (
-          <button
-            onClick={() => router.push("/")}
-            className="bg-gray-500 text-white px-4 py-2 rounded"
-          >
-            Retour à l'accueil
+            Valider
           </button>
         )}
       </div>
-
-      <ProductPopup
-        isOpen={isPopupOpen}
-        relatedItems={selectedItem?.relatedItems || []}
-        onClose={() => setIsPopupOpen(false)}
-        onSelect={handleSelectItem}
-      />
     </div>
   );
 };

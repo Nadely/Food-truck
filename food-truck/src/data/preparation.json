@@ -1,31 +1,94 @@
 {
-    "preparations": [],
-    "pretes": [
+  "preparations": [
+    {
+      "id": 1747387004787,
+      "items": [
         {
-            "id": 1747128238365,
-            "items": [
-                {
-                    "name": "Menu Enfants",
-                    "quantity": 1,
-                    "relatedItems": [
-                        "Creme au chocolat",
-                        "Poulycroc"
-                    ]
-                },
-                {
-                    "relatedItems": [
-                        "Ketchup"
-                    ]
-                }
-            ],
-            "user_name": "enola",
-            "user_phone": "0688570630",
-            "user_image": "/avatar.jpg",
-            "time": "19h30",
-            "date": "2025-05-13T09:23:58.351Z",
-            "lieu": "Maison",
-            "price": "6.5€",
-            "createdAt": "2025-05-13T09:23:58.366Z"
+          "name": "Menu Mitraillette Classique",
+          "quantity": 1,
+          "relatedItems": [
+            "Salade",
+            "Tomate",
+            "Oignons Frit",
+            "Frites"
+          ]
+        },
+        {
+          "relatedItems": [
+            "Lucifer"
+          ]
+        },
+        {
+          "relatedItems": [
+            "Dallas"
+          ]
+        },
+        {
+          "quantity": 1,
+          "relatedItems": [
+            "Maroille"
+          ]
+        },
+        {
+          "name": "",
+          "quantity": 1,
+          "relatedItems": [
+            "Leffe Ruby"
+          ]
+        },
+        {
+          "name": "Party Box",
+          "quantity": 1,
+          "relatedItems": []
+        },
+        {
+          "quantity": 1,
+          "relatedItems": [
+            "Andalouse"
+          ]
+        },
+        {
+          "name": "",
+          "quantity": 1,
+          "relatedItems": []
         }
-    ]
+      ],
+      "user_name": "Nadege",
+      "user_phone": "0606060606",
+      "user_image": "/avatar.jpg",
+      "time": "19h",
+      "date": "2025-05-16T10:21:36.517Z",
+      "lieu": "Maison",
+      "price": "25.5€",
+      "createdAt": "2025-05-16T09:16:44.787Z"
+    }
+  ],
+  "pretes": [
+    {
+      "id": 1747128238365,
+      "items": [
+        {
+          "name": "Menu Enfants",
+          "quantity": 1,
+          "relatedItems": [
+            "Creme au chocolat",
+            "Poulycroc"
+          ]
+        },
+        {
+          "relatedItems": [
+            "Ketchup"
+          ]
+        }
+      ],
+      "user_name": "enola",
+      "user_phone": "0688570630",
+      "user_image": "/avatar.jpg",
+      "time": "19h30",
+      "date": "2025-05-13T09:23:58.351Z",
+      "lieu": "Maison",
+      "price": "6.5€",
+      "createdAt": "2025-05-13T09:23:58.366Z"
+    }
+  ]
 }
