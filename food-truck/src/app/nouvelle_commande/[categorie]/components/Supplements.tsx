@@ -35,22 +35,26 @@ const Supplements = () => {
   };
 
   const handleAddToCart = () => {
-    // Filtre les suppléments sélectionnés
+    const hasNoSupplement = selectedSupplements.includes(ID_NONE);
+
     const relatedItems = data.Supplements.filter((product) =>
       selectedSupplements.includes(product.id)
     ).map((product) => ({
       id: product.id,
       name: product.name,
       image: product.image,
-      price: 0, // Prix à 0 car il est déjà inclus dans le prix total
+      price: 0, // Tous les suppléments sont affichés comme gratuits
       quantity: 1,
       uniqueId: `supplement-${product.id}-${Date.now()}`,
     }));
 
-    // Calcul du prix total uniquement des suppléments (1€ par supplément)
-    const supplementsPrice = relatedItems.length;
+    // Calcul du prix : on compte tous sauf "Aucun supplément"
+    const supplementsPrice = hasNoSupplement
+      ? selectedSupplements.length === 1
+        ? 0
+        : relatedItems.filter((item) => item.id !== ID_NONE).length
+      : relatedItems.length;
 
-    // Création de l'objet à ajouter au panier
     const item = {
       id: `supplements-${Date.now()}`,
       image: "/supplements.png",
@@ -60,18 +64,13 @@ const Supplements = () => {
       relatedItems,
     };
 
-    // Ajoute l'article au panier
     addToCart(item);
 
-    // Determine the next route based on the parameters and append `menu=true` if needed
     let nextRoute = "Boissons?viaSupplements=true";
-
-    // Add `&menu=true` if menu option is selected
     if (searchParams.get("menu") === "true") {
       nextRoute += "&menu=true";
     }
 
-    // Redirige vers la page des boissons
     router.push(nextRoute);
   };
 

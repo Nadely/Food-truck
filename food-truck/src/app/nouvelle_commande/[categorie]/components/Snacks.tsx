@@ -106,9 +106,9 @@ const Snacks = () => {
             ).map((product) => (
               <div
                 key={product.id}
-                className={`flex flex-col items-center justify-center gap-4 ${
+                className={`flex flex-col items-center justify-center ${
                   viaMitraillette && selectedSnack === product.id
-                    ? "bg-green-200 border-4 border-green-500 rounded-lg"
+                    ? "bg-green-200 rounded-lg"
                     : ""
                 }`}
               >
