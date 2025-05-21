@@ -117,13 +117,14 @@ const Snacks = () => {
                   style={{ width: "200px", height: "200px" }}
                   onClick={() => handleSelectSnack(product)}
                 >
-                  <Image
-                    src={product.image}
-                    alt={product.name}
-                    width={200}
-                    height={200}
-                    className="object-contain"
-                  />
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      style={{ objectFit: "contain" }}
+                    />
+                  </div>
                   <div className="absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-2 text-center border-t border-black rounded-b-lg">
                     <p className="text-sm mt-auto">{product.name}</p>
                     {!viaMitraillette && (

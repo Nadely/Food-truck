@@ -244,13 +244,14 @@ const handleAddToCart = () => {
                   : ""
               }`}
             >
-              <Image
-                src={sauce.image}
-                alt={sauce.name}
-                width={150}
-                height={150}
-                className="object-contain mb-auto"
-              />
+              <div className="relative w-full h-full">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      style={{ objectFit: "contain" }}
+                    />
+                  </div>
               <div className="absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-2 text-center border-t border-black rounded-b-lg">
                 <p className="text-sm">{sauce.name}</p>
 
