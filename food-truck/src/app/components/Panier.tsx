@@ -102,64 +102,55 @@ const Panier = () => {
     if (!relatedProduct) return;
 
     const baseName = relatedProduct.name;
+
     const fullProductData = allProducts.find(
-      (prod: any) => prod.name.trim().toLowerCase() === baseName.trim().toLowerCase()
-    ) as { categorie?: string } | undefined;
+      (prod) => prod.name.trim().toLowerCase() === baseName.trim().toLowerCase()
+    );
 
-    // Déterminer la catégorie correcte
-    let rawCategorie = "";
-    if (fullProductData?.categorie) {
-      rawCategorie = fullProductData.categorie;
-    } else if (baseItem?.categorie) {
-      rawCategorie = baseItem.categorie;
-    }
+    const rawCategorie = baseItem?.categorie || fullProductData?.categorie;
 
-    // Cas spécial pour Poulycroc et Capri-Sun
-    if (baseName.toLowerCase().includes("poulycroc")) {
-      rawCategorie = "Snacks";
-    } else if (baseName.toLowerCase().includes("capri-sun")) {
-      rawCategorie = "Boissons";
-    }
-
-    const isMenuEnfant = baseItem.name === "Menu Enfants";
+    const categoriesCibles = [
+      "sauces",
+      "snacks",
+      "menu_enfants",
+      "snacks veggies",
+      "supplements",
+      "boissons",
+    ];
 
     let options = [];
 
-    // Si c'est un menu enfant, on filtre les produits spécifiques aux menus enfants
-    if (isMenuEnfant) {
-      options = allProducts
-        .filter((product: any) => product.categorie === "Menu_Enfants")
-        .map(({ id, name, image, price, uniqueId }) => ({
-          id,
-          name,
-          image,
-          price: price ? parseFloat(price.toString().replace("€", "")) : 0,
-          uniqueId,
-        }));
-    } else {
-      // Pour les autres cas, on filtre par catégorie
-      const normalizedCategorie = typeof rawCategorie === "string" ? rawCategorie.trim().toLowerCase() : "";
+    if (typeof rawCategorie === "string") {
+      const normalizedCategorie = rawCategorie.trim().toLowerCase();
 
-      if (normalizedCategorie === "boissons" || normalizedCategorie === "supplements") {
+      if (categoriesCibles.includes(normalizedCategorie)) {
         options = allProducts
-          .filter((product: any) => product.categorie === rawCategorie)
+          .filter(
+            (product) =>
+              typeof product.categorie === "string" &&
+              product.categorie.trim().toLowerCase() === normalizedCategorie
+          )
           .map(({ id, name, image, price, uniqueId }) => ({
             id,
             name,
             image,
-            price: price ? parseFloat(price.toString().replace("€", "")) : 0,
             uniqueId,
           }));
       } else {
-        options = allProducts
-          .filter((product: any) => product.categorie === rawCategorie)
-          .map(({ id, name, image, uniqueId }) => ({
-            id,
-            name,
-            image,
-            uniqueId,
-          }));
+        options = allProducts.map(({ id, name, image, price, uniqueId }) => ({
+          id,
+          name,
+          image,
+          uniqueId,
+        }));
       }
+    } else {
+      options = allProducts.map(({ id, name, image, price, uniqueId }) => ({
+        id,
+        name,
+        image,
+        uniqueId,
+      }));
     }
 
     setAvailableOptions(options);
@@ -349,28 +340,18 @@ const Panier = () => {
                     onClick={() => {
                       const updatedCart = cart.map((item: any) => {
                         if (item.uniqueId === currentParentId) {
-                          const allProducts = Object.values(dataProduits).flat();
-                          const updatedRelatedItems = item.relatedItems.map((related: any) => {
-                            if (related.uniqueId === currentRelatedId) {
-                              const selectedProduct = allProducts.find(
-                                (prod: any) => prod.uniqueId === option.uniqueId
-                              );
-
-                              const price = selectedProduct?.price
-                                ? parseFloat(selectedProduct.price.toString().replace("€", ""))
-                                : 0;
-
-                              return {
-                                uniqueId: option.uniqueId,
-                                id: option.id,
-                                name: option.name,
-                                image: option.image,
-                                price: price,
-                                categorie: selectedProduct?.categorie
-                              };
-                            }
-                            return related;
-                          });
+                          // Remplacer la garniture avec uniqueId == currentRelatedId
+                          const updatedRelatedItems = item.relatedItems.map((related: any) =>
+                            related.uniqueId === currentRelatedId
+                              ? {
+                                  uniqueId: option.uniqueId, // nouveau uniqueId
+                                  id: option.id,
+                                  name: option.name,
+                                  image: option.image,
+                                  price: option.price || 0,
+                                }
+                              : related
+                          );
                           return { ...item, relatedItems: updatedRelatedItems };
                         }
                         return item;
