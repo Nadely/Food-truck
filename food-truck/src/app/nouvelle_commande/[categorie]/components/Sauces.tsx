@@ -162,19 +162,32 @@ const handleAddToCart = () => {
     Object.entries(grouped).forEach(([id, info]) => {
       const sauceData = data.Sauces.find((s) => s.id === parseInt(id));
       if (sauceData) {
-        addToCart({
-          uniqueId: `sauce-${sauceData.id}-${Date.now()}`,
-          id: sauceData.id,
-          quantity: info.quantity,
-          price: info.price,
-          totalPrice: info.totalPrice,
-          relatedItems: [{
-            uniqueId: sauceData.uniqueId,
+        // Si on est dans un contexte via* (accompagnement), on garde les relatedItems
+        if (isVia) {
+          addToCart({
+            uniqueId: `sauce-${sauceData.id}-${Date.now()}`,
+            id: sauceData.id,
+            quantity: info.quantity,
+            price: info.price,
+            totalPrice: info.totalPrice,
+            relatedItems: [{
+              id: sauceData.id,
+              name: sauceData.name,
+              image: sauceData.image
+            }]
+          });
+        } else {
+          // Sinon, on ajoute comme produit principal classique
+          addToCart({
+            uniqueId: `sauce-${sauceData.id}-${Date.now()}`,
             id: sauceData.id,
             name: sauceData.name,
-            image: sauceData.image
-          }]
-        });
+            image: sauceData.image,
+            quantity: info.quantity,
+            price: info.price,
+            totalPrice: info.totalPrice
+          });
+        }
       }
     });
   };
@@ -253,7 +266,7 @@ const handleAddToCart = () => {
                     >
                       -
                     </button>
-                    <span>{quantities[sauce.id]}</span>
+                    <span>{quantities[sauce.id] > 0 ? quantities[sauce.id] : ""}</span>
                     <button
                       onClick={(e) => {
                         e.stopPropagation();

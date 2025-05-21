@@ -134,7 +134,6 @@ const Panier = () => {
             id,
             name,
             image,
-            price,
             uniqueId,
           }));
       } else {
@@ -142,7 +141,6 @@ const Panier = () => {
           id,
           name,
           image,
-          price,
           uniqueId,
         }));
       }
@@ -151,7 +149,6 @@ const Panier = () => {
         id,
         name,
         image,
-        price,
         uniqueId,
       }));
     }
@@ -185,7 +182,8 @@ const Panier = () => {
           <p>Votre panier est vide.</p>
         ) : (
           <ul>
-            {cart.map((item) => (
+            {cart
+             .map((item) => (
               <li key={item.uniqueId} className="flex flex-col mb-4">
                 <div className="flex justify-between items-center mb-2">
                   <div className="flex items-center">
@@ -195,6 +193,7 @@ const Panier = () => {
                         alt={item.name || "Menu enfant"}
                         width={40}
                         height={40}
+                        style={{ width: 40, height: 40, objectFit: "cover" }}
                         className="object-cover rounded-full"
                       />
                     ) : (
@@ -205,6 +204,7 @@ const Panier = () => {
                           alt={item.name || ""}
                           width={40}
                           height={40}
+                          style={{ width: 40, height: 40, objectFit: "cover" }}
                           className="object-cover rounded-full"
                         />
                       )
@@ -257,10 +257,10 @@ const Panier = () => {
                 </div>
 
                 <div className="ml-4 text-sm text-black">
-                  {item.price && item.price > 0 && (
+                  {cleanPrice( item.price) > 0 && (
                     <p>Prix unitaire : {item.price.toFixed(2)}€</p>
                   )}
-                  {item.quantity > 1 && <p>Quantité : {item.quantity}</p>}
+                  {item.quantity > 1 && <p>Quantite : {item.quantity}</p>}
                   {item.relatedItems && item.relatedItems.length > 0 && (
                     <ul className="ml-4">
                       {item.relatedItems.map((related) => (
@@ -273,6 +273,7 @@ const Panier = () => {
                             alt={related.name || ""}
                             width={40}
                             height={40}
+                            style={{ width: 40, height: 40, objectFit: "cover" }}
                             className="object-cover rounded-full"
                           />
                           <span className="ml-2">
@@ -330,6 +331,7 @@ const Panier = () => {
                     alt={option.name}
                     width={40}
                     height={40}
+                    style={{ width: 40, height: 40, objectFit: "cover" }}
                     className="object-cover rounded-full"
                   />
                   <span className="ml-2 flex-grow">{option.name}</span>
@@ -380,20 +382,23 @@ const Panier = () => {
         </div>
       )}
 
-      <div className="border-t border-black p-2 mt-auto flex justify-between items-center">
-        <p className="text-xl font-bold">
-          Total : {total.toFixed(2)}€
-        </p>
-        <button
-          onClick={handleTransferCommandes}
-          disabled={cart.length === 0}
-          className={`bg-green-600 text-white px-4 py-2 rounded ${
-            cart.length === 0 ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-        >
-          Valider commande
-        </button>
-      </div>
+      <div className="sticky bottom-0 bg-white border-t border-black p-4 z-10 flex flex-col items-center">
+            <p className="text-xl font-bold mb-2">
+              Total : {total.toFixed(2)}€
+            </p>
+            {isNouvelleCommande() && (
+              <button
+                className="bg-yellow-100 border-2 border-black rounded-md px-6 py-2 bg-opacity-80"
+                onClick={async () => {
+                  await handleTransferCommandes();
+                  router.push("/horaires");
+                }}
+              >
+                Valider
+              </button>
+            )}
+          </div>
+
     </div>
   );
 };

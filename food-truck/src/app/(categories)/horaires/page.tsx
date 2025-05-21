@@ -30,7 +30,6 @@ const Horaires = () => {
         id: "horaire",
         name: "", // Pas de nom pour cet élément
         price: 0, // Prix fictif
-        quantity: 1,
         time: hour, // Ajout de l'horaire
       });
     }

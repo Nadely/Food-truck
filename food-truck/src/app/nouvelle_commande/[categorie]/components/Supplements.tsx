@@ -61,7 +61,6 @@ const Supplements = () => {
     const item = {
       id: `supplements-${Date.now()}`, // ID unique pour les suppléments
       price: supplementsPrice, // Prix total des suppléments
-      quantity: 1,
       uniqueId: `supplements-${Date.now()}`, // ID unique pour cet article
       relatedItems, // Liste des suppléments sélectionnés
     };
