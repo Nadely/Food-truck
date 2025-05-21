@@ -146,7 +146,7 @@ const Snacks = () => {
                   )}
                   </div>
                 </div>
-                    <p className="text-sm text-white border-2 border-white w-full text-center rounded-md mt-auto">
+                    <p className="text-sm text-white w-full text-center rounded-md mt-auto">
                       {!viaMitraillette && (product.price)}
                     </p>
               </div>

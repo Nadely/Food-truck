@@ -83,12 +83,25 @@ const generateUniqueId = () =>
 
 // Provider pour le contexte du panier
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
-  const [cart, setCart] = useState<CartItem[]>([]);
+  // Initialiser le panier depuis le localStorage
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    if (typeof window !== 'undefined') {
+      const savedCart = localStorage.getItem('cart');
+      return savedCart ? JSON.parse(savedCart) : [];
+    }
+    return [];
+  });
+
+  // Sauvegarder le panier dans le localStorage à chaque modification
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+  }, [cart]);
 
   useEffect(() => {
     console.log("Cart updated:", cart);
   }, [cart]);
-
 
   // Ajouter un produit au panier
   const addToCart = (item: Omit<CartItem, "uniqueId">) => {
@@ -105,15 +118,13 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
     // Ajoute toujours un nouvel article au panier
     setCart((prevCart) => {
-        const updatedCart = [...prevCart, newItem];
-        console.log("Nouvel article ajouté:", updatedCart);
-        return updatedCart;
+      const updatedCart = [...prevCart, newItem];
+      console.log("Nouvel article ajouté:", updatedCart);
+      return updatedCart;
     });
 
     console.log("Après ajout au panier:", newItem);
   };
-
-
 
   // Retirer un produit et ses éléments liés
   const removeFromCart = () => {
@@ -133,7 +144,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
-
   const getRelatedItemsVia = (parentId: string, viaMitraillette?: boolean) => {
     return (
       cart
@@ -143,7 +153,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         ) || []
     );
   };
-
 
   const removeRelatedItemVia = (parentId: string, relatedUniqueId: string) => {
     setCart((prevCart) =>
@@ -183,9 +192,19 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
+  // Vider le panier uniquement après une commande réussie
   const clearCart = () => {
-    console.log("Panier vidé");
+    console.log("Début clearCart - État actuel du panier:", cart);
+    console.log("Début clearCart - État actuel du localStorage:", localStorage.getItem('cart'));
+
     setCart([]);
+
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('cart');
+      console.log("Après clearCart - État du localStorage:", localStorage.getItem('cart'));
+    }
+
+    console.log("Fin clearCart - État du panier après vidage:", cart);
   };
 
   // Exemple de fonction pour enregistrer le panier
@@ -216,7 +235,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         removeFromCart,
         remove,
         updateQuantity,
-        clearCart: () => setCart([]),
+        clearCart,
         getCart: () => cart,
         setCart,
         setViaMitraillette: () => {}, // Ajoutez un comportement ou laissez-le vide si non nécessaire

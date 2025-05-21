@@ -17,12 +17,6 @@ const Supplements = () => {
 
   const ID_NONE = 10;
 
-  // Produit principal (exemple)
-  const mainProduct = {
-    id: 1, // Remplace par l'ID du produit principal
-    name: "Produit Principal",
-    price: "10.00", // Prix du produit principal
-  };
 
   const handleSelectSupplements = (id: number) => {
     setSelectedSupplements((prevSelected) => {
@@ -48,21 +42,22 @@ const Supplements = () => {
       id: product.id,
       name: product.name,
       image: product.image,
-      price: parseFloat(product.price), // Convertir en nombre
+      price: 0, // Prix à 0 car il est déjà inclus dans le prix total
+      quantity: 1,
+      uniqueId: `supplement-${product.id}-${Date.now()}`,
     }));
 
-    // Calcul du prix total uniquement des suppléments
-    const supplementsPrice = relatedItems.reduce(
-      (acc, product) => acc + product.price,
-      0
-    );
+    // Calcul du prix total uniquement des suppléments (1€ par supplément)
+    const supplementsPrice = relatedItems.length;
 
     // Création de l'objet à ajouter au panier
     const item = {
-      id: `supplements-${Date.now()}`, // ID unique pour les suppléments
-      price: supplementsPrice, // Prix total des suppléments
-      uniqueId: `supplements-${Date.now()}`, // ID unique pour cet article
-      relatedItems, // Liste des suppléments sélectionnés
+      id: `supplements-${Date.now()}`,
+      image: "/supplements.png",
+      price: supplementsPrice,
+      quantity: 1,
+      uniqueId: `supplements-${Date.now()}`,
+      relatedItems,
     };
 
     // Ajoute l'article au panier

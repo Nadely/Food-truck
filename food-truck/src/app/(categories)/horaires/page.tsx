@@ -91,6 +91,7 @@ const Horaires = () => {
       });
 
       if (response.ok) {
+        setCart([]); // Vider le panier après la validation
         router.push("/commandes"); // Redirection après validation
       }
     } catch (error) {
