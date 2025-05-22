@@ -163,11 +163,22 @@ const Panier = () => {
   const handleRemoveGarniture = (relatedId: string, parentId: string) => {
     const updatedCart = cart.map((item) => {
       if (item.uniqueId === parentId) {
+        const updatedRelatedItems = item.relatedItems.filter(
+          (related: any) => related.uniqueId !== relatedId
+        );
+
+        // Compter le nombre de suppléments restants
+        const remainingSupplementsCount = updatedRelatedItems.filter(
+          (related: any) => related.isSupplements
+        ).length;
+
+        // Mettre à jour le prix en fonction du nombre de suppléments
+        const newPrice = remainingSupplementsCount;
+
         return {
           ...item,
-          relatedItems: item.relatedItems.filter(
-            (related: any) => related.uniqueId !== relatedId
-          ),
+          relatedItems: updatedRelatedItems,
+          price: newPrice
         };
       }
       return item;
@@ -424,7 +435,7 @@ const Panier = () => {
             className="bg-yellow-100 border-2 border-black rounded-md px-6 py-2 bg-opacity-80"
             onClick={async () => {
               await handleTransferCommandes();
-              router.push("/horaire-livraison"); // <-- ajuste ce chemin selon ta navigation
+              router.push("/horaires");
             }}
           >
             Commander
