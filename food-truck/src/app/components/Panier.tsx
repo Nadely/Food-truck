@@ -83,34 +83,46 @@ const Panier = () => {
     if (!baseItem) return;
 
     const allProducts = Object.values(dataProduits).flat();
-
     const relatedProduct = baseItem.relatedItems.find(
       (rel) => rel.uniqueId === relatedId
     );
     if (!relatedProduct) return;
 
     const baseName = relatedProduct.name;
-
-    const fullProductData = allProducts.find(
-      (prod) => prod.name.trim().toLowerCase() === baseName.trim().toLowerCase()
-    );
-
-    const rawCategorie = baseItem?.categorie || fullProductData?.categorie;
     const isMenuEnfants = baseItem.name?.toLowerCase().includes("menu enfants");
 
     let options = [];
 
-    if (typeof rawCategorie === "string") {
-      const normalizedCategorie = rawCategorie.trim().toLowerCase();
+    if (isMenuEnfants) {
+      // Dans le menu enfants, on ne montre que les produits de la catégorie Menu_Enfants
+      options = allProducts
+        .filter(
+          (product) =>
+            typeof product.categorie === "string" &&
+            product.categorie.toLowerCase() === "menu_enfants"
+        )
+        .map(({ id, name, image, price, uniqueId }) => ({
+          id,
+          name,
+          image,
+          price: cleanPrice(price),
+          uniqueId,
+        }));
+    } else {
+      // En dehors du menu enfants, on cherche d'abord dans les catégories Snacks et Boissons
+      const fullProductData = allProducts.find(
+        (prod) =>
+          prod.name.trim().toLowerCase() === baseName.trim().toLowerCase() &&
+          (prod.categorie === "Snacks" || prod.categorie === "Boissons")
+      );
 
-      // Pour les boissons et suppléments, on montre tous les produits de ces catégories
-      if (normalizedCategorie.includes("boissons") || normalizedCategorie.includes("supplements")) {
+      if (fullProductData?.categorie) {
+        const normalizedCategory = fullProductData.categorie.toLowerCase();
         options = allProducts
           .filter(
             (product) =>
               typeof product.categorie === "string" &&
-              (product.categorie.toLowerCase().includes("boissons") ||
-               product.categorie.toLowerCase().includes("supplements"))
+              product.categorie.toLowerCase() === normalizedCategory
           )
           .map(({ id, name, image, price, uniqueId }) => ({
             id,
@@ -120,22 +132,28 @@ const Panier = () => {
             uniqueId,
           }));
       } else {
-        options = allProducts.map(({ id, name, image, price, uniqueId }) => ({
-          id,
-          name,
-          image,
-          price: cleanPrice(price),
-          uniqueId,
-        }));
+        // Si on ne trouve pas dans Snacks ou Boissons, on cherche dans toutes les catégories
+        const fullProductData = allProducts.find(
+          (prod) => prod.name.trim().toLowerCase() === baseName.trim().toLowerCase()
+        );
+
+        if (fullProductData?.categorie) {
+          const normalizedCategory = fullProductData.categorie.toLowerCase();
+          options = allProducts
+            .filter(
+              (product) =>
+                typeof product.categorie === "string" &&
+                product.categorie.toLowerCase() === normalizedCategory
+            )
+            .map(({ id, name, image, price, uniqueId }) => ({
+              id,
+              name,
+              image,
+              price: cleanPrice(price),
+              uniqueId,
+            }));
+        }
       }
-    } else {
-      options = allProducts.map(({ id, name, image, price, uniqueId }) => ({
-        id,
-        name,
-        image,
-        price: cleanPrice(price),
-        uniqueId,
-      }));
     }
 
     setAvailableOptions(options);
