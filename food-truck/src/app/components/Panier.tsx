@@ -257,7 +257,7 @@ const Panier = () => {
                               Modifier
                             </button>
                           ) : null}
-                          {related.isGarniture && (
+                          {(related.isGarniture || related.isSupplements && related.name !== "Aucuns supplements") && (
                             <button
                               onClick={() => handleRemoveGarniture(related.uniqueId, item.uniqueId)}
                               className="border-2 border-red-500 text-red-700 px-2 ml-2 rounded-full"

@@ -24,6 +24,7 @@ type CartItem = {
   viaSupplements?: boolean; // Indique si c'est lié à un supplément
   updatedCart?: CartItem;
   isFrites?: boolean; // Indique si c'est un frites
+  isSupplements?: boolean;
 };
 
 // Type pour le contexte du panier

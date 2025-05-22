@@ -46,6 +46,7 @@ const Supplements = () => {
       price: 0, // Tous les suppléments sont affichés comme gratuits
       quantity: 1,
       uniqueId: `supplement-${product.id}-${Date.now()}`,
+      isSupplements: true,
     }));
 
     // Calcul du prix : on compte tous sauf "Aucun supplément"
@@ -61,6 +62,7 @@ const Supplements = () => {
       price: supplementsPrice,
       quantity: 1,
       uniqueId: `supplements-${Date.now()}`,
+      isSupplements: true,
       relatedItems,
     };
 
