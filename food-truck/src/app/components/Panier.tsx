@@ -344,7 +344,8 @@ const Panier = () => {
                                   }
                                 }
                               } else {
-                                prixFinal = cleanPrice(option.price || 0);
+                                // Pour les autres produits, on garde le prix original
+                                prixFinal = cleanPrice(related.price || 0);
                               }
 
                               return {
