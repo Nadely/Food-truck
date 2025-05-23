@@ -125,30 +125,34 @@ const Snacks = () => {
                       style={{ objectFit: "contain" }}
                     />
                   </div>
-                  <div className="absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-2 text-center border-t border-black rounded-b-lg">
-                    <p className="text-sm mt-auto">{product.name}</p>
+                  <div className="absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-2 text-center border-t border-black rounded-b-lg flex flex-col items-center">
+                    <p className="text-sm">{product.name}</p>
+
                     {!viaMitraillette && (
-                      <div className="flex flex-row items-center gap-4">
+                      <div className="flex flex-row items-center gap-4 mt-1">
                         <button
                           onClick={() => handleDecrement(product.id)}
-                          className="text-sm bg-red-500 focus:ring-4 rounded-lg px-8 py-2 ml-3"
+                          className="text-sm bg-red-500 focus:ring-4 rounded-lg px-4 py-1"
                         >
                           -
                         </button>
                         <span className="text-sm">{quantities[product.id]}</span>
                         <button
                           onClick={() => handleIncrement(product.id)}
-                          className="text-sm bg-green-500 focus:ring-4 rounded-lg px-8 py-2"
+                          className="text-sm bg-green-500 focus:ring-4 rounded-lg px-4 py-1"
                         >
                           +
                         </button>
-                    </div>
-                  )}
+                      </div>
+                    )}
+
                   </div>
                 </div>
-                    <p className="text-sm text-white w-full text-center rounded-md mt-auto">
-                      {!viaMitraillette && (product.price)}
-                    </p>
+                {!viaMitraillette && (
+                  <p className="text-sm text-white border-2 border-white w-full text-center rounded-md mt-3">
+                    {product.price}
+                  </p>
+                )}
               </div>
             ))}
           </div>
