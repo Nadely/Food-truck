@@ -426,13 +426,13 @@ const Panier = () => {
                           }).filter(Boolean);
 
                           // Si "Aucun supplément" est sélectionné, s'assurer qu'il n'y a qu'un seul élément
-                          const finalRelatedItems = option.name === "Aucuns supplements"
-                            ? updatedRelatedItems.filter(item => item.name === "Aucuns supplements").slice(0, 1)
-                            : updatedRelatedItems;
+                          const finalRelatedItems = option.name === "Aucune sauce"
+                            ? updatedRelatedItems.filter(item => item.name === "Aucune sauce").slice(0, 1)
+                            : updatedRelatedItems.filter(item => item.name !== "Aucune sauce");
 
                           // Calculer le nouveau prix total des relatedItems
                           const newTotalPrice = finalRelatedItems.reduce((sum: number, related: any) => {
-                            if (related.name === "Aucun supplément") return sum;
+                            if (related.name === "Aucune sauce") return sum;
                             return sum + cleanPrice(related.price || 0);
                           }, 0);
 
