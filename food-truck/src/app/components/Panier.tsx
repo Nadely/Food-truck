@@ -32,7 +32,7 @@ const Panier = () => {
 
     const relatedItemsTotal = Array.isArray(item.relatedItems)
       ? item.relatedItems.reduce((sum, related) => {
-          if (related.name === "Aucun supplément") return sum;
+          if (related.name === "Aucun supplément" || related.isBoisson) return sum;
           return sum + cleanPrice(related.price || 0);
         }, 0)
       : 0;
@@ -247,8 +247,8 @@ const Panier = () => {
                   {item.quantity > 1 && <p>Quantité : {item.quantity}</p>}
                   {item.relatedItems?.length > 0 && (
                     <ul className="ml-4 mt-2">
-                      {item.relatedItems.map((related) => (
-                        <li key={related.uniqueId} className="flex items-center mb-1">
+                      {item.relatedItems.map((related, index) => (
+                        <li key={`${related.uniqueId}-${index}`} className="flex items-center mb-1">
                           <div className="w-8 h-8 relative">
                             <Image
                               src={related.image}
@@ -319,60 +319,83 @@ const Panier = () => {
                         if (item.uniqueId === currentParentId) {
                           const updatedRelatedItems = item.relatedItems.map((related: any) => {
                             if (related.uniqueId === currentRelatedId) {
-                              const relatedCategorie = related.categorie?.toLowerCase() || "";
-                              const optionCategorie = option.categorie?.toLowerCase() || "";
+                              const relatedCategorie = related.categorie?.toLowerCase() || "boissons";
+                              const optionCategorie = option.categorie?.toLowerCase() || "boissons";
+
+                              console.log("Données complètes:", {
+                                related,
+                                option,
+                                relatedCategorie,
+                                optionCategorie
+                              });
+
                               const isBoissonOrSupp =
                                 relatedCategorie.includes("boissons") ||
                                 relatedCategorie.includes("supplements") ||
                                 optionCategorie.includes("boissons") ||
-                                optionCategorie.includes("supplements");
+                                optionCategorie.includes("supplements") ||
+                                option.name.toLowerCase().includes("leffe") ||
+                                option.name.toLowerCase().includes("coca") ||
+                                option.name.toLowerCase().includes("tropico") ||
+                                option.name.toLowerCase().includes("ice tea");
+
+                              console.log("Détection boisson/supplément:", {
+                                relatedCategorie,
+                                optionCategorie,
+                                isBoissonOrSupp,
+                                optionName: option.name
+                              });
 
                               // Gestion spéciale pour les suppléments et boissons
                               let prixFinal = 0;
                               if (isBoissonOrSupp) {
-                                if (option.name === "Aucuns supplements") {
+                                if (option.name === "Aucuns supplements" || option.name === "Aucune boisson") {
                                   prixFinal = 0;
+                                  console.log("Aucun supplément/boisson sélectionné");
                                   return {
                                     ...option,
                                     price: 0,
-                                    categorie: "supplements",
-                                    uniqueId: `supplements-none-${Date.now()}`
+                                    categorie: option.name === "Aucune boisson" ? "boissons" : "supplements",
+                                    uniqueId: `${option.name === "Aucune boisson" ? "boisson" : "supplements"}-none-${Date.now()}`
                                   };
                                 } else {
                                   const isMenu = ["menu enfants", "mitraillettes", "burgers", "veggies"].some((kw) =>
                                     item.name?.toLowerCase().includes(kw)
                                   );
 
-                                  if (optionCategorie.includes("boissons")) {
-                                    if (isMenu) {
-                                      if (option.name.toLowerCase().includes("leffe")) {
-                                        prixFinal = 3.5;
-                                      } else {
-                                        prixFinal = 1;
-                                      }
+                                  console.log("Vérification du type de boisson:", {
+                                    optionName: option.name,
+                                    isMenu,
+                                    optionCategorie
+                                  });
+
+                                  if (optionCategorie.includes("boissons") ||
+                                      option.name.toLowerCase().includes("leffe") ||
+                                      option.name.toLowerCase().includes("coca") ||
+                                      option.name.toLowerCase().includes("tropico") ||
+                                      option.name.toLowerCase().includes("ice tea")) {
+                                    if (option.name.toLowerCase().includes("leffe")) {
+                                      prixFinal = 3.5;
+                                      console.log("Boisson détectée : Leffe → Prix = 3.5€");
                                     } else {
-                                      prixFinal = cleanPrice(option.price || 0);
+                                      prixFinal = 1;
+                                      console.log("Boisson détectée (autre que Leffe) → Prix = 1€");
                                     }
                                   } else {
-                                    prixFinal = cleanPrice(option.price || 0);
+                                    prixFinal = 0;
+                                    console.log("Ce n'est pas une boisson → Prix = 0€");
                                   }
                                 }
-                              } else {
-                                // Pour les autres produits, on garde le prix original
-                                prixFinal = cleanPrice(related.price || 0);
                               }
 
                               return {
                                 ...related,
                                 ...option,
                                 price: prixFinal,
-                                categorie: related.categorie || option.categorie,
-                                isBoisson: optionCategorie.includes("boissons")
+                                categorie: "boissons",
+                                isBoisson: true,
+                                displayPrice: prixFinal + "€"
                               };
-                            }
-                            // Si c'est un autre supplément et qu'on a sélectionné "Aucun supplément", on le supprime
-                            if (option.name === "Aucuns supplements" && related.categorie?.toLowerCase().includes("supplements")) {
-                              return null;
                             }
                             return related;
                           }).filter(Boolean);
@@ -384,6 +407,7 @@ const Panier = () => {
 
                           // Calculer le nouveau prix total des relatedItems
                           const newTotalPrice = finalRelatedItems.reduce((sum: number, related: any) => {
+                            if (related.name === "Aucun supplément") return sum;
                             return sum + cleanPrice(related.price || 0);
                           }, 0);
 
@@ -392,6 +416,13 @@ const Panier = () => {
                             relatedItems: finalRelatedItems,
                             price: newTotalPrice
                           };
+
+                          console.log("Mise à jour du panier:", {
+                            item,
+                            finalRelatedItems,
+                            newTotalPrice,
+                            option
+                          });
 
                           // Forcer le rafraîchissement du panier
                           setCart(prevCart => {
