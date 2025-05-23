@@ -60,7 +60,8 @@ const AperoBox = () => {
     }).filter(Boolean);
 
     if (itemsToAdd.length > 0) {
-      itemsToAdd.forEach((item) => addToCart(item));
+      const groupId = `aperobox-${Date.now()}`;
+      itemsToAdd.forEach((item) => addToCart({...item, groupId}));
 
       // Construire l'URL avec toutes les AperoBox sélectionnées et leurs quantités
       const aperoBoxParams = Object.entries(quantities)
@@ -74,7 +75,7 @@ const AperoBox = () => {
         .join("&");
 
       // Rediriger vers la page des sauces
-      router.push(`Sauces?viaAperoBox=true&${aperoBoxParams}`);
+      router.push(`Sauces?viaAperoBox=true&groupId=${groupId}&${aperoBoxParams}`);
     }
   };
 

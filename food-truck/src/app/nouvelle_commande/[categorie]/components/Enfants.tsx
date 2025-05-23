@@ -34,7 +34,7 @@ const Enfants = () => {
 
   const handleAddToCart = () => {
     if (selectedEnfants.length === 0) {
-      alert("Veuillez sélectionner au moins un produit avant de valider !");
+      alert("Veuillez sélectionner au moins un produit avant de valider !");
       return;
     }
 
@@ -49,9 +49,11 @@ const Enfants = () => {
     );
 
     if (!mainProduct) {
-      alert("Veuillez sélectionner un produit principal (id 1 ou 2) !");
+      alert("Veuillez sélectionner un produit principal (id 1 ou 2) !");
       return;
     }
+
+    const groupId = `enfants-${Date.now()}`;
 
     // Construire l'objet à ajouter au panier
     const item = {
@@ -60,18 +62,21 @@ const Enfants = () => {
       price: parseFloat(mainProduct.price), // Prix principal
       quantity: 1,
       uniqueId: `${mainProduct.id}-${Date.now()}`,
+      groupId: groupId,
       relatedItems: selectedProducts.map((product) => ({
         id: product.id,
         name: product.name,
         image: product.image,
+        groupId: groupId,
+        uniqueId: `${product.id}-${Date.now()}`,
       })), // Produits liés
     };
 
-    // Ajouter au panier
+    console.log("Ajout au panier avec groupId:", groupId);
     addToCart(item);
 
-    // Redirection vers la page "nouvelle_commande"
-    route.push("Sauces?viaEnfants=true");
+    // Redirection vers la page "Sauces" avec le même groupId
+    route.push(`Sauces?viaEnfants=true&groupId=${groupId}`);
   };
 
   return (

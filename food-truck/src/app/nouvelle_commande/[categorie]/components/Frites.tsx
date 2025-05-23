@@ -47,7 +47,8 @@ const Frites = () => {
     }).filter(Boolean);
 
     if (itemsToAdd.length > 0) {
-      itemsToAdd.forEach((item) => addToCart(item));
+      const groupId = `frites-${Date.now()}`;
+      itemsToAdd.forEach((item) => addToCart({...item, groupId}));
 
       // Ajouter les quantités de frites dans l'URL
       const fritesParams = Object.entries(quantities)
@@ -60,9 +61,9 @@ const Frites = () => {
         })
         .join("&");
 
-      router.push(`Sauces?viaFrites=true&${fritesParams}`);
+      router.push(`Sauces?viaFrites=true&groupId=${groupId}&${fritesParams}`);
     } else {
-      alert("Veuillez sélectionner une quantité avant de valider !");
+      alert("Veuillez sélectionner une quantité avant de valider !");
     }
   };
 

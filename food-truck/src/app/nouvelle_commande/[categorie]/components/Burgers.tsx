@@ -18,6 +18,7 @@ const Burgers = () => {
   const handleProduitClick = (product: any) => {
     const menuPrice = menus ? 2.5 : 0;
     const garniturePrice = garnitures ? 3 : 0;
+    const groupId = `burger-${Date.now()}`;
 
     const item = {
       id: product.id,
@@ -26,6 +27,7 @@ const Burgers = () => {
       price: parseFloat(product.price) + menuPrice + garniturePrice,
       quantity: 1,
       uniqueId: `${product.id}-${Date.now()}`,
+      groupId: groupId,
       menuOption: menus,
       garnitureOption: garnitures,
       supplementPrice: menuPrice + garniturePrice,
@@ -35,6 +37,8 @@ const Burgers = () => {
           ...garniture,
           isGarniture: true,
           parentId: product.id,
+          groupId: groupId,
+          uniqueId: `garniture-${Date.now()}`,
         })),
         ...(garnitures // Verifie si "Double Garniture" est active
           ? [
@@ -42,6 +46,8 @@ const Burgers = () => {
                 isGarniture: true,
                 name: "Double Garniture", // Indique que l'option double garniture est activee
                 parentId: product.id,
+                groupId: groupId,
+                uniqueId: `double-garniture-${Date.now()}`,
               },
             ]
           : []),
@@ -54,12 +60,15 @@ const Burgers = () => {
                 image: "/frites.jpg",
                 isFritesCategory: true,
                 parentId: product.id,
+                groupId: groupId,
+                uniqueId: `frites-${Date.now()}`,
               },
             ]
           : []),
       ],
     };
 
+    console.log("Ajout au panier avec groupId:", groupId);
     addToCart(item);
 
     const validIds = [1, 2, 3, 4, 5, 6];
@@ -67,7 +76,7 @@ const Burgers = () => {
 
     if (route) {
       // Si le produit a une route valide, construire l'URL
-      const url = `/nouvelle_commande/${route}?viaBurgers=true`;
+      const url = `/nouvelle_commande/${route}?viaBurgers=true&groupId=${groupId}`;
 
       // Ajouter l'option menu si necessaire
       if (menus === true) {

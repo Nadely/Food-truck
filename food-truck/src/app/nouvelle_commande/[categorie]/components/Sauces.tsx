@@ -21,6 +21,13 @@ const Sauces = () => {
   const viaAperoBox = searchParams.get("viaAperoBox") === "true";
   const viaFrites = searchParams.get("viaFrites") === "true";
   const isMenu = searchParams.get("menu") === "true";
+  const groupId = searchParams.get("groupId");
+
+  if (!groupId && (viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette)) {
+    console.error("groupId manquant dans les paramètres d'URL");
+    router.push("/nouvelle_commande");
+    return null;
+  }
 
   // Détection du mode multi-sélection
   const isMultiSelect = viaFrites || viaAperoBox;
@@ -107,7 +114,24 @@ const handleAddToCart = () => {
     if (selectedSauce !== null) {
       const sauce = data.Sauces.find((item) => item.id === selectedSauce);
       if (sauce) {
-        addToCart({ relatedItems: [{ id: sauce.id, name: sauce.name, image: sauce.image }] });
+        addToCart({
+          id: sauce.id,
+          name: sauce.name,
+          image: sauce.image,
+          price: 0,
+          quantity: 1,
+          uniqueId: `sauce-${sauce.id}-${Date.now()}`,
+          groupId: groupId,
+          relatedItems: [{
+            id: sauce.id,
+            name: sauce.name,
+            image: sauce.image,
+            price: 0,
+            quantity: 1,
+            uniqueId: `sauce-${sauce.id}-${Date.now()}-related`,
+            groupId: groupId
+          }]
+        });
       }
     }
   } else {
@@ -121,6 +145,7 @@ const handleAddToCart = () => {
             name: sauce.name,
             image: sauce.image,
             quantity: quantity > 0 ? quantity : 1,
+            groupId: groupId
           };
         }
         return null;
@@ -135,6 +160,7 @@ const handleAddToCart = () => {
           id: sauce.id,
           name: sauce.name,
           image: sauce.image,
+          groupId: groupId
         });
       }
     });
@@ -142,6 +168,7 @@ const handleAddToCart = () => {
     const finalSauces = flatSauces.map((sauce, index) => ({
       ...sauce,
       price: index < freeSauces ? 0 : 0.5,
+      groupId: groupId
     }));
 
     const grouped = {};
@@ -152,6 +179,7 @@ const handleAddToCart = () => {
           quantity: 1,
           totalPrice: sauce.price,
           price: sauce.price,
+          groupId: groupId
         };
       } else {
         grouped[sauce.id].quantity += 1;
@@ -162,7 +190,6 @@ const handleAddToCart = () => {
     Object.entries(grouped).forEach(([id, info]) => {
       const sauceData = data.Sauces.find((s) => s.id === parseInt(id));
       if (sauceData) {
-        // Si on est dans un contexte via* (accompagnement), on garde les relatedItems
         if (isVia) {
           addToCart({
             uniqueId: `sauce-${sauceData.id}-${Date.now()}`,
@@ -173,11 +200,12 @@ const handleAddToCart = () => {
             relatedItems: [{
               id: sauceData.id,
               name: sauceData.name,
-              image: sauceData.image
-            }]
+              image: sauceData.image,
+              groupId: groupId
+            }],
+            groupId: groupId
           });
         } else {
-          // Sinon, on ajoute comme produit principal classique
           addToCart({
             uniqueId: `sauce-${sauceData.id}-${Date.now()}`,
             id: sauceData.id,
@@ -185,7 +213,8 @@ const handleAddToCart = () => {
             image: sauceData.image,
             quantity: info.quantity,
             price: info.price,
-            totalPrice: info.totalPrice
+            totalPrice: info.totalPrice,
+            groupId: groupId
           });
         }
       }
@@ -194,7 +223,7 @@ const handleAddToCart = () => {
 
   // Redirection
   let nextRoute = (viaSnacks || viaSnacksVeggies || viaBrochettes || viaMitraillette)
-    ? "Supplements?viaSauces=true"
+    ? `Supplements?viaSauces=true&groupId=${groupId}`
     : "/nouvelle_commande";
 
   if (isMenu) {

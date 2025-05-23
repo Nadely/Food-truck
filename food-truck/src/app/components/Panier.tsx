@@ -43,8 +43,24 @@ const Panier = () => {
   const handleTransferCommandes = async () => {
     try {
       const cleanedPrice = cleanPrice(total.toFixed(2) + "€");
+
+      // Préparer les items avec leurs groupId
+      const itemsWithGroupId = cart.map(item => {
+        const groupId = item.groupId || `group-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        return {
+          ...item,
+          groupId,
+          relatedItems: item.relatedItems?.map(related => ({
+            ...related,
+            groupId
+          }))
+        };
+      });
+
+      console.log("Items avec groupId:", itemsWithGroupId);
+
       const payload = {
-        items: cart,
+        items: itemsWithGroupId,
         user_name: "",
         user_image: "URL Image",
         time: "12:00",
@@ -52,6 +68,8 @@ const Panier = () => {
         lieu: "Adresse",
         price: cleanedPrice + "€",
       };
+
+      console.log("Données envoyées au serveur:", payload);
 
       const response = await fetch("/api/panier", {
         method: "POST",
@@ -211,7 +229,14 @@ const Panier = () => {
                   </div>
                   {["Mitraillette", "Burger", "Veggie", "Enfants"].some((kw) => item.name?.includes(kw)) ? (
                     <button
-                      onClick={() => removeFromCart(item.uniqueId)}
+                      onClick={() => {
+                        console.log("Tentative de suppression du groupe:", item.groupId);
+                        if (item.groupId) {
+                          removeFromCart(item.groupId);
+                        } else {
+                          console.error("Pas de groupId trouvé pour l'élément:", item);
+                        }
+                      }}
                       className="bg-red-500 text-white px-2 rounded"
                     >
                       Supprimer

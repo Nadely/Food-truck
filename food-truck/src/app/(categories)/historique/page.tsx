@@ -209,7 +209,7 @@ const Historique = () => {
 																{item.relatedItems && item.relatedItems.length > 0 && (
 																	<ul className="list-disc list-inside ml-5">
 																		{item.relatedItems.map((related, idx) => (
-																			<li key={idx}>{related}</li>
+																			<li key={idx}>{typeof related === 'string' ? related : related.name}</li>
 																		))}
 																	</ul>
 																)}

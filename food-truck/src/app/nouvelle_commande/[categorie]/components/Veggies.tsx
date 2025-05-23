@@ -33,6 +33,8 @@ const Veggies = () => {
         return;
     }
 
+    const groupId = `veggie-${Date.now()}`;
+
     const item = {
       id: product.id,
       name:
@@ -43,6 +45,7 @@ const Veggies = () => {
       price: basePrice + menuPrice + garniturePrice,
       quantity: 1,
       uniqueId: `${product.id}-${Date.now()}`,
+      groupId: groupId,
       menuOption: menus,
       garnitureOption: garnitures,
       supplementPrice: menuPrice + garniturePrice,
@@ -52,6 +55,8 @@ const Veggies = () => {
           ...garniture,
           isGarniture: true,
           parentId: product.id,
+          groupId: groupId,
+          uniqueId: `garniture-${Date.now()}`,
         })),
         ...(garnitures // Vérifie si "Double Garniture" est activé
           ? [
@@ -59,6 +64,8 @@ const Veggies = () => {
                 isGarniture: true,
                 name: "Double Garniture", // Indique que l'option double garniture est activée
                 parentId: product.id,
+                groupId: groupId,
+                uniqueId: `double-garniture-${Date.now()}`,
               },
             ]
           : []),
@@ -71,12 +78,15 @@ const Veggies = () => {
                 image: "/frites.jpg",
                 isFritesCategory: true,
                 parentId: product.id,
+                groupId: groupId,
+                uniqueId: `frites-${Date.now()}`,
               },
             ]
           : []),
       ],
     };
 
+    console.log("Ajout au panier avec groupId:", groupId);
     addToCart(item);
 
     const route =
@@ -84,11 +94,11 @@ const Veggies = () => {
         ? "SnacksVeggies"
         : product.id === 2
         ? "Supplements"
-        : ""; // Default option
+        : "";
 
     if (route) {
       // Si le produit a une route valide, construire l'URL
-      const url = `/nouvelle_commande/${route}?viaVeggiMitraillette=true`;
+      const url = `/nouvelle_commande/${route}?viaVeggiMitraillette=true&groupId=${groupId}`;
 
       // Ajouter l'option menu si nécessaire
       if (menus === true) {

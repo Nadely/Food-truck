@@ -28,6 +28,7 @@ const Mitraillettes = () => {
     }
 
     const totalPrice = basePrice + menuPrice;
+    const groupId = `mitraillette-${Date.now()}`;
 
     const item = {
       id: product.id,
@@ -39,6 +40,7 @@ const Mitraillettes = () => {
       price: totalPrice,
       quantity: 1,
       uniqueId: `${product.id}-${Date.now()}`,
+      groupId: groupId,
       menuOption: menus,
       supplementPrice: menuPrice,
       viaMitraillette: true,
@@ -47,6 +49,8 @@ const Mitraillettes = () => {
           ...garniture,
           isGarniture: true,
           parentId: product.id,
+          groupId: groupId,
+          uniqueId: `garniture-${Date.now()}`,
         })),
         ...(menus === true
           ? [
@@ -57,33 +61,23 @@ const Mitraillettes = () => {
                 image: "/frites.jpg",
                 isFritesCategory: true,
                 parentId: product.id,
+                groupId: groupId,
+                uniqueId: `frites-${Date.now()}`,
               },
             ]
           : []),
       ],
     };
 
+    console.log("Ajout au panier avec groupId:", groupId);
     addToCart(item);
 
-    const route =
-      product.id === 1
-        ? "Snacks"
-        : product.id === 2
-        ? "Sauces"
-        : product.id === 3
-        ? "Brochettes"
-        : "";
-
-    if (route) {
-      const url = `/nouvelle_commande/${route}?viaMitraillette=true`;
-
-      if (menus === true) {
-        router.push(`${url}&menu=true`);
-      } else {
-        router.push(url);
-      }
+    // Redirection vers Sauces avec le groupId
+    const url = `Sauces?viaMitraillette=true&groupId=${groupId}`;
+    if (menus) {
+      router.push(`${url}&menu=true`);
     } else {
-      console.error("Produit invalide ou route manquante");
+      router.push(url);
     }
   };
 

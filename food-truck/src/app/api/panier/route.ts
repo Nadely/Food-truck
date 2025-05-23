@@ -14,6 +14,35 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "L'horaire, le nom et le téléphone sont requis." }, { status: 400 });
     }
 
+    // S'assurer que chaque item a un groupId et que les relatedItems sont correctement formatés
+    const itemsWithGroupId = items.map((item: any) => {
+      const groupId = item.groupId || `group-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
+      // Formater correctement les relatedItems
+      const formattedRelatedItems = item.relatedItems?.map((related: any) => {
+        // Si related est une chaîne de caractères, la convertir en objet
+        if (typeof related === 'string') {
+          return {
+            name: related,
+            groupId: groupId
+          };
+        }
+        // Si related est déjà un objet, s'assurer qu'il a le bon groupId
+        return {
+          ...related,
+          groupId: groupId
+        };
+      });
+
+      return {
+        ...item,
+        groupId,
+        relatedItems: formattedRelatedItems || []
+      };
+    });
+
+    console.log("Items avec groupId:", itemsWithGroupId);
+
     const panierData = fs.existsSync(panierFilePath)
       ? fs.readFileSync(panierFilePath, "utf-8")
       : '{"Panier": []}';
@@ -22,7 +51,7 @@ export async function POST(request: Request) {
 
     const newCommande = {
       id: Date.now(),
-      items,
+      items: itemsWithGroupId,
       user_name,
       user_phone,
       user_image,

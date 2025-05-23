@@ -25,13 +25,14 @@ type CartItem = {
   updatedCart?: CartItem;
   isFrites?: boolean; // Indique si c'est un frites
   isSupplements?: boolean;
+  groupId: string; // Indique le groupe auquel appartient l'élément (obligatoire)
 };
 
 // Type pour le contexte du panier
 type CartContextType = {
   cart: CartItem[];
   addToCart: (item: Omit<CartItem, "uniqueId">) => void; // uniqueId est généré automatiquement
-  removeFromCart: (uniqueId: string) => void;
+  removeFromCart: (groupId: string) => void;
   remove: (uniqueId: string) => void;
   updateQuantity: (uniqueId: string, quantity: number) => void;
   clearCart: () => void;
@@ -109,13 +110,23 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     console.log("Avant ajout au panier:", item);
 
     const uniqueId = generateUniqueId();
+    const groupId = item.groupId || `group-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
     const relatedItemsWithIds = item.relatedItems?.map((related) => ({
       ...related,
       uniqueId: generateUniqueId(),
       parentId: uniqueId,
+      groupId: groupId, // Assurer que tous les éléments liés ont le même groupId
     }));
 
-    const newItem = { ...item, uniqueId, relatedItems: relatedItemsWithIds || [] };
+    const newItem = {
+      ...item,
+      uniqueId,
+      groupId, // S'assurer que l'élément principal a le groupId
+      relatedItems: relatedItemsWithIds || []
+    };
+
+    console.log("Nouvel article avec groupId:", newItem);
 
     // Ajoute toujours un nouvel article au panier
     setCart((prevCart) => {
@@ -128,10 +139,16 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   // Retirer un produit et ses éléments liés
-  const removeFromCart = () => {
-    setCart((prevCart) =>
-      prevCart.filter((item) => !item.relatedItems || item.relatedItems.length === 0)
-    );
+  const removeFromCart = (groupId: string) => {
+    console.log("Suppression du groupe:", groupId);
+    setCart((prevCart) => {
+      const newCart = prevCart.filter((item) => {
+        // Garder uniquement les éléments qui n'appartiennent pas au groupe
+        return item.groupId !== groupId;
+      });
+      console.log("Nouveau panier après suppression:", newCart);
+      return newCart;
+    });
   };
 
   const remove = (uniqueId: string) => {

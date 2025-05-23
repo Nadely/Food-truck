@@ -12,11 +12,24 @@ const Supplements = () => {
   const viaSauces = searchParams.get("viaSauces") === "true";
   const viaBurgers = searchParams.get("viaBurgers") === "true";
   const { addToCart } = useCart();
+  const groupId = searchParams.get("groupId");
+
+  if (!groupId) {
+    console.error("groupId manquant dans les paramètres d'URL");
+    router.push("/nouvelle_commande");
+    return null;
+  }
 
   const [selectedSupplements, setSelectedSupplements] = useState<number[]>([]);
 
   const ID_NONE = 10;
 
+  // Produit principal (exemple)
+  const mainProduct = {
+    id: 1, // Remplace par l'ID du produit principal
+    name: "Produit Principal",
+    price: "10.00", // Prix du produit principal
+  };
 
   const handleSelectSupplements = (id: number) => {
     setSelectedSupplements((prevSelected) => {
@@ -43,18 +56,17 @@ const Supplements = () => {
       id: product.id,
       name: product.name,
       image: product.image,
-      price: 0, // Tous les suppléments sont affichés comme gratuits
+      price: 0,
       quantity: 1,
       uniqueId: `supplement-${product.id}-${Date.now()}`,
       isSupplements: true,
+      groupId: groupId
     }));
 
-    // Calcul du prix : on compte tous sauf "Aucun supplément"
-    const supplementsPrice = hasNoSupplement
-      ? selectedSupplements.length === 1
-        ? 0
-        : relatedItems.filter((item) => item.id !== ID_NONE).length
-      : relatedItems.length;
+    const supplementsPrice = relatedItems.reduce(
+      (acc, product) => acc + product.price,
+      0
+    );
 
     const item = {
       id: `supplements-${Date.now()}`,
@@ -64,11 +76,12 @@ const Supplements = () => {
       uniqueId: `supplements-${Date.now()}`,
       isSupplements: true,
       relatedItems,
+      groupId: groupId
     };
 
     addToCart(item);
 
-    let nextRoute = "Boissons?viaSupplements=true";
+    let nextRoute = `Boissons?viaSupplements=true&groupId=${groupId}`;
     if (searchParams.get("menu") === "true") {
       nextRoute += "&menu=true";
     }
