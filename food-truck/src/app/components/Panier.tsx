@@ -225,7 +225,7 @@ const Panier = () => {
                         className="w-10 h-10 rounded-full object-contain bg-white"
                       />
                     )}
-                    <p className="ml-2 style-pen">{item.categorie === "Enfants" ? item.categorie : item.name}</p>
+                    <p className="ml-2 style-pen">{item.categorie === "Enfants" ? "Menu Enfants" : (item.relatedItems?.some(rel => rel.name === item.name) ? "" : item.name)}</p>
                   </div>
                   {["Mitraillette", "Burger", "Veggie", "Enfants"].some((kw) => item.name?.includes(kw)) ? (
                     <button
@@ -269,7 +269,7 @@ const Panier = () => {
 
                 <div className="ml-4 text-sm">
                   {cleanPrice(item.price) > 0 && <p>Prix unitaire : {item.price.toFixed(2)}€</p>}
-                  {item.quantity > 1 && <p>Quantité : {item.quantity}</p>}
+                  {item.quantity > 1 && <p>Quantite : {item.quantity}</p>}
                   {item.relatedItems?.length > 0 && (
                     <ul className="ml-4 mt-2">
                       {item.relatedItems.map((related, index) => (
@@ -277,13 +277,13 @@ const Panier = () => {
                           <div className="w-8 h-8 relative">
                             <Image
                               src={related.image}
-                              alt={related.name || ""}
+                              alt=""
                               fill
                               className="object-contain bg-white rounded-full"
                             />
                           </div>
                           <span className="ml-2">
-                            - {related.name}
+                            {related.name}
                           </span>
                           {(!related.isGarniture && !related.isFrites) || related.isBoisson ? (
                             <button

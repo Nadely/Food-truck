@@ -72,12 +72,20 @@ const Mitraillettes = () => {
     console.log("Ajout au panier avec groupId:", groupId);
     addToCart(item);
 
-    // Redirection vers Sauces avec le groupId
-    const url = `Sauces?viaMitraillette=true&groupId=${groupId}`;
+    // Redirection selon le type de mitraillette
+    let url = "";
+    if (product.name === "Classique") {
+      url = `Snacks?viaMitraillette=true&groupId=${groupId}`;
+    } else if (product.name === "Brochette") {
+      url = `Brochettes?viaMitraillette=true&groupId=${groupId}`;
+    } else {
+      url = `Sauces?viaMitraillette=true&groupId=${groupId}`;
+    }
+
     if (menus) {
       router.push(`${url}&menu=true`);
     } else {
-      router.push(url);
+      router.push(`${url}`);
     }
   };
 

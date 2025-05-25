@@ -11,6 +11,7 @@ const Brochettes = () => {
   const searchParams = useSearchParams();
   const viaMitraillette = searchParams.get("viaMitraillette") === "true";
   const isMenu = searchParams.get("menu") === "true"; // Retrieve 'menu' parameter
+  const groupId = searchParams.get("groupId") || `brochette-${Date.now()}`;
   const router = useRouter();
   const { addToCart } = useCart();
 
@@ -54,12 +55,27 @@ const Brochettes = () => {
         (item) => item.id === selectedBrochette
       );
       if (produit) {
+        const price = parseFloat(produit.price);
         addToCart({
-          relatedItems: [{ id: produit.id, name: produit.name, image: produit.image }],
+          id: produit.id,
+          name: produit.name,
+          image: produit.image,
+          price: price,
+          quantity: 1,
+          groupId: groupId,
+          relatedItems: [{
+            id: produit.id,
+            name: produit.name,
+            image: produit.image,
+            price: price,
+            quantity: 1,
+            groupId: groupId,
+            uniqueId: `brochette-${Date.now()}`
+          }]
         });
 
-        // Redirect to Sauces with viaBrochettes=true
-        router.push("Sauces?viaBrochettes=true" + (isMenu ? "&menu=true" : ""));
+        // Redirect to Sauces with viaBrochettes=true and groupId
+        router.push(`Sauces?viaBrochettes=true&groupId=${groupId}${isMenu ? "&menu=true" : ""}`);
       }
     } else {
       const itemsToAdd = data.Brochettes.map((produit) => {
@@ -71,10 +87,11 @@ const Brochettes = () => {
             image: produit.image,
             price: parseFloat(produit.price),
             quantity,
+            groupId: `brochette-${Date.now()}`
           };
         }
         return null;
-      }).filter(Boolean);
+      }).filter((item): item is NonNullable<typeof item> => item !== null);
 
       if (itemsToAdd.length > 0) {
         itemsToAdd.forEach((item) => addToCart(item));

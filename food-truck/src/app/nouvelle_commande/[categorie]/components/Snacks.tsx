@@ -11,6 +11,7 @@ const Snacks = () => {
   const searchParams = useSearchParams();
   const viaMitraillette = searchParams.get("viaMitraillette") === "true";
   const isMenu = searchParams.get("menu") === "true";
+  const groupId = searchParams.get("groupId") || `snack-${Date.now()}`;
   const router = useRouter();
   const { addToCart } = useCart();
 
@@ -42,24 +43,35 @@ const Snacks = () => {
     if (viaMitraillette && selectedSnack !== null) {
       const produit = data.Snacks.find((item) => item.id === selectedSnack);
       if (produit) {
-        // Si le prix n'est pas un nombre valide, on le force à 0
-        console.log("Type de produit:", typeof produit.price);
-
         let cleanPrice = viaMitraillette && produit.categorie === "Snacks"
           ? 0
           : parseFloat(produit.price.replace(/[^\d,.]/g, "").replace(",", "."));
 
-        // Si la conversion échoue et donne NaN, on affecte 0
         if (isNaN(cleanPrice)) {
           console.error("Prix invalide, affectation à 0");
           cleanPrice = 0;
         }
-        addToCart({
-          relatedItems: [{ id: produit.id, name: produit.name, image: produit.image, price: cleanPrice, quantity: 1, viaMitraillette: true }],
-        })
-        console.log("Commande ajoutée à la liste de courses :", produit.name, cleanPrice);
 
-        router.push(`Sauces?viaSnacks=true${isMenu ? "&menu=true" : ""}`);
+        addToCart({
+          id: produit.id,
+          name: produit.name,
+          image: produit.image,
+          price: cleanPrice,
+          quantity: 1,
+          groupId: groupId,
+          relatedItems: [{
+            id: produit.id,
+            name: produit.name,
+            image: produit.image,
+            price: cleanPrice,
+            quantity: 1,
+            groupId: groupId,
+            viaMitraillette: true,
+            uniqueId: `snack-${Date.now()}`
+          }]
+        });
+
+        router.push(`Sauces?viaSnacks=true&groupId=${groupId}${isMenu ? "&menu=true" : ""}`);
       }
     } else {
       const itemsToAdd = data.Snacks.map((produit) => {
@@ -69,7 +81,6 @@ const Snacks = () => {
             ? 0
             : parseFloat(produit.price.replace(/[^\d,.]/g, "").replace(",", "."));
 
-          // Vérifier si le prix est un nombre valide, sinon le forcer à 0
           if (isNaN(cleanPrice)) {
             console.error(`Prix invalide pour ${produit.name}, valeur forcée à 0`);
             cleanPrice = 0;
@@ -81,17 +92,18 @@ const Snacks = () => {
             image: produit.image,
             price: cleanPrice,
             quantity,
+            groupId: `snack-${Date.now()}`
           };
         }
         return null;
-      }).filter(Boolean);
+      }).filter((item): item is NonNullable<typeof item> => item !== null);
 
       if (itemsToAdd.length > 0) {
-        itemsToAdd.forEach((item: any) => addToCart(item));
-        router.push(`/nouvelle_commande${isMenu ? "/Snacks?menu=true" : ""}`);
+        itemsToAdd.forEach((item) => addToCart(item));
+        router.push(`/nouvelle_commande${isMenu ? "?menu=true" : ""}`);
       }
     }
-};
+  };
 
   return (
     <div className="style-pen text-xl mb-5 mt-2">
