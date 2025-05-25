@@ -27,12 +27,21 @@ const Panier = () => {
   };
 
   const total = cart.reduce((acc, item) => {
-    const itemPrice = cleanPrice(item.price || 0);
+    // Si l'item a des relatedItems qui sont des boissons, on ne compte pas son prix principal
+    const hasBoisson = Array.isArray(item.relatedItems) && item.relatedItems.some(related => related.isBoisson);
+    const itemPrice = hasBoisson ? 0 : cleanPrice(item.price || 0);
     const quantity = item.quantity || 1;
 
     const relatedItemsTotal = Array.isArray(item.relatedItems)
       ? item.relatedItems.reduce((sum, related) => {
-          if (related.name === "Aucun supplément" || related.isBoisson) return sum;
+          // Pour les boissons, on utilise leur prix normal
+          if (related.isBoisson) {
+            const isLeffe = related.name?.toLowerCase().includes('leffe');
+            return sum + (isLeffe ? 3.5 : 1);
+          }
+          // Pour les suppléments, on compte 1€ chacun
+          if (related.isSupplements) return sum + 1;
+          // Pour les autres items, utiliser leur prix
           return sum + cleanPrice(related.price || 0);
         }, 0)
       : 0;
@@ -271,42 +280,55 @@ const Panier = () => {
                   {cleanPrice(item.price) > 0 && <p>Prix unitaire : {item.price.toFixed(2)}€</p>}
                   {item.quantity > 1 && <p>Quantite : {item.quantity}</p>}
                   {item.relatedItems?.length > 0 && (
-                    <ul className="ml-4 mt-2">
-                      {item.relatedItems.map((related, index) => (
-                        <li key={`${related.uniqueId}-${index}`} className="flex items-center mb-1">
-                          <div className="w-8 h-8 relative">
-                            <Image
-                              src={related.image}
-                              alt=""
-                              fill
-                              className="object-contain bg-white rounded-full"
-                            />
-                          </div>
-                          <span className="ml-2">
-                            {related.name}
-                          </span>
-                          {(!related.isGarniture && !related.isFrites) || related.isBoisson ? (
-                            <button
-                              onClick={() => handleModify(related.uniqueId, item.uniqueId)}
-                              className="border-2 border-yellow-500 text-black px-2 ml-5 rounded-full"
-                            >
-                              Modifier
-                            </button>
-                          ) : null}
-                          {(related.isGarniture ||
-                            (related.isSupplements &&
-                              item.relatedItems.filter(r => r.isSupplements).length > 1)
-                          ) && (
-                            <button
-                              onClick={() => handleRemoveGarniture(related.uniqueId, item.uniqueId)}
-                              className="border-2 border-red-500 text-red-700 px-2 ml-2 rounded-full"
-                            >
-                              X
-                            </button>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
+                    <>
+                      {item.relatedItems.some(related => related.isSupplements) && (
+                        <div className="mb-2">
+                          <p>Quantite : {item.relatedItems.filter(related => related.isSupplements).length}</p>
+                          <p>Prix unitaire : {dataProduits.Supplements[0].price}</p>
+                        </div>
+                      )}
+                      <ul className="ml-4 mt-2">
+                        {item.relatedItems.map((related, index) => (
+                          <li key={`${related.uniqueId}-${index}`} className="flex items-center mb-1">
+                            <div className="w-8 h-8 relative">
+                              <Image
+                                src={related.image}
+                                alt=""
+                                fill
+                                className="object-contain bg-white rounded-full"
+                              />
+                            </div>
+                            <span className="ml-2">
+                              {related.name}
+                              {related.isBoisson && related.price > 0 && (
+                                <span className="ml-2 text-sm">
+                                  ({related.price}€)
+                                </span>
+                              )}
+                            </span>
+                            {(!related.isGarniture && !related.isFrites) || related.isBoisson ? (
+                              <button
+                                onClick={() => handleModify(related.uniqueId, item.uniqueId)}
+                                className="border-2 border-yellow-500 text-black px-2 ml-5 rounded-full"
+                              >
+                                Modifier
+                              </button>
+                            ) : null}
+                            {(related.isGarniture ||
+                              (related.isSupplements &&
+                                item.relatedItems.filter(r => r.isSupplements).length > 1)
+                            ) && (
+                              <button
+                                onClick={() => handleRemoveGarniture(related.uniqueId, item.uniqueId)}
+                                className="border-2 border-red-500 text-red-700 px-2 ml-2 rounded-full"
+                              >
+                                X
+                              </button>
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    </>
                   )}
                 </div>
               </li>

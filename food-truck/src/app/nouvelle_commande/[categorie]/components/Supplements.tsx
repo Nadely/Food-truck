@@ -50,36 +50,62 @@ const Supplements = () => {
   const handleAddToCart = () => {
     const hasNoSupplement = selectedSupplements.includes(ID_NONE);
 
-    const relatedItems = data.Supplements.filter((product) =>
-      selectedSupplements.includes(product.id)
-    ).map((product) => ({
-      id: product.id,
-      name: product.name,
-      image: product.image,
-      price: 0,
-      quantity: 1,
-      uniqueId: `supplement-${product.id}-${Date.now()}`,
-      isSupplements: true,
-      groupId: groupId
-    }));
+    // Trouver l'item "Aucuns supplements" dans les données
+    const noSupplementItem = data.Supplements.find(product => product.id === ID_NONE);
 
-    const supplementsPrice = relatedItems.reduce(
-      (acc, product) => acc + product.price,
-      0
-    );
+    if (hasNoSupplement) {
+      const item = {
+        id: Date.now(),
+        name: "",
+        image: "/supplements.png",
+        price: 0,
+        quantity: 1,
+        uniqueId: `supplements-${Date.now()}`,
+        isSupplements: true,
+        relatedItems: [{
+          id: ID_NONE,
+          name: noSupplementItem?.name || "Aucuns supplements",
+          image: noSupplementItem?.image || "/rien.png",
+          price: 0,
+          quantity: 1,
+          uniqueId: `supplement-${ID_NONE}-${Date.now()}`,
+          isSupplements: false,
+          isNoSupplement: true,
+          groupId: groupId
+        }],
+        groupId: groupId
+      };
+      addToCart(item);
+    } else {
+      const relatedItems = data.Supplements.filter((product) =>
+        selectedSupplements.includes(product.id)
+      ).map((product) => ({
+        id: product.id,
+        name: product.name,
+        image: product.image,
+        price: 1, // Prix fixe de 1€ par supplément
+        quantity: 1,
+        uniqueId: `supplement-${product.id}-${Date.now()}`,
+        isSupplements: true,
+        groupId: groupId
+      }));
 
-    const item = {
-      id: `supplements-${Date.now()}`,
-      image: "/supplements.png",
-      price: supplementsPrice,
-      quantity: 1,
-      uniqueId: `supplements-${Date.now()}`,
-      isSupplements: true,
-      relatedItems,
-      groupId: groupId
-    };
+      const supplementsPrice = relatedItems.length; // 1€ par supplément
 
-    addToCart(item);
+      const item = {
+        id: Date.now(),
+        name: "",
+        image: "/supplements.png",
+        price: supplementsPrice,
+        quantity: 1,
+        uniqueId: `supplements-${Date.now()}`,
+        isSupplements: true,
+        relatedItems,
+        groupId: groupId
+      };
+
+      addToCart(item);
+    }
 
     let nextRoute = `Boissons?viaSupplements=true&groupId=${groupId}`;
     if (searchParams.get("menu") === "true") {

@@ -683,70 +683,70 @@
       "id": 1,
       "name": "Cheddar",
       "image": "/cheddar.png",
-      "price": "1€",
+      "price": "1.00€",
       "categorie": "Supplements"
     },
     {
       "id": 2,
       "name": "Raclette",
       "image": "/raclette.png",
-      "price": "1€",
+      "price": "1.00€",
       "categorie": "Supplements"
     },
     {
       "id": 3,
       "name": "Reblochon",
       "image": "/reblochon.png",
-      "price": "1€",
+      "price": "1.00€",
       "categorie": "Supplements"
     },
     {
       "id": 4,
       "name": "Chevre",
       "image": "/chevre.png",
-      "price": "1€",
+      "price": "1.00€",
       "categorie": "Supplements"
     },
     {
       "id": 5,
       "name": "Poitrine fumee",
       "image": "/poitrine.png",
-      "price": "1€",
+      "price": "1.00€",
       "categorie": "Supplements"
     },
     {
       "id": 6,
       "name": "Galette de pomme de terre",
       "image": "/galette-de-pomme-de-terre.png",
-      "price": "1€",
+      "price": "1.00€",
       "categorie": "Supplements"
     },
     {
       "id": 7,
       "name": "Galette de fromage",
       "image": "/galette-de-fromage.png",
-      "price": "1€",
+      "price": "1.00€",
       "categorie": "Supplements"
     },
     {
       "id": 8,
       "name": "Maroille",
       "image": "/maroille.png",
-      "price": "1€",
+      "price": "1.00€",
       "categorie": "Supplements"
     },
     {
       "id": 9,
       "name": "Oeuf",
       "image": "/oeuf.png",
-      "price": "1€",
+      "price": "1.00€",
       "categorie": "Supplements"
     },
     {
       "id": 10,
       "name": "Aucuns supplements",
       "image": "/rien.png",
-      "price": "0€",
+      "price": "0.00€",
       "categorie": "Supplements"
     }
   ]

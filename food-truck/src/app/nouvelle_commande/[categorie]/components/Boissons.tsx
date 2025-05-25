@@ -11,14 +11,8 @@ const Boissons = () => {
   const viaSupplements = searchParams.get("viaSupplements") === "true";
   const router = useRouter();
   const { addToCart } = useCart();
-  const menus = searchParams.get("menu") === "true"; // Lecture du paramètre 'menu' de l'URL
-  const groupId = searchParams.get("groupId"); // Suppression de la valeur par défaut
-
-  if (!groupId) {
-    console.error("groupId manquant dans les paramètres d'URL");
-    router.push("/nouvelle_commande");
-    return null;
-  }
+  const menus = searchParams.get("menu") === "true";
+  const groupId = searchParams.get("groupId") || `drink-${Date.now()}`; // Générer un groupId si non fourni
 
   const [quantities, setQuantities] = useState<{ [key: number]: number }>(
     data.Boissons.reduce((acc: { [key: number]: number }, product) => {
@@ -96,29 +90,22 @@ const Boissons = () => {
     selectedProducts.forEach((product, index) => {
       const isMenu = menus;
       const isLeffe = product.name === "Leffe" || product.name === "Leffe Blanche" || product.name === "Leffe Ruby";
-      const calculatedPrice = isMenu && index === 0 && !isLeffe ? 1 : parseFloat(product.price);
-      const supplementPrice = isMenu && index === 0 && !isLeffe ? 1 : 0;
+      // Utiliser le prix du fichier data si on n'est pas dans un menu
+      const calculatedPrice = isMenu ? (isLeffe ? 3.5 : 1) : parseFloat(product.price);
+      const supplementPrice = 0;
 
       const item = {
         id: product.id,
-        name: isMenu && index === 0 ? "" : product.name,
+        name: product.name,
         image: product.image || "/default-drink.png",
         price: calculatedPrice,
         quantity: quantities[product.id],
         uniqueId: `${product.id}-${Date.now()}`,
         menuOption: isMenu,
         supplementPrice: supplementPrice,
-        viaSupplements: true,
+        isBoisson: true,
         groupId: groupId,
-        relatedItems: isMenu && index === 0 ? [{
-          id: product.id,
-          name: product.name,
-          image: product.image || "/default-drink.png",
-          price: calculatedPrice,
-          quantity: quantities[product.id],
-          uniqueId: `${product.id}-${Date.now()}-related`,
-          groupId: groupId
-        }] : []
+        relatedItems: []
       };
 
       addToCart(item);
@@ -136,9 +123,7 @@ const Boissons = () => {
       <div className="w-full flex flex-col items-center justify-center mt-4 style-pen text-lg mb-5">
         <div className="flex flex-col items-center justify-center">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 mb-5">
-            {data.Boissons.filter(
-              (product) => viaSupplements || product.name !== "Aucune boisson"
-            ).map((product) => (
+            {data.Boissons.map((product) => (
               <div
                 key={product.id}
                 className={`flex flex-col items-center justify-center gap-4 ${
