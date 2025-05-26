@@ -63,7 +63,8 @@ const SnacksVeggies = () => {
             price: parseFloat(product.price),
             quantity: 1,
             groupId: groupId,
-            isSnack: true
+            isSnack: true,
+            uniqueId: `snack-veggie-${Date.now()}`
           }]
         });
         router.push(`Sauces?viaSnacksVeggies=true&groupId=${groupId}${isMenu ? "&menu=true" : ""}`);
@@ -109,23 +110,22 @@ const SnacksVeggies = () => {
         Snacks Veggies
       </div>
       <div className="w-full flex flex-col items-center justify-center mt-4 style-pen text-lg mb-5">
-        <div className="flex flex-col items-center justify-center">
-          <div className="grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
+        <div className="flex flex-col items-center justify-center w-full">
+          <div className="flex flex-row flex-wrap items-center justify-center gap-4 w-full max-w-[1200px]">
             {data.SnacksVeggies.filter(
               (product) =>
                 viaVeggiMitraillette || product.name !== "Steack haché"
             ).map((product) => (
               <div
                 key={product.id}
-                className={`flex flex-col items-center justify-center gap-4 ${
+                className={`flex flex-col items-center justify-center gap-4 flex-grow basis-[180px] max-w-[220px] ${
                   viaVeggiMitraillette && selectedSnackVeggie === product.id
                     ? "bg-green-200 border-4 border-green-500 rounded-lg"
                     : ""
                 }`}
               >
                 <div
-                  className="relative shadow-light flex flex-col items-center justify-center gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md"
-                  style={{ width: "200px", height: "200px" }}
+                  className="relative shadow-light flex flex-col items-center justify-center gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md w-full aspect-square"
                   onClick={() => handleSelectSnack(product)}
                 >
                   <div className="relative w-full h-full">

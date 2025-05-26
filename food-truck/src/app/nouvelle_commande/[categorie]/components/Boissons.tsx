@@ -63,19 +63,18 @@ const Boissons = () => {
       </div>
       <div className="w-full flex flex-col items-center justify-center mt-4 style-pen text-lg mb-5">
         <div className="flex flex-col items-center justify-center">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 mb-5">
+          <div className="flex flex-row flex-wrap items-center justify-center gap-4 mb-5">
             {products.map((product) => (
               <div
                 key={product.id}
-                className={`flex flex-col items-center justify-center gap-4 ${
+                className={`flex flex-col items-center justify-center gap-4 flex-grow basis-[200px] max-w-[300px] ${
                   selectedBoisson === product.id
                     ? "bg-green-200 border-4 border-green-500 rounded-lg"
                     : ""
                 }`}
               >
                 <div
-                  className="relative shadow-light flex flex-col items-center justify-center gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md"
-                  style={{ width: "200px", height: "200px" }}
+                  className="relative shadow-light flex flex-col items-center justify-center gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md w-full aspect-square"
                   onClick={() => handleSelectBoisson(product.id)}
                 >
                   <div className="relative w-full h-full">

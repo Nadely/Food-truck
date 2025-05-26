@@ -73,17 +73,16 @@ const Frites = () => {
         Frites
       </div>
       <div className="w-full flex flex-col items-center justify-center mt-4 style-pen text-lg mb-5">
-        <div className="flex flex-col items-center justify-center">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 gap-4">
+        <div className="flex flex-col items-center justify-center w-full">
+          <div className="flex flex-row flex-wrap items-center justify-center gap-4 w-full max-w-[1200px]">
           {data.Frites.map((product) => (
             <div
               key={product.id}
-              className="flex flex-col items-center justify-center gap-4"
+              className="flex flex-col items-center justify-center gap-4 flex-grow basis-[180px] max-w-[220px]"
             >
               {/* ✅ Produit cliquable */}
               <div
-                className="relative shadow-light flex flex-col items-center justify-center gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:rounded-md hover:scale-105 transition-transform duration-200 hover:shadow-md"
-                style={{ width: "200px", height: "200px" }}
+                className="relative shadow-light flex flex-col items-center justify-center gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:rounded-md hover:scale-105 transition-transform duration-200 hover:shadow-md w-full aspect-square"
               >
                 <div className="relative w-full h-full">
                     <Image
@@ -119,7 +118,6 @@ const Frites = () => {
               </p>
             </div>
           ))}
-
           </div>
         </div>
         <div className="flex flex-col items-center justify-center gap-4">

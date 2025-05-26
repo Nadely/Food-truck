@@ -115,7 +115,7 @@ const Veggies = () => {
       <div className="flex flex-col items-center justify-center border-b-2 border-white text-white text-2xl gap-4 mb-5">
         Veggies
       </div>
-      <div className="w-full flex flex-row items-center justify-center mt-10 style-pen text-lg gap-8 mb-5">
+      <div className="w-full flex flex-row flex-wrap items-center justify-center mt-10 style-pen text-lg gap-8 mb-5">
         {data.Veggies.map((product) => {
           const basePrice = parseFloat(product.price);
           const menuPrice = menus ? 2.5 : 0;
@@ -124,11 +124,10 @@ const Veggies = () => {
           const totalPrice = basePrice + menuPrice + garniturePrice;
 
           return (
-            <div key={product.id} className="flex flex-col items-center gap-2">
+            <div key={product.id} className="flex flex-col items-center gap-2 flex-grow basis-[180px] max-w-[220px]">
               <button
                 onClick={() => handleProduitClick(product)}
-                className="relative shadow-light flex flex-col items-center justify-center gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:rounded-md hover:scale-105 transition-transform duration-200 hover:shadow-md"
-                style={{ width: "200px", height: "200px" }}
+                className="relative shadow-light flex flex-col items-center justify-center gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:rounded-md hover:scale-105 transition-transform duration-200 hover:shadow-md w-full aspect-square"
               >
                 <div className="relative w-full h-full">
                     <Image
