@@ -86,8 +86,8 @@ const Enfants = () => {
       </div>
       <div className="w-full flex flex-col items-center justify-center mt-4 style-pen text-lg mb-5">
         {/* Produits cliquables */}
-        <div className="flex flex-col items-center justify-center">
-          <div className="flex flex-row flex-wrap items-center justify-center gap-4">
+        <div className="flex flex-col items-center justify-center w-full">
+          <div className="flex flex-row flex-wrap items-center justify-center gap-4 w-full max-w-[1200px]">
             {data.Enfants.filter(
               (product) => product.id !== 5 && product.id !== 6
             ).map((product) => (
@@ -119,7 +119,7 @@ const Enfants = () => {
         </div>
 
         {/* Produits non cliquables (id 5 et 6) */}
-        <div className="flex flex-row flex-wrap items-center justify-center mt-8 gap-4">
+        <div className="flex flex-row flex-wrap items-center justify-center mt-8 gap-4 w-full max-w-[1200px]">
           {data.Enfants.filter(
             (product) => product.id === 5 || product.id === 6
           ).map((product) => (
