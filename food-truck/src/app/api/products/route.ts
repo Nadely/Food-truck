@@ -11,8 +11,11 @@ export async function GET() {
     // Transformer les données en format plat pour la compatibilité
     const products = Object.entries(data).flatMap(([category, products]) => {
       return (products as any[])
-        // Exclure les éléments "Aucun(s)"
-        .filter(product => !product.name.toLowerCase().includes("aucun"))
+        // Exclure les éléments "Aucun(s)" sauf "Aucune sauce" et "Aucune boisson"
+        .filter(product => {
+          const name = product.name.toLowerCase();
+          return name === "aucune sauce" || name === "aucune boisson" || !name.includes("aucun");
+        })
         // Inclure uniquement les produits nécessaires pour les stocks
         .filter(product => {
           const name = product.name.toLowerCase();

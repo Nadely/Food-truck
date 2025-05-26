@@ -95,40 +95,56 @@ const Panier = () => {
 
       // Préparer les mises à jour de stock
       const updatedProducts = products.map((product: any) => {
-        // Chercher tous les items de la commande qui correspondent à ce produit
-        const matchingItems = itemsWithGroupId.filter(item => {
-          const itemName = item.name?.toLowerCase().trim();
-          const productName = product.name.toLowerCase().trim();
+        const productName = product.name.toLowerCase().trim();
+        let quantityToSubtract = 0;
 
-          // Vérifier si l'item principal correspond
-          if (itemName === productName) {
-            console.log(`✅ Match trouvé pour ${product.name} (item principal)`);
-            return true;
-          }
+        // Gestion des exceptions pour les pains mitraillette et burger
+        if (productName.includes('pain mitraillette')) {
+          const mitrailletteItems = itemsWithGroupId.filter(item =>
+            item.name?.toLowerCase().trim().includes('mitraillette')
+          );
+          quantityToSubtract = mitrailletteItems.reduce((total, item) =>
+            total + (item.quantity || 1), 0
+          );
+          console.log(`🍞 Mise à jour stock pain mitraillette: -${quantityToSubtract}`);
+        }
+        else if (productName.includes('pain burger')) {
+          const burgerItems = itemsWithGroupId.filter(item =>
+            item.name?.toLowerCase().trim().includes('burger')
+          );
+          quantityToSubtract = burgerItems.reduce((total, item) =>
+            total + (item.quantity || 1), 0
+          );
+          console.log(`🍞 Mise à jour stock pain burger: -${quantityToSubtract}`);
+        }
+        else {
+          // Logique normale pour les autres produits
+          const matchingItems = itemsWithGroupId.filter(item => {
+            const itemName = item.name?.toLowerCase().trim();
 
-          // Vérifier si un des items liés correspond
-          if (item.relatedItems?.some(related => {
-            const relatedName = related.name?.toLowerCase().trim();
-            const isMatch = relatedName === productName;
-            if (isMatch) {
-              console.log(`✅ Match trouvé pour ${product.name} (item lié)`);
+            // Vérifier l'item principal
+            if (itemName === productName) {
+              console.log(`✅ Match trouvé pour ${product.name} (item principal)`);
+              return true;
             }
-            return isMatch;
-          })) {
-            return true;
-          }
 
-          return false;
-        });
+            // Vérifier les items liés
+            return item.relatedItems?.some(related => {
+              const relatedName = related.name?.toLowerCase().trim();
+              const isMatch = relatedName === productName;
+              if (isMatch) {
+                console.log(`✅ Match trouvé pour ${product.name} (item lié)`);
+              }
+              return isMatch;
+            });
+          });
 
-        if (matchingItems.length > 0) {
-          // Calculer la quantité totale à soustraire
-          const quantityToSubtract = matchingItems.reduce((total, item) => {
-            const itemQuantity = item.quantity || 1;
-            console.log(`📊 Quantité à soustraire pour ${product.name}: ${itemQuantity}`);
-            return total + itemQuantity;
-          }, 0);
+          quantityToSubtract = matchingItems.reduce((total, item) =>
+            total + (item.quantity || 1), 0
+          );
+        }
 
+        if (quantityToSubtract > 0) {
           const newStock = Math.max(0, product.stock - quantityToSubtract);
           console.log(`📉 Mise à jour du stock de ${product.name}:`, {
             ancienStock: product.stock,
@@ -307,9 +323,9 @@ const Panier = () => {
       <div className="flex-grow">
         <h2 className="text-xl text-center style-pen border-b-2 border-black mb-4">Panier</h2>
         {cart.length === 0 ? (
-          <p>Votre panier est vide.</p>
+          <div className="text-center">Votre panier est vide.</div>
         ) : (
-          <ul>
+          <ul className="list-none p-0">
             {cart.map((item: any) => (
               <li key={generateUniqueId(`item-${item.id}`)} className="mb-4">
                 <div className="flex justify-between items-center">

@@ -44,10 +44,13 @@ const Sauces = () => {
           throw new Error("Erreur lors de la récupération des produits");
         }
         const data = await response.json();
-        // Filtrer uniquement les sauces
-        const sauces = data.products.filter((product: Product) =>
-          product.categories.includes("sauces")
-        );
+        const isVia = viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette || viaAperoBox || viaFrites;
+        const sauces = data.products.filter((product: Product) => {
+          if (product.name === "Aucune sauce") {
+            return isVia;
+          }
+          return product.categories.includes("sauces");
+        });
         setProducts(sauces);
       } catch (error) {
         console.error("Erreur:", error);
@@ -55,7 +58,7 @@ const Sauces = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, [viaSnacks, viaSnacksVeggies, viaEnfants, viaBrochettes, viaMitraillette, viaAperoBox, viaFrites]);
 
   // États locaux
   const [quantities, setQuantities] = useState<{ [key: number]: number }>(
@@ -119,7 +122,7 @@ const Sauces = () => {
             id: product.id,
             name: product.name,
             image: product.image,
-            price: 0,
+            price: product.name === "Aucune sauce" ? 0 : 0,
             quantity: 1,
             uniqueId: `sauce-${product.id}-${Date.now()}`,
             groupId: groupId,
@@ -127,7 +130,7 @@ const Sauces = () => {
               id: product.id,
               name: product.name,
               image: product.image,
-              price: 0,
+              price: product.name === "Aucune sauce" ? 0 : 0,
               quantity: 1,
               uniqueId: `sauce-${product.id}-${Date.now()}-related`,
               groupId: groupId
@@ -254,17 +257,10 @@ const Sauces = () => {
 
         {/* Affichage des sauces */}
         <div className="grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {products.filter(
-            (product) =>
-              (viaSnacks ||
-                viaSnacksVeggies ||
-                viaEnfants ||
-                viaBrochettes ||
-                viaMitraillette ||
-                viaAperoBox ||
-                viaFrites) ||
-              product.name !== "Aucune sauce"
-          ).map((product) => (
+          {products.filter(product => {
+            const isVia = viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette || viaAperoBox || viaFrites;
+            return isVia || product.name !== "Aucune sauce";
+          }).map((product) => (
             <div
               key={product.id}
               onClick={() => handleSelectSauce(product)}

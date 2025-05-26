@@ -31,10 +31,12 @@ const Boissons = () => {
           throw new Error("Erreur lors de la récupération des produits");
         }
         const data = await response.json();
-        // Filtrer uniquement les boissons
-        const boissons = data.products.filter((product: Product) =>
-          product.categories.includes("boissons")
-        );
+        const boissons = data.products.filter((product: Product) => {
+          if (product.name === "Aucune boisson") {
+            return viaSupplements;
+          }
+          return product.categories.includes("boissons");
+        });
         setProducts(boissons);
       } catch (error) {
         console.error("Erreur:", error);
@@ -42,7 +44,7 @@ const Boissons = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, [viaSupplements]);
 
   const handleSelectBoissons = (id: number) => {
     // Si "Aucune boisson" est sélectionnée, réinitialisez les quantités
@@ -175,22 +177,24 @@ const Boissons = () => {
                     <p className="text-sm mt-auto">{product.name}</p>
                     {product.name === "Aucune boisson" ? (
                       <></>
-                    ) : (
+                    ) : !viaSupplements ? (
                       <div className="flex flex-row items-center gap-4">
                         <button
                           onClick={() => handleDecrement(product.id)}
                           className="text-sm bg-red-500 ml-3 focus:ring-4 rounded-lg px-8 py-2 "
-                          >
+                        >
                           -
                         </button>
                         <span className="text-sm">{quantities[product.id]}</span>
                         <button
                           onClick={() => handleIncrement(product.id)}
                           className="text-sm bg-green-500 focus:ring-4 rounded-lg px-8 py-2 "
-                          >
+                        >
                           +
                         </button>
                       </div>
+                    ) : (
+                      <></>
                     )}
                   </div>
                 </div>
