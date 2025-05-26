@@ -73,17 +73,18 @@ const StockAlerts = () => {
         </div>
         {isExpanded && (
           <div className="max-h-60 overflow-y-auto">
-            {alerts.map((alert) => (
-              <div key={alert.productId} className="mb-2 p-2 bg-white rounded">
-                <p className="font-semibold">{alert.productName}</p>
-                <p className="text-sm">
-                  Stock actuel: {alert.currentStock} / Limite: {alert.stockLimit}
-                </p>
-                <p className="text-xs text-gray-600">
-                  Catégories: {alert.categories.join(", ")}
-                </p>
-              </div>
-            ))}
+            {alerts
+              .filter((alert, index, self) =>
+                index === self.findIndex(a => a.productName === alert.productName)
+              )
+              .map((alert) => (
+                <div key={alert.productId} className="mb-2 p-2 bg-white rounded">
+                  <p className="font-semibold">{alert.productName}</p>
+                  <p className="text-sm">
+                    Stock actuel: {alert.currentStock} / Limite: {alert.stockLimit}
+                  </p>
+                </div>
+              ))}
           </div>
         )}
       </div>

@@ -1235,7 +1235,7 @@
       "image": "/rien.png",
       "price": "0€",
       "categorie": "Boissons",
-      "stock": 20,
+      "stock": 19,
       "stockConseil": 0,
       "lost": 0,
       "stockAnnuel": 20,
@@ -1684,7 +1684,7 @@
         "pains",
         "frais"
       ],
-      "stock": 18,
+      "stock": 17,
       "stockConseil": 0,
       "lost": 0,
       "stockAnnuel": 20,
@@ -1715,7 +1715,7 @@
         "garniture",
         "burger"
       ],
-      "stock": 20,
+      "stock": 19,
       "stockConseil": 0,
       "lost": 0,
       "stockAnnuel": 20,

@@ -358,6 +358,14 @@ const Panier = () => {
       }
     }
 
+    // Éviter les doublons en utilisant un Set pour les noms uniques
+    const uniqueNames = new Set();
+    options = options.filter(option => {
+      const isDuplicate = uniqueNames.has(option.name);
+      uniqueNames.add(option.name);
+      return !isDuplicate;
+    });
+
     setAvailableOptions(options);
     setIsPopupOpen(true);
   };
