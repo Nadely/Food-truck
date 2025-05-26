@@ -8,6 +8,8 @@ const StockAlerts = () => {
   const [alerts, setAlerts] = useState<StockAlert[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(true);
+  const [previousAlertsCount, setPreviousAlertsCount] = useState(0);
 
   useEffect(() => {
     const fetchAlerts = async () => {
@@ -23,6 +25,13 @@ const StockAlerts = () => {
 
         const stockAlerts = checkStockAlerts(products);
         setAlerts(stockAlerts);
+
+        // Réouvrir la fenêtre si de nouvelles alertes sont détectées
+        if (stockAlerts.length > previousAlertsCount) {
+          setIsExpanded(true);
+        }
+        setPreviousAlertsCount(stockAlerts.length);
+
         setLoading(false);
       } catch (error) {
         console.error("Erreur lors du chargement des alertes:", error);
@@ -34,7 +43,7 @@ const StockAlerts = () => {
     fetchAlerts();
     const interval = setInterval(fetchAlerts, 5 * 60 * 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [previousAlertsCount]);
 
   if (error) {
     return (
@@ -53,20 +62,30 @@ const StockAlerts = () => {
   return (
     <div className="fixed bottom-4 right-4 z-50">
       <div className="bg-red-100 border-2 border-red-500 rounded-lg p-4 shadow-lg">
-        <h3 className="text-lg font-bold text-red-700 mb-2">Alertes de Stock</h3>
-        <div className="max-h-60 overflow-y-auto">
-          {alerts.map((alert) => (
-            <div key={alert.productId} className="mb-2 p-2 bg-white rounded">
-              <p className="font-semibold">{alert.productName}</p>
-              <p className="text-sm">
-                Stock actuel: {alert.currentStock} / Limite: {alert.stockLimit}
-              </p>
-              <p className="text-xs text-gray-600">
-                Catégories: {alert.categories.join(", ")}
-              </p>
-            </div>
-          ))}
+        <div className="flex justify-between items-center mb-2">
+          <h3 className="text-lg font-bold text-red-700">Alertes de Stock</h3>
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="text-red-700 hover:text-red-900"
+          >
+            {isExpanded ? "▼" : "▲"}
+          </button>
         </div>
+        {isExpanded && (
+          <div className="max-h-60 overflow-y-auto">
+            {alerts.map((alert) => (
+              <div key={alert.productId} className="mb-2 p-2 bg-white rounded">
+                <p className="font-semibold">{alert.productName}</p>
+                <p className="text-sm">
+                  Stock actuel: {alert.currentStock} / Limite: {alert.stockLimit}
+                </p>
+                <p className="text-xs text-gray-600">
+                  Catégories: {alert.categories.join(", ")}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
