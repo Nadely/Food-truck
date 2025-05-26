@@ -99,19 +99,25 @@ const Panier = () => {
         let quantityToSubtract = 0;
 
         // Gestion des exceptions pour les pains mitraillette et burger
-        if (productName.includes('pain mitraillette')) {
-          const mitrailletteItems = itemsWithGroupId.filter(item =>
-            item.name?.toLowerCase().trim().includes('mitraillette')
-          );
+        if (productName === 'pain mitraillette') {
+          // Chercher toutes les mitraillettes dans la commande
+          const mitrailletteItems = itemsWithGroupId.filter(item => {
+            const itemName = item.name?.toLowerCase().trim();
+            return itemName?.includes('mitraillette');
+          });
+          console.log('🍞 Items mitraillette trouvés:', mitrailletteItems);
           quantityToSubtract = mitrailletteItems.reduce((total, item) =>
             total + (item.quantity || 1), 0
           );
           console.log(`🍞 Mise à jour stock pain mitraillette: -${quantityToSubtract}`);
         }
-        else if (productName.includes('pain burger')) {
-          const burgerItems = itemsWithGroupId.filter(item =>
-            item.name?.toLowerCase().trim().includes('burger')
-          );
+        else if (productName === 'pain burger') {
+          // Chercher tous les burgers dans la commande
+          const burgerItems = itemsWithGroupId.filter(item => {
+            const itemName = item.name?.toLowerCase().trim();
+            return itemName?.includes('burger');
+          });
+          console.log('🍞 Items burger trouvés:', burgerItems);
           quantityToSubtract = burgerItems.reduce((total, item) =>
             total + (item.quantity || 1), 0
           );

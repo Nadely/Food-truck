@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useCart } from "../../../context/CartContext";
 import { Product } from "../../../../types/allTypes";
+import dataProduits from "../../../../data/dataProduits.json";
 
 const Burgers = () => {
   const [menus, setMenus] = useState(false);
@@ -17,24 +18,9 @@ const Burgers = () => {
   const handleCheckboxChangeGarnitures = () => setGarnitures(!garnitures);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch("/api/products");
-        if (!response.ok) {
-          throw new Error("Erreur lors de la récupération des produits");
-        }
-        const data = await response.json();
-        // Filtrer uniquement les burgers
-        const burgers = data.products.filter((product: Product) =>
-          product.categories.includes("burger")
-        );
-        setProducts(burgers);
-      } catch (error) {
-        console.error("Erreur:", error);
-      }
-    };
-
-    fetchProducts();
+    // Récupérer directement les burgers depuis dataProduits.json
+    const burgers = dataProduits.Burgers || [];
+    setProducts(burgers);
   }, []);
 
   const handleProduitClick = (product: any) => {
