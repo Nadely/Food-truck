@@ -123,6 +123,70 @@ const Panier = () => {
           );
           console.log(`🍞 Mise à jour stock pain burger: -${quantityToSubtract}`);
         }
+        else if (productName === 'fish') {
+          // Chercher tous les fish burgers dans la commande
+          const fishBurgerItems = itemsWithGroupId.filter(item => {
+            const itemName = item.name?.toLowerCase().trim();
+            return itemName?.includes('fish burger');
+          });
+          console.log('🐟 Items fish burger trouvés:', fishBurgerItems);
+          quantityToSubtract = fishBurgerItems.reduce((total, item) =>
+            total + (item.quantity || 1), 0
+          );
+          console.log(`🐟 Mise à jour stock fish: -${quantityToSubtract}`);
+        }
+        else if (productName === 'chicken') {
+          // Chercher tous les chicken burgers dans la commande
+          const chickenBurgerItems = itemsWithGroupId.filter(item => {
+            const itemName = item.name?.toLowerCase().trim();
+            return itemName?.includes('chicken burger');
+          });
+          console.log('🍗 Items chicken burger trouvés:', chickenBurgerItems);
+          quantityToSubtract = chickenBurgerItems.reduce((total, item) =>
+            total + (item.quantity || 1), 0
+          );
+          console.log(`🍗 Mise à jour stock chicken: -${quantityToSubtract}`);
+        }
+        else if (productName === 'steak crispy') {
+          // Chercher tous les crispy burgers dans la commande
+          const crispyBurgerItems = itemsWithGroupId.filter(item => {
+            const itemName = item.name?.toLowerCase().trim();
+            return itemName?.includes('crispy burger');
+          });
+          console.log('🍖 Items crispy burger trouvés:', crispyBurgerItems);
+          quantityToSubtract = crispyBurgerItems.reduce((total, item) =>
+            total + (item.quantity || 1), 0
+          );
+          console.log(`🍖 Mise à jour stock steak crispy: -${quantityToSubtract}`);
+        }
+        else if (productName === 'steak mexicain') {
+          // Chercher tous les mexicain burgers dans la commande
+          const mexicainBurgerItems = itemsWithGroupId.filter(item => {
+            const itemName = item.name?.toLowerCase().trim();
+            return itemName?.includes('mexicano burger');
+          });
+          console.log('🌮 Items mexicain burger trouvés:', mexicainBurgerItems);
+          quantityToSubtract = mexicainBurgerItems.reduce((total, item) =>
+            total + (item.quantity || 1), 0
+          );
+          console.log(`🌮 Mise à jour stock steak mexicain: -${quantityToSubtract}`);
+        }
+        else if (productName === 'steack') {
+          // Chercher tous les burgers classiques et bicky dans la commande
+          const classicBurgerItems = itemsWithGroupId.filter(item => {
+            const itemName = item.name?.toLowerCase().trim();
+            return itemName?.includes('burger') &&
+                   !itemName?.includes('fish') &&
+                   !itemName?.includes('chicken') &&
+                   !itemName?.includes('crispy') &&
+                   !itemName?.includes('mexicano');
+          });
+          console.log('🥩 Items burger classique trouvés:', classicBurgerItems);
+          quantityToSubtract = classicBurgerItems.reduce((total, item) =>
+            total + (item.quantity || 1), 0
+          );
+          console.log(`🥩 Mise à jour stock steak haché: -${quantityToSubtract}`);
+        }
         else {
           // Logique normale pour les autres produits
           const matchingItems = itemsWithGroupId.filter(item => {
