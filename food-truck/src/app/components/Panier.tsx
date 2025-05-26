@@ -47,6 +47,10 @@ const Panier = () => {
           if (related.isSupplements) {
             return sum + 1;
           }
+          // Pour les snacks, on ne compte pas le prix
+          if (related.categorie?.toLowerCase().includes('snacks')) {
+            return sum;
+          }
           // Pour les autres items, utiliser leur prix
           return sum + cleanPrice(related.price || 0);
         }, 0)
@@ -419,7 +423,7 @@ const Panier = () => {
                     )}
                     <p className="ml-2 style-pen">
                       {item.categorie === "Enfants" ? "Menu Enfants" :
-                       (item.relatedItems?.some(rel => rel.name === item.name) ? "" : item.name)}
+                       (item.relatedItems?.length > 0 ? "" : item.name)}
                     </p>
                   </div>
                   {["Mitraillette", "Burger", "Veggie", "Enfants"].some((kw) => item.name?.includes(kw)) ? (
@@ -485,7 +489,7 @@ const Panier = () => {
                             </div>
                             <span className="ml-2">
                               {related.name}
-                              {related.isBoisson && related.price > 0 && (
+                              {related.isBoisson && !related.isSupplements && related.price > 0 && (
                                 <span className="ml-2 text-sm">
                                   ({related.price}€)
                                 </span>
@@ -562,71 +566,51 @@ const Panier = () => {
                               });
 
                               const isBoissonOrSupp =
-                                relatedCategorie.includes("boissons") ||
-                                relatedCategorie.includes("supplements") ||
-                                optionCategorie.includes("boissons") ||
-                                optionCategorie.includes("supplements") ||
-                                option.name.toLowerCase().includes("leffe") ||
+                                (relatedCategorie === "boissons") ||
+                                (optionCategorie === "boissons") ||
+                                (option.name.toLowerCase().includes("leffe") ||
                                 option.name.toLowerCase().includes("coca") ||
                                 option.name.toLowerCase().includes("tropico") ||
-                                option.name.toLowerCase().includes("ice tea");
+                                option.name.toLowerCase().includes("ice tea"));
 
                               console.log("Détection boisson/supplément:", {
                                 relatedCategorie,
                                 optionCategorie,
                                 isBoissonOrSupp,
-                                optionName: option.name
+                                optionName: option.name,
+                                viaMitraillette: related.viaMitraillette
                               });
 
                               // Gestion spéciale pour les suppléments et boissons
                               let prixFinal = 0;
-                              if (isBoissonOrSupp) {
-                                if (option.name === "Aucuns supplements" || option.name === "Aucune boisson") {
+
+                              // Traitement spécial pour les snacks
+                              if (related.viaMitraillette || optionCategorie === "snacks" || relatedCategorie === "snacks") {
+                                // Si le snack est ajouté via une mitraillette, il est gratuit
+                                if (related.viaMitraillette) {
                                   prixFinal = 0;
-                                  console.log("Aucun supplément/boisson sélectionné");
-                                  return {
-                                    ...option,
-                                    price: 0,
-                                    categorie: option.name === "Aucune boisson" ? "boissons" : "supplements",
-                                    uniqueId: `${option.name === "Aucune boisson" ? "boisson" : "supplements"}-none-${Date.now()}`
-                                  };
+                                  console.log("Snack via mitraillette → Gratuit");
                                 } else {
-                                  const isMenu = ["menu enfants", "mitraillettes", "burgers", "veggies"].some((kw) =>
-                                    item.name?.toLowerCase().includes(kw)
-                                  );
-
-                                  console.log("Vérification du type de boisson:", {
-                                    optionName: option.name,
-                                    isMenu,
-                                    optionCategorie
-                                  });
-
-                                  if (optionCategorie.includes("boissons") ||
-                                      option.name.toLowerCase().includes("leffe") ||
-                                      option.name.toLowerCase().includes("coca") ||
-                                      option.name.toLowerCase().includes("tropico") ||
-                                      option.name.toLowerCase().includes("ice tea")) {
-                                    if (option.name.toLowerCase().includes("leffe")) {
-                                      prixFinal = 3.5;
-                                      console.log("Boisson détectée : Leffe → Prix = 3.5€");
-                                    } else {
-                                      prixFinal = 1;
-                                      console.log("Boisson détectée (autre que Leffe) → Prix = 1€");
-                                    }
-                                  } else {
-                                    prixFinal = 0;
-                                    console.log("Ce n'est pas une boisson → Prix = 0€");
-                                  }
+                                  prixFinal = cleanPrice(option.price || 0);
+                                  console.log("Snack normal → Prix d'origine:", prixFinal);
                                 }
+                                return {
+                                  ...option,
+                                  price: prixFinal,
+                                  categorie: "snacks",
+                                  uniqueId: `snack-${Date.now()}`,
+                                  isSnack: true,
+                                  viaMitraillette: related.viaMitraillette
+                                };
                               }
 
                               return {
                                 ...related,
                                 ...option,
                                 price: prixFinal,
-                                categorie: "boissons",
-                                isBoisson: true,
-                                displayPrice: prixFinal + "€"
+                                categorie: optionCategorie.includes("boissons") ? "boissons" : "snacks",
+                                isBoisson: optionCategorie.includes("boissons"),
+                                displayPrice: prixFinal > 0 ? prixFinal + "€" : ""
                               };
                             }
                             return related;
