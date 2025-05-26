@@ -19,6 +19,10 @@ const Panier = () => {
     { id: number; name: string; image: string; price?: number; uniqueId?: string; categorie?: string }[]
   >([]);
 
+  const generateUniqueId = (prefix: string) => {
+    return `${prefix}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  };
+
   const isNouvelleCommande = () => pathname === "/nouvelle_commande";
 
   const cleanPrice = (priceString: string | number) => {
@@ -55,19 +59,97 @@ const Panier = () => {
 
       // Préparer les items avec leurs groupId
       const itemsWithGroupId = cart.map(item => {
-        const groupId = item.groupId || `group-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        const groupId = item.groupId || generateUniqueId('group');
         return {
           ...item,
           groupId,
+          uniqueId: generateUniqueId('item'),
           relatedItems: item.relatedItems?.map(related => ({
             ...related,
-            groupId
+            groupId,
+            uniqueId: generateUniqueId('related')
           }))
         };
       });
 
       console.log("Items avec groupId:", itemsWithGroupId);
 
+      // Mettre à jour les stocks dans dataProduits.json
+      const productsResponse = await fetch("/api/products");
+      if (!productsResponse.ok) {
+        throw new Error("Erreur lors de la récupération des produits");
+      }
+      const { products } = await productsResponse.json();
+
+      // Créer une map des produits par nom pour une recherche plus rapide
+      const productsByName = new Map(
+        products.map((p: any) => [p.name.toLowerCase().trim(), p])
+      );
+
+      // Préparer les mises à jour de stock
+      const updatedProducts = products.map((product: any) => {
+        // Chercher tous les items de la commande qui correspondent à ce produit
+        const matchingItems = itemsWithGroupId.filter(item => {
+          const itemName = item.name?.toLowerCase().trim();
+          const productName = product.name.toLowerCase().trim();
+
+          // Vérifier si l'item principal correspond
+          if (itemName === productName) {
+            console.log(`✅ Match trouvé pour ${product.name} (item principal)`);
+            return true;
+          }
+
+          // Vérifier si un des items liés correspond
+          if (item.relatedItems?.some(related => {
+            const relatedName = related.name?.toLowerCase().trim();
+            const isMatch = relatedName === productName;
+            if (isMatch) {
+              console.log(`✅ Match trouvé pour ${product.name} (item lié)`);
+            }
+            return isMatch;
+          })) {
+            return true;
+          }
+
+          return false;
+        });
+
+        if (matchingItems.length > 0) {
+          // Calculer la quantité totale à soustraire
+          const quantityToSubtract = matchingItems.reduce((total, item) => {
+            const itemQuantity = item.quantity || 1;
+            console.log(`📊 Quantité à soustraire pour ${product.name}: ${itemQuantity}`);
+            return total + itemQuantity;
+          }, 0);
+
+          const newStock = Math.max(0, product.stock - quantityToSubtract);
+          console.log(`📉 Mise à jour du stock de ${product.name}:`, {
+            ancienStock: product.stock,
+            nouvelleQuantite: quantityToSubtract,
+            nouveauStock: newStock
+          });
+
+          return {
+            ...product,
+            stock: newStock
+          };
+        }
+
+        return product;
+      });
+
+      // Envoyer la mise à jour des stocks
+      const updateStockResponse = await fetch("/api/products", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ products: updatedProducts }),
+      });
+
+      if (!updateStockResponse.ok) {
+        throw new Error("Erreur lors de la mise à jour des stocks");
+      }
+
+      // Envoyer la commande
       const payload = {
         items: itemsWithGroupId,
         user_name: "",
@@ -80,17 +162,17 @@ const Panier = () => {
 
       console.log("Données envoyées au serveur:", payload);
 
-      const response = await fetch("/api/panier", {
+      const orderResponse = await fetch("/api/panier", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
-      if (response.ok) {
+      if (orderResponse.ok) {
         setCart([]);
         setRefreshKey((prev) => prev + 1);
       } else {
-        const data = await response.json();
+        const data = await orderResponse.json();
         console.error("Erreur:", data.message);
       }
     } catch (error) {
@@ -222,7 +304,7 @@ const Panier = () => {
         ) : (
           <ul>
             {cart.map((item: any) => (
-              <li key={item.uniqueId} className="mb-4">
+              <li key={generateUniqueId(`item-${item.id}`)} className="mb-4">
                 <div className="flex justify-between items-center">
                   <div className="flex items-center">
                     {(!item.relatedItems || item.relatedItems.length === 0) && (
@@ -292,7 +374,7 @@ const Panier = () => {
                       )}
                       <ul className="ml-4 mt-2">
                         {item.relatedItems.map((related, index) => (
-                          <li key={`${related.uniqueId}-${index}`} className="flex items-center mb-1">
+                          <li key={generateUniqueId(`related-${related.id}-${index}`)} className="flex items-center mb-1">
                             <div className="w-8 h-8 relative">
                               <Image
                                 src={related.image}

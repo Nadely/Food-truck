@@ -2,8 +2,8 @@
 
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { useState } from "react";
-import data from "../../../../data/dataProduits.json";
+import { useState, useEffect } from "react";
+import { Product } from "../../../../types/allTypes";
 import { useRouter } from "next/navigation";
 import { useCart } from "../../../context/CartContext";
 
@@ -11,6 +11,7 @@ const Sauces = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const { addToCart } = useCart();
+  const [products, setProducts] = useState<Product[]>([]);
 
   // Récupération des paramètres via
   const viaSnacks = searchParams.get("viaSnacks") === "true";
@@ -35,30 +36,31 @@ const Sauces = () => {
   // Calcul des sauces gratuites
   let freeSauces = 0;
 
-  data.AperoBox.forEach((box) => {
-    const quantity = parseInt(searchParams.get(box.name) || "0");
-    if (quantity > 0) {
-      freeSauces += quantity * (box.name === "Party Box" ? 2 : 1);
-    }
-  });
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("/api/products");
+        if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des produits");
+        }
+        const data = await response.json();
+        // Filtrer uniquement les sauces
+        const sauces = data.products.filter((product: Product) =>
+          product.categories.includes("sauces")
+        );
+        setProducts(sauces);
+      } catch (error) {
+        console.error("Erreur:", error);
+      }
+    };
 
-  data.Frites.forEach((frites) => {
-    const quantity = parseInt(searchParams.get(frites.name) || "0");
-    if (quantity > 0) {
-      freeSauces += quantity;
-    }
-  });
-
-  if (viaSnacks) freeSauces += 1;
-  if (viaSnacksVeggies) freeSauces += 1;
-  if (viaEnfants) freeSauces += 1;
-  if (viaBrochettes) freeSauces += 1;
-  if (viaMitraillette) freeSauces += 1;
+    fetchProducts();
+  }, []);
 
   // États locaux
   const [quantities, setQuantities] = useState<{ [key: number]: number }>(
-    data.Sauces.reduce((acc, sauce) => {
-      acc[sauce.id] = 0;
+    products.reduce((acc, product) => {
+      acc[product.id] = 0;
       return acc;
     }, {} as { [key: number]: number })
   );
@@ -83,15 +85,15 @@ const Sauces = () => {
   };
 
   // Sélection simple ou multiple (clic)
-  const handleSelectSauce = (sauce: any) => {
+  const handleSelectSauce = (product: Product) => {
     if (isMultiSelect) {
       setSelectedSauce((prevSelected) => {
         if (Array.isArray(prevSelected)) {
-          return prevSelected.includes(sauce.id)
-            ? prevSelected.filter((id) => id !== sauce.id)
-            : [...prevSelected, sauce.id];
+          return prevSelected.includes(product.id)
+            ? prevSelected.filter((id) => id !== product.id)
+            : [...prevSelected, product.id];
         }
-        return [sauce.id];
+        return [product.id];
       });
     } else if (
       viaSnacks ||
@@ -100,138 +102,137 @@ const Sauces = () => {
       viaBrochettes ||
       viaMitraillette
     ) {
-      setSelectedSauce(sauce.id);
+      setSelectedSauce(product.id);
     }
   };
 
+  // Validation
+  const handleAddToCart = () => {
+    const isVia =
+      viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette || viaFrites || viaAperoBox;
 
-// Validation
-const handleAddToCart = () => {
-  const isVia =
-    viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette || viaFrites || viaAperoBox;
-
-  if (viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette) {
-    if (selectedSauce !== null) {
-      const sauce = data.Sauces.find((item) => item.id === selectedSauce);
-      if (sauce) {
-        addToCart({
-          id: sauce.id,
-          name: sauce.name,
-          image: sauce.image,
-          price: 0,
-          quantity: 1,
-          uniqueId: `sauce-${sauce.id}-${Date.now()}`,
-          groupId: groupId,
-          relatedItems: [{
-            id: sauce.id,
-            name: sauce.name,
-            image: sauce.image,
+    if (viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette) {
+      if (selectedSauce !== null) {
+        const product = products.find((item) => item.id === selectedSauce);
+        if (product) {
+          addToCart({
+            id: product.id,
+            name: product.name,
+            image: product.image,
             price: 0,
             quantity: 1,
-            uniqueId: `sauce-${sauce.id}-${Date.now()}-related`,
-            groupId: groupId
-          }]
-        });
+            uniqueId: `sauce-${product.id}-${Date.now()}`,
+            groupId: groupId,
+            relatedItems: [{
+              id: product.id,
+              name: product.name,
+              image: product.image,
+              price: 0,
+              quantity: 1,
+              uniqueId: `sauce-${product.id}-${Date.now()}-related`,
+              groupId: groupId
+            }]
+          });
+        }
       }
-    }
-  } else {
-    const selectedSauces = data.Sauces
-      .filter((sauce) => selectedSauce?.includes?.(sauce.id) || quantities[sauce.id] > 0)
-      .map((sauce) => {
-        const quantity = quantities[sauce.id];
-        if (quantity > 0 || selectedSauce?.includes?.(sauce.id)) {
-          return {
-            id: sauce.id,
-            name: sauce.name,
-            image: sauce.image,
-            quantity: quantity > 0 ? quantity : 1,
+    } else {
+      const selectedSauces = products
+        .filter((product) => selectedSauce?.includes?.(product.id) || quantities[product.id] > 0)
+        .map((product) => {
+          const quantity = quantities[product.id];
+          if (quantity > 0 || selectedSauce?.includes?.(product.id)) {
+            return {
+              id: product.id,
+              name: product.name,
+              image: product.image,
+              quantity: quantity > 0 ? quantity : 1,
+              groupId: groupId
+            };
+          }
+          return null;
+        })
+        .filter(Boolean);
+
+      const flatSauces = [];
+
+      selectedSauces.forEach((product) => {
+        for (let i = 0; i < product.quantity; i++) {
+          flatSauces.push({
+            id: product.id,
+            name: product.name,
+            image: product.image,
+            groupId: groupId
+          });
+        }
+      });
+
+      const finalSauces = flatSauces.map((product, index) => ({
+        ...product,
+        price: index < freeSauces ? 0 : 0.5,
+        groupId: groupId
+      }));
+
+      const grouped = {};
+
+      finalSauces.forEach((product) => {
+        if (!grouped[product.id]) {
+          grouped[product.id] = {
+            quantity: 1,
+            totalPrice: product.price,
+            price: product.price,
             groupId: groupId
           };
-        }
-        return null;
-      })
-      .filter(Boolean);
-
-    const flatSauces = [];
-
-    selectedSauces.forEach((sauce) => {
-      for (let i = 0; i < sauce.quantity; i++) {
-        flatSauces.push({
-          id: sauce.id,
-          name: sauce.name,
-          image: sauce.image,
-          groupId: groupId
-        });
-      }
-    });
-
-    const finalSauces = flatSauces.map((sauce, index) => ({
-      ...sauce,
-      price: index < freeSauces ? 0 : 0.5,
-      groupId: groupId
-    }));
-
-    const grouped = {};
-
-    finalSauces.forEach((sauce) => {
-      if (!grouped[sauce.id]) {
-        grouped[sauce.id] = {
-          quantity: 1,
-          totalPrice: sauce.price,
-          price: sauce.price,
-          groupId: groupId
-        };
-      } else {
-        grouped[sauce.id].quantity += 1;
-        grouped[sauce.id].totalPrice += sauce.price;
-      }
-    });
-
-    Object.entries(grouped).forEach(([id, info]) => {
-      const sauceData = data.Sauces.find((s) => s.id === parseInt(id));
-      if (sauceData) {
-        if (isVia) {
-          addToCart({
-            uniqueId: `sauce-${sauceData.id}-${Date.now()}`,
-            id: sauceData.id,
-            quantity: info.quantity,
-            price: info.price,
-            totalPrice: info.totalPrice,
-            relatedItems: [{
-              id: sauceData.id,
-              name: sauceData.name,
-              image: sauceData.image,
-              groupId: groupId
-            }],
-            groupId: groupId
-          });
         } else {
-          addToCart({
-            uniqueId: `sauce-${sauceData.id}-${Date.now()}`,
-            id: sauceData.id,
-            name: sauceData.name,
-            image: sauceData.image,
-            quantity: info.quantity,
-            price: info.price,
-            totalPrice: info.totalPrice,
-            groupId: groupId
-          });
+          grouped[product.id].quantity += 1;
+          grouped[product.id].totalPrice += product.price;
         }
-      }
-    });
+      });
+
+      Object.entries(grouped).forEach(([id, info]) => {
+        const productData = products.find((p) => p.id === parseInt(id));
+        if (productData) {
+          if (isVia) {
+            addToCart({
+              uniqueId: `sauce-${productData.id}-${Date.now()}`,
+              id: productData.id,
+              quantity: info.quantity,
+              price: info.price,
+              totalPrice: info.totalPrice,
+              relatedItems: [{
+                id: productData.id,
+                name: productData.name,
+                image: productData.image,
+                groupId: groupId
+              }],
+              groupId: groupId
+            });
+          } else {
+            addToCart({
+              uniqueId: `sauce-${productData.id}-${Date.now()}`,
+              id: productData.id,
+              name: productData.name,
+              image: productData.image,
+              quantity: info.quantity,
+              price: info.price,
+              totalPrice: info.totalPrice,
+              groupId: groupId
+            });
+          }
+        }
+      });
+    }
+
+    // Redirection
+    let nextRoute = (viaSnacks || viaSnacksVeggies || viaBrochettes || viaMitraillette)
+      ? `Supplements?viaSauces=true&groupId=${groupId}`
+      : "/nouvelle_commande";
+
+    if (isMenu) {
+      nextRoute += "&menu=true";
+    }
+
+    router.push(nextRoute);
   };
-
-  // Redirection
-  let nextRoute = (viaSnacks || viaSnacksVeggies || viaBrochettes || viaMitraillette)
-    ? `Supplements?viaSauces=true&groupId=${groupId}`
-    : "/nouvelle_commande";
-
-  if (isMenu) {
-    nextRoute += "&menu=true";
-  }
-
-  router.push(nextRoute);
-};
 
   return (
     <div className="font-bold style-pen text-lg mb-5 mt-2">
@@ -253,8 +254,8 @@ const handleAddToCart = () => {
 
         {/* Affichage des sauces */}
         <div className="grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-          {data.Sauces.filter(
-            (sauce) =>
+          {products.filter(
+            (product) =>
               (viaSnacks ||
                 viaSnacksVeggies ||
                 viaEnfants ||
@@ -262,26 +263,26 @@ const handleAddToCart = () => {
                 viaMitraillette ||
                 viaAperoBox ||
                 viaFrites) ||
-              sauce.name !== "Aucune sauce"
-          ).map((sauce) => (
+              product.name !== "Aucune sauce"
+          ).map((product) => (
             <div
-              key={sauce.id}
-              onClick={() => handleSelectSauce(sauce)}
+              key={product.id}
+              onClick={() => handleSelectSauce(product)}
               className={`relative shadow-light flex flex-col items-center justify-center gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 transition-transform duration-200 hover:scale-105 ${
-                (Array.isArray(selectedSauce) && selectedSauce.includes(sauce.id) || sauce.id === selectedSauce) && (viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette || viaFrites || viaAperoBox || isMultiSelect)
+                (Array.isArray(selectedSauce) && selectedSauce.includes(product.id) || product.id === selectedSauce) && (viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette || viaFrites || viaAperoBox || isMultiSelect)
                   ? "bg-green-200 border-green-500"
                   : ""
               }`}
             >
               <Image
-                src={sauce.image}
-                alt={sauce.name}
+                src={product.image}
+                alt={product.name}
                 width={150}
                 height={150}
                 className="object-contain mb-auto"
               />
               <div className="absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-2 text-center border-t border-black rounded-b-lg">
-                <p className="text-sm">{sauce.name}</p>
+                <p className="text-sm">{product.name}</p>
 
                 {/* Si mode non-via, afficher boutons +/- */}
                 {!(viaSnacks || viaSnacksVeggies || viaEnfants || viaBrochettes || viaMitraillette || viaAperoBox || viaFrites) && (
@@ -289,17 +290,17 @@ const handleAddToCart = () => {
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleDecrement(sauce.id);
+                        handleDecrement(product.id);
                       }}
                       className="text-sm bg-red-500 text-white rounded-lg px-3 py-1"
                     >
                       -
                     </button>
-                    <span>{quantities[sauce.id] > 0 ? quantities[sauce.id] : ""}</span>
+                    <span>{quantities[product.id] > 0 ? quantities[product.id] : ""}</span>
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleIncrement(sauce.id);
+                        handleIncrement(product.id);
                       }}
                       className="text-sm bg-green-500 text-white rounded-lg px-3 py-1"
                     >

@@ -2,18 +2,40 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import data from "../../../../data/dataProduits.json";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useCart } from "../../../context/CartContext";
+import { Product } from "../../../../types/allTypes";
 
 const Burgers = () => {
   const [menus, setMenus] = useState(false);
   const [garnitures, setGarnitures] = useState(false);
   const router = useRouter();
   const { addToCart } = useCart();
+  const [products, setProducts] = useState<Product[]>([]);
 
   const handleCheckboxChangeMenus = () => setMenus(!menus);
   const handleCheckboxChangeGarnitures = () => setGarnitures(!garnitures);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("/api/products");
+        if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des produits");
+        }
+        const data = await response.json();
+        // Filtrer uniquement les burgers
+        const burgers = data.products.filter((product: Product) =>
+          product.categories.includes("burger")
+        );
+        setProducts(burgers);
+      } catch (error) {
+        console.error("Erreur:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const handleProduitClick = (product: any) => {
     const menuPrice = menus ? 2.5 : 0;
@@ -95,7 +117,7 @@ const Burgers = () => {
         Burgers
         </div>
       <div className="w-full flex flex-row items-center justify-center mt-10 style-pen text-lg gap-4 mb-5">
-      {data.Burgers.map((product) => {
+      {products.map((product) => {
         const price = parseFloat(product.price);
         const menuPrice = menus ? 2.5 : 0;
         const garniturePrice = garnitures ? 3 : 0;

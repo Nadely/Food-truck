@@ -1,0 +1,3 @@
+. "\home\nadely\.cursor-server\bin\02270c8441bdc4b2fdbc30e6f470a589ec78d600\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration-bash.sh"
+
+node src/scripts/mergeStockData.js

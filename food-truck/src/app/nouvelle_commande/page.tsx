@@ -15,7 +15,7 @@ const NouvelleCommande = () => {
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-5">
         {Object.keys(data)
           .filter(
-            (categorie) => categorie !== "Supplements"
+            (categorie) => categorie !== "Supplements" && categorie !== "Pain" && categorie !== "Steack"
           )
           .map((categorie, index) => (
             <button

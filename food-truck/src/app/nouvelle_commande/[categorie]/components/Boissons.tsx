@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-import data from "../../../../data/dataProduits.json";
+import { Product } from "../../../../types/allTypes";
 import { useCart } from "../../../context/CartContext";
 
 const Boissons = () => {
@@ -14,22 +14,44 @@ const Boissons = () => {
   const menus = searchParams.get("menu") === "true";
   const groupId = searchParams.get("groupId") || `drink-${Date.now()}`; // Générer un groupId si non fourni
 
+  const [products, setProducts] = useState<Product[]>([]);
   const [quantities, setQuantities] = useState<{ [key: number]: number }>(
-    data.Boissons.reduce((acc: { [key: number]: number }, product) => {
+    products.reduce((acc: { [key: number]: number }, product) => {
       acc[product.id] = 0;
       return acc;
     }, {})
   );
   const [selectedBoissons, setSelectedBoissons] = useState<number | null>(null);
 
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("/api/products");
+        if (!response.ok) {
+          throw new Error("Erreur lors de la récupération des produits");
+        }
+        const data = await response.json();
+        // Filtrer uniquement les boissons
+        const boissons = data.products.filter((product: Product) =>
+          product.categories.includes("boissons")
+        );
+        setProducts(boissons);
+      } catch (error) {
+        console.error("Erreur:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   const handleSelectBoissons = (id: number) => {
     // Si "Aucune boisson" est sélectionnée, réinitialisez les quantités
     if (
-      data.Boissons.find((product) => product.id === id)?.name ===
+      products.find((product) => product.id === id)?.name ===
       "Aucune boisson"
     ) {
       setQuantities(
-        data.Boissons.reduce((acc: any, product: any) => {
+        products.reduce((acc: any, product: any) => {
           if (product.id !== id) {
             acc[product.id] = 0; // Réinitialisez les quantités des autres boissons
           }
@@ -49,7 +71,7 @@ const Boissons = () => {
       // désélectionnez "Aucune boisson" si elle est sélectionnée
       if (
         selectedBoissons ===
-        data.Boissons.find((product) => product.name === "Aucune boisson")?.id
+        products.find((product) => product.name === "Aucune boisson")?.id
       ) {
         if (Object.values(newQuantities).some((quantity) => quantity > 0)) {
           setSelectedBoissons(null); // Désélectionne "Aucune boisson"
@@ -71,7 +93,7 @@ const Boissons = () => {
       // désélectionnez "Aucune boisson" si elle est sélectionnée
       if (
         selectedBoissons ===
-        data.Boissons.find((product) => product.name === "Aucune boisson")?.id
+        products.find((product) => product.name === "Aucune boisson")?.id
       ) {
         if (Object.values(newQuantities).some((quantity) => quantity > 0)) {
           setSelectedBoissons(null); // Désélectionne "Aucune boisson"
@@ -83,7 +105,7 @@ const Boissons = () => {
   };
 
   const handleAddToCart = () => {
-    const selectedProducts = data.Boissons.filter(
+    const selectedProducts = products.filter(
       (product) => quantities[product.id] > 0
     );
 
@@ -123,7 +145,7 @@ const Boissons = () => {
       <div className="w-full flex flex-col items-center justify-center mt-4 style-pen text-lg mb-5">
         <div className="flex flex-col items-center justify-center">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 mb-5">
-            {data.Boissons.map((product) => (
+            {products.map((product) => (
               <div
                 key={product.id}
                 className={`flex flex-col items-center justify-center gap-4 ${

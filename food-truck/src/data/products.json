@@ -8,10 +8,10 @@
         "viande",
         "top-vente"
       ],
-      "stock": 0,
+      "stock": 18,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -22,10 +22,10 @@
         "viande",
         "top-vente"
       ],
-      "stock": 0,
+      "stock": 18,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -36,10 +36,10 @@
         "viande",
         "top-vente"
       ],
-      "stock": 0,
+      "stock": 18,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -49,10 +49,10 @@
         "poulet",
         "viande"
       ],
-      "stock": 0,
+      "stock": 18,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -63,10 +63,10 @@
         "viande",
         "top-vente"
       ],
-      "stock": 0,
+      "stock": 19,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -76,10 +76,10 @@
         "porc",
         "viande"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -89,10 +89,10 @@
         "poulet",
         "viande"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -102,10 +102,10 @@
         "poulet",
         "viande"
       ],
-      "stock": 0,
+      "stock": 19,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -115,23 +115,23 @@
         "poulet",
         "viande"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
       "id": 10,
-      "name": "Boulette",
+      "name": "Boulettes",
       "categories": [
         "poulet",
         "viande"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -142,10 +142,10 @@
         "viande",
         "top-vente"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -155,10 +155,10 @@
         "poulet",
         "viande"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -170,10 +170,10 @@
         "brochettes",
         "top-vente"
       ],
-      "stock": 0,
+      "stock": 19,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -184,10 +184,10 @@
         "viande",
         "brochettes"
       ],
-      "stock": 0,
+      "stock": 19,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -198,10 +198,10 @@
         "viande",
         "brochettes"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -212,10 +212,10 @@
         "viande",
         "brochettes"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -226,10 +226,10 @@
         "viande",
         "brochettes"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -240,10 +240,10 @@
         "viande",
         "brochettes"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -254,10 +254,10 @@
         "veggie",
         "frit"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -268,10 +268,10 @@
         "veggie",
         "frit"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -281,10 +281,10 @@
         "zero-meat",
         "veggie"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -295,10 +295,10 @@
         "frit",
         "veggie"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -307,10 +307,10 @@
       "categories": [
         "sauces"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -319,10 +319,10 @@
       "categories": [
         "sauces"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -331,10 +331,10 @@
       "categories": [
         "sauces"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -343,10 +343,10 @@
       "categories": [
         "sauces"
       ],
-      "stock": 0,
-      "stockConseil":0,
+      "stock": 20,
+      "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -355,10 +355,10 @@
       "categories": [
         "sauces"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -367,10 +367,10 @@
       "categories": [
         "sauces"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -379,10 +379,10 @@
       "categories": [
         "sauces"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -391,10 +391,10 @@
       "categories": [
         "sauces"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -403,10 +403,10 @@
       "categories": [
         "sauces"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -415,10 +415,10 @@
       "categories": [
         "sauces"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -427,10 +427,10 @@
       "categories": [
         "sauces"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -439,10 +439,10 @@
       "categories": [
         "sauces"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -451,10 +451,10 @@
       "categories": [
         "sauces"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -463,10 +463,10 @@
       "categories": [
         "sauces"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -475,10 +475,10 @@
       "categories": [
         "sauces"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -487,10 +487,10 @@
       "categories": [
         "sauces"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -499,10 +499,10 @@
       "categories": [
         "sauces"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -512,10 +512,10 @@
         "sans-alcool",
         "boissons"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -525,10 +525,10 @@
         "sans-alcool",
         "boissons"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -538,10 +538,10 @@
         "sans-alcool",
         "boissons"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -551,10 +551,10 @@
         "sans-alcool",
         "boissons"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -564,10 +564,10 @@
         "sans-alcool",
         "boissons"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -577,10 +577,10 @@
         "sans-alcool",
         "boissons"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -590,10 +590,10 @@
         "sans-alcool",
         "boissons"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -603,23 +603,23 @@
         "sans-alcool",
         "boissons"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
       "id": 48,
-      "name": "ice-tea",
+      "name": "Ice-tea",
       "categories": [
         "sans-alcool",
         "boissons"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -629,10 +629,10 @@
         "sans-alcool",
         "boissons"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -642,10 +642,10 @@
         "sans-alcool",
         "boissons"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -655,23 +655,23 @@
         "sans-alcool",
         "boissons"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
       "id": 52,
-      "name": "Eau-petillante",
+      "name": "Eau petillante",
       "categories": [
         "sans-alcool",
         "boissons"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -681,41 +681,41 @@
         "alcool",
         "boissons"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
       "id": 54,
-      "name": "Leffe-blanche",
+      "name": "Leffe blanche",
       "categories": [
         "alcool",
         "boissons"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
       "id": 55,
-      "name": "Leffe-ruby",
+      "name": "Leffe ruby",
       "categories": [
         "alcool",
         "boissons"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
       "id": 56,
-      "name": "Steaks",
+      "name": "Steack",
       "categories": [
         "boeuf",
         "viande",
@@ -724,10 +724,10 @@
         "burger",
         "mitraillette"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -737,10 +737,10 @@
         "pains",
         "frais"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -750,10 +750,10 @@
         "pains",
         "frais"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -766,10 +766,10 @@
         "garniture",
         "burger"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -783,10 +783,10 @@
         "burger",
         "top-vente"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -800,10 +800,10 @@
         "burger",
         "top-vente"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -816,10 +816,10 @@
         "frit",
         "burger"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -828,48 +828,48 @@
       "categories": [
         "desserts"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
       "id": 64,
-      "name": "Crèmes au chocolat",
+      "name": "Cremes au chocolat",
       "categories": [
         "desserts"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
       "id": 65,
-      "name": "Galettes-pomme-de-terre",
+      "name": "Galettes pomme de terre",
       "categories": [
         "garniture",
         "supplement"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
       "id": 66,
-      "name": "Galettes-fromage",
+      "name": "Galettes fromage",
       "categories": [
         "garniture",
         "supplement"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -879,10 +879,10 @@
         "garniture",
         "supplement"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -892,10 +892,10 @@
         "garniture",
         "supplement"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -905,10 +905,10 @@
         "garniture",
         "supplement"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -918,36 +918,36 @@
         "garniture",
         "supplement"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
       "id": 71,
-      "name": "Chèvre",
+      "name": "Chevre",
       "categories": [
         "garniture",
         "supplement"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
       "id": 72,
-      "name": "Poitrine-fumee",
+      "name": "Poitrine fumee",
       "categories": [
         "garniture",
         "supplement"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     },
     {
@@ -957,10 +957,10 @@
         "garniture",
         "supplement"
       ],
-      "stock": 0,
+      "stock": 20,
       "stockConseil": 0,
       "lost": 0,
-      "stockAnnuel": 0,
+      "stockAnnuel": 20,
       "stockLimite": 0
     }
   ]

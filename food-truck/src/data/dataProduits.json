@@ -7,9 +7,29 @@
       "price": "6.5€",
       "categorie": "Mitraillettes",
       "garniture": [
-        { "id": 1, "name": "Salade", "image": "/salade.png" },
-        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
-        { "id": 3, "name": "Oignons Frit", "image": "/oignons-frit.png" }
+        {
+          "id": 1,
+          "name": "Salade",
+          "image": "/salade.png"
+        },
+        {
+          "id": 2,
+          "name": "Tomate",
+          "image": "/tomate.png"
+        },
+        {
+          "id": 3,
+          "name": "Oignons Frit",
+          "image": "/oignons-frit.png"
+        }
+      ],
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "mitraillettes"
       ]
     },
     {
@@ -19,9 +39,29 @@
       "price": "6.5€",
       "categorie": "Mitraillettes",
       "garniture": [
-        { "id": 1, "name": "Salade", "image": "/salade.png" },
-        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
-        { "id": 3, "name": "Oignons Frit", "image": "/oignons-frit.png" }
+        {
+          "id": 1,
+          "name": "Salade",
+          "image": "/salade.png"
+        },
+        {
+          "id": 2,
+          "name": "Tomate",
+          "image": "/tomate.png"
+        },
+        {
+          "id": 3,
+          "name": "Oignons Frit",
+          "image": "/oignons-frit.png"
+        }
+      ],
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "mitraillettes"
       ]
     },
     {
@@ -31,13 +71,32 @@
       "price": "7€",
       "categorie": "Mitraillettes",
       "garniture": [
-        { "id": 1, "name": "Salade", "image": "/salade.png" },
-        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
-        { "id": 3, "name": "Oignons Frit", "image": "/oignons-frit.png" }
+        {
+          "id": 1,
+          "name": "Salade",
+          "image": "/salade.png"
+        },
+        {
+          "id": 2,
+          "name": "Tomate",
+          "image": "/tomate.png"
+        },
+        {
+          "id": 3,
+          "name": "Oignons Frit",
+          "image": "/oignons-frit.png"
+        }
+      ],
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "mitraillettes"
       ]
     }
   ],
-
   "Burgers": [
     {
       "id": 1,
@@ -46,10 +105,34 @@
       "price": "7.5€",
       "categorie": "Burgers",
       "garniture": [
-        { "id": 1, "name": "Salade", "image": "/salade.png" },
-        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
-        { "id": 3, "name": "Oignons Frit", "image": "/oignons-frit.png" },
-        { "id": 4, "name": "Sauce Hamburger", "image": "/hamburger.png" }
+        {
+          "id": 1,
+          "name": "Salade",
+          "image": "/salade.png"
+        },
+        {
+          "id": 2,
+          "name": "Tomate",
+          "image": "/tomate.png"
+        },
+        {
+          "id": 3,
+          "name": "Oignons Frit",
+          "image": "/oignons-frit.png"
+        },
+        {
+          "id": 4,
+          "name": "Sauce Hamburger",
+          "image": "/hamburger.png"
+        }
+      ],
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "burgers"
       ]
     },
     {
@@ -59,10 +142,34 @@
       "price": "7.5€",
       "categorie": "Burgers",
       "garniture": [
-        { "id": 1, "name": "Salade", "image": "/salade.png" },
-        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
-        { "id": 3, "name": "Cornichons sucrées", "image": "/cornichons-sucrees.png" },
-        { "id": 4, "name": "Sauce Bicky", "image": "/bicky.png" }
+        {
+          "id": 1,
+          "name": "Salade",
+          "image": "/salade.png"
+        },
+        {
+          "id": 2,
+          "name": "Tomate",
+          "image": "/tomate.png"
+        },
+        {
+          "id": 3,
+          "name": "Cornichons sucrées",
+          "image": "/cornichons-sucrees.png"
+        },
+        {
+          "id": 4,
+          "name": "Sauce Bicky",
+          "image": "/bicky.png"
+        }
+      ],
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "burgers"
       ]
     },
     {
@@ -72,10 +179,34 @@
       "price": "7.5€",
       "categorie": "Burgers",
       "garniture": [
-        { "id": 1, "name": "Salade", "image": "/salade.png" },
-        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
-        { "id": 3, "name": "Oignons Frit", "image": "/oignons-frit.png" },
-        { "id": 4, "name": "Sauce Hamburger", "image": "/hamburger.png" }
+        {
+          "id": 1,
+          "name": "Salade",
+          "image": "/salade.png"
+        },
+        {
+          "id": 2,
+          "name": "Tomate",
+          "image": "/tomate.png"
+        },
+        {
+          "id": 3,
+          "name": "Oignons Frit",
+          "image": "/oignons-frit.png"
+        },
+        {
+          "id": 4,
+          "name": "Sauce Hamburger",
+          "image": "/hamburger.png"
+        }
+      ],
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "burgers"
       ]
     },
     {
@@ -85,10 +216,34 @@
       "price": "7.5€",
       "categorie": "Burgers",
       "garniture": [
-        { "id": 1, "name": "Salade", "image": "/salade.png" },
-        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
-        { "id": 3, "name": "Cornichons sucrées", "image": "/cornichons-sucrees.png" },
-        { "id": 4, "name": "Sauce Bicky", "image": "/bicky.png" }
+        {
+          "id": 1,
+          "name": "Salade",
+          "image": "/salade.png"
+        },
+        {
+          "id": 2,
+          "name": "Tomate",
+          "image": "/tomate.png"
+        },
+        {
+          "id": 3,
+          "name": "Cornichons sucrées",
+          "image": "/cornichons-sucrees.png"
+        },
+        {
+          "id": 4,
+          "name": "Sauce Bicky",
+          "image": "/bicky.png"
+        }
+      ],
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "burgers"
       ]
     },
     {
@@ -98,10 +253,34 @@
       "price": "7.5€",
       "categorie": "Burgers",
       "garniture": [
-        { "id": 1, "name": "Salade", "image": "/salade.png" },
-        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
-        { "id": 3, "name": "Oignons Frit", "image": "/oignons-frit.png" },
-        { "id": 4, "name": "Sauce Hamburger", "image": "/hamburger.png" }
+        {
+          "id": 1,
+          "name": "Salade",
+          "image": "/salade.png"
+        },
+        {
+          "id": 2,
+          "name": "Tomate",
+          "image": "/tomate.png"
+        },
+        {
+          "id": 3,
+          "name": "Oignons Frit",
+          "image": "/oignons-frit.png"
+        },
+        {
+          "id": 4,
+          "name": "Sauce Hamburger",
+          "image": "/hamburger.png"
+        }
+      ],
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "burgers"
       ]
     },
     {
@@ -111,14 +290,37 @@
       "price": "8.5€",
       "categorie": "Burgers",
       "garniture": [
-        { "id": 1, "name": "Salade", "image": "/salade.png" },
-        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
-        { "id": 3, "name": "Oignons Frit", "image": "/oignons-frit.png" },
-        { "id": 4, "name": "Sauce Hamburger", "image": "/hamburger.png" }
+        {
+          "id": 1,
+          "name": "Salade",
+          "image": "/salade.png"
+        },
+        {
+          "id": 2,
+          "name": "Tomate",
+          "image": "/tomate.png"
+        },
+        {
+          "id": 3,
+          "name": "Oignons Frit",
+          "image": "/oignons-frit.png"
+        },
+        {
+          "id": 4,
+          "name": "Sauce Hamburger",
+          "image": "/hamburger.png"
+        }
+      ],
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "burgers"
       ]
     }
   ],
-
   "Veggies": [
     {
       "id": 1,
@@ -127,9 +329,29 @@
       "price": "6.5€",
       "categorie": "Veggies",
       "garniture": [
-        { "id": 1, "name": "Salade", "image": "/salade.png" },
-        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
-        { "id": 3, "name": "Oignons Frit", "image": "/oignons-frit.png" }
+        {
+          "id": 1,
+          "name": "Salade",
+          "image": "/salade.png"
+        },
+        {
+          "id": 2,
+          "name": "Tomate",
+          "image": "/tomate.png"
+        },
+        {
+          "id": 3,
+          "name": "Oignons Frit",
+          "image": "/oignons-frit.png"
+        }
+      ],
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "veggies"
       ]
     },
     {
@@ -139,615 +361,1415 @@
       "price": "7.5€",
       "categorie": "Veggies",
       "garniture": [
-        { "id": 1, "name": "Salade", "image": "/salade.png" },
-        { "id": 2, "name": "Tomate", "image": "/tomate.png" },
-        { "id": 3, "name": "Oignons Frit", "image": "/oignons-frit.png" },
-        { "id": 4, "name": "Sauce Hamburger", "image": "/hamburger.png" }
+        {
+          "id": 1,
+          "name": "Salade",
+          "image": "/salade.png"
+        },
+        {
+          "id": 2,
+          "name": "Tomate",
+          "image": "/tomate.png"
+        },
+        {
+          "id": 3,
+          "name": "Oignons Frit",
+          "image": "/oignons-frit.png"
+        },
+        {
+          "id": 4,
+          "name": "Sauce Hamburger",
+          "image": "/hamburger.png"
+        }
+      ],
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "veggies"
       ]
     }
   ],
-
   "Enfants": [
     {
       "id": 1,
       "name": "Compote",
       "image": "/compote.png",
       "price": "6.5€",
-      "categorie": "Menu_Enfants"
+      "categorie": "Menu_Enfants",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "desserts"
+      ]
     },
     {
       "id": 2,
       "name": "Creme au chocolat",
       "image": "/creme-chocolat.png",
       "price": "6.5€",
-      "categorie": "Menu_Enfants"
+      "categorie": "Menu_Enfants",
+      "stock": 14,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "enfants"
+      ]
     },
     {
       "id": 3,
       "name": "Nuggets",
       "image": "/nuggets.png",
-      "categorie": "Menu_Enfants"
+      "categorie": "Menu_Enfants",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "enfants"
+      ]
     },
     {
       "id": 4,
       "name": "Poulycroc",
       "image": "/poulycroc.png",
-      "categorie": "Menu_Enfants"
+      "categorie": "Menu_Enfants",
+      "stock": 14,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "enfants"
+      ]
     },
     {
       "id": 5,
       "name": "Capri-Sun",
       "image": "/capri-sun.png",
-      "categorie": "Menu_Enfants"
+      "categorie": "Menu_Enfants",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ]
     },
     {
       "id": 6,
       "name": "Frites",
       "image": "/frites.png",
-      "categorie": "Menu_Enfants"
+      "categorie": "Menu_Enfants",
+      "stock": 19,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "enfants"
+      ]
     }
   ],
-
   "AperoBox": [
     {
       "id": 1,
       "name": "Fun Box",
       "image": "/funbox.png",
       "price": "5.5€",
-      "categorie": "AperoBox"
+      "categorie": "AperoBox",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "aperobox"
+      ]
     },
     {
       "id": 2,
       "name": "Spicy Box",
       "image": "/spicybox.png",
       "price": "5.5€",
-      "categorie": "AperoBox"
+      "categorie": "AperoBox",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "aperobox"
+      ]
     },
     {
       "id": 3,
       "name": "Cheese Box",
       "image": "/cheesebox.png",
       "price": "5.5€",
-      "categorie": "AperoBox"
+      "categorie": "AperoBox",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "aperobox"
+      ]
     },
     {
       "id": 4,
       "name": "Chicken Box",
       "image": "/chickenbox.png",
       "price": "5.5€",
-      "categorie": "AperoBox"
+      "categorie": "AperoBox",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "aperobox"
+      ]
     },
     {
       "id": 5,
       "name": "Vegan Box",
       "image": "/veganbox.png",
       "price": "5.5€",
-      "categorie": "AperoBox"
+      "categorie": "AperoBox",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "aperobox"
+      ]
     },
     {
       "id": 6,
       "name": "Party Box",
       "image": "/partybox.png",
       "price": "12€",
-      "categorie": "AperoBox"
+      "categorie": "AperoBox",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "aperobox"
+      ]
     }
   ],
-
   "Snacks": [
     {
       "id": 1,
       "name": "Fricadelle",
       "image": "/fricadelle.png",
       "price": "4€",
-      "categorie": "Snacks"
+      "categorie": "Snacks",
+      "stock": 18,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "poulet",
+        "viande",
+        "top-vente"
+      ]
     },
     {
       "id": 2,
       "name": "Fricadelle XXL",
       "image": "/fricadelle.png",
       "price": "6.5€",
-      "categorie": "Snacks"
+      "categorie": "Snacks",
+      "stock": 17,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "snacks"
+      ]
     },
     {
       "id": 3,
       "name": "Poulycroc",
       "image": "/poulycroc.png",
       "price": "4€",
-      "categorie": "Snacks"
+      "categorie": "Snacks",
+      "stock": 14,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "enfants"
+      ]
     },
     {
       "id": 4,
       "name": "Viandelle",
       "image": "/viandelle.png",
       "price": "4€",
-      "categorie": "Snacks"
+      "categorie": "Snacks",
+      "stock": 18,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "poulet",
+        "viande"
+      ]
     },
     {
       "id": 5,
       "name": "Belcanto",
       "image": "/belcanto.png",
       "price": "4.5€",
-      "categorie": "Snacks"
+      "categorie": "Snacks",
+      "stock": 19,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "boeuf",
+        "viande",
+        "top-vente"
+      ]
     },
     {
       "id": 6,
       "name": "Cervelas brun",
       "image": "/cervelas-brun.png",
       "price": "4.5€",
-      "categorie": "Snacks"
+      "categorie": "Snacks",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "snacks"
+      ]
     },
     {
       "id": 7,
       "name": "Bouffe feu",
       "image": "/bouffe-feu.png",
       "price": "4.5€",
-      "categorie": "Snacks"
+      "categorie": "Snacks",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "snacks"
+      ]
     },
     {
       "id": 8,
       "name": "Lucifer",
       "image": "/lucifer.png",
       "price": "4.5€",
-      "categorie": "Snacks"
+      "categorie": "Snacks",
+      "stock": 18,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "poulet",
+        "viande"
+      ]
     },
     {
       "id": 9,
       "name": "Loempia poulet",
       "image": "/loempia-poulet.png",
       "price": "5€",
-      "categorie": "Snacks"
+      "categorie": "Snacks",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "snacks"
+      ]
     },
     {
       "id": 10,
       "name": "Boulettes",
       "image": "/boulette.png",
       "price": "4€",
-      "categorie": "Snacks"
+      "categorie": "Snacks",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "poulet",
+        "viande"
+      ]
     },
     {
       "id": 11,
       "name": "Cheese crack",
       "image": "/cheese-crack.png",
       "price": "4.5€",
-      "categorie": "Snacks"
+      "categorie": "Snacks",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "snacks"
+      ]
     },
     {
       "id": 12,
       "name": "Loempidel",
       "image": "/loempidel.png",
       "price": "4.5€",
-      "categorie": "Snacks"
+      "categorie": "Snacks",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "poulet",
+        "viande"
+      ]
     },
     {
       "id": 13,
       "name": "Steack haché",
       "image": "/steack-haché.png",
       "price": "0€",
-      "categorie": "Snacks"
+      "categorie": "Snacks",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "snacks"
+      ]
     },
     {
       "id": 14,
       "name": "Belcanto XXL",
       "image": "/belcanto.png",
       "price": "0€",
-      "categorie": "Snacks"
+      "categorie": "Snacks",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "snacks"
+      ]
     }
   ],
-
   "Brochettes": [
     {
       "id": 1,
       "name": "Volaille",
       "image": "/brochette-volaille.png",
       "price": "5€",
-      "categorie": "Brochettes"
+      "categorie": "Brochettes",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "brochettes"
+      ]
     },
     {
       "id": 2,
       "name": "Tzigane",
       "image": "/brochette-tzigane.png",
       "price": "5€",
-      "categorie": "Brochettes"
+      "categorie": "Brochettes",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "brochettes"
+      ]
     },
     {
       "id": 3,
       "name": "Ardennaise",
       "image": "/brochette-ardennaise.png",
       "price": "5€",
-      "categorie": "Brochettes"
+      "categorie": "Brochettes",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "brochettes"
+      ]
     },
     {
       "id": 4,
       "name": "Poisson",
       "image": "/brochette-poisson.png",
       "price": "5€",
-      "categorie": "Brochettes"
+      "categorie": "Brochettes",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "brochettes"
+      ]
     },
     {
       "id": 5,
       "name": "Porc",
       "image": "/brochette-porc.png",
       "price": "5€",
-      "categorie": "Brochettes"
+      "categorie": "Brochettes",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "brochettes"
+      ]
     },
     {
       "id": 6,
       "name": "Boeuf",
       "image": "/brochette-boeuf.png",
       "price": "5.5€",
-      "categorie": "Brochettes"
+      "categorie": "Brochettes",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "brochettes"
+      ]
     }
   ],
-
   "SnacksVeggies": [
     {
       "id": 1,
       "name": "Belcanto Zero Meat",
       "image": "/belcanto-zero-meat.png",
       "price": "5€",
-      "categorie": "Snacks Veggies"
+      "categorie": "Snacks Veggies",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "snacksveggies"
+      ]
     },
     {
       "id": 2,
       "name": "Fricadelle Zero Meat",
       "image": "/fricadelle-zero-meat.png",
       "price": "4.5€",
-      "categorie": "Snacks Veggies"
+      "categorie": "Snacks Veggies",
+      "stock": 17,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "snacksveggies"
+      ]
     },
     {
       "id": 3,
       "name": "Hamburger Zero Meat",
       "image": "/hamburger-zero-meat.png",
       "price": "4.5€",
-      "categorie": "Snacks Veggies"
+      "categorie": "Snacks Veggies",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "snacksveggies"
+      ]
     },
     {
       "id": 4,
       "name": "Poulycroc Vegi",
       "image": "/poulycroc-zero-meat.png",
       "price": "4.5€",
-      "categorie": "Snacks Veggies"
+      "categorie": "Snacks Veggies",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "snacksveggies"
+      ]
     }
   ],
-
   "Frites": [
     {
       "id": 1,
       "name": "Petites frites",
       "image": "/frites.png",
       "price": "4€",
-      "categorie": "Frites"
+      "categorie": "Frites",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "frites"
+      ]
     },
     {
       "id": 2,
       "name": "Grandes frites",
       "image": "/Frites.png",
       "price": "5€",
-      "categorie": "Frites"
+      "categorie": "Frites",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "frites"
+      ]
     }
   ],
-
   "Boissons": [
     {
       "id": 1,
       "name": "Coca Cola",
       "image": "/coca-cola.png",
       "price": "1.50€",
-      "categorie": "Boissons"
+      "categorie": "Boissons",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "boissons"
+      ]
     },
     {
       "id": 2,
       "name": "Coca Cola Zero",
       "image": "/coca-cola-zero.png",
       "price": "1.50€",
-      "categorie": "Boissons"
+      "categorie": "Boissons",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "boissons"
+      ]
     },
     {
       "id": 3,
       "name": "Fanta citron",
       "image": "/fanta-citron.png",
       "price": "1.50€",
-      "categorie": "Boissons"
+      "categorie": "Boissons",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "boissons"
+      ]
     },
     {
       "id": 4,
       "name": "Fanta orange",
       "image": "/fanta-orange.png",
       "price": "1.50€",
-      "categorie": "Boissons"
+      "categorie": "Boissons",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "boissons"
+      ]
     },
     {
       "id": 5,
       "name": "Canada Dry",
       "image": "/canada-dry.png",
       "price": "1.50€",
-      "categorie": "Boissons"
+      "categorie": "Boissons",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "boissons"
+      ]
     },
     {
       "id": 6,
       "name": "Orangina",
       "image": "/orangina.png",
       "price": "1.50€",
-      "categorie": "Boissons"
+      "categorie": "Boissons",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ]
     },
     {
       "id": 7,
       "name": "Seven up / Sprite",
       "image": "/seven-up.png",
       "price": "1.50€",
-      "categorie": "Boissons"
+      "categorie": "Boissons",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "boissons"
+      ]
     },
     {
       "id": 8,
       "name": "Capri-Sun",
       "image": "/capri-sun.png",
       "price": "1€",
-      "categorie": "Boissons"
+      "categorie": "Boissons",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ]
     },
     {
       "id": 9,
       "name": "Ice Tea",
       "image": "/ice-tea.png",
       "price": "1.50€",
-      "categorie": "Boissons"
+      "categorie": "Boissons",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "boissons"
+      ]
     },
     {
       "id": 10,
       "name": "Oasis",
       "image": "/oasis.png",
       "price": "1.50€",
-      "categorie": "Boissons"
+      "categorie": "Boissons",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ]
     },
     {
       "id": 11,
       "name": "Tropico",
       "image": "/tropico.png",
       "price": "1.50€",
-      "categorie": "Boissons"
+      "categorie": "Boissons",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ]
     },
     {
       "id": 12,
       "name": "Eau",
       "image": "/eau.png",
       "price": "1€",
-      "categorie": "Boissons"
+      "categorie": "Boissons",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ]
     },
     {
       "id": 13,
       "name": "Eau petillante",
       "image": "/eau-pétillante.png",
       "price": "1.50€",
-      "categorie": "Boissons"
+      "categorie": "Boissons",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sans-alcool",
+        "boissons"
+      ]
     },
     {
       "id": 14,
       "name": "Leffe",
       "image": "/leffe.png",
       "price": "3.50€",
-      "categorie": "Boissons"
+      "categorie": "Boissons",
+      "stock": 19,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "alcool",
+        "boissons"
+      ]
     },
     {
       "id": 15,
       "name": "Leffe Blanche",
       "image": "/leffe-blanche.png",
       "price": "3.50€",
-      "categorie": "Boissons"
+      "categorie": "Boissons",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "alcool",
+        "boissons"
+      ]
     },
     {
       "id": 16,
       "name": "Leffe Ruby",
       "image": "/leffe-ruby.png",
       "price": "3.50€",
-      "categorie": "Boissons"
+      "categorie": "Boissons",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "alcool",
+        "boissons"
+      ]
     },
     {
       "id": 17,
       "name": "Aucune boisson",
       "image": "/rien.png",
       "price": "0€",
-      "categorie": "Boissons"
+      "categorie": "Boissons",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "boissons"
+      ]
     }
   ],
-
   "Sauces": [
     {
       "id": 1,
       "name": "Ketchup",
       "image": "/ketchup.png",
       "price": "0.50€",
-      "categorie": "Sauces"
+      "categorie": "Sauces",
+      "stock": 19,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sauces"
+      ]
     },
     {
       "id": 2,
       "name": "Mayonnaise",
       "image": "/mayonnaise.png",
       "price": "0.50€",
-      "categorie": "Sauces"
+      "categorie": "Sauces",
+      "stock": 16,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sauces"
+      ]
     },
     {
       "id": 3,
       "name": "Andalouse",
       "image": "/andalouse.png",
       "price": "0.50€",
-      "categorie": "Sauces"
+      "categorie": "Sauces",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sauces"
+      ]
     },
     {
       "id": 4,
       "name": "Bicky",
       "image": "/bicky.png",
       "price": "0.50€",
-      "categorie": "Sauces"
+      "categorie": "Sauces",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sauces"
+      ]
     },
     {
       "id": 5,
       "name": "Dallas",
       "image": "/dallas.png",
       "price": "0.50€",
-      "categorie": "Sauces"
+      "categorie": "Sauces",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sauces"
+      ]
     },
     {
       "id": 6,
       "name": "Hamburger",
       "image": "/hamburger.png",
       "price": "0.50€",
-      "categorie": "Sauces"
+      "categorie": "Sauces",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sauces"
+      ]
     },
     {
       "id": 7,
       "name": "Pita",
       "image": "/pita.png",
       "price": "0.50€",
-      "categorie": "Sauces"
+      "categorie": "Sauces",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sauces"
+      ]
     },
     {
       "id": 8,
       "name": "Brazil",
       "image": "/brazil.png",
       "price": "0.50€",
-      "categorie": "Sauces"
+      "categorie": "Sauces",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sauces"
+      ]
     },
     {
       "id": 9,
       "name": "Hannibale",
       "image": "/hannibale.png",
       "price": "0.50€",
-      "categorie": "Sauces"
+      "categorie": "Sauces",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sauces"
+      ]
     },
     {
       "id": 10,
       "name": "Hawai",
       "image": "/hawai.png",
       "price": "0.50€",
-      "categorie": "Sauces"
+      "categorie": "Sauces",
+      "stock": 19,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sauces"
+      ]
     },
     {
       "id": 11,
       "name": "Riche",
       "image": "/riche.png",
       "price": "0.50€",
-      "categorie": "Sauces"
+      "categorie": "Sauces",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sauces"
+      ]
     },
     {
       "id": 12,
       "name": "Sweet Curry Oignon",
       "image": "/sweet-curry-oignon.png",
       "price": "0.50€",
-      "categorie": "Sauces"
+      "categorie": "Sauces",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sauces"
+      ]
     },
     {
       "id": 13,
       "name": "Chimayo",
       "image": "/chimayo.png",
       "price": "0.50€",
-      "categorie": "Sauces"
+      "categorie": "Sauces",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sauces"
+      ]
     },
     {
       "id": 14,
       "name": "Ch'ti",
       "image": "/chti.png",
       "price": "0.50€",
-      "categorie": "Sauces"
+      "categorie": "Sauces",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sauces"
+      ]
     },
     {
       "id": 15,
       "name": "Hot Mammouth",
       "image": "/hot-mammouth.png",
       "price": "0.50€",
-      "categorie": "Sauces"
+      "categorie": "Sauces",
+      "stock": 19,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sauces"
+      ]
     },
     {
       "id": 16,
       "name": "Poivre",
       "image": "/poivre.png",
       "price": "0.50€",
-      "categorie": "Sauces"
+      "categorie": "Sauces",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sauces"
+      ]
     },
     {
       "id": 17,
       "name": "Samourai",
       "image": "/samourai.png",
       "price": "0.50€",
-      "categorie": "Sauces"
+      "categorie": "Sauces",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sauces"
+      ]
     },
     {
       "id": 18,
       "name": "Aucune sauce",
       "image": "/rien.png",
       "price": "0€",
-      "categorie": "Sauces"
+      "categorie": "Sauces",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "sauces"
+      ]
     }
   ],
-
   "Supplements": [
     {
       "id": 1,
       "name": "Cheddar",
       "image": "/cheddar.png",
       "price": "1.00€",
-      "categorie": "Supplements"
+      "categorie": "Supplements",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "garniture",
+        "supplements"
+      ]
     },
     {
       "id": 2,
       "name": "Raclette",
       "image": "/raclette.png",
       "price": "1.00€",
-      "categorie": "Supplements"
+      "categorie": "Supplements",
+      "stock": 17,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "garniture",
+        "supplements"
+      ]
     },
     {
       "id": 3,
       "name": "Reblochon",
       "image": "/reblochon.png",
       "price": "1.00€",
-      "categorie": "Supplements"
+      "categorie": "Supplements",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "garniture",
+        "supplements"
+      ]
     },
     {
       "id": 4,
       "name": "Chevre",
       "image": "/chevre.png",
       "price": "1.00€",
-      "categorie": "Supplements"
+      "categorie": "Supplements",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "garniture",
+        "supplements"
+      ]
     },
     {
       "id": 5,
       "name": "Poitrine fumee",
       "image": "/poitrine.png",
       "price": "1.00€",
-      "categorie": "Supplements"
+      "categorie": "Supplements",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "garniture",
+        "supplements"
+      ]
     },
     {
       "id": 6,
       "name": "Galette de pomme de terre",
       "image": "/galette-de-pomme-de-terre.png",
       "price": "1.00€",
-      "categorie": "Supplements"
+      "categorie": "Supplements",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "supplements"
+      ]
     },
     {
       "id": 7,
       "name": "Galette de fromage",
       "image": "/galette-de-fromage.png",
       "price": "1.00€",
-      "categorie": "Supplements"
+      "categorie": "Supplements",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "supplements"
+      ]
     },
     {
       "id": 8,
       "name": "Maroille",
       "image": "/maroille.png",
       "price": "1.00€",
-      "categorie": "Supplements"
+      "categorie": "Supplements",
+      "stock": 19,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "garniture",
+        "supplements"
+      ]
     },
     {
       "id": 9,
       "name": "Oeuf",
       "image": "/oeuf.png",
       "price": "1.00€",
-      "categorie": "Supplements"
+      "categorie": "Supplements",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "garniture",
+        "supplements"
+      ]
     },
     {
       "id": 10,
       "name": "Aucuns supplements",
       "image": "/rien.png",
       "price": "0.00€",
-      "categorie": "Supplements"
+      "categorie": "Supplements",
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0,
+      "categories": [
+        "supplements"
+      ]
+    }
+  ],
+  "Pain": [
+    {
+      "id": 57,
+      "name": "Pains burger",
+      "categories": [
+        "pains",
+        "frais"
+      ],
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0
+    },
+    {
+      "id": 58,
+      "name": "Pains mitraillette",
+      "categories": [
+        "pains",
+        "frais"
+      ],
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0
+    }
+  ],
+  "Steack": [
+    {
+      "id": 59,
+      "name": "Fish",
+      "categories": [
+        "poisson",
+        "viande",
+        "frit",
+        "garniture",
+        "burger"
+      ],
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0
+    },
+    {
+      "id": 60,
+      "name": "Chicken",
+      "categories": [
+        "poulet",
+        "viande",
+        "garniture",
+        "frit",
+        "burger",
+        "top-vente"
+      ],
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0
+    },
+    {
+      "id": 61,
+      "name": "Steak crispy",
+      "categories": [
+        "poulet",
+        "viande",
+        "garniture",
+        "frit",
+        "burger",
+        "top-vente"
+      ],
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0
+    },
+    {
+      "id": 62,
+      "name": "Steak mexicain",
+      "categories": [
+        "poulet",
+        "viande",
+        "garniture",
+        "frit",
+        "burger"
+      ],
+      "stock": 20,
+      "stockConseil": 0,
+      "lost": 0,
+      "stockAnnuel": 20,
+      "stockLimite": 0
     }
   ]
 }

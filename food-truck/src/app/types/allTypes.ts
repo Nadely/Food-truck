@@ -63,3 +63,12 @@ export interface Commande {
     lieu: string;
     createdAt: Date;
 }
+
+export interface StockAlert {
+  productId: number;
+  productName: string;
+  currentStock: number;
+  stockLimit: number;
+  categories: string[];
+  isAlert: boolean;
+}

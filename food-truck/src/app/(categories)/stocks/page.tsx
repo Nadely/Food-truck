@@ -19,7 +19,10 @@ const Stocks = () => {
         return response.json();
       })
       .then((data) => {
-        setProducts(data);
+        if (!data.products || !Array.isArray(data.products)) {
+          throw new Error("Format de données invalide");
+        }
+        setProducts(data.products);
         setLoading(false);
       })
       .catch((err) => {
@@ -65,11 +68,14 @@ const Stocks = () => {
 
   // réinitialiser la quantité de stock pour le produit sélectionné
   const handleValidateAllStocks = async () => {
-    const updatedProducts = products.map((product) => ({
-      ...product,
-      stock: quantities[product.id],
-      stockAnnuel: product.stockAnnuel + quantities[product.id],
-    }));
+    const updatedProducts = products.map((product) => {
+      const difference = quantities[product.id] - product.stock;
+      return {
+        ...product,
+        stock: quantities[product.id],
+        stockAnnuel: product.stockAnnuel + (difference > 0 ? difference : 0)
+      };
+    });
 
     const stocksSaved = await saveCurrentStocks(updatedProducts);
 

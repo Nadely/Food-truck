@@ -9,6 +9,7 @@ import Panier from "./components/Panier";
 import Horaires from "./(categories)/horaires/page";
 import { usePathname } from "next/navigation";
 import { CartProvider } from "./context/CartContext";
+import StockAlerts from "./components/StockAlerts";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             <main className="flex-grow">
               <Nav />
+              <StockAlerts />
 
               {/* Section pour children et Panier */}
               <div className="flex mt-2 gap-4 font-bold style-pen">
