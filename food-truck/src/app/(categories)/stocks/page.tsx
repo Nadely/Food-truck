@@ -49,14 +49,31 @@ const Stocks = () => {
   // Obtenir toutes les catégories uniques
   const categories = [
     "all",
-    ...new Set(products.map((item) => item.categories).flat()),
+    ...new Set(products
+      .filter(product =>
+        !product.categories.includes('sauces') &&
+        !product.name.includes('Aucune boisson') &&
+        !(product.name.includes('Poulycroc') && product.categories.includes('enfants'))
+      )
+      .map((item) => item.categories)
+      .flat()
+    ),
   ];
 
   // Filtrer les items selon la catégorie sélectionnée
   const filteredItems =
     selectedCategory === "all"
-      ? products
-      : products.filter((item) => item.categories.includes(selectedCategory));
+      ? products.filter(product =>
+          !product.categories.includes('sauces') &&
+          !product.name.includes('Aucune boisson') &&
+          !(product.name.includes('Poulycroc') && product.categories.includes('enfants'))
+        )
+      : products.filter((item) =>
+          item.categories.includes(selectedCategory) &&
+          !item.categories.includes('sauces') &&
+          !item.name.includes('Aucune boisson') &&
+          !(item.name.includes('Poulycroc') && item.categories.includes('enfants'))
+        );
 
   // changer la quantité de stock pour le produit sélectionné
   const handleQuantityChange = (id: number, newValue: number) => {

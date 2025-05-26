@@ -9,7 +9,7 @@ const StockAlerts = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [isExpanded, setIsExpanded] = useState(true);
-  const [previousAlertsCount, setPreviousAlertsCount] = useState(0);
+  const [previousAlerts, setPreviousAlerts] = useState<StockAlert[]>([]);
 
   useEffect(() => {
     const fetchAlerts = async () => {
@@ -24,14 +24,21 @@ const StockAlerts = () => {
         }
 
         const stockAlerts = checkStockAlerts(products);
-        setAlerts(stockAlerts);
 
-        // Réouvrir la fenêtre si de nouvelles alertes sont détectées
-        if (stockAlerts.length > previousAlertsCount) {
+        // Vérifier s'il y a de nouvelles alertes ou des changements dans les alertes existantes
+        const hasNewAlerts = stockAlerts.some(newAlert =>
+          !previousAlerts.some(prevAlert =>
+            prevAlert.productName === newAlert.productName &&
+            prevAlert.currentStock === newAlert.currentStock
+          )
+        );
+
+        if (hasNewAlerts) {
           setIsExpanded(true);
         }
-        setPreviousAlertsCount(stockAlerts.length);
 
+        setPreviousAlerts(stockAlerts);
+        setAlerts(stockAlerts);
         setLoading(false);
       } catch (error) {
         console.error("Erreur lors du chargement des alertes:", error);
@@ -43,7 +50,7 @@ const StockAlerts = () => {
     fetchAlerts();
     const interval = setInterval(fetchAlerts, 5 * 60 * 1000);
     return () => clearInterval(interval);
-  }, [previousAlertsCount]);
+  }, [previousAlerts]);
 
   if (error) {
     return (

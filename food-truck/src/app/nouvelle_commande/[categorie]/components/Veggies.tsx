@@ -72,10 +72,9 @@ const Veggies = () => {
         ...(menus === true
           ? [
               {
-                ...product.frites,
                 isFrites: true,
                 name: "Frites",
-                image: "/frites.jpg",
+                image: "/frites.png",
                 isFritesCategory: true,
                 parentId: product.id,
                 groupId: groupId,

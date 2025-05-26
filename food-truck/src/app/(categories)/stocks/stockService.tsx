@@ -81,7 +81,36 @@ export const checkStockAlerts = (products: Product[]): StockAlert[] => {
 
   const DEFAULT_STOCK_LIMIT = 15; // Valeur par défaut pour stockLimite
 
-  return products
+  // Filtrer les produits à exclure (sauces et boissons)
+  const filteredProducts = products.filter(product => {
+    if (!product || !product.categories) return false;
+
+    // Exclure les sauces et les boissons
+    const isSauce = product.categories.includes('sauces');
+    const isDrink = product.categories.includes('boissons');
+
+    // Gérer le stock unifié de Poulycroc
+    if (product.name.toLowerCase().includes('poulycroc')) {
+      // Trouver tous les produits Poulycroc
+      const poulycrocProducts = products.filter(p =>
+        p.name.toLowerCase().includes('poulycroc')
+      );
+
+      // Calculer le stock total
+      const totalStock = poulycrocProducts.reduce((sum, p) => sum + p.stock, 0);
+
+      // Ne garder que le premier produit Poulycroc trouvé avec le stock total
+      if (product === poulycrocProducts[0]) {
+        product.stock = totalStock;
+        return true;
+      }
+      return false;
+    }
+
+    return !isSauce && !isDrink;
+  });
+
+  return filteredProducts
     .filter(product => product && product.stock <= (product.stockLimite || DEFAULT_STOCK_LIMIT))
     .map(product => ({
       productId: product.id,
@@ -139,21 +168,71 @@ export const updateStockFromOrder = async (orderItems: any[]): Promise<boolean> 
       // Vérifier les items liés
       item.relatedItems?.forEach(related => {
         const relatedName = related.name?.toLowerCase().trim();
-        const relatedProduct = productsByName.get(relatedName);
-        if (relatedProduct) {
-          const category = relatedProduct.categories[0];
-          if (!updatesByCategory.has(category)) {
-            updatesByCategory.set(category, new Map());
+
+        // Gestion spéciale pour Poulycroc du menu enfant
+        if (relatedName?.includes('poulycroc')) {
+          // Trouver le Poulycroc des snacks
+          const snackPoulycroc = products.find(p =>
+            p.name.toLowerCase().includes('poulycroc') &&
+            p.categories.includes('Snacks')
+          );
+
+          if (snackPoulycroc) {
+            const category = snackPoulycroc.categories[0];
+            if (!updatesByCategory.has(category)) {
+              updatesByCategory.set(category, new Map());
+            }
+            updatesByCategory.get(category).set(snackPoulycroc.name, {
+              ...snackPoulycroc,
+              stock: Math.max(0, snackPoulycroc.stock - itemQuantity)
+            });
+            console.log(`📉 Mise à jour du stock pour ${snackPoulycroc.name} (via menu enfant):`, {
+              ancienStock: snackPoulycroc.stock,
+              nouvelleQuantite: itemQuantity,
+              nouveauStock: Math.max(0, snackPoulycroc.stock - itemQuantity)
+            });
           }
-          updatesByCategory.get(category).set(relatedProduct.name, {
-            ...relatedProduct,
-            stock: Math.max(0, relatedProduct.stock - itemQuantity)
-          });
-          console.log(`📉 Mise à jour du stock pour ${relatedProduct.name}:`, {
-            ancienStock: relatedProduct.stock,
-            nouvelleQuantite: itemQuantity,
-            nouveauStock: Math.max(0, relatedProduct.stock - itemQuantity)
-          });
+        }
+        // Gestion spéciale pour les frites incluses dans un menu
+        else if (related.isFrites) {
+          // Trouver les frites dans la catégorie Frites
+          const fritesProduct = products.find(p =>
+            p.categories.includes('frites')
+          );
+
+          if (fritesProduct) {
+            const category = fritesProduct.categories[0];
+            if (!updatesByCategory.has(category)) {
+              updatesByCategory.set(category, new Map());
+            }
+            updatesByCategory.get(category).set(fritesProduct.name, {
+              ...fritesProduct,
+              stock: Math.max(0, fritesProduct.stock - itemQuantity)
+            });
+            console.log(`📉 Mise à jour du stock pour ${fritesProduct.name} (via menu):`, {
+              ancienStock: fritesProduct.stock,
+              nouvelleQuantite: itemQuantity,
+              nouveauStock: Math.max(0, fritesProduct.stock - itemQuantity)
+            });
+          }
+        }
+        else {
+          const relatedProduct = productsByName.get(relatedName);
+          if (relatedProduct) {
+            const category = relatedProduct.categories[0];
+            if (!updatesByCategory.has(category)) {
+              updatesByCategory.set(category, new Map());
+            }
+            updatesByCategory.get(category).set(relatedProduct.name, {
+              ...relatedProduct,
+              stock: Math.max(0, relatedProduct.stock - itemQuantity)
+            });
+            console.log(`📉 Mise à jour du stock pour ${relatedProduct.name}:`, {
+              ancienStock: relatedProduct.stock,
+              nouvelleQuantite: itemQuantity,
+              nouveauStock: Math.max(0, relatedProduct.stock - itemQuantity)
+            });
+          }
         }
       });
     });

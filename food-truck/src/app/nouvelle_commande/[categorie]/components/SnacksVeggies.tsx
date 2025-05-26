@@ -42,15 +42,31 @@ const SnacksVeggies = () => {
   };
 
   const handleAddToCart = () => {
+    const groupId = `snacks-veggies-${Date.now()}`;
+
     if (viaVeggiMitraillette && selectedSnackVeggie !== null) {
       const product = data.SnacksVeggies.find(
         (item) => item.id === selectedSnackVeggie
       );
       if (product) {
         addToCart({
-          relatedItems: [{ id: product.id, name: product.name }],
+          id: product.id,
+          name: product.name,
+          image: product.image,
+          price: parseFloat(product.price),
+          quantity: 1,
+          groupId: groupId,
+          relatedItems: [{
+            id: product.id,
+            name: product.name,
+            image: product.image,
+            price: parseFloat(product.price),
+            quantity: 1,
+            groupId: groupId,
+            isSnack: true
+          }]
         });
-        router.push(`Sauces?viaSnacks=true${isMenu ? "&menu=true" : ""}`);
+        router.push(`Sauces?viaSnacksVeggies=true&groupId=${groupId}${isMenu ? "&menu=true" : ""}`);
       }
     } else {
       const itemsToAdd = data.SnacksVeggies.map((product) => {
@@ -68,9 +84,20 @@ const SnacksVeggies = () => {
       }).filter(Boolean);
 
       if (itemsToAdd.length > 0) {
-        itemsToAdd.forEach((item) => addToCart(item));
+        itemsToAdd.forEach((item) => {
+          if (item) {
+            addToCart({
+              id: item.id,
+              name: item.name,
+              image: item.image,
+              price: item.price,
+              quantity: item.quantity,
+              groupId: groupId
+            });
+          }
+        });
         router.push(
-          `/nouvelle_commande${isMenu ? "/SnacksVeggies?menu=true" : ""}`
+          `Sauces?viaSnacksVeggies=true&groupId=${groupId}${isMenu ? "&menu=true" : ""}`
         );
       }
     }
