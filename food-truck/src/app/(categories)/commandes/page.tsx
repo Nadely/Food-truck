@@ -138,7 +138,7 @@ const Commandes = () => {
 																<div className="flex items-center">
 																	{item.quantity && item.quantity !== 1 ? `${item.quantity} x ` : ''}
 																	<span style={{ marginRight: '5px' }}>
-																		{item.name && item.name.length > 0 ? item.name : ''}
+																		{item.name && item.name.length > 0 && !item.relatedItems?.some(rel => rel.name === item.name) ? item.name : ''}
 																	</span>
 																</div>
 																{item.relatedItems && item.relatedItems.length > 0 && (
@@ -207,7 +207,7 @@ const Commandes = () => {
 																<div className="flex items-center">
 																	{item.quantity && item.quantity !== 1 ? `${item.quantity} x ` : ''}
 																	<span style={{ marginRight: '5px' }}>
-																		{item.name && item.name.length > 0 ? item.name : ''}
+																		{item.name && item.name.length > 0 && !item.relatedItems?.some(rel => rel.name === item.name) ? item.name : ''}
 																	</span>
 																</div>
 																{item.relatedItems && item.relatedItems.length > 0 && (

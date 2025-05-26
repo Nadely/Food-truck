@@ -234,7 +234,10 @@ const Panier = () => {
                         className="w-10 h-10 rounded-full object-contain bg-white"
                       />
                     )}
-                    <p className="ml-2 style-pen">{item.categorie === "Enfants" ? "Menu Enfants" : (item.relatedItems?.some(rel => rel.name === item.name) ? "" : item.name)}</p>
+                    <p className="ml-2 style-pen">
+                      {item.categorie === "Enfants" ? "Menu Enfants" :
+                       (item.relatedItems?.some(rel => rel.name === item.name) ? "" : item.name)}
+                    </p>
                   </div>
                   {["Mitraillette", "Burger", "Veggie", "Enfants"].some((kw) => item.name?.includes(kw)) ? (
                     <button

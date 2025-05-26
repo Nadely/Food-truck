@@ -198,24 +198,26 @@ const Historique = () => {
                           </span>
                         </div>
                         <ul className="list-none list-inside style-pen">
-														{commande.items.map((item, index) => (
-															<li key={index}>
-																<div className="flex items-center">
-																	{item.quantity && item.quantity !== 1 ? `${item.quantity} x ` : ''}
-																	<span style={{ marginRight: '5px' }}>
-																		{item.name && item.name.length > 0 ? item.name : ''}
-																	</span>
-																</div>
-																{item.relatedItems && item.relatedItems.length > 0 && (
-																	<ul className="list-disc list-inside ml-5">
-																		{item.relatedItems.map((related, idx) => (
-																			<li key={idx}>{typeof related === 'string' ? related : related.name}</li>
-																		))}
-																	</ul>
-																)}
-															</li>
-														))}
-													</ul>
+                          {commande.items.map((item, index) => (
+                            <li key={index}>
+                              <div className="flex items-center">
+                                {item.quantity && item.quantity !== 1 ? `${item.quantity} x ` : ''}
+                                <span style={{ marginRight: '5px' }}>
+                                  {item.name && item.name.length > 0 && !item.relatedItems?.some(rel => rel.name === item.name) ? item.name : ''}
+                                </span>
+                              </div>
+                              {item.relatedItems && item.relatedItems.length > 0 && (
+                                <ul className="list-disc list-inside ml-5">
+                                  {item.relatedItems.map((related, idx) => (
+                                    <li key={idx}>
+                                      {typeof related === 'string' ? related : related.name}
+                                    </li>
+                                  ))}
+                                </ul>
+                              )}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                       <div className="flex flex-col items-end">
                         <div className="flex flex-row items-end gap-2">
