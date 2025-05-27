@@ -90,10 +90,10 @@ const AperoBox = () => {
             {data.AperoBox.map((product) => (
               <div
                 key={product.id}
-                className="flex flex-col items-center justify-center gap-4 flex-grow basis-[180px] max-w-[220px]"
+                className="flex flex-col items-center justify-center gap-3 flex-grow basis-[170px] max-w-[200px]"
                 >
                 <div
-                className="relative shadow-light flex flex-col items-center justify-center gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md w-full aspect-square"
+                className="relative shadow-light flex flex-col items-center justify-center gap-3 rounded-lg p-1.5 cursor-pointer hover:bg-green-200 hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md w-full aspect-square"
                 onClick={() => handleSelectAperoBox(product.name)}
               >
                 <div className="relative w-full h-full">
@@ -104,26 +104,26 @@ const AperoBox = () => {
                       style={{ objectFit: "contain" }}
                     />
                   </div>
-                <div className="absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-2 text-center border-t border-black rounded-b-lg ">
+                <div className="absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-1.5 text-center border-t border-black rounded-b-lg">
                   <p className="text-sm mt-auto">{product.name}</p>
-                  <div className="flex flex-row items-center gap-4">
+                  <div className="flex flex-row items-center justify-center gap-3">
                     <button
                       onClick={() => handleDecrement(product.id)}
-                      className="text-sm px-2 py-1  bg-red-500 focus:ring-4 rounded-lg px-8 py-2 ml-3"
+                      className="text-sm px-1.5 py-1 bg-red-500 focus:ring-2 rounded-lg"
                     >
                       -
                     </button>
                     <span className="text-sm">{quantities[product.id]}</span>
                     <button
                       onClick={() => handleIncrement(product.id)}
-                      className="text-sm px-2 py-1 rounded-lg bg-green-500 focus:ring-4 rounded-lg px-8 py-2 "
+                      className="text-sm px-1.5 py-1 rounded-lg bg-green-500 focus:ring-2"
                     >
                       +
                     </button>
                   </div>
                 </div>
                   </div>
-                <p className="text-sm text-white border-2 border-white w-full text-center rounded-md p-1">{product.price}</p>
+                <p className="text-sm text-white border border-white w-full text-center rounded-md p-1">{product.price}</p>
               </div>
             ))}
           </div>

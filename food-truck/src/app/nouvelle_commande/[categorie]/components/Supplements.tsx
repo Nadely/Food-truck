@@ -122,18 +122,18 @@ const Supplements = () => {
       </div>
       <div className="w-full flex flex-col items-center justify-center mt-4 style-pen text-lg mb-5">
         <div className="flex flex-col items-center justify-center">
-          <div className="grid grid-cols-5 gap-6 w-full max-w-[1400px]">
+          <div className="grid grid-cols-5 gap-4 w-full max-w-[1400px]">
             {data.Supplements.map((product) => (
               <div
                 key={product.id}
-                className={`flex flex-col items-center justify-center gap-4 min-w-[200px] ${
+                className={`flex flex-col items-center justify-center gap-3 min-w-[180px] ${
                   selectedSupplements.includes(product.id)
                     ? "bg-green-200 border-4 border-green-500 rounded-lg"
                     : ""
                 }`}
               >
                 <div
-                  className="relative shadow-light flex flex-col items-center justify-center gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md w-full aspect-square"
+                  className="relative shadow-light flex flex-col items-center justify-center gap-3 rounded-lg p-1.5 cursor-pointer hover:bg-green-200 hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md w-full aspect-square"
                   onClick={() => handleSelectSupplements(product.id)}
                 >
                   <div className="relative w-full h-full">
@@ -144,7 +144,7 @@ const Supplements = () => {
                       style={{ objectFit: "contain" }}
                     />
                   </div>
-                  <p className="absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-2 text-center border-t border-black rounded-b-lg text-sm">{product.name}</p>
+                  <p className="absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-1.5 text-center border-t border-black rounded-b-lg text-sm">{product.name}</p>
                 </div>
               </div>
             ))}

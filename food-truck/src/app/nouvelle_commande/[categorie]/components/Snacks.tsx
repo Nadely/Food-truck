@@ -116,14 +116,14 @@ const Snacks = () => {
             ).map((product) => (
               <div
                 key={product.id}
-                className={`flex flex-col items-center justify-center flex-grow basis-[160px] max-w-[200px] ${
+                className={`flex flex-col items-center justify-center flex-grow basis-[140px] max-w-[160px] ${
                   viaMitraillette && selectedSnack === product.id
                     ? "bg-green-200 rounded-lg"
                     : ""
                 }`}
               >
                 <div
-                  className="relative shadow-light flex flex-col items-center justify-center gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md w-full aspect-square"
+                  className="relative shadow-light flex flex-col items-center justify-center gap-2 rounded-lg p-1 cursor-pointer hover:bg-green-200 hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md w-full aspect-square"
                   onClick={() => handleSelectSnack(product)}
                 >
                   <div className="relative w-full h-full">
@@ -134,21 +134,21 @@ const Snacks = () => {
                       style={{ objectFit: "contain" }}
                     />
                   </div>
-                  <div className="absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-2 text-center border-t border-black rounded-b-lg flex flex-col items-center">
-                    <p className="text-sm">{product.name}</p>
+                  <div className="absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-1 text-center border-t border-black rounded-b-lg flex flex-col items-center">
+                    <p className="text-xs">{product.name}</p>
 
                     {!viaMitraillette && (
-                      <div className="flex flex-row items-center gap-4 mt-1">
+                      <div className="flex flex-row items-center justify-center gap-2 mt-1">
                         <button
                           onClick={() => handleDecrement(product.id)}
-                          className="text-sm bg-red-500 focus:ring-4 rounded-lg px-4 py-1"
+                          className="text-xs bg-red-500 focus:ring-2 rounded-lg px-1 py-0.5"
                         >
                           -
                         </button>
-                        <span className="text-sm">{quantities[product.id]}</span>
+                        <span className="text-xs">{quantities[product.id]}</span>
                         <button
                           onClick={() => handleIncrement(product.id)}
-                          className="text-sm bg-green-500 focus:ring-4 rounded-lg px-4 py-1"
+                          className="text-xs bg-green-500 focus:ring-2 rounded-lg px-1 py-0.5"
                         >
                           +
                         </button>
@@ -158,7 +158,7 @@ const Snacks = () => {
                   </div>
                 </div>
                 {!viaMitraillette && (
-                  <p className="text-sm text-white border-2 border-white w-full text-center rounded-md mt-3">
+                  <p className="text-xs text-white border border-white w-full text-center rounded-md mt-1 p-0.5">
                     {product.price}
                   </p>
                 )}
