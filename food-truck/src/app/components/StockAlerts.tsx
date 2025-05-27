@@ -54,9 +54,9 @@ const StockAlerts = () => {
 
   if (error) {
     return (
-      <div className="fixed bottom-4 right-4 z-50">
-        <div className="bg-yellow-100 border-2 border-yellow-500 rounded-lg p-4 shadow-lg">
-          <p className="text-yellow-700">Erreur de chargement des alertes: {error}</p>
+      <div className="absolute top-[120px] right-[200px] z-50">
+        <div className="bg-yellow-100 border-2 border-yellow-500 rounded-lg p-2 shadow-lg">
+          <p className="text-yellow-700 text-sm">Erreur de chargement des alertes: {error}</p>
         </div>
       </div>
     );
@@ -67,27 +67,34 @@ const StockAlerts = () => {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
-      <div className="bg-red-100 border-2 border-red-500 rounded-lg p-4 shadow-lg">
-        <div className="flex justify-between items-center mb-2">
-          <h3 className="text-lg font-bold text-red-700">Alertes de Stock</h3>
+    <div className="absolute top-[120px] right-[200px] z-50">
+      <div className="bg-red-100 border-2 border-red-500 rounded-lg p-2 shadow-lg">
+        <div className="flex justify-between items-center">
+          <div className="flex items-center gap-2">
+            <h3 className="text-sm font-bold text-red-700">Alertes de Stock</h3>
+            <span className="bg-red-500 text-white rounded-full px-2 py-0.5 text-xs">
+              {alerts.filter((alert, index, self) =>
+                index === self.findIndex(a => a.productName === alert.productName)
+              ).length}
+            </span>
+          </div>
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="text-red-700 hover:text-red-900"
+            className="text-red-700 hover:text-red-900 text-sm"
           >
-            {isExpanded ? "▼" : "▲"}
+            {isExpanded ? "▲" : "▼"}
           </button>
         </div>
         {isExpanded && (
-          <div className="max-h-60 overflow-y-auto">
+          <div className="max-h-40 overflow-y-auto mt-2">
             {alerts
               .filter((alert, index, self) =>
                 index === self.findIndex(a => a.productName === alert.productName)
               )
               .map((alert) => (
-                <div key={alert.productId} className="mb-2 p-2 bg-white rounded">
+                <div key={alert.productId} className="mb-1 p-1 bg-white rounded text-sm">
                   <p className="font-semibold">{alert.productName}</p>
-                  <p className="text-sm">
+                  <p className="text-xs">
                     Stock actuel: {alert.currentStock} / Limite: {alert.stockLimit}
                   </p>
                 </div>

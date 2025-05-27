@@ -1664,7 +1664,7 @@
       "id": 10,
       "name": "Aucuns supplements",
       "image": "/rien.png",
-      "price": "0.00€",
+      "price": "",
       "categorie": "Supplements",
       "stock": 20,
       "stockConseil": 0,
