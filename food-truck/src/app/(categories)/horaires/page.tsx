@@ -129,7 +129,7 @@ const Horaires = () => {
               <div className="flex flex-col items-center justify-center mt-4">
                 <input
                   type="text"
-                  className="border-2 border-black rounded-md mt-10 mb-4 w-80 text-center"
+                  className="border-2 border-black rounded-md mt-10 mb-4 w-80 h-10 text-center"
                   placeholder="Entrez votre nom"
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
@@ -137,14 +137,14 @@ const Horaires = () => {
 
                 <input
                   type="text"
-                  className="border-2 border-black rounded-md mt-2 mb-4 w-80 text-center"
+                  className="border-2 border-black rounded-md mt-2 mb-4 w-80 h-10 text-center"
                   placeholder="Entrez votre telephone"
                   value={userPhone}
                   onChange={(e) => setUserPhone(e.target.value)}
                 />
 
       {/* Grille des horaires */}
-      <div className="grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-2 mb-5">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4 mb-5 px-4">
         {Object.keys(categorieColors).map((hour) => (
           <button
             key={hour}
@@ -153,7 +153,7 @@ const Horaires = () => {
                 ? "bg-green-400 border-4 border-black scale-105"
                 : `${categorieColors[hour]} hover:bg-green-400 hover:scale-105`
               }`}
-            style={{ width: "150px", height: "150px" }}
+            style={{ width: "100%", aspectRatio: "1/1", maxWidth: "200px" }}
             onClick={() => handleSelectHours(hour)}
           >
             {hour}
