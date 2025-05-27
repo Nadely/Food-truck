@@ -554,68 +554,18 @@ const Panier = () => {
                         if (item.uniqueId === currentParentId) {
                           const updatedRelatedItems = item.relatedItems.map((related: any) => {
                             if (related.uniqueId === currentRelatedId) {
-                              const relatedCategorie = related.categorie?.toLowerCase() || "boissons";
-                              const optionCategorie = option.categorie?.toLowerCase() || "boissons";
-
-                              console.log("Données complètes:", {
-                                related,
-                                option,
-                                relatedCategorie,
-                                optionCategorie
-                              });
-
-                              const isBoissonOrSupp =
-                                (relatedCategorie === "boissons") ||
-                                (optionCategorie === "boissons") ||
-                                (option.name.toLowerCase().includes("leffe") ||
-                                option.name.toLowerCase().includes("coca") ||
-                                option.name.toLowerCase().includes("tropico") ||
-                                option.name.toLowerCase().includes("ice tea"));
-
-                              console.log("Détection boisson/supplément:", {
-                                relatedCategorie,
-                                optionCategorie,
-                                isBoissonOrSupp,
-                                optionName: option.name,
-                                viaMitraillette: related.viaMitraillette
-                              });
-
-                              // Gestion spéciale pour les suppléments et boissons
-                              let prixFinal = 0;
-
-                              // Traitement spécial pour les snacks
-                              if (related.viaMitraillette || optionCategorie === "snacks" || relatedCategorie === "snacks") {
-                                // Si le snack est ajouté via une mitraillette, il est gratuit
-                                if (related.viaMitraillette) {
-                                  prixFinal = 0;
-                                  console.log("Snack via mitraillette → Gratuit");
-                                } else {
-                                  prixFinal = cleanPrice(option.price || 0);
-                                  console.log("Snack normal → Prix d'origine:", prixFinal);
-                                }
-                                return {
-                                  ...option,
-                                  price: prixFinal,
-                                  categorie: "snacks",
-                                  uniqueId: `snack-${Date.now()}`,
-                                  isSnack: true,
-                                  viaMitraillette: related.viaMitraillette
-                                };
-                              }
-
+                              const isSauce = related.categorie?.toLowerCase() === "sauces";
                               return {
                                 ...related,
                                 ...option,
-                                price: prixFinal,
-                                categorie: optionCategorie.includes("boissons") ? "boissons" : "snacks",
-                                isBoisson: optionCategorie.includes("boissons"),
-                                displayPrice: prixFinal > 0 ? prixFinal + "€" : ""
+                                price: isSauce ? (option.name === "Aucune sauce" ? 0 : 0.5) : cleanPrice(option.price || 0),
+                                uniqueId: `sauce-${option.id}-${Date.now()}`
                               };
                             }
                             return related;
-                          }).filter(Boolean);
+                          });
 
-                          // Si "Aucun supplément" est sélectionné, s'assurer qu'il n'y a qu'un seul élément
+                          // Si "Aucune sauce" est sélectionné, s'assurer qu'il n'y a qu'un seul élément
                           const finalRelatedItems = option.name === "Aucune sauce"
                             ? updatedRelatedItems.filter(item => item.name === "Aucune sauce").slice(0, 1)
                             : updatedRelatedItems.filter(item => item.name !== "Aucune sauce");
@@ -623,7 +573,7 @@ const Panier = () => {
                           // Calculer le nouveau prix total des relatedItems
                           const newTotalPrice = finalRelatedItems.reduce((sum: number, related: any) => {
                             if (related.name === "Aucune sauce") return sum;
-                            return sum + cleanPrice(related.price || 0);
+                            return sum + (related.price || 0);
                           }, 0);
 
                           const updatedItem = {

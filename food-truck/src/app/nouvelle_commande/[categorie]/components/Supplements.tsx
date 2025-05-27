@@ -69,7 +69,7 @@ const Supplements = () => {
           price: 0,
           quantity: 1,
           uniqueId: `supplement-${ID_NONE}-${Date.now()}`,
-          isSupplements: false,
+          isSupplements: true,
           isNoSupplement: true,
           groupId: groupId
         }],
