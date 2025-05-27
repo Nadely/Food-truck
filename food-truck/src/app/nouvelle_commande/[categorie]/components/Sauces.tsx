@@ -119,13 +119,18 @@ const Sauces = () => {
         const product = products.find((item) => item.id === selectedSauce);
         if (product) {
           addToCart({
+            id: product.id,
+            name: product.name,
+            image: product.image,
             price: product.name === "Aucune sauce" ? 0 : 0,
             quantity: 1,
+            uniqueId: `sauce-${product.id}-${Date.now()}`,
+            groupId: groupId,
             relatedItems: [{
               id: product.id,
               name: product.name,
               image: product.image,
-              price: 0,
+              price: product.name === "Aucune sauce" ? 0 : 0,
               quantity: 1,
               uniqueId: `sauce-${product.id}-${Date.now()}-related`,
               groupId: groupId

@@ -47,7 +47,11 @@ const Panier = () => {
           if (related.isSupplements) {
             return sum + cleanPrice(related.price || 0);
           }
-          // Pour les sauces, on utilise un prix fixe de 0.5€
+          // Pour les sauces, on ne compte pas le prix si le produit principal est à 0
+          if (related.categorie?.toLowerCase() === "sauces" && itemPrice === 0) {
+            return sum;
+          }
+          // Pour les sauces avec un produit principal qui a un prix
           if (related.categorie?.toLowerCase() === "sauces") {
             return sum + (related.name === "Aucune sauce" ? 0 : 0.5);
           }
@@ -571,27 +575,27 @@ const Panier = () => {
                           // Si "Aucune sauce" est sélectionné, s'assurer qu'il n'y a qu'un seul élément
                           const finalRelatedItems = option.name === "Aucune sauce"
                             ? updatedRelatedItems.filter(item => item.name === "Aucune sauce").slice(0, 1)
-                            : updatedRelatedItems.filter(item => item.name !== "Aucune sauce");
-
-                          // Calculer le nouveau prix total des relatedItems
-                          const newTotalPrice = finalRelatedItems.reduce((sum: number, related: any) => {
-                            if (related.name === "Aucune sauce") return sum;
-                            return sum + (related.price || 0);
-                          }, 0);
+                            : updatedRelatedItems.filter(item => item.name !== "Aucune sauce").concat(
+                                updatedRelatedItems.find(item => item.uniqueId === currentRelatedId) || []
+                              );
 
                           const updatedItem = {
                             ...item,
-                            name: item.name, // Préserver le nom du produit principal
-                            image: item.image, // Préserver l'image du produit principal
+                            name: item.name,
+                            image: item.image,
                             relatedItems: finalRelatedItems,
-                            price: newTotalPrice
+                            price: item.price
                           };
 
                           console.log("Mise à jour du panier:", {
                             item,
                             finalRelatedItems,
-                            newTotalPrice,
-                            option
+                            updatedItem,
+                            prixOriginal: item.price,
+                            prixSauces: finalRelatedItems.map(sauce => ({
+                              nom: sauce.name,
+                              prix: sauce.price
+                            }))
                           });
 
                           setCart(prevCart => {
