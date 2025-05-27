@@ -67,7 +67,7 @@ const Boissons = () => {
             {products.map((product) => (
               <div
                 key={product.id}
-                className={`flex flex-col items-center justify-center gap-4 flex-grow basis-[200px] max-w-[300px] ${
+                className={`flex flex-col items-center justify-center gap-4 flex-grow basis-[160px] max-w-[200px] ${
                   selectedBoisson === product.id
                     ? "bg-green-200 border-4 border-green-500 rounded-lg"
                     : ""

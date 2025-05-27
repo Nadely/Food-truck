@@ -118,7 +118,7 @@ const Snacks = () => {
             ).map((product) => (
               <div
                 key={product.id}
-                className={`flex flex-col items-center justify-center flex-grow basis-[180px] max-w-[220px] ${
+                className={`flex flex-col items-center justify-center flex-grow basis-[160px] max-w-[200px] ${
                   viaMitraillette && selectedSnack === product.id
                     ? "bg-green-200 rounded-lg"
                     : ""

@@ -122,11 +122,11 @@ const Supplements = () => {
       </div>
       <div className="w-full flex flex-col items-center justify-center mt-4 style-pen text-lg mb-5">
         <div className="flex flex-col items-center justify-center">
-          <div className="flex flex-row flex-wrap items-center justify-center gap-4">
+          <div className="grid grid-cols-5 gap-6 w-full max-w-[1400px]">
             {data.Supplements.map((product) => (
               <div
                 key={product.id}
-                className={`flex flex-col items-center justify-center gap-4 flex-grow basis-[200px] max-w-[300px] ${
+                className={`flex flex-col items-center justify-center gap-4 min-w-[200px] ${
                   selectedSupplements.includes(product.id)
                     ? "bg-green-200 border-4 border-green-500 rounded-lg"
                     : ""

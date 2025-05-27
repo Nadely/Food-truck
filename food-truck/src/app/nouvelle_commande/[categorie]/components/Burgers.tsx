@@ -110,7 +110,7 @@ const Burgers = () => {
         const totalPrice = price + menuPrice + garniturePrice;
 
         return (
-          <div key={product.id} className="flex flex-col items-center gap-2 flex-grow basis-[200px] max-w-[300px]">
+          <div key={product.id} className="flex flex-col items-center gap-2 flex-grow basis-[160px] max-w-[200px]">
             <button
               onClick={() => handleProduitClick(product)}
               className="relative shadow-light flex flex-col items-center justify-center gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md w-full aspect-square"
