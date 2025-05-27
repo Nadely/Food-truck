@@ -47,6 +47,10 @@ const Panier = () => {
           if (related.isSupplements) {
             return sum + cleanPrice(related.price || 0);
           }
+          // Pour les sauces, on utilise un prix fixe de 0.5€
+          if (related.categorie?.toLowerCase() === "sauces") {
+            return sum + (related.name === "Aucune sauce" ? 0 : 0.5);
+          }
           // Pour les snacks, on ne compte pas le prix
           if (related.categorie?.toLowerCase().includes('snacks')) {
             return sum;
@@ -296,6 +300,7 @@ const Panier = () => {
 
     const baseName = relatedProduct.name;
     const isMenuEnfants = baseItem.name?.toLowerCase().includes("menu enfants");
+    const isSupplement = relatedProduct.isSupplements;
 
     let options = [];
 
@@ -314,12 +319,28 @@ const Panier = () => {
           price: cleanPrice(price),
           uniqueId,
         }));
+    } else if (isSupplement) {
+      // Pour les suppléments, on montre tous les produits de la catégorie Supplements
+      options = allProducts
+        .filter(
+          (product) =>
+            typeof product.categorie === "string" &&
+            product.categorie.toLowerCase() === "supplements"
+        )
+        .map(({ id, name, image, price, uniqueId }) => ({
+          id,
+          name,
+          image,
+          price: cleanPrice(price),
+          uniqueId,
+          isSupplements: true
+        }));
     } else {
       // En dehors du menu enfants, on cherche d'abord dans les catégories Snacks et Boissons
       const fullProductData = allProducts.find(
         (prod) =>
           prod.name.trim().toLowerCase() === baseName.trim().toLowerCase() &&
-          (prod.categorie === "Snacks" || prod.categorie === "Boissons")
+          (prod.categorie === "Snacks" || prod.categorie === "Boissons" || prod.categorie === "Sauces")
       );
 
       if (fullProductData?.categorie) {
@@ -330,35 +351,14 @@ const Panier = () => {
               typeof product.categorie === "string" &&
               product.categorie.toLowerCase() === normalizedCategory
           )
-          .map(({ id, name, image, price, uniqueId }) => ({
+          .map(({ id, name, image, price, uniqueId, categorie }) => ({
             id,
             name,
             image,
-            price: cleanPrice(price),
+            price: categorie?.toLowerCase() === "sauces" ? (name === "Aucune sauce" ? 0 : 0.5) : cleanPrice(price),
             uniqueId,
+            categorie
           }));
-      } else {
-        // Si on ne trouve pas dans Snacks ou Boissons, on cherche dans toutes les catégories
-        const fullProductData = allProducts.find(
-          (prod) => prod.name.trim().toLowerCase() === baseName.trim().toLowerCase()
-        );
-
-        if (fullProductData?.categorie) {
-          const normalizedCategory = fullProductData.categorie.toLowerCase();
-          options = allProducts
-            .filter(
-              (product) =>
-                typeof product.categorie === "string" &&
-                product.categorie.toLowerCase() === normalizedCategory
-            )
-            .map(({ id, name, image, price, uniqueId }) => ({
-              id,
-              name,
-              image,
-              price: cleanPrice(price),
-              uniqueId,
-            }));
-        }
       }
     }
 
@@ -408,119 +408,122 @@ const Panier = () => {
           <div className="text-center">Votre panier est vide.</div>
         ) : (
           <ul className="list-none p-0">
-            {cart.map((item: any) => (
-              <li key={generateUniqueId(`item-${item.id}`)} className="mb-4">
-                <div className="flex justify-between items-center">
-                  <div className="flex items-center">
-                    {(!item.relatedItems || item.relatedItems.length === 0) && (
-                      <Image
-                        src={item.name === "Menu Enfants" ? "/Enfants.png" : item.image}
-                        alt={item.name}
-                        width={40}
-                        height={40}
-                        className="w-10 h-10 rounded-full object-contain bg-white"
-                      />
-                    )}
-                    <p className="ml-2 style-pen">
-                      {item.categorie === "Enfants" ? "Menu Enfants" :
-                       (item.relatedItems?.length > 0 ? "" : item.name)}
-                    </p>
-                  </div>
-                  {["Mitraillette", "Burger", "Veggie", "Enfants"].some((kw) => item.name?.includes(kw)) ? (
-                    <button
-                      onClick={() => {
-                        console.log("Tentative de suppression du groupe:", item.groupId);
-                        if (item.groupId) {
-                          removeFromCart(item.groupId);
-                        } else {
-                          console.error("Pas de groupId trouvé pour l'élément:", item);
-                        }
-                      }}
-                      className="bg-red-500 text-white px-2 rounded"
-                    >
-                      Supprimer
-                    </button>
-                  ) : (
-                    (!item.relatedItems || item.relatedItems.length === 0) && (
-                      <div className="flex items-center">
-                        <button
-                          onClick={() => updateQuantity(item.uniqueId, Math.max(1, item.quantity - 1))}
-                          className="bg-red-500 text-white px-2 rounded"
-                        >
-                          -
-                        </button>
-                        <button
-                          onClick={() => updateQuantity(item.uniqueId, item.quantity + 1)}
-                          className="bg-green-500 text-white px-2 ml-2 rounded"
-                        >
-                          +
-                        </button>
-                        <button
-                          onClick={() => remove(item.uniqueId)}
-                          className="bg-black text-white px-2 ml-4 rounded"
-                        >
-                          Supprimer
-                        </button>
-                      </div>
-                    )
-                  )}
-                </div>
-
-                <div className="ml-4 text-sm">
-                  {cleanPrice(item.price) > 0 && !item.isSupplements && <p>Prix unitaire : {item.price.toFixed(2)}€</p>}
-                  {item.quantity > 1 && !item.isSupplements && <p>Quantite : {item.quantity}</p>}
-                  {item.relatedItems?.length > 0 && (
-                    <>
-                      {item.relatedItems.some(related => related.isSupplements) && (
-                        <div className="mb-2">
-                        </div>
+            {cart.filter(item => {
+              // Ne jamais afficher les sauces comme produits principaux
+              return !item.categorie?.toLowerCase().includes("sauces");
+            }).map((item: any) => {
+              return (
+                <li key={item.uniqueId} className="mb-4">
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center">
+                      {!item.isSupplements && !item.relatedItems?.some(rel => rel.categorie?.toLowerCase() === "sauces") && (
+                        <>
+                          <Image
+                            src={item.name === "Menu Enfants" ? "/Enfants.png" : item.image}
+                            alt={item.name}
+                            width={40}
+                            height={40}
+                            className="w-10 h-10 rounded-full object-contain bg-white"
+                          />
+                          <p className="ml-2 style-pen">
+                            {item.categorie === "Enfants" ? "Menu Enfants" : item.name}
+                          </p>
+                        </>
                       )}
-                      <ul className="ml-4 mt-2">
-                        {item.relatedItems.map((related, index) => (
-                          <li key={generateUniqueId(`related-${related.id}-${index}`)} className="flex items-center mb-1">
-                            <div className="w-8 h-8 relative">
-                              <Image
-                                src={related.image}
-                                alt=""
-                                fill
-                                className="object-contain bg-white rounded-full"
-                              />
-                            </div>
-                            <span className="ml-2">
-                              {related.name}
-                              {related.isBoisson && !related.isSupplements && related.price > 0 && (
-                                <span className="ml-2 text-sm">
-                                  ({related.price}€)
-                                </span>
+                    </div>
+                    {["Mitraillette", "Burger", "Veggie", "Enfants"].some((kw) => item.name?.includes(kw)) ? (
+                      <button
+                        onClick={() => {
+                          console.log("Tentative de suppression du groupe:", item.groupId);
+                          if (item.groupId) {
+                            removeFromCart(item.groupId);
+                          } else {
+                            console.error("Pas de groupId trouvé pour l'élément:", item);
+                          }
+                        }}
+                        className="bg-red-500 text-white px-2 rounded"
+                      >
+                        Supprimer
+                      </button>
+                    ) : (
+                      ((!item.relatedItems) || item.relatedItems.length === 0) && (
+                        <div className="flex items-center">
+                          <button
+                            onClick={() => updateQuantity(item.uniqueId, Math.max(1, item.quantity - 1))}
+                            className="bg-red-500 text-white px-2 rounded"
+                          >
+                            -
+                          </button>
+                          <button
+                            onClick={() => updateQuantity(item.uniqueId, item.quantity + 1)}
+                            className="bg-green-500 text-white px-2 ml-2 rounded"
+                          >
+                            +
+                          </button>
+                          <button
+                            onClick={() => remove(item.uniqueId)}
+                            className="bg-black text-white px-2 ml-4 rounded"
+                          >
+                            Supprimer
+                          </button>
+                        </div>
+                      )
+                    )}
+                  </div>
+
+                  <div className="ml-4 text-sm">
+                    {cleanPrice(item.price) > 0 && !item.isSupplements && !item.relatedItems?.some(rel => rel.categorie?.toLowerCase() === "sauces") && (
+                      <p>Prix unitaire : {item.price.toFixed(2)}€</p>
+                    )}
+                    {item.quantity > 1 && !item.isSupplements && <p>Quantite : {item.quantity}</p>}
+                    {item.relatedItems?.length > 0 && (
+                      <>
+                        {item.relatedItems.some(related => related.isSupplements) && (
+                          <div className="mb-2">
+                          </div>
+                        )}
+                        <ul className="ml-4 mt-2">
+                          {item.relatedItems.map((related, index) => (
+                            <li key={generateUniqueId(`related-${related.id}-${index}`)} className="flex items-center mb-1">
+                              <div className="w-8 h-8 relative">
+                                <Image
+                                  src={related.image}
+                                  alt=""
+                                  fill
+                                  className="object-contain bg-white rounded-full"
+                                />
+                              </div>
+                              <span className="ml-2">
+                                {related.name}
+                              </span>
+                              {(!related.isGarniture && !related.isFrites) || related.isBoisson ? (
+                                <button
+                                  onClick={() => handleModify(related.uniqueId, item.uniqueId)}
+                                  className="border-2 border-yellow-500 text-black px-2 ml-5 rounded-full"
+                                >
+                                  Modifier
+                                </button>
+                              ) : null}
+                              {(related.isGarniture ||
+                                (related.isSupplements &&
+                                  item.relatedItems.filter(r => r.isSupplements).length > 1)
+                              ) && (
+                                <button
+                                  onClick={() => handleRemoveGarniture(related.uniqueId, item.uniqueId)}
+                                  className="border-2 border-red-500 text-red-700 px-2 ml-2 rounded-full"
+                                >
+                                  X
+                                </button>
                               )}
-                            </span>
-                            {(!related.isGarniture && !related.isFrites) || related.isBoisson ? (
-                              <button
-                                onClick={() => handleModify(related.uniqueId, item.uniqueId)}
-                                className="border-2 border-yellow-500 text-black px-2 ml-5 rounded-full"
-                              >
-                                Modifier
-                              </button>
-                            ) : null}
-                            {(related.isGarniture ||
-                              (related.isSupplements &&
-                                item.relatedItems.filter(r => r.isSupplements).length > 1)
-                            ) && (
-                              <button
-                                onClick={() => handleRemoveGarniture(related.uniqueId, item.uniqueId)}
-                                className="border-2 border-red-500 text-red-700 px-2 ml-2 rounded-full"
-                              >
-                                X
-                              </button>
-                            )}
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  )}
-                </div>
-              </li>
-            ))}
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         )}
       </div>
@@ -578,6 +581,8 @@ const Panier = () => {
 
                           const updatedItem = {
                             ...item,
+                            name: item.name, // Préserver le nom du produit principal
+                            image: item.image, // Préserver l'image du produit principal
                             relatedItems: finalRelatedItems,
                             price: newTotalPrice
                           };
@@ -589,7 +594,6 @@ const Panier = () => {
                             option
                           });
 
-                          // Forcer le rafraîchissement du panier
                           setCart(prevCart => {
                             const newCart = prevCart.map(cartItem =>
                               cartItem.uniqueId === currentParentId ? updatedItem : cartItem
