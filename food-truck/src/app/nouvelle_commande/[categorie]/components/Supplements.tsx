@@ -83,14 +83,14 @@ const Supplements = () => {
         id: product.id,
         name: product.name,
         image: product.image,
-        price: 1, // Prix fixe de 1€ par supplément
+        price: parseFloat(product.price.replace("€", "").replace(",", ".").trim()),
         quantity: 1,
         uniqueId: `supplement-${product.id}-${Date.now()}`,
         isSupplements: true,
         groupId: groupId
       }));
 
-      const supplementsPrice = relatedItems.length; // 1€ par supplément
+      const supplementsPrice = relatedItems.reduce((sum, item) => sum + item.price, 0);
 
       const item = {
         id: Date.now(),

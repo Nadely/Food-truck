@@ -43,9 +43,9 @@ const Panier = () => {
             const isLeffe = related.name?.toLowerCase().includes('leffe');
             return sum + (isLeffe ? 3.5 : 1);
           }
-          // Pour les suppléments, on compte 1€ chacun mais on ne compte pas le prix du produit principal
+          // Pour les suppléments, on utilise leur prix réel
           if (related.isSupplements) {
-            return sum + 1;
+            return sum + cleanPrice(related.price || 0);
           }
           // Pour les snacks, on ne compte pas le prix
           if (related.categorie?.toLowerCase().includes('snacks')) {
@@ -467,13 +467,12 @@ const Panier = () => {
                 </div>
 
                 <div className="ml-4 text-sm">
-                  {cleanPrice(item.price) > 0 && <p>Prix unitaire : {item.price.toFixed(2)}€</p>}
-                  {item.quantity > 1 && <p>Quantite : {item.quantity}</p>}
+                  {cleanPrice(item.price) > 0 && !item.isSupplements && <p>Prix unitaire : {item.price.toFixed(2)}€</p>}
+                  {item.quantity > 1 && !item.isSupplements && <p>Quantite : {item.quantity}</p>}
                   {item.relatedItems?.length > 0 && (
                     <>
                       {item.relatedItems.some(related => related.isSupplements) && (
                         <div className="mb-2">
-                          <p>Quantite : {item.relatedItems.filter(related => related.isSupplements).length}</p>
                         </div>
                       )}
                       <ul className="ml-4 mt-2">
