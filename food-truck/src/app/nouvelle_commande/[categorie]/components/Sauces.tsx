@@ -10,7 +10,7 @@ import { useCart } from "../../../context/CartContext";
 const Sauces = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { addToCart } = useCart();
+  const { addToCart, addRelatedItem } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
 
   // Récupération des paramètres via
@@ -119,21 +119,18 @@ const Sauces = () => {
         const product = products.find((item) => item.id === selectedSauce);
         if (product) {
           addToCart({
-            id: product.id,
-            name: product.name,
-            image: product.image,
-            price: product.name === "Aucune sauce" ? 0 : 0,
+            id: Date.now(),
             quantity: 1,
-            uniqueId: `sauce-${product.id}-${Date.now()}`,
             groupId: groupId,
+            isHidden: true,
             relatedItems: [{
               id: product.id,
               name: product.name,
               image: product.image,
               price: product.name === "Aucune sauce" ? 0 : 0,
               quantity: 1,
-              uniqueId: `sauce-${product.id}-${Date.now()}-related`,
-              groupId: groupId
+              groupId: groupId,
+              isSauces: true
             }]
           });
         }

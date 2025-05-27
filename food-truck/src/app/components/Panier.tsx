@@ -420,7 +420,7 @@ const Panier = () => {
                 <li key={item.uniqueId} className="mb-4">
                   <div className="flex justify-between items-center">
                     <div className="flex items-center">
-                      {!item.isSupplements && !item.relatedItems?.some(rel => rel.categorie?.toLowerCase() === "sauces") && !item.relatedItems?.some(rel => rel.categorie?.toLowerCase() === "snacks") && (
+                      {!item.isHidden && !item.isSupplements && !item.relatedItems?.some(rel => rel.categorie?.toLowerCase() === "sauces") && !item.relatedItems?.some(rel => rel.categorie?.toLowerCase() === "snacks") && (
                         <>
                           <Image
                             src={item.name === "Menu Enfants" ? "/Enfants.png" : item.image}

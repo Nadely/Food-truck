@@ -13,7 +13,7 @@ const Snacks = () => {
   const isMenu = searchParams.get("menu") === "true";
   const groupId = searchParams.get("groupId") || `snack-${Date.now()}`;
   const router = useRouter();
-  const { addToCart } = useCart();
+  const { addToCart, addRelatedItem } = useCart();
 
   const [quantities, setQuantities] = useState<{ [key: number]: number }>(
     data.Snacks.reduce((acc: { [key: number]: number }, product) => {
@@ -53,12 +53,10 @@ const Snacks = () => {
         }
 
         addToCart({
-          id: produit.id,
-          name: produit.name,
-          image: produit.image,
-          price: cleanPrice,
+          id: Date.now(),
           quantity: 1,
           groupId: groupId,
+          isHidden: true,
           relatedItems: [{
             id: produit.id,
             name: produit.name,
@@ -66,8 +64,8 @@ const Snacks = () => {
             price: cleanPrice,
             quantity: 1,
             groupId: groupId,
-            viaMitraillette: true,
-            uniqueId: `snack-${Date.now()}`
+            isSnack: true,
+            viaMitraillette: true
           }]
         });
 
