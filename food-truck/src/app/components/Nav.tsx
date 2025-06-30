@@ -29,10 +29,10 @@ const Nav = () => {
 
   return (
     <div className="flex w-[500px]">
-      <Link href="/" className="text-md style-pen text-black bg-red-200 border-2 border-black rounded-lg p-2">
+      <Link href="/acceuiladmin" className="text-md style-pen text-black bg-red-200 border-2 border-black rounded-lg p-2">
         Accueil
       </Link>
-      {categories !== '' && (
+      {categories !== '' && categories !== 'acceuiladmin' && (
         <div className="flex flex-col border-2 animate-fillLeftToRight h-1 bg-red-200 mt-5"></div>
       )}
       {categories === 'commandes' && (

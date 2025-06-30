@@ -1,99 +1,79 @@
 "use client";
+import { signIn } from "next-auth/react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
-import Link from "next/link";
-import { useState, useEffect } from "react";
+export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
 
-const HomePage = () => {
-    const [selectedLieu, setSelectedLieu] = useState<string | null>(null);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    const res = await signIn("credentials", {
+      email,
+      password,
+      redirect: false
+    });
+    if (res?.ok) {
+      router.push("/acceuiladmin");
+    } else {
+      setError("Identifiants invalides");
+    }
+  };
 
-    // Charger l'état depuis localStorage au montage du composant
-    useEffect(() => {
-        const savingLieu = localStorage.getItem("selectedLieu");
-        if (savingLieu) {
-            setSelectedLieu(savingLieu);
-        }
-    }, []);
+  return (
+    <div className="flex flex-col w-full min-h-screen">
+      {/* Header avec drapeau en fond */}
+      <div className="relative w-full h-[120px] flex items-center justify-center">
+        <Image
+          src="/drapeau.jpg"
+          alt="drapeau"
+          fill
+          style={{ objectFit: "cover" }}
+          priority
+        />
+        <h1 className="relative z-10 text-white text-6xl font-bold style-pen text-shadow-lg">
+          La petite Belgique des Coevrons
+        </h1>
+      </div>
 
-    // Mettre à jour localStorage lorsqu'un lieu est sélectionné
-    const handleLieuClick = async (lieu: string) => {
-        setSelectedLieu(lieu);
-        localStorage.setItem("selectedLieu", lieu);
-        console.log(`Lieu sélectionné: `, lieu);
-    };
-
-    // Gérer le bouton "Fermer"
-    const handleClose = () => {
-        setSelectedLieu(null);
-        localStorage.removeItem("selectedLieu");
-    };
-
-    return (
-        <div>
-            <div className="flex flex-col items-center justify-center mt-20">
-                <h6 className="text-center text-4xl text-white style-pen text-black">
-                    Bienvenue sur ton tableau de bord
-                </h6>
-                {!selectedLieu ? (
-                    <p className="text-center text-xl style-pen text-white text-black mt-5">
-                        Choisis une ville pour ouvrir les commandes en ce lieu.
-                    </p>
-                ) : (
-                    <p className="text-center text-white text-lg style-pen text-black mt-5">
-                        Lieu selectionne : {selectedLieu}
-                    </p>
-                )}
-            </div>
-
-            {!selectedLieu ? (
-                // Afficher les choix des lieux si aucun lieu n'est sélectionné
-                <div className="flex flex-col 2xl:flex-row justify-center items-center mt-20">
-                    <div className="flex flex-row items-center justify-center mb-5 mr-5 gap-8">
-                        <button
-                            className="relative shadow-light flex flex-col items-center justify-center text-xl text-white gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:text-black hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md"
-                            style={{ width: "200px", height: "200px" }}
-                            onClick={() => handleLieuClick("Neau")}
-                        >
-                            <Link href="/commandes">Ouverture a Neau</Link>
-                        </button>
-                        <button
-                            className="relative shadow-light flex flex-col items-center justify-center text-xl text-white gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:text-black hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md"
-                            style={{ width: "200px", height: "200px" }}
-                            onClick={() => handleLieuClick("Montsurs")}
-                        >
-                            <Link href="/commandes">Ouverture a Montsurs</Link>
-                        </button>
-                    </div>
-                    <div className="flex flex-row items-center justify-center mb-5 mr-5 gap-8">
-                        <button
-                            className="relative shadow-light flex flex-col items-center justify-center text-xl text-white gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:text-black hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md"
-                            style={{ width: "200px", height: "200px" }}
-                            onClick={() => handleLieuClick("St-Suzanne")}
-                        >
-                            <Link href="/commandes">Ouverture a St-Suzanne</Link>
-                        </button>
-                        <button
-                            className="relative shadow-light flex flex-col items-center justify-center text-xl text-white gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:text-black hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md"
-                            style={{ width: "200px", height: "200px" }}
-                            onClick={() => handleLieuClick("Chatre-la-foret")}
-                        >
-                            <Link href="/commandes">Ouverture a Chatre-la-foret</Link>
-                        </button>
-                    </div>
-                </div>
-            ) : (
-                // Afficher le bouton "Fermer" si un lieu est sélectionné
-                <div className="flex flex-col items-center justify-center mt-20">
-                    <button
-                        className="relative shadow-light flex flex-col items-center justify-center text-xl text-white gap-4 rounded-lg p-2 cursor-pointer hover:bg-green-200 hover:text-black hover:rouded-md hover:scale-105 transition-transform duration-200 hover:shadow-md"
-                        style={{ width: "200px", height: "200px" }}
-                        onClick={handleClose}
-                    >
-                        Fermer {selectedLieu}
-                    </button>
-                </div>
-            )}
-        </div>
-    );
-};
-
-export default HomePage;
+      {/* Zone de connexion avec ardoise en fond */}
+      <div className="relative flex-grow flex items-center justify-center">
+        <Image
+          src="/ardoise.jpg"
+          alt="ardoise"
+          fill
+          style={{ objectFit: "cover", zIndex: 0 }}
+          priority
+        />
+        {/* Formulaire de connexion */}
+        <form onSubmit={handleSubmit} className="relative z-10 p-8 rounded shadow-md w-96">
+          <h1 className="text-2xl font-bold text-white mb-6 text-center style-pen">Connexion</h1>
+          <label className="text-white style-pen block mb-2">Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            className="w-full p-2 mb-4 border rounded"
+            required
+          />
+          <label className="text-white style-pen block mb-2">Mot de passe</label>
+          <input
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            className="w-full p-2 mb-4 border rounded"
+            required
+          />
+          {error && <div className="text-red-500 mb-4">{error}</div>}
+          <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 style-pen">Se connecter</button>
+          <button type="button" className="w-full text-white p-2 hover:text-blue-600 style-pen" onClick={() => router.push("/reset-password/")}>mot de passe oublie ?</button>
+        </form>
+      </div>
+    </div>
+  );
+}
