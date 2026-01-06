@@ -235,8 +235,8 @@ const Sauces = () => {
   };
 
   return (
-    <div className="font-bold style-pen text-lg mb-5 mt-2">
-      <h1 className="flex flex-col items-center justify-center border-b-2 border-white text-white text-2xl gap-4 mb-5">
+    <div className="text-black font-bold style-pen text-lg mb-5 mt-2">
+      <h1 className="flex flex-col text-black items-center justify-center border-b-2 border-white text-white text-2xl gap-4 mb-5">
         Sauces *
       </h1>
 

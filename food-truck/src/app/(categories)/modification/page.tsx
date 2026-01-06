@@ -44,10 +44,10 @@ const ModifierSelectionPage = () => {
   if (!currentSelection) return <div>Loading...</div>; // Précharge si nécessaire
 
   return (
-    <div>
-      <h2>Modifier la sélection pour {currentSelection.name}</h2>
-      <p>Produit actuel: {currentSelection.name}</p>
-      <p>Sauce actuelle: {currentSelection.sauce}</p>
+    <div className="text-black">
+      <h2 className="text-black">Modifier la sélection pour {currentSelection.name}</h2>
+      <p className="text-black">Produit actuel: {currentSelection.name}</p>
+      <p className="text-black">Sauce actuelle: {currentSelection.sauce}</p>
 
       {/* Formulaire pour modifier la sélection */}
       <form onSubmit={(e) => e.preventDefault()}>

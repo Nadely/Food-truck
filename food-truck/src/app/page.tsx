@@ -58,7 +58,7 @@ export default function LoginPage() {
             type="email"
             value={email}
             onChange={e => setEmail(e.target.value)}
-            className="w-full p-2 mb-4 border rounded"
+            className="w-full text-black p-2 mb-4 border rounded"
             required
           />
           <label className="text-white style-pen block mb-2">Mot de passe</label>
@@ -66,7 +66,7 @@ export default function LoginPage() {
             type="password"
             value={password}
             onChange={e => setPassword(e.target.value)}
-            className="w-full p-2 mb-4 border rounded"
+            className="w-full text-black p-2 mb-4 border rounded"
             required
           />
           {error && <div className="text-red-500 mb-4">{error}</div>}

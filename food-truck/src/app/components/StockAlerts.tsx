@@ -92,7 +92,7 @@ const StockAlerts = () => {
                 index === self.findIndex(a => a.productName === alert.productName)
               )
               .map((alert) => (
-                <div key={alert.productId} className="mb-1 p-1 bg-white rounded text-sm">
+                <div key={alert.productId} className="mb-1 p-1 bg-white text-black rounded text-sm">
                   <p className="font-semibold">{alert.productName}</p>
                   <p className="text-xs">
                     Stock actuel: {alert.currentStock} / Limite: {alert.stockLimit}

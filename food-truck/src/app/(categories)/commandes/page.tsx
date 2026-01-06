@@ -98,7 +98,7 @@ const Commandes = () => {
 
 
 	return (
-		<div className="flex flex-col mt-2">
+		<div className="flex flex-col mt-2 text-black">
 			<div className="flex flex-row justify-end items-center mr-20 gap-4">
 				<Link href="/nouvelle_commande" className="button-yellow style-pen">
 					Nouvelle Commande

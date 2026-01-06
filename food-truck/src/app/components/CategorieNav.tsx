@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const CategorieNav = () => {
   return (
-    <div className="flex flex-col justify-center items-center top-110 gap-4">
+    <div className="flex flex-col text-black justify-center items-center top-110 gap-4">
       <Link href="/commandes">
         <div className="relative w-[150px] h-[150px]">
           <Image

@@ -31,11 +31,11 @@ export default function ResetPasswordPage() {
           type="email"
           value={email}
           onChange={e => setEmail(e.target.value)}
-          className="w-full p-2 mb-4 border rounded"
+          className="w-full text-black p-2 mb-4 border rounded"
           required
         />
         <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700 style-pen mb-2">Envoyer le lien</button>
-        <button type="button" className="w-full text-white p-2 hover:text-blue-600 style-pen" onClick={() => router.push("/login")}>Retour a la connexion</button>
+        <button type="button" className="w-full text-white p-2 hover:text-blue-600 style-pen" onClick={() => router.push("/")}>Retour a la connexion</button>
         {message && <div className="text-green-400 mt-4 text-center">{message}</div>}
       </form>
     </div>

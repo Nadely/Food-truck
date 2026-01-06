@@ -8,7 +8,7 @@ const dataStock = JSON.parse(fs.readFileSync("src/data/products.json", "utf-8"))
 // Connexion à la base de données
 const dbConfig = {
   host: 'mysql-teamseniornad.alwaysdata.net',
-  user: '397492_teams',
+  user: '449602',
   password: 'Enola2908@',
   database: 'teamseniornad_foodtruck_db'
 };
@@ -23,22 +23,18 @@ async function insertData() {
       for (const produit of produits) {
         // Convertir la garniture en JSON string si elle existe
         const garnitureText = produit.garniture ? JSON.stringify(produit.garniture) : null;
-
+        const categoriesText = produit.categories ? JSON.stringify(produit.categories) : null;
+        const stockLimit = produit.stockLimite ? produit.stockLimite : 0;
+        const stock = produit.stock ? produit.stock : 20;
+        const stockConseil = produit.stockConseil ? produit.stockConseil : 0;
+        const lost = produit.lost ? produit.lost : 0;
+        const stockAnnuel = produit.stockAnnuel ? produit.stockAnnuel : 20;
+        
         await connection.query(
-          "INSERT INTO dataProduits (name, image, price, categorie, garniture) VALUES (?, ?, ?, ?, ?)",
-          [produit.name, produit.image, produit.price, categorie, garnitureText]
+          "INSERT INTO dataProduits (name, image, price, categorie, garniture, stock, stockConseil, lost, stockAnnuel, stockLimit, categories) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+          [produit.name, produit.image, produit.price, categorie, garnitureText, produit.stock, produit.stockConseil, produit.lost, produit.stockAnnuel, produit.stockLimit, categoriesText]
         );
       }
-    }
-
-    // Insertion des stocks
-    for (const produit of dataStock.products) {
-      const categoriesText = produit.categories ? JSON.stringify(produit.categories) : null;
-
-      await connection.query(
-        "INSERT INTO products (name, stock, stockConseil, lost, stockAnnuel, stockLimit, categories) VALUES (?, ?, ?, ?, ?, ?, ?)",
-        [produit.name, produit.stock, produit.stockConseil, produit.lost, produit.stockAnnuel, produit.stockLimit, categoriesText]
-      );
     }
 
     console.log("Import terminé !");

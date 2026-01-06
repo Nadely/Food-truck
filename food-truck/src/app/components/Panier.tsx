@@ -405,11 +405,11 @@ const Panier = () => {
   };
 
   return (
-    <div key={refreshKey} className="flex flex-col h-screen">
+    <div key={refreshKey} className="flex flex-col text-black h-screen">
       <div className="flex-grow">
         <h2 className="text-xl text-center style-pen border-b-2 border-black mb-4">Panier</h2>
         {cart.length === 0 ? (
-          <div className="text-center">Votre panier est vide.</div>
+          <div className="text-center text-black">Votre panier est vide.</div>
         ) : (
           <ul className="list-none p-0">
             {cart.filter(item => {
@@ -418,7 +418,7 @@ const Panier = () => {
             }).map((item: any) => {
               return (
                 <li key={item.uniqueId} className="mb-4">
-                  <div className="flex justify-between items-center">
+                  <div className="flex justify-between items-center text-black">
                     <div className="flex items-center">
                       {!item.isHidden && !item.isSupplements && !item.relatedItems?.some(rel => rel.categorie?.toLowerCase() === "sauces") && !item.relatedItems?.some(rel => rel.categorie?.toLowerCase() === "snacks") && (
                         <>

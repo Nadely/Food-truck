@@ -28,7 +28,7 @@ const Nav = () => {
   );
 
   return (
-    <div className="flex w-[500px]">
+    <div className="flex w-[500px] text-black">
       <Link href="/acceuiladmin" className="text-md style-pen text-black bg-red-200 border-2 border-black rounded-lg p-2">
         Accueil
       </Link>

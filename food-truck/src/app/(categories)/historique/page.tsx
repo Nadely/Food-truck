@@ -172,7 +172,7 @@ const Historique = () => {
   }
 
   return (
-    <div className="flex flex-row w-full mt-3 space-x-1">
+    <div className="text-black flex flex-row w-full mt-3 space-x-1">
       <div className="flex flex-col w-1/2">
         <div className="border-black bg-gray-300 rounded-md p-1">
           <h2 className="style-pen text-center">Historique des commandes</h2>

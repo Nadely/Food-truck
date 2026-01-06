@@ -80,8 +80,8 @@ const Enfants = () => {
   };
 
   return (
-    <div className="style-pen text-xl mb-5 mt-2">
-      <div className="flex flex-col items-center justify-center border-b-2 border-white text-white text-2xl gap-4 mb-5">
+    <div className="text-black style-pen text-xl mb-5 mt-2">
+      <div className="flex flex-col text-black items-center justify-center border-b-2 border-white text-white text-2xl gap-4 mb-5">
         Enfants*
       </div>
       <div className="w-full flex flex-col items-center justify-center mt-4 style-pen text-lg mb-5">
