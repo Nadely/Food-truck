@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import data from "../../../../data/dataProduits.json";
+import { dataProduits as data } from "../../../../data/db";
 import { useRouter } from "next/navigation";
 import { useCart } from "../../../context/CartContext";
 

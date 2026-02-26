@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useCart } from "../../../context/CartContext";
 import { Product } from "../../../../types/allTypes";
-import dataProduits from "../../../../data/dataProduits.json";
+import { dataProduits } from "../../../../data/db";
 
 const Burgers = () => {
   const [menus, setMenus] = useState(false);

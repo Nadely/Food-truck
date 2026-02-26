@@ -4,7 +4,7 @@ import { useCart } from "/src/app/context/CartContext.tsx";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import dataProduits from "/src/data/dataProduits.json";
+import { dataProduits } from "/src/data/db";
 
 const Panier = () => {
   const { cart, removeFromCart, updateQuantity, setCart, remove } = useCart();
@@ -93,7 +93,7 @@ const Panier = () => {
 
       console.log("Items avec groupId:", itemsWithGroupId);
 
-      // Mettre à jour les stocks dans dataProduits.json
+      // Mettre à jour les stocks dans la base de données (stocks.json)
       const productsResponse = await fetch("/api/products");
       if (!productsResponse.ok) {
         throw new Error("Erreur lors de la récupération des produits");

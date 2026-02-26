@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "Mitraillettes"
+  },
+  {
+    "id": 2,
+    "name": "Burgers"
+  },
+  {
+    "id": 3,
+    "name": "Veggies"
+  },
+  {
+    "id": 4,
+    "name": "Enfants"
+  },
+  {
+    "id": 5,
+    "name": "AperoBox"
+  },
+  {
+    "id": 6,
+    "name": "Snacks"
+  },
+  {
+    "id": 7,
+    "name": "Brochettes"
+  },
+  {
+    "id": 8,
+    "name": "SnacksVeggies"
+  },
+  {
+    "id": 9,
+    "name": "Frites"
+  },
+  {
+    "id": 10,
+    "name": "Boissons"
+  },
+  {
+    "id": 11,
+    "name": "Sauces"
+  },
+  {
+    "id": 12,
+    "name": "Supplements"
+  },
+  {
+    "id": 13,
+    "name": "Pain"
+  },
+  {
+    "id": 14,
+    "name": "Steack"
+  }
+]

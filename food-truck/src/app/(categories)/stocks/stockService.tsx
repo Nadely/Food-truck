@@ -79,7 +79,7 @@ export const checkStockAlerts = (products: Product[]): StockAlert[] => {
     return [];
   }
 
-  const DEFAULT_STOCK_LIMIT = 15; // Valeur par défaut pour stockLimite
+  const DEFAULT_STOCK_LIMIT = 20; // Valeur par défaut pour stockLimite (alerte quand stock <= 20)
 
   // Filtrer les produits à exclure (sauces et boissons)
   const filteredProducts = products.filter(product => {

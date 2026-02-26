@@ -1,45 +1,48 @@
-const fs = require('fs');
+const fs = require("fs");
+const path = require("path");
 
-// Charger les données JSON
-const dataProduits = JSON.parse(fs.readFileSync("src/data/dataProduits.json", "utf-8"));
-const products = JSON.parse(fs.readFileSync("src/data/products.json", "utf-8"));
+// Charger les données JSON (nouvelle structure DB)
+const produits = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "../data/db/produits.json"), "utf-8")
+);
+const stocks = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "../data/db/stocks.json"), "utf-8")
+);
+const products = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "../data/products.json"), "utf-8")
+);
 
 // Créer un map des produits par nom pour un accès rapide
 const productsMap = new Map();
-products.products.forEach(product => {
+products.products.forEach((product) => {
   productsMap.set(product.name.toLowerCase(), product);
 });
 
-// Fonction pour trouver le produit correspondant
-function findMatchingProduct(productName) {
-  return productsMap.get(productName.toLowerCase());
-}
+// Parcourir les stocks et mettre à jour avec les données de products.json
+for (const stock of stocks) {
+  const produit = produits.find((p) => p.id === stock.produit_id);
+  if (!produit) continue;
 
-// Parcourir toutes les catégories et produits
-for (const [categorie, produits] of Object.entries(dataProduits)) {
-  for (const produit of produits) {
-    const matchingProduct = findMatchingProduct(produit.name);
-    if (matchingProduct) {
-      // Ajouter les informations de stock
-      produit.stock = matchingProduct.stock;
-      produit.stockConseil = matchingProduct.stockConseil;
-      produit.lost = matchingProduct.lost;
-      produit.stockAnnuel = matchingProduct.stockAnnuel;
-      produit.stockLimite = matchingProduct.stockLimite;
-      produit.categories = matchingProduct.categories;
-    } else {
-      // Valeurs par défaut si le produit n'est pas trouvé
-      produit.stock = 20;
-      produit.stockConseil = 0;
-      produit.lost = 0;
-      produit.stockAnnuel = 20;
-      produit.stockLimite = 0;
-      produit.categories = [categorie.toLowerCase()];
-    }
+  const matchingProduct = productsMap.get(produit.name.toLowerCase());
+  if (matchingProduct) {
+    stock.quantite = matchingProduct.stock;
+    stock.stockConseil = matchingProduct.stockConseil;
+    stock.lost = matchingProduct.lost;
+    stock.stockAnnuel = matchingProduct.stockAnnuel;
+    stock.stockLimite = matchingProduct.stockLimite;
+  } else {
+    stock.quantite = 20;
+    stock.stockConseil = 0;
+    stock.lost = 0;
+    stock.stockAnnuel = 20;
+    stock.stockLimite = 0;
   }
 }
 
-// Sauvegarder le fichier fusionné
-fs.writeFileSync("src/data/dataProduits.json", JSON.stringify(dataProduits, null, 2));
+// Sauvegarder stocks.json
+fs.writeFileSync(
+  path.join(__dirname, "../data/db/stocks.json"),
+  JSON.stringify(stocks, null, 2)
+);
 
 console.log("Fusion des données de stock terminée !");

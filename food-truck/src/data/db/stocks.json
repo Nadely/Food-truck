@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1,
+    "produit_id": 1,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 2,
+    "produit_id": 2,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 3,
+    "produit_id": 3,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 4,
+    "produit_id": 4,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 5,
+    "produit_id": 5,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 6,
+    "produit_id": 6,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 7,
+    "produit_id": 7,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 8,
+    "produit_id": 8,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 9,
+    "produit_id": 9,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 10,
+    "produit_id": 10,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 11,
+    "produit_id": 11,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 12,
+    "produit_id": 12,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 13,
+    "produit_id": 13,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 14,
+    "produit_id": 14,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 15,
+    "produit_id": 15,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 16,
+    "produit_id": 16,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 17,
+    "produit_id": 17,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 18,
+    "produit_id": 18,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 19,
+    "produit_id": 19,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 20,
+    "produit_id": 20,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 21,
+    "produit_id": 21,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 22,
+    "produit_id": 22,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 23,
+    "produit_id": 23,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 24,
+    "produit_id": 24,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 25,
+    "produit_id": 25,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 26,
+    "produit_id": 26,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 27,
+    "produit_id": 27,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 28,
+    "produit_id": 28,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 29,
+    "produit_id": 29,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 30,
+    "produit_id": 30,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 31,
+    "produit_id": 31,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 32,
+    "produit_id": 32,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 33,
+    "produit_id": 33,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 34,
+    "produit_id": 34,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 35,
+    "produit_id": 35,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 36,
+    "produit_id": 36,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 37,
+    "produit_id": 37,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 38,
+    "produit_id": 38,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 39,
+    "produit_id": 39,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 40,
+    "produit_id": 40,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 41,
+    "produit_id": 41,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 42,
+    "produit_id": 42,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 43,
+    "produit_id": 43,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 44,
+    "produit_id": 44,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 45,
+    "produit_id": 45,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 46,
+    "produit_id": 46,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 47,
+    "produit_id": 47,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 48,
+    "produit_id": 48,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 49,
+    "produit_id": 49,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 50,
+    "produit_id": 50,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 51,
+    "produit_id": 51,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 52,
+    "produit_id": 52,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 53,
+    "produit_id": 53,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 54,
+    "produit_id": 54,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 55,
+    "produit_id": 55,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 56,
+    "produit_id": 56,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 57,
+    "produit_id": 57,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 58,
+    "produit_id": 58,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 59,
+    "produit_id": 59,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 60,
+    "produit_id": 60,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 61,
+    "produit_id": 61,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 62,
+    "produit_id": 62,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 63,
+    "produit_id": 63,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 64,
+    "produit_id": 64,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 65,
+    "produit_id": 65,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 66,
+    "produit_id": 66,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 67,
+    "produit_id": 67,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 68,
+    "produit_id": 68,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 69,
+    "produit_id": 69,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 70,
+    "produit_id": 70,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 71,
+    "produit_id": 71,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 72,
+    "produit_id": 72,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 73,
+    "produit_id": 73,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 74,
+    "produit_id": 74,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 75,
+    "produit_id": 75,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 76,
+    "produit_id": 76,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 77,
+    "produit_id": 77,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 78,
+    "produit_id": 78,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 79,
+    "produit_id": 79,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 80,
+    "produit_id": 80,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 81,
+    "produit_id": 81,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 82,
+    "produit_id": 82,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 83,
+    "produit_id": 83,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 84,
+    "produit_id": 84,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 85,
+    "produit_id": 85,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 86,
+    "produit_id": 86,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 87,
+    "produit_id": 87,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 88,
+    "produit_id": 88,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 89,
+    "produit_id": 89,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 90,
+    "produit_id": 90,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 91,
+    "produit_id": 91,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 92,
+    "produit_id": 92,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 93,
+    "produit_id": 93,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 94,
+    "produit_id": 94,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 95,
+    "produit_id": 95,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 96,
+    "produit_id": 96,
+    "quantite": 22,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 97,
+    "produit_id": 97,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 98,
+    "produit_id": 98,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 99,
+    "produit_id": 99,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  },
+  {
+    "id": 100,
+    "produit_id": 100,
+    "quantite": 20,
+    "stockConseil": 0,
+    "lost": 0,
+    "stockAnnuel": 20,
+    "stockLimite": 15
+  }
+]

@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Product } from "../../../../types/allTypes";
 import { useCart } from "../../../context/CartContext";
-import dataProduits from "../../../../data/dataProduits.json";
+import { dataProduits } from "../../../../data/db";
 
 const Boissons = () => {
   const searchParams = useSearchParams();
