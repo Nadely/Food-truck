@@ -1,53 +1,55 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
+import { getDb } from "../../../lib/db";
 
-const panierFilePath = path.join(process.cwd(), "src/data/panier.json");
-const preparationFilePath = path.join(process.cwd(), "src/data/preparation.json");
+export const dynamic = "force-dynamic";
+
+export async function GET() {
+  try {
+    const db = await getDb();
+    const [rows] = await db.query("SELECT items FROM panier WHERE id = 1");
+    const row = (rows as any[])[0];
+    const items = row?.items
+      ? typeof row.items === "string"
+        ? JSON.parse(row.items)
+        : row.items
+      : [];
+    return NextResponse.json({ Panier: items });
+  } catch (error) {
+    console.error("Erreur GET panier:", error);
+    return NextResponse.json(
+      { message: "Erreur lors de la récupération du panier" },
+      { status: 500 }
+    );
+  }
+}
 
 export async function POST(request: Request) {
   try {
-    const { items, user_name, user_phone, user_image, time, date, lieu, price } = await request.json();
+    const { items, user_name, user_phone, user_image, time, date, lieu, price } =
+      await request.json();
 
-    // Vérifier si l'heure est bien définie
     if (!time || !user_name || !user_phone) {
-      return NextResponse.json({ message: "L'horaire, le nom et le téléphone sont requis." }, { status: 400 });
+      return NextResponse.json(
+        { message: "L'horaire, le nom et le téléphone sont requis." },
+        { status: 400 }
+      );
     }
 
-    // S'assurer que chaque item a un groupId et que les relatedItems sont correctement formatés
     const itemsWithGroupId = items.map((item: any) => {
-      const groupId = item.groupId || `group-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-
-      // Formater correctement les relatedItems
+      const groupId =
+        item.groupId || `group-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
       const formattedRelatedItems = item.relatedItems?.map((related: any) => {
-        // Si related est une chaîne de caractères, la convertir en objet
-        if (typeof related === 'string') {
-          return {
-            name: related,
-            groupId: groupId
-          };
+        if (typeof related === "string") {
+          return { name: related, groupId };
         }
-        // Si related est déjà un objet, s'assurer qu'il a le bon groupId
-        return {
-          ...related,
-          groupId: groupId
-        };
+        return { ...related, groupId };
       });
-
       return {
         ...item,
         groupId,
-        relatedItems: formattedRelatedItems || []
+        relatedItems: formattedRelatedItems || [],
       };
     });
-
-    console.log("Items avec groupId:", itemsWithGroupId);
-
-    const panierData = fs.existsSync(panierFilePath)
-      ? fs.readFileSync(panierFilePath, "utf-8")
-      : '{"Panier": []}';
-
-    const panier = JSON.parse(panierData);
 
     const newCommande = {
       id: Date.now(),
@@ -62,74 +64,105 @@ export async function POST(request: Request) {
       createdAt: new Date().toISOString(),
     };
 
-    panier.Panier.push(newCommande);
+    const db = await getDb();
+    const [rows] = await db.query("SELECT items FROM panier WHERE id = 1");
+    let panierItems: any[] = [];
+    if ((rows as any[]).length > 0) {
+      const row = (rows as any[])[0];
+      panierItems = row?.items
+        ? typeof row.items === "string"
+          ? JSON.parse(row.items)
+          : row.items
+        : [];
+    } else {
+      await db.query("INSERT INTO panier (id, items) VALUES (1, ?)", [
+        JSON.stringify([]),
+      ]);
+    }
 
-    // Sauvegarder les changements dans panier.json
-    fs.writeFileSync(panierFilePath, JSON.stringify(panier, null, 2), "utf-8");
+    panierItems.push(newCommande);
+    await db.query("UPDATE panier SET items = ? WHERE id = 1", [
+      JSON.stringify(panierItems),
+    ]);
 
-    return NextResponse.json({ message: "Commande ajoutée ou mise à jour dans le panier.", panier }, { status: 200 });
+    return NextResponse.json(
+      { message: "Commande ajoutée ou mise à jour dans le panier.", panier: { Panier: panierItems } },
+      { status: 200 }
+    );
   } catch (error) {
-    console.error("Erreur POST panier :", error);
-    return NextResponse.json({ message: "Erreur serveur", error }, { status: 500 });
+    console.error("Erreur POST panier:", error);
+    return NextResponse.json(
+      { message: "Erreur serveur", error },
+      { status: 500 }
+    );
   }
 }
 
 export async function PUT(request: Request) {
   try {
-    console.log("Début de la requête PUT");
+    const db = await getDb();
+    const [rows] = await db.query("SELECT items FROM panier WHERE id = 1");
+    const row = (rows as any[])[0];
+    const panierItems = row?.items
+      ? typeof row.items === "string"
+        ? JSON.parse(row.items)
+        : row.items
+      : [];
 
-    // Log des chemins de fichiers
-    console.log("Chemins de fichiers : ", panierFilePath, preparationFilePath);
-
-    // Lire les fichiers JSON
-    const panierData = fs.existsSync(panierFilePath)
-      ? fs.readFileSync(panierFilePath, "utf-8")
-      : '{"Panier": [{}]}';  // Ici, la clé doit être "Panier"
-    const preparationData = fs.existsSync(preparationFilePath)
-      ? fs.readFileSync(preparationFilePath, "utf-8")
-      : '{"preparations": [{}]}';
-
-    // Log des données lues
-    console.log("Données lues : ", panierData, preparationData);
-
-    const panier = JSON.parse(panierData);
-    const preparation = JSON.parse(preparationData);
-
-    // Vérification de la présence de la clé 'Panier' et si c'est un tableau
-    if (!Array.isArray(panier.Panier)) {
-      console.error("Erreur : panier.Panier n'est pas un tableau valide.");
-      return NextResponse.json({ message: "Erreur dans la structure du panier.", error: "panier.Panier est invalide" }, { status: 500 });
+    if (!Array.isArray(panierItems) || panierItems.length === 0) {
+      return NextResponse.json(
+        { message: "Aucune commande à transférer." },
+        { status: 400 }
+      );
     }
 
-    if (!panier.Panier.length) {
-      return NextResponse.json({ message: "Aucune commande à transférer." }, { status: 400 });
+    for (const cmd of panierItems) {
+      await db.query(
+        `INSERT INTO commandes (id, user_name, user_phone, user_image, time, date, lieu, price, createdAt, status) 
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'preparation')`,
+        [
+          cmd.id,
+          cmd.user_name || null,
+          cmd.user_phone || null,
+          cmd.user_image || null,
+          cmd.time || null,
+          cmd.date || null,
+          cmd.lieu || null,
+          cmd.price || null,
+          cmd.createdAt || null,
+        ]
+      );
+      for (const item of cmd.items || []) {
+        const relatedItemsJson = item.relatedItems
+          ? JSON.stringify(item.relatedItems)
+          : null;
+        await db.query(
+          `INSERT INTO ligne_commandes (commande_id, produit_nom, quantity, relatedItems, groupId) 
+           VALUES (?, ?, ?, ?, ?)`,
+          [
+            cmd.id,
+            item.name || null,
+            item.quantity ?? 1,
+            relatedItemsJson,
+            item.groupId || null,
+          ]
+        );
+      }
     }
 
-    // Ajouter les commandes du panier à preparation.json
-    preparation.preparations.push(...panier.Panier);
-    console.log("Commandes ajoutées à preparation : ", preparation.preparations);
+    await db.query("UPDATE panier SET items = ? WHERE id = 1", [
+      JSON.stringify([]),
+    ]);
 
-    // Vider panier.json
-    try {
-      fs.writeFileSync(panierFilePath, JSON.stringify({ Panier: [] }, null, 2), "utf-8");
-      console.log("panier.json vidé avec succès");
-    } catch (writeError) {
-      console.error("Erreur d'écriture dans panier.json : ", writeError);
-      return NextResponse.json({ message: "Erreur lors de l'écriture dans panier.json", error: writeError }, { status: 500 });
-    }
-
-    // Sauvegarder les nouvelles préparations dans preparation.json
-    try {
-      fs.writeFileSync(preparationFilePath, JSON.stringify(preparation, null, 2), "utf-8");
-      console.log("preparation.json sauvegardé avec succès");
-    } catch (writeError) {
-      console.error("Erreur d'écriture dans preparation.json : ", writeError);
-      return NextResponse.json({ message: "Erreur lors de l'écriture dans preparation.json", error: writeError }, { status: 500 });
-    }
-
-    return NextResponse.json({ message: "Commande transférée vers préparation.json." }, { status: 200 });
+    return NextResponse.json(
+      { message: "Commande transférée vers préparation." },
+      { status: 200 }
+    );
   } catch (error) {
-    console.error("Erreur côté serveur : ", error.message, error.stack);
-    return NextResponse.json({ message: "Erreur lors du transfert.", error: error.message }, { status: 500 });
+    console.error("Erreur PUT panier:", error);
+    return NextResponse.json(
+      { message: "Erreur lors du transfert.", error },
+      { status: 500 }
+    );
   }
 }

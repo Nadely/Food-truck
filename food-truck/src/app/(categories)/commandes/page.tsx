@@ -1,21 +1,43 @@
 "use client"
 
 import Image from 'next/image';
-import data from '../../../data/preparation.json'; // Assurez-vous que le chemin est correct
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Commande } from '../../types/allTypes';
 
-
-const listCommandes : Commande[] = data.preparations.map(commande => ({
-	...commande,
-	createdAt: new Date(commande.createdAt)
-}));
-
 const Commandes = () => {
-	const [preparations, setPreparations] = useState<Commande[]>([...listCommandes]);
+	const [preparations, setPreparations] = useState<Commande[]>([]);
 	const [pretes, setPretes] = useState<Commande[]>([]);
 	const [historique, setHistorique] = useState<Commande[]>([]);
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		const fetchPreparation = async () => {
+			try {
+				const res = await fetch('/api/preparation');
+				if (res.ok) {
+					const data = await res.json();
+					setPreparations(
+						(data.preparations || []).map((c: any) => ({
+							...c,
+							createdAt: c.createdAt ? new Date(c.createdAt) : new Date(),
+						}))
+					);
+					setPretes(
+						(data.pretes || []).map((c: any) => ({
+							...c,
+							createdAt: c.createdAt ? new Date(c.createdAt) : new Date(),
+						}))
+					);
+				}
+			} catch (err) {
+				console.error('Erreur chargement préparations:', err);
+			} finally {
+				setLoading(false);
+			}
+		};
+		fetchPreparation();
+	}, []);
 
 	const loadLocalStorage = () => {
 		const storageValue = localStorage.getItem('selectedLieu');
@@ -96,6 +118,14 @@ const Commandes = () => {
     return numberPrice.toLocaleString("fr-FR", { style: "currency", currency: "EUR" });
 };
 
+
+	if (loading) {
+		return (
+			<div className="flex justify-center items-center p-8">
+				<p className="style-pen">Chargement des commandes...</p>
+			</div>
+		);
+	}
 
 	return (
 		<div className="flex flex-col mt-2 text-black">

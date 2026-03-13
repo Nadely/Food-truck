@@ -1,43 +1,33 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-import { Commande } from "../../types/allTypes";
+import { getDb } from "../../../lib/db";
+
+export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
   try {
     const { commandeId } = await request.json();
-    const preparationPath = path.join(
-      process.cwd(),
-      "src/data/preparation.json"
+    const db = await getDb();
+
+    const [rows] = await db.query(
+      "SELECT id FROM commandes WHERE id = ? AND status = 'preparation'",
+      [commandeId]
     );
-    // const historiquePath = path.join(process.cwd(), 'src/data/historique.json');
 
-    const preparationData = fs.readFileSync(preparationPath, "utf-8");
-    const commandes = JSON.parse(preparationData);
-
-    const commandeIndex = commandes.preparations.findIndex(
-      (c: Commande) => c.id === commandeId
-    );
-    if (commandeIndex !== -1) {
-      const [commande] = commandes.preparations.splice(commandeIndex, 1);
-      commandes.pretes.push(commande);
-
-      fs.writeFileSync(
-        preparationPath,
-        JSON.stringify(commandes, null, 4),
-        "utf-8"
-      );
-
-      return NextResponse.json(
-        { message: "Commande déplacée avec succès." },
-        { status: 200 }
-      );
-    } else {
+    if ((rows as any[]).length === 0) {
       return NextResponse.json(
         { message: "Commande non trouvée." },
         { status: 404 }
       );
     }
+
+    await db.query("UPDATE commandes SET status = 'pret' WHERE id = ?", [
+      commandeId,
+    ]);
+
+    return NextResponse.json(
+      { message: "Commande déplacée avec succès." },
+      { status: 200 }
+    );
   } catch (error) {
     console.error(error);
     return NextResponse.json(
