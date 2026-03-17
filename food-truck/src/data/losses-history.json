@@ -375,5 +375,41 @@
         "quantite": 5
       }
     ]
+  },
+  {
+    "date": "2026-03-17T10:08:57.197Z",
+    "items": [
+      {
+        "categories": [
+          "frites"
+        ],
+        "produit": "Frites",
+        "quantite": 19
+      }
+    ]
+  },
+  {
+    "date": "2026-03-17T10:24:49.361Z",
+    "items": [
+      {
+        "categories": [
+          "frites"
+        ],
+        "produit": "Frites",
+        "quantite": 19
+      }
+    ]
+  },
+  {
+    "date": "2026-03-17T10:42:48.410Z",
+    "items": [
+      {
+        "categories": [
+          "frites"
+        ],
+        "produit": "Frites",
+        "quantite": 19
+      }
+    ]
   }
 ]

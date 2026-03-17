@@ -190,7 +190,7 @@ const Stocks = () => {
         </thead>
         <tbody>
           {filteredItems.map((item) => (
-            <tr key={item.id}>
+            <tr key={`${item.id}-${item.categories}`}>
               <td className="border border-slate-700 px-2">{item.name}</td>
               <td className="border border-slate-700 px-2">
                 {item.categories[0]}

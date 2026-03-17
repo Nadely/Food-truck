@@ -1,34 +1,5 @@
 {
-    "preparations": [
-        {
-            "id": 1748336300124,
-            "items": [
-                {
-                    "quantity": 1,
-                    "relatedItems": [
-                        {
-                            "name": "Chimayo",
-                            "groupId": "group-1748336300100-zyklfmoyc"
-                        }
-                    ],
-                    "groupId": "group-1748336300100-zyklfmoyc"
-                },
-                {
-                    "name": "",
-                    "relatedItems": [],
-                    "groupId": "group-1748336300100-c0zi6ga0w"
-                }
-            ],
-            "user_name": "bvegv",
-            "user_phone": "+9+",
-            "user_image": "/avatar.jpg",
-            "time": "20h15",
-            "date": "2025-05-27T08:58:20.083Z",
-            "lieu": "Maison",
-            "price": "0.5€",
-            "createdAt": "2025-05-27T08:58:20.124Z"
-        }
-    ],
+    "preparations": [],
     "pretes": [
         {
             "id": 1767696096261,
@@ -98,6 +69,113 @@
             "lieu": "Maison",
             "price": "9€",
             "createdAt": "2026-01-06T10:41:36.261Z"
+        },
+        {
+            "id": 1773741982462,
+            "items": [
+                {
+                    "name": "Tzigane",
+                    "quantity": 2,
+                    "relatedItems": [],
+                    "groupId": "group-1773741982457-i0dknbwdm"
+                },
+                {
+                    "name": "Menu Mitraillette Classique",
+                    "quantity": 1,
+                    "relatedItems": [
+                        {
+                            "name": "Salade",
+                            "groupId": "group-1773741982457-d9x6w6izs"
+                        },
+                        {
+                            "name": "Oignons Frit",
+                            "groupId": "group-1773741982457-d9x6w6izs"
+                        },
+                        {
+                            "name": "Frites",
+                            "groupId": "group-1773741982457-d9x6w6izs"
+                        }
+                    ],
+                    "groupId": "group-1773741982457-d9x6w6izs"
+                },
+                {
+                    "quantity": 1,
+                    "relatedItems": [
+                        {
+                            "name": "Lucifer",
+                            "groupId": "group-1773741982457-6t1b5us9o"
+                        }
+                    ],
+                    "groupId": "group-1773741982457-6t1b5us9o"
+                },
+                {
+                    "quantity": 1,
+                    "relatedItems": [
+                        {
+                            "name": "Riche",
+                            "groupId": "group-1773741982457-mjpl282bg"
+                        }
+                    ],
+                    "groupId": "group-1773741982457-mjpl282bg"
+                },
+                {
+                    "name": "",
+                    "quantity": 1,
+                    "relatedItems": [
+                        {
+                            "name": "Galette de pomme de terre",
+                            "groupId": "group-1773741982457-0i1y3sqy5"
+                        },
+                        {
+                            "name": "Maroille",
+                            "groupId": "group-1773741982457-0i1y3sqy5"
+                        }
+                    ],
+                    "groupId": "group-1773741982457-0i1y3sqy5"
+                },
+                {
+                    "name": "Fanta orange",
+                    "quantity": 1,
+                    "relatedItems": [],
+                    "groupId": "group-1773741982457-tenvyux4u"
+                }
+            ],
+            "user_name": "Nadege",
+            "user_phone": "0606060606",
+            "user_image": "/avatar.jpg",
+            "time": "19h15",
+            "date": "2026-03-17T10:06:22.401Z",
+            "lieu": "Maison",
+            "price": "13€",
+            "createdAt": "2026-03-17T10:06:22.463Z"
+        },
+        {
+            "id": 1748336300124,
+            "items": [
+                {
+                    "quantity": 1,
+                    "relatedItems": [
+                        {
+                            "name": "Chimayo",
+                            "groupId": "group-1748336300100-zyklfmoyc"
+                        }
+                    ],
+                    "groupId": "group-1748336300100-zyklfmoyc"
+                },
+                {
+                    "name": "",
+                    "relatedItems": [],
+                    "groupId": "group-1748336300100-c0zi6ga0w"
+                }
+            ],
+            "user_name": "bvegv",
+            "user_phone": "+9+",
+            "user_image": "/avatar.jpg",
+            "time": "20h15",
+            "date": "2025-05-27T08:58:20.083Z",
+            "lieu": "Maison",
+            "price": "0.5€",
+            "createdAt": "2025-05-27T08:58:20.124Z"
         }
     ]
 }
