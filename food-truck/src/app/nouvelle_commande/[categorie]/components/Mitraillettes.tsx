@@ -98,7 +98,9 @@ const Mitraillettes = () => {
       </div>
       <div className="w-full flex flex-row flex-wrap items-center justify-center mt-10 style-pen text-lg gap-4 mb-5">
         {data.Mitraillettes.map((product) => {
-          const basePrice = parseFloat(product.price);
+          const basePrice = parseFloat(
+            product.price.toString().replace("€", "").replace(",", ".").trim()
+          );
           const menuPrice = menus ? 2.5 : 0;
           const totalPrice = basePrice + menuPrice;
 
@@ -125,7 +127,9 @@ const Mitraillettes = () => {
               </div>
               {!viaSauces && (
                 <p className="text-base text-white border border-white w-full text-center rounded-md mt-1.5 p-1">
-                  {product.price}
+                  {Number.isFinite(totalPrice)
+                    ? `${totalPrice.toFixed(2)}€`
+                    : product.price}
                 </p>
               )}
             </div>

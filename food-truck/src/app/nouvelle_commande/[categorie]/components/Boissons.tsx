@@ -3,9 +3,16 @@
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { Product } from "../../../../types/allTypes";
 import { useCart } from "../../../context/CartContext";
 import { dataProduits } from "../../../../data/db";
+
+type DrinkProduct = {
+  id: number;
+  name: string;
+  image?: string;
+  price?: string;
+  categories?: string[];
+};
 
 const Boissons = () => {
   const searchParams = useSearchParams();
@@ -15,13 +22,13 @@ const Boissons = () => {
   const menus = searchParams.get("menu") === "true";
   const groupId = searchParams.get("groupId") || `drink-${Date.now()}`;
 
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<DrinkProduct[]>([]);
   const [selectedBoisson, setSelectedBoisson] = useState<number | null>(null);
   const [quantities, setQuantities] = useState<{ [key: number]: number }>({});
 
   useEffect(() => {
     const boissons = dataProduits.Boissons || [];
-    setProducts(boissons);
+    setProducts(boissons as unknown as DrinkProduct[]);
     // Initialiser les quantités à 0 pour chaque produit
     const initialQuantities = boissons.reduce((acc: { [key: number]: number }, product) => {
       acc[product.id] = 0;
@@ -55,8 +62,13 @@ const Boissons = () => {
       if (selectedBoisson !== null) {
         const selectedProduct = products.find(product => product.id === selectedBoisson);
         if (selectedProduct) {
-          const isLeffe = selectedProduct.name.toLowerCase().includes('leffe');
-          const calculatedPrice = menus ? (isLeffe ? 3.5 : 1) : parseFloat(selectedProduct.price);
+          const isAlcohol =
+            selectedProduct.categories?.includes("alcool") ||
+            selectedProduct.name.toLowerCase().includes("leffe");
+          const basePrice = parseFloat(
+            (selectedProduct.price ?? "0€").toString().replace("€", "").replace(",", ".").trim()
+          );
+          const calculatedPrice = menus ? (isAlcohol ? basePrice : 1) : basePrice;
 
           const item = {
             id: selectedProduct.id,
@@ -81,8 +93,13 @@ const Boissons = () => {
       const itemsToAdd = products
         .filter(product => quantities[product.id] > 0)
         .map(product => {
-          const isLeffe = product.name.toLowerCase().includes('leffe');
-          const calculatedPrice = menus ? (isLeffe ? 3.5 : 1) : parseFloat(product.price);
+          const isAlcohol =
+            product.categories?.includes("alcool") ||
+            product.name.toLowerCase().includes("leffe");
+          const basePrice = parseFloat(
+            (product.price ?? "0€").toString().replace("€", "").replace(",", ".").trim()
+          );
+          const calculatedPrice = menus ? (isAlcohol ? basePrice : 1) : basePrice;
 
           return {
             id: product.id,
@@ -129,7 +146,7 @@ const Boissons = () => {
                 >
                   <div className="relative w-full h-full">
                     <Image
-                      src={product.image}
+                      src={product.image || "/default-drink.png"}
                       alt={product.name}
                       fill
                       style={{ objectFit: "contain" }}
@@ -164,7 +181,12 @@ const Boissons = () => {
                 </div>
                 {!viaSupplements && (
                   <p className="text-xs text-white border border-white w-full text-center rounded-md mt-1 p-0.5">
-                    {menus ? (product.name.toLowerCase().includes('leffe') ? "3.5€" : "1€") : product.price}
+                    {menus
+                      ? (product.categories?.includes("alcool") ||
+                        product.name.toLowerCase().includes("leffe"))
+                        ? product.price
+                        : "1€"
+                      : product.price}
                   </p>
                 )}
               </div>

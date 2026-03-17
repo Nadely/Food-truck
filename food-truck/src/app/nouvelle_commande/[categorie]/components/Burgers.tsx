@@ -4,15 +4,23 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useCart } from "../../../context/CartContext";
-import { Product } from "../../../../types/allTypes";
 import { dataProduits } from "../../../../data/db";
+
+type BurgerProduct = {
+  id: number;
+  name: string;
+  image: string;
+  price?: string;
+  garniture: any[];
+  frites?: any;
+};
 
 const Burgers = () => {
   const [menus, setMenus] = useState(false);
   const [garnitures, setGarnitures] = useState(false);
   const router = useRouter();
   const { addToCart } = useCart();
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<BurgerProduct[]>([]);
 
   const handleCheckboxChangeMenus = () => setMenus(!menus);
   const handleCheckboxChangeGarnitures = () => setGarnitures(!garnitures);
@@ -20,7 +28,7 @@ const Burgers = () => {
   useEffect(() => {
     // Récupérer directement les burgers depuis dataProduits.json
     const burgers = dataProduits.Burgers || [];
-    setProducts(burgers);
+    setProducts(burgers as unknown as BurgerProduct[]);
   }, []);
 
   const handleProduitClick = (product: any) => {
@@ -79,22 +87,16 @@ const Burgers = () => {
     console.log("Ajout au panier avec groupId:", groupId);
     addToCart(item);
 
-    const validIds = [1, 2, 3, 4, 5, 6];
-    const route = validIds.includes(product.id) ? "Supplements" : null;
-
-    if (route) {
-      // Si le produit a une route valide, construire l'URL
-      const url = `/nouvelle_commande/${route}?viaBurgers=true&groupId=${groupId}`;
-
-      // Ajouter l'option menu si necessaire
-      if (menus === true) {
-        router.push(`${url}&menu=true`);
-      } else {
-        router.push(url);
-      }
-    } else {
-      console.error("Produit invalide ou route manquante");
+    // Si option menu : enchaîner vers Supplements -> Boissons avec menu=true (boisson à 1€ hors alcool)
+    if (menus === true) {
+      router.push(
+        `/nouvelle_commande/Supplements?viaBurgers=true&groupId=${groupId}&menu=true`
+      );
+      return;
     }
+
+    // Sinon, retour direct à la liste des catégories après ajout au panier
+    router.push("/nouvelle_commande/Supplements?viaBurgers=true&groupId=${groupId}");
   };
 
   return (
@@ -104,7 +106,9 @@ const Burgers = () => {
         </div>
       <div className="w-full flex flex-row flex-wrap items-center justify-center mt-10 style-pen text-lg gap-4 mb-5">
       {products.map((product) => {
-        const price = parseFloat(product.price);
+        const price = parseFloat(
+          (product.price ?? "0").toString().replace("€", "").replace(",", ".").trim()
+        );
         const menuPrice = menus ? 2.5 : 0;
         const garniturePrice = garnitures ? 3 : 0;
         const totalPrice = price + menuPrice + garniturePrice;

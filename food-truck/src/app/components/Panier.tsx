@@ -38,10 +38,13 @@ const Panier = () => {
 
     const relatedItemsTotal = Array.isArray(item.relatedItems)
       ? item.relatedItems.reduce((sum, related) => {
-          // Pour les boissons, on utilise leur prix normal
+          // Pour les boissons en menu : soft = 1€, alcool = prix normal
           if (related.isBoisson) {
-            const isLeffe = related.name?.toLowerCase().includes('leffe');
-            return sum + (isLeffe ? 3.5 : 1);
+            const isAlcohol =
+              Array.isArray((related as any).categories) &&
+              (related as any).categories.includes("alcool");
+            const byName = related.name?.toLowerCase().includes("leffe");
+            return sum + ((isAlcohol || byName) ? cleanPrice(related.price || 0) : 1);
           }
           // Pour les suppléments, on utilise leur prix réel
           if (related.isSupplements) {
@@ -386,8 +389,8 @@ const Panier = () => {
   };
 
   return (
-    <div key={refreshKey} className="flex flex-col text-black h-screen">
-      <div className="flex-grow">
+    <div key={refreshKey} className="flex flex-col text-black min-h-screen h-[100dvh]">
+      <div className="flex-1 overflow-y-auto pb-32">
         <h2 className="text-xl text-center style-pen border-b-2 border-black mb-4">Panier</h2>
         {cart.length === 0 ? (
           <div className="text-center text-black">Votre panier est vide.</div>

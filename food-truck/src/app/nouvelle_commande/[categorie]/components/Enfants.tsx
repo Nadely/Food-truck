@@ -1,30 +1,32 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { dataProduits as data } from "../../../../data/db";
 import { useRouter } from "next/navigation";
 import { useCart } from "../../../context/CartContext";
 
 const Enfants = () => {
   const route = useRouter();
-  const [selectedEnfants, setSelectedEnfants] = useState<number[]>([]);
+  const autoIncludedIds = useMemo(() => {
+    const capri = data.Enfants.find(
+      (p) => p.name?.trim().toLowerCase() === "capri-sun"
+    )?.id;
+    const frites = data.Enfants.find(
+      (p) => p.name?.trim().toLowerCase() === "frites"
+    )?.id;
+    return [capri, frites].filter((v): v is number => typeof v === "number");
+  }, []);
+
+  // Capri-Sun + Frites doivent être inclus automatiquement dans le menu enfant
+  const [selectedEnfants, setSelectedEnfants] = useState<number[]>(autoIncludedIds);
   const { addToCart } = useCart();
 
   const handleSelectSnack = (id: number) => {
     setSelectedEnfants((prevSelected) => {
-      if (id === 1 && prevSelected.includes(2)) {
-        return prevSelected.filter((selectedId) => selectedId !== 2).concat(id);
-      }
-      if (id === 2 && prevSelected.includes(1)) {
-        return prevSelected.filter((selectedId) => selectedId !== 1).concat(id);
-      }
-      if (id === 3 && prevSelected.includes(4)) {
-        return prevSelected.filter((selectedId) => selectedId !== 4).concat(id);
-      }
-      if (id === 4 && prevSelected.includes(3)) {
-        return prevSelected.filter((selectedId) => selectedId !== 3).concat(id);
-      }
+      // Empêcher la désélection des produits inclus automatiquement
+      if (autoIncludedIds.includes(id)) return prevSelected;
+
       if (prevSelected.includes(id)) {
         return prevSelected.filter((selectedId) => selectedId !== id);
       }
@@ -43,13 +45,14 @@ const Enfants = () => {
       selectedEnfants.includes(product.id)
     );
 
-    // Identifier le produit principal (id 1 ou 2) pour le prix et la catégorie
-    const mainProduct = selectedProducts.find(
-      (product) => product.id === 1 || product.id === 2
-    );
+    // Identifier le produit principal (celui qui porte le prix du menu)
+    const mainProduct = selectedProducts.find((product) => {
+      const raw = (product.price ?? "").toString().trim();
+      return raw.length > 0;
+    });
 
     if (!mainProduct) {
-      alert("Veuillez sélectionner un produit principal (id 1 ou 2) !");
+      alert("Veuillez sélectionner un produit principal pour le menu enfant !");
       return;
     }
 
@@ -89,7 +92,7 @@ const Enfants = () => {
         <div className="flex flex-col items-center justify-center w-full">
           <div className="flex flex-row flex-wrap items-center justify-center gap-4 w-full max-w-[1200px]">
             {data.Enfants.filter(
-              (product) => product.id !== 5 && product.id !== 6
+              (product) => !autoIncludedIds.includes(product.id)
             ).map((product) => (
               <div
                 key={product.id}
@@ -121,7 +124,7 @@ const Enfants = () => {
         {/* Produits non cliquables (id 5 et 6) */}
         <div className="flex flex-row flex-wrap items-center justify-center mt-8 gap-4 w-full max-w-[1200px]">
           {data.Enfants.filter(
-            (product) => product.id === 5 || product.id === 6
+            (product) => autoIncludedIds.includes(product.id)
           ).map((product) => (
             <div
               key={product.id}
