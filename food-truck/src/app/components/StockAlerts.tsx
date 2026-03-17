@@ -1,10 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 import { StockAlert } from "../types/allTypes";
 import { checkStockAlerts } from "../(categories)/stocks/stockService";
 
 const StockAlerts = () => {
+  const { data: session, status } = useSession();
+  const role = (session?.user as any)?.role;
+  const isAdmin = status === "authenticated" && role === "admin";
+
+  if (!isAdmin) {
+    return null;
+  }
+
   const [alerts, setAlerts] = useState<StockAlert[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);

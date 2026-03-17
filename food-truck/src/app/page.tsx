@@ -19,7 +19,11 @@ export default function LoginPage() {
       redirect: false
     });
     if (res?.ok) {
-      router.push("/acceuiladmin");
+      // Redirection basée sur le rôle renvoyé par l'API session
+      const sessionRes = await fetch("/api/auth/session");
+      const session = await sessionRes.json();
+      const role = session?.user?.role;
+      router.push(role === "admin" ? "/acceuiladmin" : "/nouvelle_commande");
     } else {
       setError("Identifiants invalides");
     }

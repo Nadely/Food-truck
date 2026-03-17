@@ -1,4 +1,5 @@
 import Image from "next/image";
+import LogoutButton from "./LogoutButton";
 
 const Header = () => {
   return (
@@ -13,6 +14,7 @@ const Header = () => {
       <div className="absolute inset-0 flex items-center justify-center text-white text-4xl style-pen">
         La petite Belgique des coevrons - Admin
       </div>
+      <LogoutButton />
       <Image
         src="/Micka.png"
         alt="logoadmin"
