@@ -146,7 +146,7 @@
   {
     "id": 17,
     "produit_id": 17,
-    "quantite": 17,
+    "quantite": 16,
     "stockConseil": 0,
     "lost": 0,
     "stockAnnuel": 20,
@@ -281,7 +281,7 @@
   {
     "id": 32,
     "produit_id": 32,
-    "quantite": 20,
+    "quantite": 19,
     "stockConseil": 0,
     "lost": 0,
     "stockAnnuel": 20,
@@ -470,7 +470,7 @@
   {
     "id": 53,
     "produit_id": 53,
-    "quantite": 20,
+    "quantite": 19,
     "stockConseil": 0,
     "lost": 0,
     "stockAnnuel": 20,
@@ -722,7 +722,7 @@
   {
     "id": 81,
     "produit_id": 81,
-    "quantite": 20,
+    "quantite": 19,
     "stockConseil": 0,
     "lost": 0,
     "stockAnnuel": 20,
@@ -803,7 +803,7 @@
   {
     "id": 90,
     "produit_id": 90,
-    "quantite": 20,
+    "quantite": 19,
     "stockConseil": 0,
     "lost": 0,
     "stockAnnuel": 20,
@@ -821,7 +821,7 @@
   {
     "id": 92,
     "produit_id": 92,
-    "quantite": 20,
+    "quantite": 19,
     "stockConseil": 0,
     "lost": 0,
     "stockAnnuel": 20,
@@ -857,7 +857,7 @@
   {
     "id": 96,
     "produit_id": 96,
-    "quantite": 19,
+    "quantite": 18,
     "stockConseil": 0,
     "lost": 0,
     "stockAnnuel": 20,

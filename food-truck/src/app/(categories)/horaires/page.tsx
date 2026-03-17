@@ -11,89 +11,52 @@ const Horaires = () => {
   const [userPhone, setUserPhone] = useState(""); // Téléphone de l'utilisateur
   const { cart, setCart } = useCart(); // Panier
 
-  const handleSelectHours = async (hour: string) => {
+  const handleSelectHours = (hour: string) => {
     setSelectedHoraire(hour);
-
-    // Chercher si un élément "horaire" existe déjà dans le panier
-    const existingOrderIndex = cart.findIndex(item => item.id === "horaire");
-
-    // Si l'horaire existe déjà, on met à jour l'heure
-    const updatedCart = [...cart];
-    if (existingOrderIndex !== -1) {
-      updatedCart[existingOrderIndex] = {
-        ...updatedCart[existingOrderIndex],
-        time: hour, // Met à jour l'horaire
-      };
-    } else {
-      // Sinon, on ajoute un nouvel élément horaire
-      updatedCart.push({
-        id: "horaire",
-        name: "", // Pas de nom pour cet élément
-        price: 0, // Prix fictif
-        time: hour, // Ajout de l'horaire
-      });
-    }
-
-    // Mettre à jour le panier
-    setCart(updatedCart);
-
-    // Calculer le prix total du panier
-    const totalPrice = updatedCart.reduce((acc, item) => {
-      if (item.price > 0) {
-        return acc + item.price * item.quantity;
-      }
-      return acc;
-    }, 0);
-
-    // Envoi des données au backend pour enregistrer la commande
-    try {
-      const res = await fetch("/api/panier", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          id: Date.now(),
-          image: "/images/nouvelle_commande.jpg",
-          items: cart.map((item) => ({
-            name: item.name,
-            quantity: item.quantity,
-            relatedItems: item.relatedItems ? item.relatedItems.map((related) => related.name) : [],
-          })),
-          user_name: userName, // Nom du client
-          user_phone: userPhone, // Téléphone du client
-          user_image: "/avatar.jpg",
-          time: hour,
-          date: new Date().toISOString(),
-          lieu: "Maison", // Lieu par défaut
-          price: `${totalPrice}€`, // Prix calculé
-          createdAt: new Date().toISOString(),
-        }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Erreur lors de l'ajout");
-
-      console.log("Commande ajoutée au panier :", data);
-
-      // Redirection vers l'écran des horaires après validation
-      router.push("/horaires");
-    } catch (error) {
-      console.error("Erreur lors de l'ajout au panier :", error);
-    }
   };
 
   const handleValidate = async () => {
     if (!selectedHoraire) return;
+    if (!userName.trim() || !userPhone.trim()) return;
 
     try {
-      const response = await fetch("/api/panier", {
+      // Calculer le prix total du panier (simple: prix * quantité de chaque item principal)
+      const totalPrice = cart.reduce((acc, item: any) => {
+        const q = item.quantity ?? 1;
+        const p = typeof item.price === "number" ? item.price : 0;
+        return acc + p * q;
+      }, 0);
+
+      // 1) Enregistrer la commande (nom/tel/horaire requis côté backend)
+      const postRes = await fetch("/api/panier", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          items: cart,
+          user_name: userName.trim(),
+          user_phone: userPhone.trim(),
+          user_image: "/avatar.jpg",
+          time: selectedHoraire,
+          date: new Date().toISOString(),
+          lieu: "Maison",
+          price: `${totalPrice.toFixed(2)}€`,
+        }),
+      });
+
+      const postData = await postRes.json().catch(() => null);
+      if (!postRes.ok) throw new Error(postData?.message || "Erreur lors de l'enregistrement.");
+
+      // 2) Transférer vers `commandes` (préparation) et vider le panier côté DB
+      const putRes = await fetch("/api/panier", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
       });
 
-      if (response.ok) {
-        setCart([]); // Vider le panier après la validation
-        router.push("/commandes"); // Redirection après validation
-      }
+      const putData = await putRes.json().catch(() => null);
+      if (!putRes.ok) throw new Error(putData?.message || "Erreur lors du transfert.");
+
+      setCart([]); // Vider le panier local après validation
+      router.push("/commandes");
     } catch (error) {
       console.error(error);
       alert("Une erreur est survenue.");
@@ -164,10 +127,12 @@ const Horaires = () => {
         {/* Bouton de validation */}
         <button
           className={`bg-yellow-100 rounded-md bg-opacity-80 w-40 mt-10 mb-5 ${
-            !selectedHoraire ? "opacity-50 cursor-not-allowed" : ""
+            !selectedHoraire || !userName.trim() || !userPhone.trim()
+              ? "opacity-50 cursor-not-allowed"
+              : ""
           }`}
           onClick={handleValidate}
-          disabled={!selectedHoraire}
+          disabled={!selectedHoraire || !userName.trim() || !userPhone.trim()}
         >
           Valider
         </button>

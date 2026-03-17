@@ -254,32 +254,13 @@ const Panier = () => {
         throw new Error("Erreur lors de la mise à jour des stocks");
       }
 
-      // Envoyer la commande
-      const payload = {
-        items: itemsWithGroupId,
-        user_name: "",
-        user_image: "URL Image",
-        time: "12:00",
-        date: "2025-02-24",
-        lieu: "Adresse",
+      // À ce stade on ne valide pas encore la commande côté serveur :
+      // la saisie nom/téléphone/horaire se fait sur `/horaires`.
+      // On ne fait ici que la mise à jour des stocks, puis on laisse l'écran horaires envoyer la commande complète.
+      console.log("Stocks mis à jour. Items prêts pour validation:", {
+        itemsCount: itemsWithGroupId.length,
         price: cleanedPrice + "€",
-      };
-
-      console.log("Données envoyées au serveur:", payload);
-
-      const orderResponse = await fetch("/api/panier", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
       });
-
-      if (orderResponse.ok) {
-        setCart([]);
-        setRefreshKey((prev) => prev + 1);
-      } else {
-        const data = await orderResponse.json();
-        console.error("Erreur:", data.message);
-      }
     } catch (error) {
       console.error("Erreur réseau:", error);
     }
