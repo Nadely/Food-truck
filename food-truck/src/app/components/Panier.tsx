@@ -524,28 +524,84 @@ const Panier = () => {
                   </div>
                   <span className="ml-2 flex-grow">{option.name}</span>
                   <button
-                    className="bg-green-500 text-white px-2 py-1 rounded"
-                    onClick={() => {
-                      const isAucuneSauce =
-                        option.name.trim().toLowerCase() === "aucune sauce";
+                      className="bg-green-500 text-white px-2 py-1 rounded"
+                      onClick={() => {
+                        const optionName = option.name.trim().toLowerCase();
 
-                      if (isAucuneSauce) {
+                        const isAucuneSauce = optionName === "aucune sauce";
+                        const isAucunSupplement = optionName === "aucuns supplements";
+
+                        // =====================================================
+                        // SUPPRESSION : "Aucune sauce" ou "Aucun supplément"
+                        // =====================================================
+                        if (isAucuneSauce || isAucunSupplement) {
+                          const updatedCart = cart.map((item) => {
+                            if (item.uniqueId !== currentParentId) {
+                              return item;
+                            }
+
+                            const updatedRelatedItems = item.relatedItems.filter(
+                              (related: any) => related.uniqueId !== currentRelatedId
+                            );
+
+                            console.log(
+                              isAucuneSauce
+                                ? "🗑️ SAUCE SUPPRIMÉE DÉFINITIVEMENT"
+                                : "🗑️ SUPPLÉMENT SUPPRIMÉ DÉFINITIVEMENT",
+                              {
+                                parent: item.name,
+                                currentRelatedId,
+                                avant: item.relatedItems,
+                                après: updatedRelatedItems,
+                              }
+                            );
+
+                            return {
+                              ...item,
+                              relatedItems: updatedRelatedItems,
+                            };
+                          });
+
+                          setCart(updatedCart);
+
+                          setIsPopupOpen(false);
+                          setCurrentParentId(null);
+                          setCurrentRelatedId(null);
+
+                          return;
+                        }
+
+                        // =====================================================
+                        // AUTRE SUPPLÉMENT
+                        // =====================================================
                         const updatedCart = cart.map((item) => {
                           if (item.uniqueId !== currentParentId) {
                             return item;
                           }
 
-                          // Supprime complètement la sauce actuellement modifiée
-                          const updatedRelatedItems = item.relatedItems.filter(
-                            (related: any) => related.uniqueId !== currentRelatedId
-                          );
+                          const updatedRelatedItems = item.relatedItems.map(
+                            (related: any) => {
+                              if (related.uniqueId !== currentRelatedId) {
+                                return related;
+                              }
 
-                          console.log("🗑️ SAUCE SUPPRIMÉE DÉFINITIVEMENT", {
-                            parent: item.name,
-                            currentRelatedId,
-                            avant: item.relatedItems,
-                            après: updatedRelatedItems,
-                          });
+                              return {
+                                ...related,
+                                id: option.id,
+                                name: option.name,
+                                image: option.image,
+                                categorie: "Supplements",
+
+                                // On conserve le prix existant
+                                price: related.price,
+
+                                isSupplement: true,
+                                isSupplements: true,
+
+                                uniqueId: generateUniqueId("supplement"),
+                              };
+                            }
+                          );
 
                           return {
                             ...item,
@@ -553,65 +609,15 @@ const Panier = () => {
                           };
                         });
 
-                        // IMPORTANT : on remplace immédiatement le panier
                         setCart(updatedCart);
 
-                        // Fermer le popup
                         setIsPopupOpen(false);
                         setCurrentParentId(null);
                         setCurrentRelatedId(null);
-
-                        return;
-                      }
-
-                      // =====================================================
-                      // AUTRE SAUCE
-                      // =====================================================
-
-                      const updatedCart = cart.map((item) => {
-                        if (item.uniqueId !== currentParentId) {
-                          return item;
-                        }
-
-                        const updatedRelatedItems = item.relatedItems.map(
-                          (related: any) => {
-                            if (related.uniqueId !== currentRelatedId) {
-                              return related;
-                            }
-
-                            return {
-                              ...related,
-                              id: option.id,
-                              name: option.name,
-                              image: option.image,
-                              categorie: "Sauces",
-
-                              // PAS DE CALCUL DE PRIX ICI
-                              price: related.price,
-
-                              isSauce: true,
-                              isSauces: true,
-
-                              uniqueId: generateUniqueId("sauce"),
-                            };
-                          }
-                        );
-
-                        return {
-                          ...item,
-                          relatedItems: updatedRelatedItems,
-                        };
-                      });
-
-                      setCart(updatedCart);
-
-                      setIsPopupOpen(false);
-                      setCurrentParentId(null);
-                      setCurrentRelatedId(null);
-                    }}
-                  >
-                    Selectionner
-                  </button>
+                      }}
+                    >
+                      Selectionner
+                    </button>
                 </li>
               ))}
             </ul>
