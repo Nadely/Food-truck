@@ -351,27 +351,22 @@ const Panier = () => {
 
   const handleRemoveGarniture = (relatedId: string, parentId: string) => {
     const updatedCart = cart.map((item) => {
-      if (item.uniqueId === parentId) {
-        const updatedRelatedItems = item.relatedItems.filter(
-          (related: any) => related.uniqueId !== relatedId
-        );
-
-        // Compter le nombre de suppléments restants
-        const remainingSupplementsCount = updatedRelatedItems.filter(
-          (related: any) => related.isSupplements
-        ).length;
-
-        // Mettre à jour le prix en fonction du nombre de suppléments
-        const newPrice = remainingSupplementsCount;
-
-        return {
-          ...item,
-          relatedItems: updatedRelatedItems,
-          price: newPrice
-        };
+      if (item.uniqueId !== parentId) {
+        return item;
       }
-      return item;
+
+      const updatedRelatedItems = item.relatedItems.filter(
+        (related: any) => related.uniqueId !== relatedId
+      );
+
+      return {
+        ...item,
+        relatedItems: updatedRelatedItems,
+        // Le prix du produit principal reste inchangé
+        price: item.price,
+      };
     });
+
     setCart(updatedCart);
   };
 
