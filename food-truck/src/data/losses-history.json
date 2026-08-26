@@ -1,0 +1,26 @@
+[
+  {
+    "date": "2026-03-19T09:35:09.483Z",
+    "items": [
+      {
+        "categories": [
+          "frites"
+        ],
+        "produit": "Frites",
+        "quantite": 17
+      }
+    ]
+  },
+  {
+    "date": "2026-03-19T09:37:42.031Z",
+    "items": [
+      {
+        "categories": [
+          "aperobox"
+        ],
+        "produit": "Spicy Box",
+        "quantite": 20
+      }
+    ]
+  }
+]

@@ -10,7 +10,7 @@ import { useCart } from "../../../context/CartContext";
 const Sauces = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { addToCart, addRelatedItem } = useCart();
+  const { addToCart, addRelatedItem, setCart } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
 
   // Récupération des paramètres via
@@ -20,6 +20,10 @@ const Sauces = () => {
   const viaBrochettes = searchParams.get("viaBrochettes") === "true";
   const viaMitraillette = searchParams.get("viaMitraillette") === "true";
   const viaAperoBox = searchParams.get("viaAperoBox") === "true";
+  const aperoBoxName =
+  Array.from(searchParams.keys()).find(
+    (key) => key !== "viaAperoBox" && key !== "groupId"
+  ) || "";
   const viaFrites = searchParams.get("viaFrites") === "true";
   const isMenu = searchParams.get("menu") === "true";
   const groupId = searchParams.get("groupId");
@@ -34,7 +38,46 @@ const Sauces = () => {
   const isMultiSelect = viaFrites || viaAperoBox;
 
   // Calcul des sauces gratuites
+
   let freeSauces = 0;
+
+  if (viaEnfants || viaMitraillette) {
+    // Toutes les sauces sont gratuites
+    freeSauces = Infinity;
+
+  } else if (viaAperoBox) {
+    // On parcourt TOUTES les AperoBox présentes dans l'URL
+    searchParams.forEach((value, key) => {
+      // On ignore les paramètres techniques
+      if (
+        key === "viaAperoBox" ||
+        key === "groupId" ||
+        key === "menu"
+      ) {
+        return;
+      }
+
+      const quantity = Math.max(0, Number(value) || 0);
+
+      // Party Box = 2 sauces gratuites par box
+      if (key.trim().toLowerCase() === "party box") {
+        freeSauces += quantity * 2;
+      } else {
+        // Toutes les autres AperoBox = 1 sauce gratuite par box
+        freeSauces += quantity;
+      }
+    });
+
+  } else if (viaFrites) {
+    // 1 sauce gratuite
+    freeSauces = 1;
+
+  } else {
+    // Commande normale = aucune sauce gratuite
+    freeSauces = 0;
+  }
+
+  console.log("🥫 SAUCES GRATUITES :", freeSauces);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -166,11 +209,29 @@ const Sauces = () => {
         }
       });
 
-      const finalSauces = flatSauces.map((product, index) => ({
-        ...product,
-        price: index < freeSauces ? 0 : 0.5,
-        groupId: groupId
-      }));
+      const finalSauces = flatSauces.map((product, index) => {
+        const isNoSauce =
+          product.name?.trim().toLowerCase() === "aucune sauce";
+
+        let price = 0;
+
+        if (isNoSauce) {
+          // "Aucune sauce" est toujours gratuite
+          price = 0;
+        } else if (index < freeSauces) {
+          // Sauce comprise dans les sauces gratuites
+          price = 0;
+        } else {
+          // Sauce supplémentaire payante
+          price = 0.5;
+        }
+
+        return {
+          ...product,
+          price,
+          groupId
+        };
+      });
 
       const grouped = {};
 

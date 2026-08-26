@@ -2,7 +2,7 @@ import mysql from "mysql2/promise";
 
 const dbConfig = {
   host: process.env.DB_HOST || "mysql-teamseniornad.alwaysdata.net",
-  user: process.env.DB_USER || "449602",
+  user: process.env.DB_USER || "teamseniornad",
   password: process.env.DB_PASSWORD || "Enola2908@",
   database: process.env.DB_NAME || "teamseniornad_foodtruck_db",
 };

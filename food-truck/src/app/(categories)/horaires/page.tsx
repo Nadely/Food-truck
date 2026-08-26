@@ -20,14 +20,7 @@ const Horaires = () => {
     if (!userName.trim() || !userPhone.trim()) return;
 
     try {
-      // Calculer le prix total du panier (simple: prix * quantité de chaque item principal)
-      const totalPrice = cart.reduce((acc, item: any) => {
-        const q = item.quantity ?? 1;
-        const p = typeof item.price === "number" ? item.price : 0;
-        return acc + p * q;
-      }, 0);
-
-      // 1) Enregistrer la commande (nom/tel/horaire requis côté backend)
+      // 1) Enregistrer la commande (le montant est calculé côté serveur via la table produits)
       const postRes = await fetch("/api/panier", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -39,12 +32,20 @@ const Horaires = () => {
           time: selectedHoraire,
           date: new Date().toISOString(),
           lieu: "Maison",
-          price: `${totalPrice.toFixed(2)}€`,
         }),
       });
 
-      const postData = await postRes.json().catch(() => null);
-      if (!postRes.ok) throw new Error(postData?.message || "Erreur lors de l'enregistrement.");
+      const postText = await postRes.text();
+
+      console.log("POST /api/panier");
+      console.log("Status :", postRes.status);
+      console.log("Réponse :", postText);
+
+      if (!postRes.ok) {
+        throw new Error(postText || `Erreur serveur (${postRes.status})`);
+      }
+
+      const postData = postText ? JSON.parse(postText) : null;
 
       // 2) Transférer vers `commandes` (préparation) et vider le panier côté DB
       const putRes = await fetch("/api/panier", {

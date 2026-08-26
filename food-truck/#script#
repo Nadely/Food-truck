@@ -1,3 +1,1 @@
-. "\home\nadely\.cursor-server\bin\5b19bac7a947f54e4caa3eb7e4c5fbf832389850\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration-bash.sh"
-
-npm install twitter-api-v2
+npm run dev

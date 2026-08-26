@@ -18,6 +18,7 @@ const Panier = () => {
   const [availableOptions, setAvailableOptions] = useState<
     { id: number; name: string; image: string; price?: number; uniqueId?: string; categorie?: string }[]
   >([]);
+  const [total, setTotal] = useState(0);
 
   const generateUniqueId = (prefix: string) => {
     return `${prefix}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -30,50 +31,36 @@ const Panier = () => {
     return parseFloat(priceString.toString().replace("€", "").replace(",", "."));
   };
 
-  const total = cart.reduce((acc, item) => {
-    // Si l'item a des relatedItems qui sont des boissons, on ne compte pas son prix principal
-    const hasBoisson = Array.isArray(item.relatedItems) && item.relatedItems.some(related => related.isBoisson);
-    const itemPrice = hasBoisson ? 0 : cleanPrice(item.price || 0);
-    const quantity = item.quantity || 1;
-
-    const relatedItemsTotal = Array.isArray(item.relatedItems)
-      ? item.relatedItems.reduce((sum, related) => {
-          // Pour les boissons en menu : soft = 1€, alcool = prix normal
-          if (related.isBoisson) {
-            const isAlcohol =
-              Array.isArray((related as any).categories) &&
-              (related as any).categories.includes("alcool");
-            const byName = related.name?.toLowerCase().includes("leffe");
-            return sum + ((isAlcohol || byName) ? cleanPrice(related.price || 0) : 1);
-          }
-          // Pour les suppléments, on utilise leur prix réel
-          if (related.isSupplements) {
-            return sum + cleanPrice(related.price || 0);
-          }
-          // Pour les sauces, on ne compte pas le prix si le produit principal est à 0
-          if (related.categorie?.toLowerCase() === "sauces" && itemPrice === 0) {
-            return sum;
-          }
-          // Pour les sauces avec un produit principal qui a un prix
-          if (related.categorie?.toLowerCase() === "sauces") {
-            return sum + (related.name === "Aucune sauce" ? 0 : 0.5);
-          }
-          // Pour les snacks, on ne compte pas le prix
-          if (related.categorie?.toLowerCase().includes('snacks')) {
-            return sum;
-          }
-          // Pour les autres items, utiliser leur prix
-          return sum + cleanPrice(related.price || 0);
-        }, 0)
-      : 0;
-
-    // Si c'est un menu avec suppléments, on ne compte que les suppléments
-    if (item.relatedItems?.some(related => related.isSupplements)) {
-      return acc + relatedItemsTotal * quantity;
+  useEffect(() => {
+    if (cart.length === 0) {
+      setTotal(0);
+      return;
     }
 
-    return acc + (itemPrice + relatedItemsTotal) * quantity;
-  }, 0);
+    const controller = new AbortController();
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetch("/api/panier/total", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ items: cart }),
+          signal: controller.signal,
+        });
+        if (!res.ok) return;
+        const data = await res.json();
+        setTotal(typeof data.total === "number" ? data.total : 0);
+      } catch (error) {
+        if ((error as { name?: string }).name !== "AbortError") {
+          console.error("Erreur calcul du total:", error);
+        }
+      }
+    }, 150);
+
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
+  }, [cart]);
 
   const handleTransferCommandes = async () => {
     try {
@@ -472,7 +459,10 @@ const Panier = () => {
                         )}
                         <ul className="ml-4 mt-2">
                           {item.relatedItems.map((related, index) => (
-                            <li key={generateUniqueId(`related-${related.id}-${index}`)} className="flex items-center mb-1">
+                            <li key={
+                              related.uniqueId ??
+                              `related-${related.id}-${index}`
+                            } className="flex items-center mb-1">
                               <div className="w-8 h-8 relative">
                                 <Image
                                   src={related.image}
@@ -541,61 +531,88 @@ const Panier = () => {
                   <button
                     className="bg-green-500 text-white px-2 py-1 rounded"
                     onClick={() => {
-                      const updatedCart = cart.map((item) => {
-                        if (item.uniqueId === currentParentId) {
-                          const updatedRelatedItems = item.relatedItems.map((related: any) => {
-                            if (related.uniqueId === currentRelatedId) {
-                              const isSauce = related.categorie?.toLowerCase() === "sauces";
-                              return {
-                                ...related,
-                                ...option,
-                                price: isSauce ? (option.name === "Aucune sauce" ? 0 : 0.5) : cleanPrice(option.price || 0),
-                                uniqueId: `sauce-${option.id}-${Date.now()}`
-                              };
-                            }
-                            return related;
+                      const isAucuneSauce =
+                        option.name.trim().toLowerCase() === "aucune sauce";
+
+                      if (isAucuneSauce) {
+                        const updatedCart = cart.map((item) => {
+                          if (item.uniqueId !== currentParentId) {
+                            return item;
+                          }
+
+                          // Supprime complètement la sauce actuellement modifiée
+                          const updatedRelatedItems = item.relatedItems.filter(
+                            (related: any) => related.uniqueId !== currentRelatedId
+                          );
+
+                          console.log("🗑️ SAUCE SUPPRIMÉE DÉFINITIVEMENT", {
+                            parent: item.name,
+                            currentRelatedId,
+                            avant: item.relatedItems,
+                            après: updatedRelatedItems,
                           });
 
-                          // Si "Aucune sauce" est sélectionné, s'assurer qu'il n'y a qu'un seul élément
-                          const finalRelatedItems = option.name === "Aucune sauce"
-                            ? updatedRelatedItems.filter(item => item.name === "Aucune sauce").slice(0, 1)
-                            : updatedRelatedItems.filter(item => item.name !== "Aucune sauce").concat(
-                                updatedRelatedItems.find(item => item.uniqueId === currentRelatedId) || []
-                              );
-
-                          const updatedItem = {
+                          return {
                             ...item,
-                            name: item.name,
-                            image: item.image,
-                            relatedItems: finalRelatedItems,
-                            price: item.price
+                            relatedItems: updatedRelatedItems,
                           };
+                        });
 
-                          console.log("Mise à jour du panier:", {
-                            item,
-                            finalRelatedItems,
-                            updatedItem,
-                            prixOriginal: item.price,
-                            prixSauces: finalRelatedItems.map(sauce => ({
-                              nom: sauce.name,
-                              prix: sauce.price
-                            }))
-                          });
+                        // IMPORTANT : on remplace immédiatement le panier
+                        setCart(updatedCart);
 
-                          setCart(prevCart => {
-                            const newCart = prevCart.map(cartItem =>
-                              cartItem.uniqueId === currentParentId ? updatedItem : cartItem
-                            );
-                            return newCart;
-                          });
-                          setRefreshKey(prev => prev + 1);
-                          setIsPopupOpen(false);
-                          setCurrentParentId(null);
-                          setCurrentRelatedId(null);
-                          return updatedItem;
+                        // Fermer le popup
+                        setIsPopupOpen(false);
+                        setCurrentParentId(null);
+                        setCurrentRelatedId(null);
+
+                        return;
+                      }
+
+                      // =====================================================
+                      // AUTRE SAUCE
+                      // =====================================================
+
+                      const updatedCart = cart.map((item) => {
+                        if (item.uniqueId !== currentParentId) {
+                          return item;
                         }
-                        return item;
+
+                        const updatedRelatedItems = item.relatedItems.map(
+                          (related: any) => {
+                            if (related.uniqueId !== currentRelatedId) {
+                              return related;
+                            }
+
+                            return {
+                              ...related,
+                              id: option.id,
+                              name: option.name,
+                              image: option.image,
+                              categorie: "Sauces",
+
+                              // PAS DE CALCUL DE PRIX ICI
+                              price: related.price,
+
+                              isSauce: true,
+                              isSauces: true,
+
+                              uniqueId: generateUniqueId("sauce"),
+                            };
+                          }
+                        );
+
+                        return {
+                          ...item,
+                          relatedItems: updatedRelatedItems,
+                        };
                       });
+
+                      setCart(updatedCart);
+
+                      setIsPopupOpen(false);
+                      setCurrentParentId(null);
+                      setCurrentRelatedId(null);
                     }}
                   >
                     Selectionner

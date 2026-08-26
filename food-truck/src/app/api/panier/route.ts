@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getDb } from "../../../lib/db";
+import { calculateCommandeTotal } from "../../../lib/calculateCommandeTotal";
 
 export const dynamic = "force-dynamic";
 
@@ -25,7 +26,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const { items, user_name, user_phone, user_image, time, date, lieu, price } =
+    const { items, user_name, user_phone, user_image, time, date, lieu } =
       await request.json();
 
     if (!time || !user_name || !user_phone) {
@@ -51,6 +52,14 @@ export async function POST(request: Request) {
       };
     });
 
+    const db = await getDb();
+
+    const { formatted: price } =
+      await calculateCommandeTotal(
+        db,
+        itemsWithGroupId
+      );
+
     const newCommande = {
       id: Date.now(),
       items: itemsWithGroupId,
@@ -63,8 +72,7 @@ export async function POST(request: Request) {
       price,
       createdAt: new Date().toISOString(),
     };
-
-    const db = await getDb();
+    
     const [rows] = await db.query("SELECT items FROM panier WHERE id = 1");
     let panierItems: any[] = [];
     if ((rows as any[]).length > 0) {
@@ -117,8 +125,12 @@ export async function PUT(request: Request) {
     }
 
     for (const cmd of panierItems) {
+      const { formatted: price } = await calculateCommandeTotal(
+        db,
+        cmd.items || []
+      );
       await db.query(
-        `INSERT INTO commandes (id, user_name, user_phone, user_image, time, date, lieu, price, createdAt, status) 
+        `INSERT INTO commandes (id, user_name, user_phone, user_image, time, date, lieu, price, createdAt, status)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'preparation')`,
         [
           cmd.id,
@@ -128,7 +140,7 @@ export async function PUT(request: Request) {
           cmd.time || null,
           cmd.date || null,
           cmd.lieu || null,
-          cmd.price || null,
+          price,
           cmd.createdAt || null,
         ]
       );
@@ -137,7 +149,7 @@ export async function PUT(request: Request) {
           ? JSON.stringify(item.relatedItems)
           : null;
         await db.query(
-          `INSERT INTO ligne_commandes (commande_id, produit_nom, quantity, relatedItems, groupId) 
+          `INSERT INTO ligne_commandes (commande_id, produit_nom, quantity, relatedItems, groupId)
            VALUES (?, ?, ?, ?, ?)`,
           [
             cmd.id,

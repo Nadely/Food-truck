@@ -16,7 +16,7 @@ const dbDir = path.join(__dirname, "../src/data/db");
 
 const dbConfig = {
   host: "mysql-teamseniornad.alwaysdata.net",
-  user: "449602",
+  user: "teamseniornad",
   password: "Enola2908@",
   database: "teamseniornad_foodtruck_db",
   multipleStatements: true,
@@ -227,7 +227,7 @@ async function run() {
     const stocks = loadJson("stocks.json");
     for (const row of stocks) {
       await connection.query(
-        `INSERT INTO stocks (id, produit_id, quantite, stockConseil, lost, stockAnnuel, stockLimite) 
+        `INSERT INTO stocks (id, produit_id, quantite, stockConseil, lost, stockAnnuel, stockLimite)
          VALUES (?, ?, ?, ?, ?, ?, ?)`,
         [
           row.id,
@@ -247,7 +247,7 @@ async function run() {
     for (const row of mouvementsStock) {
       const stockId = validStockIds.has(row.stock_id) ? row.stock_id : null;
       await connection.query(
-        `INSERT INTO mouvements_stock (id, stock_id, type, quantite, date, produit_nom) 
+        `INSERT INTO mouvements_stock (id, stock_id, type, quantite, date, produit_nom)
          VALUES (?, ?, ?, ?, ?, ?)`,
         [
           row.id,
@@ -276,7 +276,7 @@ async function run() {
     // Insérer les commandes historique depuis historique.json
     for (const row of historique.historique || []) {
       await connection.query(
-        `INSERT INTO commandes (id, user_name, user_phone, user_image, time, date, lieu, price, createdAt, status) 
+        `INSERT INTO commandes (id, user_name, user_phone, user_image, time, date, lieu, price, createdAt, status)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'historique')`,
         [
           row.id,
@@ -303,7 +303,7 @@ async function run() {
 
     for (const cmd of preparation.preparations || []) {
       await connection.query(
-        `INSERT INTO commandes (id, user_name, user_phone, user_image, time, date, lieu, price, createdAt, status) 
+        `INSERT INTO commandes (id, user_name, user_phone, user_image, time, date, lieu, price, createdAt, status)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'preparation')`,
         [
           cmd.id,
@@ -330,7 +330,7 @@ async function run() {
     }
     for (const cmd of preparation.pretes || []) {
       await connection.query(
-        `INSERT INTO commandes (id, user_name, user_phone, user_image, time, date, lieu, price, createdAt, status) 
+        `INSERT INTO commandes (id, user_name, user_phone, user_image, time, date, lieu, price, createdAt, status)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'pret')`,
         [
           cmd.id,

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getDb } from "../../../lib/db";
+import { calculateCommandeTotal } from "../../../lib/calculateCommandeTotal";
 
 export const dynamic = "force-dynamic";
 
@@ -66,6 +67,10 @@ export async function PUT(request: Request) {
     }
 
     for (const cmd of panierItems) {
+      const { formatted: price } = await calculateCommandeTotal(
+        db,
+        cmd.items || []
+      );
       await db.query(
         `INSERT INTO commandes (id, user_name, user_phone, user_image, time, date, lieu, price, createdAt, status) 
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'preparation')`,
@@ -77,7 +82,7 @@ export async function PUT(request: Request) {
           cmd.time || null,
           cmd.date || null,
           cmd.lieu || null,
-          cmd.price || null,
+          price,
           cmd.createdAt || null,
         ]
       );

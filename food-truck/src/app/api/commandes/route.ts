@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { connection, NextResponse } from "next/server";
 import { getDb } from "../../../lib/db";
 
 export const dynamic = "force-dynamic";
@@ -23,6 +23,8 @@ export async function POST(request: Request) {
     await db.query("UPDATE commandes SET status = 'pret' WHERE id = ?", [
       commandeId,
     ]);
+
+    await db.commit();
 
     return NextResponse.json(
       { message: "Commande déplacée avec succès." },
