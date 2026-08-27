@@ -1,35 +1,88 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-export const authOptions = {
+const authOptions = {
   providers: [
     CredentialsProvider({
-      name: "Admin",
+      name: "Connexion",
+
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "admin@email.com" },
-        password: { label: "Mot de passe", type: "password" }
+        email: {
+          label: "Email",
+          type: "email",
+        },
+        password: {
+          label: "Mot de passe",
+          type: "password",
+        },
       },
+
       async authorize(credentials) {
-        // Remplace ces valeurs par tes variables d'environnement !
-        const adminEmail = process.env.ADMIN_EMAIL;
-        const adminPassword = process.env.ADMIN_PASSWORD;
-        if (
-          credentials?.email === adminEmail &&
-          credentials?.password === adminPassword
-        ) {
-          return { id: "admin", email: adminEmail };
+        if (!credentials?.email || !credentials?.password) {
+          return null;
         }
+
+        const email = credentials.email.toLowerCase().trim();
+        const password = credentials.password;
+
+        // ADMIN
+        if (
+          email === process.env.ADMIN_EMAIL?.toLowerCase() &&
+          password === process.env.ADMIN_PASSWORD
+        ) {
+          return {
+            id: "admin",
+            name: "Administrateur",
+            email: process.env.ADMIN_EMAIL,
+            role: "ADMIN",
+          };
+        }
+
+        // CLIENT
+        if (
+          email === process.env.CLIENT_EMAIL?.toLowerCase() &&
+          password === process.env.CLIENT_PASSWORD
+        ) {
+          return {
+            id: "client-1",
+            name: "Client",
+            email: process.env.CLIENT_EMAIL,
+            role: "CLIENT",
+          };
+        }
+
         return null;
-      }
-    })
+      },
+    }),
   ],
+
   session: {
-    strategy: "jwt"
+    strategy: "jwt" as const,
   },
+
   pages: {
-    signIn: "/login"
-  }
+    signIn: "/login",
+  },
+
+  callbacks: {
+    async jwt({ token, user }: any) {
+      if (user) {
+        token.role = user.role;
+      }
+
+      return token;
+    },
+
+    async session({ session, token }: any) {
+      if (session.user) {
+        session.user.role = token.role;
+      }
+
+      return session;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);
+
 export { handler as GET, handler as POST };

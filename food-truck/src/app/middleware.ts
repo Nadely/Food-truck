@@ -1,36 +1,52 @@
-import { NextResponse } from 'next/server';
-import { getToken } from 'next-auth/jwt';
-import type { NextRequest } from 'next/server';
+import { withAuth } from "next-auth/middleware";
+import { NextResponse } from "next/server";
 
-const PUBLIC_PATHS = [
-  '/',
-  '/api/auth',
-  '/nouvelle_commande' // à ouvrir plus tard pour les clients
-];
+export default withAuth(
+  function middleware(req) {
+    const token = req.nextauth.token;
+    const pathname = req.nextUrl.pathname;
 
-export async function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+    // =========================
+    // CLIENT
+    // =========================
 
-  // Check if the path is public
-  if (PUBLIC_PATHS.some(path => pathname.startsWith(path))) {
+    if (token?.role === "CLIENT") {
+      // Le client a uniquement accès à nouvelle_commande
+      if (
+        pathname !== "/nouvelle_commande" &&
+        !pathname.startsWith("/nouvelle_commande/")
+      ) {
+        return NextResponse.redirect(
+          new URL("/nouvelle_commande", req.url)
+        );
+      }
+    }
+
+    // =========================
+    // ADMIN
+    // =========================
+
+    if (token?.role === "ADMIN") {
+      // L'admin peut accéder à toutes les pages protégées
+      return NextResponse.next();
+    }
+
     return NextResponse.next();
+  },
+  {
+    callbacks: {
+      authorized: ({ token }) => !!token,
+    },
   }
-
-  // Check for NextAuth token
-  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-
-  // If no token, redirect to login page (which is now the root)
-  if (!token) {
-    const loginUrl = new URL('/', req.url);
-    return NextResponse.redirect(loginUrl);
-  }
-
-  // If there's a token and they're trying to access a public-only path like login, redirect them
-  // This part is optional but good practice. For now, let's stick to protection.
-
-  return NextResponse.next();
-}
+);
 
 export const config = {
-  matcher: ['/((?!_next|favicon.ico|public).*)'],
+  matcher: [
+    "/dashboard/:path*",
+    "/clients/:path*",
+    "/commandes/:path*",
+    "/nouvelle_commande/:path*",
+    "/parametres/:path*",
+    "/admin/:path*",
+  ],
 };
