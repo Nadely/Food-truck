@@ -535,34 +535,40 @@ const Panier = () => {
                         // SUPPRESSION : "Aucune sauce" ou "Aucun supplément"
                         // =====================================================
                         if (isAucuneSauce || isAucunSupplement) {
-                          const updatedCart = cart.map((item) => {
-                            if (item.uniqueId !== currentParentId) {
-                              return item;
-                            }
+                          console.log(
+                            isAucuneSauce
+                              ? "🗑️ Suppression automatique de la sauce"
+                              : "🗑️ Suppression automatique du supplément"
+                          );
 
-                            const updatedRelatedItems = item.relatedItems.filter(
+                          const parentItem = cart.find(
+                            (item) => item.uniqueId === currentParentId
+                          );
+
+                          if (parentItem) {
+                            // Retirer la sauce / le supplément
+                            const remainingRelatedItems = parentItem.relatedItems.filter(
                               (related: any) => related.uniqueId !== currentRelatedId
                             );
 
-                            console.log(
-                              isAucuneSauce
-                                ? "🗑️ SAUCE SUPPRIMÉE DÉFINITIVEMENT"
-                                : "🗑️ SUPPLÉMENT SUPPRIMÉ DÉFINITIVEMENT",
-                              {
-                                parent: item.name,
-                                currentRelatedId,
-                                avant: item.relatedItems,
-                                après: updatedRelatedItems,
-                              }
-                            );
-
-                            return {
-                              ...item,
-                              relatedItems: updatedRelatedItems,
-                            };
-                          });
-
-                          setCart(updatedCart);
+                            // Si c'était le dernier relatedItem,
+                            // on supprime automatiquement le produit principal
+                            if (remainingRelatedItems.length === 0) {
+                              remove(parentItem.uniqueId);
+                            } else {
+                              // Sinon on garde le produit avec ses autres relatedItems
+                              setCart(
+                                cart.map((item) =>
+                                  item.uniqueId === currentParentId
+                                    ? {
+                                        ...item,
+                                        relatedItems: remainingRelatedItems,
+                                      }
+                                    : item
+                                )
+                              );
+                            }
+                          }
 
                           setIsPopupOpen(false);
                           setCurrentParentId(null);
@@ -572,7 +578,7 @@ const Panier = () => {
                         }
 
                         // =====================================================
-                        // AUTRE SUPPLÉMENT
+                        // AUTRE SUPPLÉMENT / AUTRE SAUCE
                         // =====================================================
                         const updatedCart = cart.map((item) => {
                           if (item.uniqueId !== currentParentId) {
@@ -590,15 +596,27 @@ const Panier = () => {
                                 id: option.id,
                                 name: option.name,
                                 image: option.image,
-                                categorie: "Supplements",
+
+                                // ✅ On conserve la vraie catégorie de l'option
+                                categorie: option.categorie,
 
                                 // On conserve le prix existant
                                 price: related.price,
 
-                                isSupplement: true,
-                                isSupplements: true,
+                                // ✅ On conserve le vrai type :
+                                // sauce ou supplément
+                                isSupplement:
+                                  option.isSupplements ?? related.isSupplement,
 
-                                uniqueId: generateUniqueId("supplement"),
+                                isSupplements:
+                                  option.isSupplements ?? related.isSupplements,
+
+                                // Nouveau uniqueId
+                                uniqueId: generateUniqueId(
+                                  option.isSupplements
+                                    ? "supplement"
+                                    : "sauce"
+                                ),
                               };
                             }
                           );
