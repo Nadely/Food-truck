@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Salade",
+    "image": "/salade.png"
+  },
+  {
+    "id": 2,
+    "name": "Tomate",
+    "image": "/tomate.png"
+  },
+  {
+    "id": 3,
+    "name": "Oignons Frit",
+    "image": "/oignons-frit.png"
+  },
+  {
+    "id": 4,
+    "name": "Sauce Hamburger",
+    "image": "/hamburger.png"
+  },
+  {
+    "id": 5,
+    "name": "Cornichons sucrées",
+    "image": "/cornichons-sucrees.png"
+  },
+  {
+    "id": 6,
+    "name": "Sauce Bicky",
+    "image": "/bicky.png"
+  }
+]

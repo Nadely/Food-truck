@@ -4,28 +4,15 @@ import type { NextRequest } from 'next/server';
 
 const PUBLIC_PATHS = [
   '/',
-  '/reset-password',
   '/api/auth',
-  '/nouvelle_commande',
-  '/horaires',
-];
-
-const PUBLIC_API_PATHS = [
-  '/api/panier',
-  '/api/products',
-  '/api/losses-history',
+  '/nouvelle_commande' // à ouvrir plus tard pour les clients
 ];
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // APIs publiques (nécessaires pour nouvelle commande / horaires)
-  if (PUBLIC_API_PATHS.some((p) => pathname.startsWith(p))) {
-    return NextResponse.next();
-  }
-
-  // Pages publiques
-  if (PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(p + '/'))) {
+  // Check if the path is public
+  if (PUBLIC_PATHS.some(path => pathname.startsWith(path))) {
     return NextResponse.next();
   }
 
@@ -38,28 +25,19 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(loginUrl);
   }
 
-  const role = (token as any)?.role as string | undefined;
-  const isAdmin = role === 'admin';
-
-  if (!isAdmin) {
-    // Autoriser uniquement nouvelle_commande et horaires pour le client connecté
-    if (
-      pathname === '/nouvelle_commande' ||
-      pathname.startsWith('/nouvelle_commande/') ||
-      pathname === '/horaires' ||
-      pathname.startsWith('/horaires/')
-    ) {
-      return NextResponse.next();
-    }
-
-    // Bloquer le reste
-    const redirectUrl = new URL('/nouvelle_commande', req.url);
-    return NextResponse.redirect(redirectUrl);
-  }
+  // If there's a token and they're trying to access a public-only path like login, redirect them
+  // This part is optional but good practice. For now, let's stick to protection.
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/((?!_next|favicon.ico|public).*)'],
+  matcher: [
+    "/dashboard/:path*",
+    "/clients/:path*",
+    "/commandes/:path*",
+    "/nouvelle_commande/:path*",
+    "/parametres/:path*",
+    "/admin/:path*",
+  ],
 };

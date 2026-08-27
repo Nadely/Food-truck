@@ -4,7 +4,7 @@ import { useCart } from "/src/app/context/CartContext.tsx";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import dataProduits from "/src/data/dataProduits.json";
+import { dataProduits } from "/src/data/db";
 
 const Panier = () => {
   const { cart, removeFromCart, updateQuantity, setCart, remove } = useCart();
@@ -18,6 +18,7 @@ const Panier = () => {
   const [availableOptions, setAvailableOptions] = useState<
     { id: number; name: string; image: string; price?: number; uniqueId?: string; categorie?: string }[]
   >([]);
+  const [total, setTotal] = useState(0);
 
   const generateUniqueId = (prefix: string) => {
     return `${prefix}-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -30,47 +31,36 @@ const Panier = () => {
     return parseFloat(priceString.toString().replace("€", "").replace(",", "."));
   };
 
-  const total = cart.reduce((acc, item) => {
-    // Si l'item a des relatedItems qui sont des boissons, on ne compte pas son prix principal
-    const hasBoisson = Array.isArray(item.relatedItems) && item.relatedItems.some(related => related.isBoisson);
-    const itemPrice = hasBoisson ? 0 : cleanPrice(item.price || 0);
-    const quantity = item.quantity || 1;
-
-    const relatedItemsTotal = Array.isArray(item.relatedItems)
-      ? item.relatedItems.reduce((sum, related) => {
-          // Pour les boissons, on utilise leur prix normal
-          if (related.isBoisson) {
-            const isLeffe = related.name?.toLowerCase().includes('leffe');
-            return sum + (isLeffe ? 3.5 : 1);
-          }
-          // Pour les suppléments, on utilise leur prix réel
-          if (related.isSupplements) {
-            return sum + cleanPrice(related.price || 0);
-          }
-          // Pour les sauces, on ne compte pas le prix si le produit principal est à 0
-          if (related.categorie?.toLowerCase() === "sauces" && itemPrice === 0) {
-            return sum;
-          }
-          // Pour les sauces avec un produit principal qui a un prix
-          if (related.categorie?.toLowerCase() === "sauces") {
-            return sum + (related.name === "Aucune sauce" ? 0 : 0.5);
-          }
-          // Pour les snacks, on ne compte pas le prix
-          if (related.categorie?.toLowerCase().includes('snacks')) {
-            return sum;
-          }
-          // Pour les autres items, utiliser leur prix
-          return sum + cleanPrice(related.price || 0);
-        }, 0)
-      : 0;
-
-    // Si c'est un menu avec suppléments, on ne compte que les suppléments
-    if (item.relatedItems?.some(related => related.isSupplements)) {
-      return acc + relatedItemsTotal * quantity;
+  useEffect(() => {
+    if (cart.length === 0) {
+      setTotal(0);
+      return;
     }
 
-    return acc + (itemPrice + relatedItemsTotal) * quantity;
-  }, 0);
+    const controller = new AbortController();
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetch("/api/panier/total", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ items: cart }),
+          signal: controller.signal,
+        });
+        if (!res.ok) return;
+        const data = await res.json();
+        setTotal(typeof data.total === "number" ? data.total : 0);
+      } catch (error) {
+        if ((error as { name?: string }).name !== "AbortError") {
+          console.error("Erreur calcul du total:", error);
+        }
+      }
+    }, 150);
+
+    return () => {
+      clearTimeout(timer);
+      controller.abort();
+    };
+  }, [cart]);
 
   const handleTransferCommandes = async () => {
     try {
@@ -93,7 +83,7 @@ const Panier = () => {
 
       console.log("Items avec groupId:", itemsWithGroupId);
 
-      // Mettre à jour les stocks dans dataProduits.json
+      // Mettre à jour les stocks dans la base de données (stocks.json)
       const productsResponse = await fetch("/api/products");
       if (!productsResponse.ok) {
         throw new Error("Erreur lors de la récupération des produits");
@@ -254,32 +244,13 @@ const Panier = () => {
         throw new Error("Erreur lors de la mise à jour des stocks");
       }
 
-      // Envoyer la commande
-      const payload = {
-        items: itemsWithGroupId,
-        user_name: "",
-        user_image: "URL Image",
-        time: "12:00",
-        date: "2025-02-24",
-        lieu: "Adresse",
+      // À ce stade on ne valide pas encore la commande côté serveur :
+      // la saisie nom/téléphone/horaire se fait sur `/horaires`.
+      // On ne fait ici que la mise à jour des stocks, puis on laisse l'écran horaires envoyer la commande complète.
+      console.log("Stocks mis à jour. Items prêts pour validation:", {
+        itemsCount: itemsWithGroupId.length,
         price: cleanedPrice + "€",
-      };
-
-      console.log("Données envoyées au serveur:", payload);
-
-      const orderResponse = await fetch("/api/panier", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
       });
-
-      if (orderResponse.ok) {
-        setCart([]);
-        setRefreshKey((prev) => prev + 1);
-      } else {
-        const data = await orderResponse.json();
-        console.error("Erreur:", data.message);
-      }
     } catch (error) {
       console.error("Erreur réseau:", error);
     }
@@ -331,40 +302,46 @@ const Panier = () => {
             typeof product.categorie === "string" &&
             product.categorie.toLowerCase() === "supplements"
         )
-        .map(({ id, name, image, price, uniqueId }) => ({
+        .map(({ id, name, image, price, uniqueId, categorie }) => ({
           id,
           name,
           image,
-          price: cleanPrice(price),
+          price: categorie?.toLowerCase() === "supplements" ? (name === "Aucuns Supplements" ? 0 : 1) : cleanPrice(price),
           uniqueId,
           isSupplements: true
         }));
-    } else {
-      // En dehors du menu enfants, on cherche d'abord dans les catégories Snacks et Boissons
-      const fullProductData = allProducts.find(
-        (prod) =>
-          prod.name.trim().toLowerCase() === baseName.trim().toLowerCase() &&
-          (prod.categorie === "Snacks" || prod.categorie === "Boissons" || prod.categorie === "Sauces")
-      );
+      } else {
+        // Cherche le produit sélectionné sans limiter la catégorie
+        const fullProductData = allProducts.find(
+          (prod) =>
+            typeof prod.name === "string" &&
+            prod.name.trim().toLowerCase() === baseName.trim().toLowerCase()
+        );
 
-      if (fullProductData?.categorie) {
-        const normalizedCategory = fullProductData.categorie.toLowerCase();
-        options = allProducts
-          .filter(
-            (product) =>
-              typeof product.categorie === "string" &&
-              product.categorie.toLowerCase() === normalizedCategory
-          )
-          .map(({ id, name, image, price, uniqueId, categorie }) => ({
-            id,
-            name,
-            image,
-            price: categorie?.toLowerCase() === "sauces" ? (name === "Aucune sauce" ? 0 : 0.5) : cleanPrice(price),
-            uniqueId,
-            categorie
-          }));
+        if (fullProductData?.categorie) {
+          const normalizedCategory = fullProductData.categorie.trim().toLowerCase();
+
+          options = allProducts
+            .filter(
+              (product) =>
+                typeof product.categorie === "string" &&
+                product.categorie.trim().toLowerCase() === normalizedCategory
+            )
+            .map(({ id, name, image, price, uniqueId, categorie }) => ({
+              id,
+              name,
+              image,
+              price:
+                categorie?.trim().toLowerCase() === "sauces"
+                  ? name === "Aucune sauce"
+                    ? 0
+                    : 0.5
+                  : cleanPrice(price),
+              uniqueId,
+              categorie,
+            }));
+        }
       }
-    }
 
     // Éviter les doublons en utilisant un Set pour les noms uniques
     const uniqueNames = new Set();
@@ -380,33 +357,28 @@ const Panier = () => {
 
   const handleRemoveGarniture = (relatedId: string, parentId: string) => {
     const updatedCart = cart.map((item) => {
-      if (item.uniqueId === parentId) {
-        const updatedRelatedItems = item.relatedItems.filter(
-          (related: any) => related.uniqueId !== relatedId
-        );
-
-        // Compter le nombre de suppléments restants
-        const remainingSupplementsCount = updatedRelatedItems.filter(
-          (related: any) => related.isSupplements
-        ).length;
-
-        // Mettre à jour le prix en fonction du nombre de suppléments
-        const newPrice = remainingSupplementsCount;
-
-        return {
-          ...item,
-          relatedItems: updatedRelatedItems,
-          price: newPrice
-        };
+      if (item.uniqueId !== parentId) {
+        return item;
       }
-      return item;
+
+      const updatedRelatedItems = item.relatedItems.filter(
+        (related: any) => related.uniqueId !== relatedId
+      );
+
+      return {
+        ...item,
+        relatedItems: updatedRelatedItems,
+        // Le prix du produit principal reste inchangé
+        price: item.price,
+      };
     });
+
     setCart(updatedCart);
   };
 
   return (
-    <div key={refreshKey} className="flex flex-col text-black h-screen">
-      <div className="flex-grow">
+    <div key={refreshKey} className="flex flex-col text-black min-h-screen h-[100dvh]">
+      <div className="flex-1 overflow-y-auto pb-32">
         <h2 className="text-xl text-center style-pen border-b-2 border-black mb-4">Panier</h2>
         {cart.length === 0 ? (
           <div className="text-center text-black">Votre panier est vide.</div>
@@ -450,28 +422,35 @@ const Panier = () => {
                         Supprimer
                       </button>
                     ) : (
-                      ((!item.relatedItems) || item.relatedItems.length === 0) && (
-                        <div className="flex items-center">
-                          <button
-                            onClick={() => updateQuantity(item.uniqueId, Math.max(1, item.quantity - 1))}
-                            className="bg-red-500 text-white px-2 rounded"
-                          >
-                            -
-                          </button>
-                          <button
-                            onClick={() => updateQuantity(item.uniqueId, item.quantity + 1)}
-                            className="bg-green-500 text-white px-2 ml-2 rounded"
-                          >
-                            +
-                          </button>
-                          <button
-                            onClick={() => remove(item.uniqueId)}
-                            className="bg-black text-white px-2 ml-4 rounded"
-                          >
-                            Supprimer
-                          </button>
-                        </div>
-                      )
+                      !item.menuOption &&
+                        (!item.relatedItems || item.relatedItems.length === 0) && (
+                          <div className="flex items-center">
+                            <button
+                              onClick={() =>
+                                updateQuantity(item.uniqueId, Math.max(1, item.quantity - 1))
+                              }
+                              className="bg-red-500 text-white px-2 rounded"
+                            >
+                              -
+                            </button>
+
+                            <button
+                              onClick={() =>
+                                updateQuantity(item.uniqueId, item.quantity + 1)
+                              }
+                              className="bg-green-500 text-white px-2 ml-2 rounded"
+                            >
+                              +
+                            </button>
+
+                            <button
+                              onClick={() => remove(item.uniqueId)}
+                              className="bg-black text-white px-2 ml-4 rounded"
+                            >
+                              Supprimer
+                            </button>
+                          </div>
+                        )
                     )}
                   </div>
 
@@ -488,7 +467,10 @@ const Panier = () => {
                         )}
                         <ul className="ml-4 mt-2">
                           {item.relatedItems.map((related, index) => (
-                            <li key={generateUniqueId(`related-${related.id}-${index}`)} className="flex items-center mb-1">
+                            <li key={
+                              related.uniqueId ??
+                              `related-${related.id}-${index}`
+                            } className="flex items-center mb-1">
                               <div className="w-8 h-8 relative">
                                 <Image
                                   src={related.image}
@@ -555,67 +537,113 @@ const Panier = () => {
                   </div>
                   <span className="ml-2 flex-grow">{option.name}</span>
                   <button
-                    className="bg-green-500 text-white px-2 py-1 rounded"
-                    onClick={() => {
-                      const updatedCart = cart.map((item) => {
-                        if (item.uniqueId === currentParentId) {
-                          const updatedRelatedItems = item.relatedItems.map((related: any) => {
-                            if (related.uniqueId === currentRelatedId) {
-                              const isSauce = related.categorie?.toLowerCase() === "sauces";
-                              return {
-                                ...related,
-                                ...option,
-                                price: isSauce ? (option.name === "Aucune sauce" ? 0 : 0.5) : cleanPrice(option.price || 0),
-                                uniqueId: `sauce-${option.id}-${Date.now()}`
-                              };
-                            }
-                            return related;
-                          });
+                      className="bg-green-500 text-white px-2 py-1 rounded"
+                      onClick={() => {
+                        const optionName = option.name.trim().toLowerCase();
 
-                          // Si "Aucune sauce" est sélectionné, s'assurer qu'il n'y a qu'un seul élément
-                          const finalRelatedItems = option.name === "Aucune sauce"
-                            ? updatedRelatedItems.filter(item => item.name === "Aucune sauce").slice(0, 1)
-                            : updatedRelatedItems.filter(item => item.name !== "Aucune sauce").concat(
-                                updatedRelatedItems.find(item => item.uniqueId === currentRelatedId) || []
-                              );
+                        const isAucuneSauce = optionName === "aucune sauce";
+                        const isAucunSupplement = optionName === "aucuns supplements";
 
-                          const updatedItem = {
-                            ...item,
-                            name: item.name,
-                            image: item.image,
-                            relatedItems: finalRelatedItems,
-                            price: item.price
-                          };
+                        // =====================================================
+                        // SUPPRESSION : "Aucune sauce" ou "Aucun supplément"
+                        // =====================================================
+                        if (isAucuneSauce || isAucunSupplement) {
+                          console.log(
+                            isAucuneSauce
+                              ? "🗑️ Suppression automatique de la sauce"
+                              : "🗑️ Suppression automatique du supplément"
+                          );
 
-                          console.log("Mise à jour du panier:", {
-                            item,
-                            finalRelatedItems,
-                            updatedItem,
-                            prixOriginal: item.price,
-                            prixSauces: finalRelatedItems.map(sauce => ({
-                              nom: sauce.name,
-                              prix: sauce.price
-                            }))
-                          });
+                          const parentItem = cart.find(
+                            (item) => item.uniqueId === currentParentId
+                          );
 
-                          setCart(prevCart => {
-                            const newCart = prevCart.map(cartItem =>
-                              cartItem.uniqueId === currentParentId ? updatedItem : cartItem
+                          if (parentItem) {
+                            // Retirer la sauce / le supplément
+                            const remainingRelatedItems = parentItem.relatedItems.filter(
+                              (related: any) => related.uniqueId !== currentRelatedId
                             );
-                            return newCart;
-                          });
-                          setRefreshKey(prev => prev + 1);
+
+                            // Si c'était le dernier relatedItem,
+                            // on supprime automatiquement le produit principal
+                            if (remainingRelatedItems.length === 0) {
+                              remove(parentItem.uniqueId);
+                            } else {
+                              // Sinon on garde le produit avec ses autres relatedItems
+                              setCart(
+                                cart.map((item) =>
+                                  item.uniqueId === currentParentId
+                                    ? {
+                                        ...item,
+                                        relatedItems: remainingRelatedItems,
+                                      }
+                                    : item
+                                )
+                              );
+                            }
+                          }
+
                           setIsPopupOpen(false);
                           setCurrentParentId(null);
                           setCurrentRelatedId(null);
-                          return updatedItem;
+
+                          return;
                         }
-                        return item;
-                      });
-                    }}
-                  >
-                    Selectionner
-                  </button>
+
+                        // =====================================================
+                        // AUTRE SUPPLÉMENT / AUTRE SAUCE
+                        // =====================================================
+                        const updatedCart = cart.map((item) => {
+                          if (item.uniqueId !== currentParentId) {
+                            return item;
+                          }
+
+                          const updatedRelatedItems = item.relatedItems.map(
+                            (related: any) => {
+                              if (related.uniqueId !== currentRelatedId) {
+                                return related;
+                              }
+
+                              const newPrice =
+                              option.isSupplements
+                                ? cleanPrice(option.price ?? 0)
+                                : related.price;
+
+                            return {
+                              ...related,
+                              id: option.id,
+                              name: option.name,
+                              image: option.image,
+                              categorie: option.categorie,
+                              price: newPrice,
+                              isSupplement:
+                                option.isSupplements ?? related.isSupplement,
+                              isSupplements:
+                                option.isSupplements ?? related.isSupplements,
+                              uniqueId: generateUniqueId(
+                                option.isSupplements
+                                  ? "supplement"
+                                  : "sauce"
+                              ),
+                            };
+                            }
+                          );
+
+                          return {
+                            ...item,
+                            relatedItems: updatedRelatedItems,
+                          };
+                        });
+
+                        setCart(updatedCart);
+
+                        setIsPopupOpen(false);
+                        setCurrentParentId(null);
+                        setCurrentRelatedId(null);
+                      }}
+                    >
+                      Selectionner
+                    </button>
                 </li>
               ))}
             </ul>

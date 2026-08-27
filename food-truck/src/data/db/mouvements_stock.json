@@ -1,0 +1,809 @@
+[
+  {
+    "id": 1,
+    "stock_id": 1,
+    "type": "ajustement",
+    "quantite": 81,
+    "date": "2025-01-14T08:55:37.983Z",
+    "produit_nom": "Mega burger"
+  },
+  {
+    "id": 2,
+    "stock_id": 2,
+    "type": "ajustement",
+    "quantite": 2,
+    "date": "2025-01-14T08:55:37.983Z",
+    "produit_nom": "Vegan Burger"
+  },
+  {
+    "id": 3,
+    "stock_id": 3,
+    "type": "ajustement",
+    "quantite": 42,
+    "date": "2025-01-14T08:55:37.983Z",
+    "produit_nom": "Space fish"
+  },
+  {
+    "id": 4,
+    "stock_id": 4,
+    "type": "ajustement",
+    "quantite": 112,
+    "date": "2025-01-14T08:55:37.983Z",
+    "produit_nom": "Crousty chicken"
+  },
+  {
+    "id": 5,
+    "stock_id": 1,
+    "type": "ajustement",
+    "quantite": 81,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "fricadelle"
+  },
+  {
+    "id": 6,
+    "stock_id": 2,
+    "type": "ajustement",
+    "quantite": 2,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "fricadelle-xxl"
+  },
+  {
+    "id": 7,
+    "stock_id": 3,
+    "type": "ajustement",
+    "quantite": 42,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "pouleycroc"
+  },
+  {
+    "id": 8,
+    "stock_id": 4,
+    "type": "ajustement",
+    "quantite": 112,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "viandelle"
+  },
+  {
+    "id": 9,
+    "stock_id": 5,
+    "type": "ajustement",
+    "quantite": 0,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "belcanto"
+  },
+  {
+    "id": 10,
+    "stock_id": 6,
+    "type": "ajustement",
+    "quantite": 112,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "cervelas-brun"
+  },
+  {
+    "id": 11,
+    "stock_id": 7,
+    "type": "ajustement",
+    "quantite": 112,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "bouffe-feu"
+  },
+  {
+    "id": 12,
+    "stock_id": 8,
+    "type": "ajustement",
+    "quantite": 112,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "lucifer"
+  },
+  {
+    "id": 13,
+    "stock_id": 9,
+    "type": "ajustement",
+    "quantite": 112,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "loempia-poulet"
+  },
+  {
+    "id": 14,
+    "stock_id": 10,
+    "type": "ajustement",
+    "quantite": 112,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "boulette"
+  },
+  {
+    "id": 15,
+    "stock_id": 11,
+    "type": "ajustement",
+    "quantite": 112,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "cheese-crack"
+  },
+  {
+    "id": 16,
+    "stock_id": 12,
+    "type": "ajustement",
+    "quantite": 112,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "loempidel"
+  },
+  {
+    "id": 17,
+    "stock_id": 13,
+    "type": "ajustement",
+    "quantite": 42,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "brochette volaille"
+  },
+  {
+    "id": 18,
+    "stock_id": 14,
+    "type": "ajustement",
+    "quantite": 42,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "brochette tzigane"
+  },
+  {
+    "id": 19,
+    "stock_id": 16,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "brochette ardennaise"
+  },
+  {
+    "id": 20,
+    "stock_id": 17,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "brochette poisson"
+  },
+  {
+    "id": 21,
+    "stock_id": 18,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "brochette porc"
+  },
+  {
+    "id": 22,
+    "stock_id": 19,
+    "type": "ajustement",
+    "quantite": 0,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "brochette boeuf"
+  },
+  {
+    "id": 23,
+    "stock_id": 20,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "belcanto-zero"
+  },
+  {
+    "id": 24,
+    "stock_id": 21,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "fricadelle-zero"
+  },
+  {
+    "id": 25,
+    "stock_id": 22,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "hamburger-zero"
+  },
+  {
+    "id": 26,
+    "stock_id": 23,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "poulycroc-vegi"
+  },
+  {
+    "id": 27,
+    "stock_id": 24,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "ketchup"
+  },
+  {
+    "id": 28,
+    "stock_id": 25,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "mayonnaise"
+  },
+  {
+    "id": 29,
+    "stock_id": 26,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "andalouse"
+  },
+  {
+    "id": 30,
+    "stock_id": 27,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "bicky"
+  },
+  {
+    "id": 31,
+    "stock_id": 28,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "dallas"
+  },
+  {
+    "id": 32,
+    "stock_id": 29,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "hamburger"
+  },
+  {
+    "id": 33,
+    "stock_id": 30,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "pita"
+  },
+  {
+    "id": 34,
+    "stock_id": 31,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "brazil"
+  },
+  {
+    "id": 35,
+    "stock_id": 32,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "hannibale"
+  },
+  {
+    "id": 36,
+    "stock_id": 33,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "hawai"
+  },
+  {
+    "id": 37,
+    "stock_id": 34,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "riche"
+  },
+  {
+    "id": 38,
+    "stock_id": 35,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "sweet-curry-oignon"
+  },
+  {
+    "id": 39,
+    "stock_id": 36,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "chimayo"
+  },
+  {
+    "id": 40,
+    "stock_id": 37,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "ch'ti"
+  },
+  {
+    "id": 41,
+    "stock_id": 38,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "hot-mammouth"
+  },
+  {
+    "id": 42,
+    "stock_id": 39,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "poivre"
+  },
+  {
+    "id": 43,
+    "stock_id": 40,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "samourai"
+  },
+  {
+    "id": 44,
+    "stock_id": 41,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "coca-cola"
+  },
+  {
+    "id": 45,
+    "stock_id": 42,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "coca-cola-zero"
+  },
+  {
+    "id": 46,
+    "stock_id": 43,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "fanta-citron"
+  },
+  {
+    "id": 47,
+    "stock_id": 44,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "fanta-orange"
+  },
+  {
+    "id": 48,
+    "stock_id": 45,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "canada-dry / autres"
+  },
+  {
+    "id": 49,
+    "stock_id": 46,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "orangina"
+  },
+  {
+    "id": 50,
+    "stock_id": 47,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "seven-up / Sprite"
+  },
+  {
+    "id": 51,
+    "stock_id": 48,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "capri-sun"
+  },
+  {
+    "id": 52,
+    "stock_id": 49,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "ice-tea"
+  },
+  {
+    "id": 53,
+    "stock_id": 50,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "oasis"
+  },
+  {
+    "id": 54,
+    "stock_id": 51,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "tropico"
+  },
+  {
+    "id": 55,
+    "stock_id": 52,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "eau"
+  },
+  {
+    "id": 56,
+    "stock_id": 53,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "eau-petillante"
+  },
+  {
+    "id": 57,
+    "stock_id": 54,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "leffe"
+  },
+  {
+    "id": 58,
+    "stock_id": 55,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "leffe-blanche"
+  },
+  {
+    "id": 59,
+    "stock_id": 56,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "leffe-ruby"
+  },
+  {
+    "id": 60,
+    "stock_id": 57,
+    "type": "ajustement",
+    "quantite": 0,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "steaks"
+  },
+  {
+    "id": 61,
+    "stock_id": 58,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "pains burger"
+  },
+  {
+    "id": 62,
+    "stock_id": 59,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "pains mitraillette"
+  },
+  {
+    "id": 63,
+    "stock_id": 64,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "fish"
+  },
+  {
+    "id": 64,
+    "stock_id": 65,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "chicken"
+  },
+  {
+    "id": 65,
+    "stock_id": 66,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "steak crispy"
+  },
+  {
+    "id": 66,
+    "stock_id": 67,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "steak mexicain"
+  },
+  {
+    "id": 67,
+    "stock_id": 69,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "compotes"
+  },
+  {
+    "id": 68,
+    "stock_id": 70,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "crèmes au chocolat"
+  },
+  {
+    "id": 69,
+    "stock_id": 77,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "galettes-pomme-de-terre"
+  },
+  {
+    "id": 70,
+    "stock_id": 78,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "galettes-fromage"
+  },
+  {
+    "id": 71,
+    "stock_id": 79,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "boulles de fromage"
+  },
+  {
+    "id": 72,
+    "stock_id": 80,
+    "type": "ajustement",
+    "quantite": 4,
+    "date": "2025-01-14T11:53:04.443Z",
+    "produit_nom": "Mini fricadelle"
+  },
+  {
+    "id": 73,
+    "type": "perte",
+    "quantite": -9,
+    "date": "2025-01-09T13:26:14.313Z",
+    "produit_nom": "Mega burger"
+  },
+  {
+    "id": 74,
+    "type": "perte",
+    "quantite": -454,
+    "date": "2025-01-09T13:26:14.313Z",
+    "produit_nom": "Vegan Burger"
+  },
+  {
+    "id": 75,
+    "type": "perte",
+    "quantite": -22,
+    "date": "2025-01-09T13:26:14.313Z",
+    "produit_nom": "Space fish"
+  },
+  {
+    "id": 76,
+    "type": "perte",
+    "quantite": -14,
+    "date": "2025-01-09T13:26:14.313Z",
+    "produit_nom": "Crousty chick"
+  },
+  {
+    "id": 77,
+    "type": "perte",
+    "quantite": -8,
+    "date": "2025-01-09T13:51:58.008Z",
+    "produit_nom": "Mega burger"
+  },
+  {
+    "id": 78,
+    "type": "perte",
+    "quantite": -7,
+    "date": "2025-01-09T13:51:58.008Z",
+    "produit_nom": "Crousty chick"
+  },
+  {
+    "id": 79,
+    "type": "perte",
+    "quantite": -45,
+    "date": "2025-01-09T13:52:06.864Z",
+    "produit_nom": "Vegan Burger"
+  },
+  {
+    "id": 80,
+    "type": "perte",
+    "quantite": -45,
+    "date": "2025-01-10T13:07:48.538Z",
+    "produit_nom": "Vegan Burger"
+  },
+  {
+    "id": 81,
+    "type": "perte",
+    "quantite": -150,
+    "date": "2025-01-10T13:07:48.538Z",
+    "produit_nom": "Space fish"
+  },
+  {
+    "id": 82,
+    "type": "perte",
+    "quantite": -81,
+    "date": "2025-01-14T08:55:47.367Z",
+    "produit_nom": "Mega burger"
+  },
+  {
+    "id": 83,
+    "type": "perte",
+    "quantite": -2,
+    "date": "2025-01-14T08:55:47.367Z",
+    "produit_nom": "Vegan Burger"
+  },
+  {
+    "id": 84,
+    "type": "perte",
+    "quantite": -42,
+    "date": "2025-01-14T08:55:47.367Z",
+    "produit_nom": "Space fish"
+  },
+  {
+    "id": 85,
+    "type": "perte",
+    "quantite": -112,
+    "date": "2025-01-14T08:55:47.367Z",
+    "produit_nom": "Crousty chicken"
+  },
+  {
+    "id": 86,
+    "type": "perte",
+    "quantite": -81,
+    "date": "2025-01-14T09:05:15.733Z",
+    "produit_nom": "Mega burger"
+  },
+  {
+    "id": 87,
+    "type": "perte",
+    "quantite": -2,
+    "date": "2025-01-14T09:05:15.733Z",
+    "produit_nom": "Vegan Burger"
+  },
+  {
+    "id": 88,
+    "type": "perte",
+    "quantite": -42,
+    "date": "2025-01-14T09:05:15.733Z",
+    "produit_nom": "Space fish"
+  },
+  {
+    "id": 89,
+    "type": "perte",
+    "quantite": -112,
+    "date": "2025-01-14T09:05:15.733Z",
+    "produit_nom": "Crousty chicken"
+  },
+  {
+    "id": 90,
+    "type": "perte",
+    "quantite": -4,
+    "date": "2025-01-14T11:37:56.468Z",
+    "produit_nom": "steak mexicain"
+  },
+  {
+    "id": 91,
+    "type": "perte",
+    "quantite": -4,
+    "date": "2025-01-14T11:53:09.230Z",
+    "produit_nom": "brochette boeuf"
+  },
+  {
+    "id": 92,
+    "type": "perte",
+    "quantite": -4,
+    "date": "2025-01-14T11:53:09.230Z",
+    "produit_nom": "steaks"
+  },
+  {
+    "id": 93,
+    "type": "perte",
+    "quantite": -4,
+    "date": "2025-01-14T12:46:52.077Z",
+    "produit_nom": "brochette boeuf"
+  },
+  {
+    "id": 94,
+    "type": "perte",
+    "quantite": -4,
+    "date": "2025-01-14T12:46:52.077Z",
+    "produit_nom": "steaks"
+  },
+  {
+    "id": 95,
+    "type": "perte",
+    "quantite": -81,
+    "date": "2025-01-14T12:46:53.413Z",
+    "produit_nom": "fricadelle"
+  },
+  {
+    "id": 96,
+    "type": "perte",
+    "quantite": -81,
+    "date": "2025-01-14T12:54:28.638Z",
+    "produit_nom": "fricadelle"
+  },
+  {
+    "id": 97,
+    "type": "perte",
+    "quantite": -4,
+    "date": "2025-01-14T12:54:28.638Z",
+    "produit_nom": "brochette boeuf"
+  },
+  {
+    "id": 98,
+    "type": "perte",
+    "quantite": -4,
+    "date": "2025-01-14T12:54:28.638Z",
+    "produit_nom": "steaks"
+  },
+  {
+    "id": 99,
+    "type": "perte",
+    "quantite": -4,
+    "date": "2025-01-22T13:08:27.190Z",
+    "produit_nom": "brochette boeuf"
+  },
+  {
+    "id": 100,
+    "type": "perte",
+    "quantite": -24,
+    "date": "2025-01-22T13:08:27.190Z",
+    "produit_nom": "steaks"
+  },
+  {
+    "id": 101,
+    "type": "perte",
+    "quantite": -4,
+    "date": "2025-02-10T16:11:12.810Z",
+    "produit_nom": "brochette boeuf"
+  },
+  {
+    "id": 102,
+    "type": "perte",
+    "quantite": -4,
+    "date": "2025-02-10T16:11:12.810Z",
+    "produit_nom": "steaks"
+  },
+  {
+    "id": 103,
+    "type": "perte",
+    "quantite": -2,
+    "date": "2025-02-10T16:11:40.019Z",
+    "produit_nom": "fricadelle"
+  },
+  {
+    "id": 104,
+    "type": "perte",
+    "quantite": -5,
+    "date": "2025-02-10T16:21:32.703Z",
+    "produit_nom": "fricadelle"
+  },
+  {
+    "id": 105,
+    "type": "perte",
+    "quantite": -5,
+    "date": "2025-02-10T16:23:49.698Z",
+    "produit_nom": "fricadelle"
+  }
+]

@@ -1,6 +1,6 @@
 "use client";
 
-import data from "../../data/dataProduits.json";
+import { dataProduits as data } from "../../data/db";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 

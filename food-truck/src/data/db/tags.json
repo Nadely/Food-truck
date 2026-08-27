@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "name": "mitraillettes"
+  },
+  {
+    "id": 2,
+    "name": "burgers"
+  },
+  {
+    "id": 3,
+    "name": "veggies"
+  },
+  {
+    "id": 4,
+    "name": "desserts"
+  },
+  {
+    "id": 5,
+    "name": "enfants"
+  },
+  {
+    "id": 6,
+    "name": "sans-alcool"
+  },
+  {
+    "id": 7,
+    "name": "boissons"
+  },
+  {
+    "id": 8,
+    "name": "frites"
+  },
+  {
+    "id": 9,
+    "name": "aperobox"
+  },
+  {
+    "id": 10,
+    "name": "poulet"
+  },
+  {
+    "id": 11,
+    "name": "viande"
+  },
+  {
+    "id": 12,
+    "name": "top-vente"
+  },
+  {
+    "id": 13,
+    "name": "snacks"
+  },
+  {
+    "id": 14,
+    "name": "boeuf"
+  },
+  {
+    "id": 15,
+    "name": "brochettes"
+  },
+  {
+    "id": 16,
+    "name": "snacksveggies"
+  },
+  {
+    "id": 17,
+    "name": "alcool"
+  },
+  {
+    "id": 18,
+    "name": "sauces"
+  },
+  {
+    "id": 19,
+    "name": "garniture"
+  },
+  {
+    "id": 20,
+    "name": "supplements"
+  },
+  {
+    "id": 21,
+    "name": "pains"
+  },
+  {
+    "id": 22,
+    "name": "frais"
+  },
+  {
+    "id": 23,
+    "name": "poisson"
+  },
+  {
+    "id": 24,
+    "name": "frit"
+  },
+  {
+    "id": 25,
+    "name": "burger"
+  }
+]

@@ -7,9 +7,16 @@ export const authOptions: AuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "admin@email.com" },
-        password: { label: "Mot de passe", type: "password" }
+        email: {
+          label: "Email",
+          type: "email",
+        },
+        password: {
+          label: "Mot de passe",
+          type: "password",
+        },
       },
+
       async authorize(credentials) {
         const adminEmail = process.env.ADMIN_EMAIL;
         const adminPassword = process.env.ADMIN_PASSWORD;
@@ -29,10 +36,12 @@ export const authOptions: AuthOptions = {
         ) {
           return { id: "client", email: clientEmail, role: "client" };
         }
+
         return null;
-      }
-    })
+      },
+    }),
   ],
+
   session: {
     strategy: "jwt",
   },
@@ -52,10 +61,30 @@ export const authOptions: AuthOptions = {
       return session;
     },
   },
+
   pages: {
-    signIn: "/login"
-  }
+    signIn: "/login",
+  },
+
+  callbacks: {
+    async jwt({ token, user }: any) {
+      if (user) {
+        token.role = user.role;
+      }
+
+      return token;
+    },
+
+    async session({ session, token }: any) {
+      if (session.user) {
+        session.user.role = token.role;
+      }
+
+      return session;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);
+
 export { handler as GET, handler as POST };

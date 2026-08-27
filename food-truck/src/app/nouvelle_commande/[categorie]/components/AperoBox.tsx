@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
-import data from "../../../../data/dataProduits.json";
+import { dataProduits as data } from "../../../../data/db";
 import { useCart } from "../../../context/CartContext";
 
 const AperoBox = () => {

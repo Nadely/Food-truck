@@ -14,7 +14,7 @@ const Horaires = () => {
   // Le panier contient aussi un item spécial "horaire" (id string + champ time)
   const { cart, setCart } = useCart() as any; // Panier
 
-  const handleSelectHours = async (hour: string) => {
+  const handleSelectHours = (hour: string) => {
     setSelectedHoraire(hour);
 
     // Chercher si un élément "horaire" existe déjà dans le panier
@@ -68,31 +68,26 @@ const Horaires = () => {
           user_name: userName, // Nom du client
           user_phone: userPhone, // Téléphone du client
           user_image: "/avatar.jpg",
-          time: hour,
+          time: selectedHoraire,
           date: new Date().toISOString(),
-          lieu: "Maison", // Lieu par défaut
-          price: `${totalPrice}€`, // Prix calculé
-          createdAt: new Date().toISOString(),
+          lieu: "Maison",
         }),
       });
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Erreur lors de l'ajout");
+      const postText = await postRes.text();
 
-      console.log("Commande ajoutée au panier :", data);
+      console.log("POST /api/panier");
+      console.log("Status :", postRes.status);
+      console.log("Réponse :", postText);
 
-      // Redirection vers l'écran des horaires après validation
-      router.push("/horaires");
-    } catch (error) {
-      console.error("Erreur lors de l'ajout au panier :", error);
-    }
-  };
+      if (!postRes.ok) {
+        throw new Error(postText || `Erreur serveur (${postRes.status})`);
+      }
 
-  const handleValidate = async () => {
-    if (!selectedHoraire) return;
+      const postData = postText ? JSON.parse(postText) : null;
 
-    try {
-      const response = await fetch("/api/panier", {
+      // 2) Transférer vers `commandes` (préparation) et vider le panier côté DB
+      const putRes = await fetch("/api/panier", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
       });
@@ -172,10 +167,12 @@ const Horaires = () => {
         {/* Bouton de validation */}
         <button
           className={`bg-yellow-100 rounded-md bg-opacity-80 w-40 mt-10 mb-5 ${
-            !selectedHoraire ? "opacity-50 cursor-not-allowed" : ""
+            !selectedHoraire || !userName.trim() || !userPhone.trim()
+              ? "opacity-50 cursor-not-allowed"
+              : ""
           }`}
           onClick={handleValidate}
-          disabled={!selectedHoraire}
+          disabled={!selectedHoraire || !userName.trim() || !userPhone.trim()}
         >
           Valider
         </button>

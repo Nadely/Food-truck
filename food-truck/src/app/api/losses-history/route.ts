@@ -5,10 +5,22 @@ import fs from "fs/promises";
 import path from "path";
 
 export async function GET() {
-  const filePath = path.join(process.cwd(), "src/data/losses-history.json");
-  const fileContent = await fs.readFile(filePath, "utf-8");
-  const data = JSON.parse(fileContent);
-  return NextResponse.json(data);
+  try {
+    const filePath = path.join(process.cwd(), "src/data/losses-history.json");
+    const fileContent = await fs.readFile(filePath, "utf-8");
+    const data = JSON.parse(fileContent);
+    return NextResponse.json(data);
+  } catch (error: any) {
+    // Si le fichier n'existe pas encore, retourner un historique vide plutôt qu'une 500
+    if (error?.code === "ENOENT") {
+      return NextResponse.json([]);
+    }
+    console.error("Erreur GET losses-history:", error);
+    return NextResponse.json(
+      { message: "Erreur lors de la récupération des pertes." },
+      { status: 500 }
+    );
+  }
 }
 
 export async function POST(request: Request) {

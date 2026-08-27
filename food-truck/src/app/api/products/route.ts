@@ -1,52 +1,63 @@
 import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
+import { getDataProduits } from "../../../data/db";
+
+const DB_DIR = "src/data/db";
 
 export async function GET() {
   try {
-    const filePath = path.join(process.cwd(), "src/data/dataProduits.json");
-    const fileContent = await fs.readFile(filePath, "utf-8");
-    const data = JSON.parse(fileContent);
+    const data = getDataProduits();
 
     // Transformer les données en format plat pour la compatibilité
     const products = Object.entries(data).flatMap(([category, products]) => {
       return (products as any[])
         // Exclure les éléments "Aucun(s)" sauf "Aucune sauce" et "Aucune boisson"
-        .filter(product => {
+        .filter((product) => {
           const name = product.name.toLowerCase();
-          return name === "aucune sauce" || name === "aucune boisson" || !name.includes("aucun");
+          return (
+            name === "aucune sauce" ||
+            name === "aucune boisson" ||
+            !name.includes("aucun")
+          );
         })
         // Inclure uniquement les produits nécessaires pour les stocks
-        .filter(product => {
+        .filter((product) => {
           const name = product.name.toLowerCase();
           // Exclure les burgers spécifiques
-          if (name.includes("fish burger") ||
-              name.includes("chicken burger") ||
-              name.includes("crispy burger")) {
+          if (
+            name.includes("fish burger") ||
+            name.includes("chicken burger") ||
+            name.includes("crispy burger")
+          ) {
             return false;
           }
           // Inclure les pains et steaks
-          if (name.includes("pain") ||
-              name.includes("steak") ||
-              name.includes("fish") ||
-              name.includes("chicken") ||
-              name.includes("crispy") ||
-              name.includes("mexicain")) {
+          if (
+            name.includes("pain") ||
+            name.includes("steak") ||
+            name.includes("fish") ||
+            name.includes("chicken") ||
+            name.includes("crispy") ||
+            name.includes("mexicain")
+          ) {
             return true;
           }
           // Exclure les mitraillettes et burgers
-          if (name.includes("mitraillette") ||
-              name.includes("burger") ||
-              name.includes("classique") ||
-              name.includes("filet americain") ||
-              name.includes("brochette")) {
+          if (
+            name.includes("mitraillette") ||
+            name.includes("burger") ||
+            name.includes("classique") ||
+            name.includes("filet americain") ||
+            name.includes("brochette")
+          ) {
             return false;
           }
           // Inclure tous les autres produits
           return true;
         })
-        .map(product => ({
-          id: parseInt(`${category.toLowerCase().charCodeAt(0)}${product.id}`),
+        .map((product) => ({
+          id: product.id,
           name: product.name,
           image: product.image,
           price: product.price,
@@ -55,7 +66,7 @@ export async function GET() {
           stockConseil: product.stockConseil || 0,
           lost: product.lost || 0,
           stockAnnuel: product.stockAnnuel || 20,
-          stockLimite: product.stockLimite || 0
+          stockLimite: product.stockLimite || 0,
         }));
     });
 
@@ -69,40 +80,39 @@ export async function GET() {
 export async function PUT(request: Request) {
   try {
     const { products } = await request.json();
-    const filePath = path.join(process.cwd(), "src/data/dataProduits.json");
+    const stocksPath = path.join(process.cwd(), DB_DIR, "stocks.json");
+    const produitsPath = path.join(process.cwd(), DB_DIR, "produits.json");
 
-    // Lire le fichier actuel
-    const fileContent = await fs.readFile(filePath, "utf-8");
-    const data = JSON.parse(fileContent);
+    // Lire les fichiers
+    const stocksContent = await fs.readFile(stocksPath, "utf-8");
+    const produitsContent = await fs.readFile(produitsPath, "utf-8");
+    const stocks = JSON.parse(stocksContent);
+    const produits = JSON.parse(produitsContent);
 
-    // Mettre à jour les stocks pour chaque produit
-    for (const category in data) {
-      data[category] = data[category].map(product => {
-        // Trouver le produit mis à jour en comparant les noms
-        const updatedProduct = products.find(p =>
-          p.name.toLowerCase().trim() === product.name.toLowerCase().trim()
-        );
+    // Créer une map produit_id -> nom
+    const produitNames = new Map(
+      produits.map((p: any) => [p.id, p.name.toLowerCase().trim()])
+    );
 
-        if (updatedProduct) {
-          console.log(`📦 Mise à jour du stock pour ${product.name}:`, {
-            ancienStock: product.stock,
-            nouveauStock: updatedProduct.stock,
-            categorie: category
-          });
+    // Mettre à jour les stocks
+    for (const stock of stocks) {
+      const produitName = produitNames.get(stock.produit_id);
+      const updatedProduct = products.find(
+        (p: any) => p.name.toLowerCase().trim() === produitName
+      );
 
-          // Mettre à jour uniquement le stock
-          return {
-            ...product,
-            stock: updatedProduct.stock
-          };
-        }
-        return product;
-      });
+      if (updatedProduct) {
+        console.log(`📦 Mise à jour du stock pour ${updatedProduct.name}:`, {
+          ancienStock: stock.quantite,
+          nouveauStock: updatedProduct.stock,
+        });
+        stock.quantite = updatedProduct.stock;
+      }
     }
 
-    // Sauvegarder les modifications
-    await fs.writeFile(filePath, JSON.stringify(data, null, 2), "utf-8");
-    console.log("✅ Stocks mis à jour avec succès dans dataProduits.json");
+    // Sauvegarder
+    await fs.writeFile(stocksPath, JSON.stringify(stocks, null, 2), "utf-8");
+    console.log("✅ Stocks mis à jour avec succès dans stocks.json");
 
     return NextResponse.json({ success: true });
   } catch (error) {

@@ -74,6 +74,14 @@ type CartContextType = {
   ) => CartItem | undefined;
   deleteRelatedItemVia: (viaMitraillette: boolean, uniqueId: string) => void;
   deleteRelatedItemsVia: (viaMitraillette: boolean, uniqueId: string[]) => void;
+  replaceSaucesForGroup: (
+    groupId: string,
+    newSauces: CartItem[]
+  ) => void;
+  addRelatedItemToGroup: (
+    groupId: string,
+    item: Omit<CartItem, "uniqueId">
+  ) => void;
 };
 
 // Création du contexte
@@ -138,6 +146,36 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     console.log("Après ajout au panier:", newItem);
   };
 
+  const addRelatedItemToGroup = (
+    groupId: string,
+    item: Omit<CartItem, "uniqueId">
+  ) => {
+    const uniqueId = generateUniqueId();
+
+    const newRelatedItem: CartItem = {
+      ...item,
+      uniqueId,
+      groupId,
+      isRelateItem: true,
+    };
+
+    setCart((prevCart) =>
+      prevCart.map((cartItem) => {
+        if (cartItem.groupId === groupId) {
+          return {
+            ...cartItem,
+            relatedItems: [
+              ...(cartItem.relatedItems || []),
+              newRelatedItem,
+            ],
+          };
+        }
+
+        return cartItem;
+      })
+    );
+  };
+
   // Retirer un produit et ses éléments liés
   const removeFromCart = (groupId: string) => {
     console.log("Suppression du groupe:", groupId);
@@ -162,14 +200,70 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
-  const getRelatedItemsVia = (parentId: string, viaMitraillette?: boolean) => {
-    return (
-      cart
-        .find((item) => item.uniqueId === parentId)
-        ?.relatedItems?.filter((related) =>
-          viaMitraillette !== undefined ? related.viaMitraillette === viaMitraillette : true
-        ) || []
-    );
+  const replaceSaucesForGroup = (
+    groupId: string,
+    sauces: Omit<CartItem, "uniqueId">[]
+  ) => {
+
+    setCart((prevCart) => {
+
+      // =====================================================
+      // SUPPRIMER LES ANCIENNES SAUCES DU GROUPE
+      // =====================================================
+
+      const cartWithoutOldSauces =
+        prevCart.filter((item) => {
+
+          const isSauceItem =
+            item.isSauce === true ||
+            item.uniqueId?.startsWith("sauce-") ||
+            item.name
+              ?.toLowerCase()
+              .includes("sauce");
+
+          return !(
+            item.groupId === groupId &&
+            isSauceItem
+          );
+        });
+
+      // =====================================================
+      // AJOUTER LES NOUVELLES SAUCES
+      // =====================================================
+
+      const newSauces =
+        sauces.map((sauce) => {
+
+          const uniqueId =
+            generateUniqueId();
+
+          const relatedItems =
+            sauce.relatedItems?.map(
+              (related) => ({
+                ...related,
+                uniqueId:
+                  generateUniqueId(),
+                groupId,
+              })
+            ) || [];
+
+          return {
+            ...sauce,
+            uniqueId,
+            groupId,
+            relatedItems,
+          };
+        });
+
+      // =====================================================
+      // NOUVEL ÉTAT DU PANIER
+      // =====================================================
+
+      return [
+        ...cartWithoutOldSauces,
+        ...newSauces,
+      ];
+    });
   };
 
   const removeRelatedItemVia = (parentId: string, relatedUniqueId: string) => {
@@ -279,6 +373,8 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         getRelatedItemVia: () => undefined,
         deleteRelatedItemVia: () => {},
         deleteRelatedItemsVia: () => {},
+        replaceSaucesForGroup: () => {},
+        addRelatedItemToGroup,
       }}
     >
       {children}

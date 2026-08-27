@@ -1,0 +1,70 @@
+[
+  {
+    "id": 1,
+    "commande_id": 1,
+    "produit_nom": "Mitraillette Classique",
+    "quantity": 1,
+    "relatedItems": [
+      {
+        "name": "Tomate",
+        "groupId": "group-1767696096256-pyex6nr8e"
+      },
+      {
+        "name": "Oignons Frit",
+        "groupId": "group-1767696096256-pyex6nr8e"
+      }
+    ],
+    "groupId": "group-1767696096256-pyex6nr8e"
+  },
+  {
+    "id": 2,
+    "commande_id": 1,
+    "produit_nom": "",
+    "quantity": 1,
+    "relatedItems": [
+      {
+        "name": "Bouffe feu",
+        "groupId": "group-1767696096256-h73adwv60"
+      }
+    ],
+    "groupId": "group-1767696096256-h73adwv60"
+  },
+  {
+    "id": 3,
+    "commande_id": 1,
+    "produit_nom": "",
+    "quantity": 1,
+    "relatedItems": [
+      {
+        "name": "Hot Mammouth",
+        "groupId": "group-1767696096256-hnn5vy8t6"
+      }
+    ],
+    "groupId": "group-1767696096256-hnn5vy8t6"
+  },
+  {
+    "id": 4,
+    "commande_id": 1,
+    "produit_nom": "",
+    "quantity": 1,
+    "relatedItems": [
+      {
+        "name": "Raclette",
+        "groupId": "group-1767696096256-a1ifvspdg"
+      },
+      {
+        "name": "Chevre",
+        "groupId": "group-1767696096256-a1ifvspdg"
+      }
+    ],
+    "groupId": "group-1767696096256-a1ifvspdg"
+  },
+  {
+    "id": 5,
+    "commande_id": 1,
+    "produit_nom": "Leffe Ruby",
+    "quantity": 2,
+    "relatedItems": [],
+    "groupId": "group-1767696096256-zh4hkbohy"
+  }
+]

@@ -1,0 +1,162 @@
+[
+  {
+    "produit_id": 1,
+    "garniture_id": 1
+  },
+  {
+    "produit_id": 1,
+    "garniture_id": 2
+  },
+  {
+    "produit_id": 1,
+    "garniture_id": 3
+  },
+  {
+    "produit_id": 2,
+    "garniture_id": 1
+  },
+  {
+    "produit_id": 2,
+    "garniture_id": 2
+  },
+  {
+    "produit_id": 2,
+    "garniture_id": 3
+  },
+  {
+    "produit_id": 3,
+    "garniture_id": 1
+  },
+  {
+    "produit_id": 3,
+    "garniture_id": 2
+  },
+  {
+    "produit_id": 3,
+    "garniture_id": 3
+  },
+  {
+    "produit_id": 4,
+    "garniture_id": 1
+  },
+  {
+    "produit_id": 4,
+    "garniture_id": 2
+  },
+  {
+    "produit_id": 4,
+    "garniture_id": 3
+  },
+  {
+    "produit_id": 4,
+    "garniture_id": 4
+  },
+  {
+    "produit_id": 5,
+    "garniture_id": 1
+  },
+  {
+    "produit_id": 5,
+    "garniture_id": 2
+  },
+  {
+    "produit_id": 5,
+    "garniture_id": 5
+  },
+  {
+    "produit_id": 5,
+    "garniture_id": 6
+  },
+  {
+    "produit_id": 6,
+    "garniture_id": 1
+  },
+  {
+    "produit_id": 6,
+    "garniture_id": 2
+  },
+  {
+    "produit_id": 6,
+    "garniture_id": 3
+  },
+  {
+    "produit_id": 6,
+    "garniture_id": 4
+  },
+  {
+    "produit_id": 7,
+    "garniture_id": 1
+  },
+  {
+    "produit_id": 7,
+    "garniture_id": 2
+  },
+  {
+    "produit_id": 7,
+    "garniture_id": 5
+  },
+  {
+    "produit_id": 7,
+    "garniture_id": 6
+  },
+  {
+    "produit_id": 8,
+    "garniture_id": 1
+  },
+  {
+    "produit_id": 8,
+    "garniture_id": 2
+  },
+  {
+    "produit_id": 8,
+    "garniture_id": 3
+  },
+  {
+    "produit_id": 8,
+    "garniture_id": 4
+  },
+  {
+    "produit_id": 9,
+    "garniture_id": 1
+  },
+  {
+    "produit_id": 9,
+    "garniture_id": 2
+  },
+  {
+    "produit_id": 9,
+    "garniture_id": 3
+  },
+  {
+    "produit_id": 9,
+    "garniture_id": 4
+  },
+  {
+    "produit_id": 10,
+    "garniture_id": 1
+  },
+  {
+    "produit_id": 10,
+    "garniture_id": 2
+  },
+  {
+    "produit_id": 10,
+    "garniture_id": 3
+  },
+  {
+    "produit_id": 11,
+    "garniture_id": 1
+  },
+  {
+    "produit_id": 11,
+    "garniture_id": 2
+  },
+  {
+    "produit_id": 11,
+    "garniture_id": 3
+  },
+  {
+    "produit_id": 11,
+    "garniture_id": 4
+  }
+]

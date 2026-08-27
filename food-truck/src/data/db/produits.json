@@ -1,0 +1,702 @@
+[
+  {
+    "id": 1,
+    "name": "Classique",
+    "image": "/Mitraillettes.png",
+    "price": "6.5€",
+    "categorie_id": 1
+  },
+  {
+    "id": 2,
+    "name": "Filet Americain",
+    "image": "/americain-filet.png",
+    "price": "6.5€",
+    "categorie_id": 1
+  },
+  {
+    "id": 3,
+    "name": "Brochette",
+    "image": "/mitraillette-brochette.png",
+    "price": "7€",
+    "categorie_id": 1
+  },
+  {
+    "id": 4,
+    "name": "Burger",
+    "image": "/burger.png",
+    "price": "7.5€",
+    "categorie_id": 2
+  },
+  {
+    "id": 5,
+    "name": "Mexicano Burger",
+    "image": "/mexicano-burger.png",
+    "price": "7.5€",
+    "categorie_id": 2
+  },
+  {
+    "id": 6,
+    "name": "Fish Burger",
+    "image": "/fish-burger.png",
+    "price": "7.5€",
+    "categorie_id": 2
+  },
+  {
+    "id": 7,
+    "name": "Bicky Burger",
+    "image": "/bicky-burger.png",
+    "price": "7.5€",
+    "categorie_id": 2
+  },
+  {
+    "id": 8,
+    "name": "Chicken Burger",
+    "image": "/chicken-burger.png",
+    "price": "7.5€",
+    "categorie_id": 2
+  },
+  {
+    "id": 9,
+    "name": "Crispy Burger",
+    "image": "/crispy-burger.png",
+    "price": "8.5€",
+    "categorie_id": 2
+  },
+  {
+    "id": 10,
+    "name": "Veggie Mitraillette",
+    "image": "/mitraillette-veggie.png",
+    "price": "6.5€",
+    "categorie_id": 3
+  },
+  {
+    "id": 11,
+    "name": "Veggie Burger",
+    "image": "/veggi-burger.png",
+    "price": "7.5€",
+    "categorie_id": 3
+  },
+  {
+    "id": 12,
+    "name": "Compote",
+    "image": "/compote.png",
+    "price": "6.5€",
+    "categorie_id": 4
+  },
+  {
+    "id": 13,
+    "name": "Creme au chocolat",
+    "image": "/creme-chocolat.png",
+    "price": "6.5€",
+    "categorie_id": 4
+  },
+  {
+    "id": 14,
+    "name": "Nuggets",
+    "image": "/nuggets.png",
+    "price": "",
+    "categorie_id": 4
+  },
+  {
+    "id": 15,
+    "name": "Poulycroc",
+    "image": "/poulycroc.png",
+    "price": "",
+    "categorie_id": 4
+  },
+  {
+    "id": 16,
+    "name": "Capri-Sun",
+    "image": "/capri-sun.png",
+    "price": "",
+    "categorie_id": 4
+  },
+  {
+    "id": 17,
+    "name": "Frites",
+    "image": "/frites.png",
+    "price": "",
+    "categorie_id": 4
+  },
+  {
+    "id": 18,
+    "name": "Fun Box",
+    "image": "/funbox.png",
+    "price": "5.5€",
+    "categorie_id": 5
+  },
+  {
+    "id": 19,
+    "name": "Spicy Box",
+    "image": "/spicybox.png",
+    "price": "5.5€",
+    "categorie_id": 5
+  },
+  {
+    "id": 20,
+    "name": "Cheese Box",
+    "image": "/cheesebox.png",
+    "price": "5.5€",
+    "categorie_id": 5
+  },
+  {
+    "id": 21,
+    "name": "Chicken Box",
+    "image": "/chickenbox.png",
+    "price": "5.5€",
+    "categorie_id": 5
+  },
+  {
+    "id": 22,
+    "name": "Vegan Box",
+    "image": "/veganbox.png",
+    "price": "5.5€",
+    "categorie_id": 5
+  },
+  {
+    "id": 23,
+    "name": "Party Box",
+    "image": "/partybox.png",
+    "price": "12€",
+    "categorie_id": 5
+  },
+  {
+    "id": 24,
+    "name": "Fricadelle",
+    "image": "/fricadelle.png",
+    "price": "4€",
+    "categorie_id": 6
+  },
+  {
+    "id": 25,
+    "name": "Fricadelle XXL",
+    "image": "/fricadelle.png",
+    "price": "6.5€",
+    "categorie_id": 6
+  },
+  {
+    "id": 26,
+    "name": "Poulycroc",
+    "image": "/poulycroc.png",
+    "price": "4€",
+    "categorie_id": 6
+  },
+  {
+    "id": 27,
+    "name": "Viandelle",
+    "image": "/viandelle.png",
+    "price": "4€",
+    "categorie_id": 6
+  },
+  {
+    "id": 28,
+    "name": "Belcanto",
+    "image": "/belcanto.png",
+    "price": "4.5€",
+    "categorie_id": 6
+  },
+  {
+    "id": 29,
+    "name": "Cervelas brun",
+    "image": "/cervelas-brun.png",
+    "price": "4.5€",
+    "categorie_id": 6
+  },
+  {
+    "id": 30,
+    "name": "Bouffe feu",
+    "image": "/bouffe-feu.png",
+    "price": "4.5€",
+    "categorie_id": 6
+  },
+  {
+    "id": 31,
+    "name": "Lucifer",
+    "image": "/lucifer.png",
+    "price": "4.5€",
+    "categorie_id": 6
+  },
+  {
+    "id": 32,
+    "name": "Loempia poulet",
+    "image": "/loempia-poulet.png",
+    "price": "5€",
+    "categorie_id": 6
+  },
+  {
+    "id": 33,
+    "name": "Boulettes",
+    "image": "/boulette.png",
+    "price": "4€",
+    "categorie_id": 6
+  },
+  {
+    "id": 34,
+    "name": "Cheese crack",
+    "image": "/cheese-crack.png",
+    "price": "4.5€",
+    "categorie_id": 6
+  },
+  {
+    "id": 35,
+    "name": "Loempidel",
+    "image": "/loempidel.png",
+    "price": "4.5€",
+    "categorie_id": 6
+  },
+  {
+    "id": 36,
+    "name": "Steack hache",
+    "image": "/steack-haché.png",
+    "price": "0€",
+    "categorie_id": 6
+  },
+  {
+    "id": 37,
+    "name": "Belcanto XXL",
+    "image": "/belcanto.png",
+    "price": "0€",
+    "categorie_id": 6
+  },
+  {
+    "id": 38,
+    "name": "Volaille",
+    "image": "/brochette-volaille.png",
+    "price": "5€",
+    "categorie_id": 7
+  },
+  {
+    "id": 39,
+    "name": "Tzigane",
+    "image": "/brochette-tzigane.png",
+    "price": "5€",
+    "categorie_id": 7
+  },
+  {
+    "id": 40,
+    "name": "Ardennaise",
+    "image": "/brochette-ardennaise.png",
+    "price": "5€",
+    "categorie_id": 7
+  },
+  {
+    "id": 41,
+    "name": "Poisson",
+    "image": "/brochette-poisson.png",
+    "price": "5€",
+    "categorie_id": 7
+  },
+  {
+    "id": 42,
+    "name": "Porc",
+    "image": "/brochette-porc.png",
+    "price": "5€",
+    "categorie_id": 7
+  },
+  {
+    "id": 43,
+    "name": "Boeuf",
+    "image": "/brochette-boeuf.png",
+    "price": "5.5€",
+    "categorie_id": 7
+  },
+  {
+    "id": 44,
+    "name": "Belcanto Zero Meat",
+    "image": "/belcanto-zero-meat.png",
+    "price": "5€",
+    "categorie_id": 8
+  },
+  {
+    "id": 45,
+    "name": "Fricadelle Zero Meat",
+    "image": "/fricadelle-zero-meat.png",
+    "price": "4.5€",
+    "categorie_id": 8
+  },
+  {
+    "id": 46,
+    "name": "Hamburger Zero Meat",
+    "image": "/hamburger-zero-meat.png",
+    "price": "4.5€",
+    "categorie_id": 8
+  },
+  {
+    "id": 47,
+    "name": "Poulycroc Vegi",
+    "image": "/poulycroc-zero-meat.png",
+    "price": "4.5€",
+    "categorie_id": 8
+  },
+  {
+    "id": 48,
+    "name": "Petites frites",
+    "image": "/frites.png",
+    "price": "4€",
+    "categorie_id": 9
+  },
+  {
+    "id": 49,
+    "name": "Grandes frites",
+    "image": "/Frites.png",
+    "price": "5€",
+    "categorie_id": 9
+  },
+  {
+    "id": 50,
+    "name": "Coca Cola",
+    "image": "/coca-cola.png",
+    "price": "1.50€",
+    "categorie_id": 10
+  },
+  {
+    "id": 51,
+    "name": "Coca Cola Zero",
+    "image": "/coca-cola-zero.png",
+    "price": "1.50€",
+    "categorie_id": 10
+  },
+  {
+    "id": 52,
+    "name": "Fanta citron",
+    "image": "/fanta-citron.png",
+    "price": "1.50€",
+    "categorie_id": 10
+  },
+  {
+    "id": 53,
+    "name": "Fanta orange",
+    "image": "/fanta-orange.png",
+    "price": "1.50€",
+    "categorie_id": 10
+  },
+  {
+    "id": 54,
+    "name": "Canada Dry",
+    "image": "/canada-dry.png",
+    "price": "1.50€",
+    "categorie_id": 10
+  },
+  {
+    "id": 55,
+    "name": "Orangina",
+    "image": "/orangina.png",
+    "price": "1.50€",
+    "categorie_id": 10
+  },
+  {
+    "id": 56,
+    "name": "Seven up / Sprite",
+    "image": "/seven-up.png",
+    "price": "1.50€",
+    "categorie_id": 10
+  },
+  {
+    "id": 57,
+    "name": "Capri-Sun",
+    "image": "/capri-sun.png",
+    "price": "1€",
+    "categorie_id": 10
+  },
+  {
+    "id": 58,
+    "name": "Ice Tea",
+    "image": "/ice-tea.png",
+    "price": "1.50€",
+    "categorie_id": 10
+  },
+  {
+    "id": 59,
+    "name": "Oasis",
+    "image": "/oasis.png",
+    "price": "1.50€",
+    "categorie_id": 10
+  },
+  {
+    "id": 60,
+    "name": "Tropico",
+    "image": "/tropico.png",
+    "price": "1.50€",
+    "categorie_id": 10
+  },
+  {
+    "id": 61,
+    "name": "Eau",
+    "image": "/eau.png",
+    "price": "1€",
+    "categorie_id": 10
+  },
+  {
+    "id": 62,
+    "name": "Eau petillante",
+    "image": "/eau-pétillante.png",
+    "price": "1.50€",
+    "categorie_id": 10
+  },
+  {
+    "id": 63,
+    "name": "Leffe",
+    "image": "/leffe.png",
+    "price": "3.50€",
+    "categorie_id": 10
+  },
+  {
+    "id": 64,
+    "name": "Leffe Blanche",
+    "image": "/leffe-blanche.png",
+    "price": "3.50€",
+    "categorie_id": 10
+  },
+  {
+    "id": 65,
+    "name": "Leffe Ruby",
+    "image": "/leffe-ruby.png",
+    "price": "3.50€",
+    "categorie_id": 10
+  },
+  {
+    "id": 66,
+    "name": "Aucune boisson",
+    "image": "/rien.png",
+    "price": "0€",
+    "categorie_id": 10
+  },
+  {
+    "id": 67,
+    "name": "Ketchup",
+    "image": "/ketchup.png",
+    "price": "0.50€",
+    "categorie_id": 11
+  },
+  {
+    "id": 68,
+    "name": "Mayonnaise",
+    "image": "/mayonnaise.png",
+    "price": "0.50€",
+    "categorie_id": 11
+  },
+  {
+    "id": 69,
+    "name": "Andalouse",
+    "image": "/andalouse.png",
+    "price": "0.50€",
+    "categorie_id": 11
+  },
+  {
+    "id": 70,
+    "name": "Bicky",
+    "image": "/bicky.png",
+    "price": "0.50€",
+    "categorie_id": 11
+  },
+  {
+    "id": 71,
+    "name": "Dallas",
+    "image": "/dallas.png",
+    "price": "0.50€",
+    "categorie_id": 11
+  },
+  {
+    "id": 72,
+    "name": "Hamburger",
+    "image": "/hamburger.png",
+    "price": "0.50€",
+    "categorie_id": 11
+  },
+  {
+    "id": 73,
+    "name": "Pita",
+    "image": "/pita.png",
+    "price": "0.50€",
+    "categorie_id": 11
+  },
+  {
+    "id": 74,
+    "name": "Brazil",
+    "image": "/brazil.png",
+    "price": "0.50€",
+    "categorie_id": 11
+  },
+  {
+    "id": 75,
+    "name": "Hannibale",
+    "image": "/hannibale.png",
+    "price": "0.50€",
+    "categorie_id": 11
+  },
+  {
+    "id": 76,
+    "name": "Hawai",
+    "image": "/hawai.png",
+    "price": "0.50€",
+    "categorie_id": 11
+  },
+  {
+    "id": 77,
+    "name": "Riche",
+    "image": "/riche.png",
+    "price": "0.50€",
+    "categorie_id": 11
+  },
+  {
+    "id": 78,
+    "name": "Sweet Curry Oignon",
+    "image": "/sweet-curry-oignon.png",
+    "price": "0.50€",
+    "categorie_id": 11
+  },
+  {
+    "id": 79,
+    "name": "Chimayo",
+    "image": "/chimayo.png",
+    "price": "0.50€",
+    "categorie_id": 11
+  },
+  {
+    "id": 80,
+    "name": "Ch'ti",
+    "image": "/chti.png",
+    "price": "0.50€",
+    "categorie_id": 11
+  },
+  {
+    "id": 81,
+    "name": "Hot Mammouth",
+    "image": "/hot-mammouth.png",
+    "price": "0.50€",
+    "categorie_id": 11
+  },
+  {
+    "id": 82,
+    "name": "Poivre",
+    "image": "/poivre.png",
+    "price": "0.50€",
+    "categorie_id": 11
+  },
+  {
+    "id": 83,
+    "name": "Samourai",
+    "image": "/samourai.png",
+    "price": "0.50€",
+    "categorie_id": 11
+  },
+  {
+    "id": 84,
+    "name": "Aucune sauce",
+    "image": "/rien.png",
+    "price": "0€",
+    "categorie_id": 11
+  },
+  {
+    "id": 85,
+    "name": "Cheddar",
+    "image": "/cheddar.png",
+    "price": "1.00€",
+    "categorie_id": 12
+  },
+  {
+    "id": 86,
+    "name": "Raclette",
+    "image": "/raclette.png",
+    "price": "1.00€",
+    "categorie_id": 12
+  },
+  {
+    "id": 87,
+    "name": "Reblochon",
+    "image": "/reblochon.png",
+    "price": "1.00€",
+    "categorie_id": 12
+  },
+  {
+    "id": 88,
+    "name": "Chevre",
+    "image": "/chevre.png",
+    "price": "1.00€",
+    "categorie_id": 12
+  },
+  {
+    "id": 89,
+    "name": "Poitrine fumee",
+    "image": "/poitrine.png",
+    "price": "1.00€",
+    "categorie_id": 12
+  },
+  {
+    "id": 90,
+    "name": "Galette de pomme de terre",
+    "image": "/galette-de-pomme-de-terre.png",
+    "price": "1.00€",
+    "categorie_id": 12
+  },
+  {
+    "id": 91,
+    "name": "Galette de fromage",
+    "image": "/galette-de-fromage.png",
+    "price": "1.00€",
+    "categorie_id": 12
+  },
+  {
+    "id": 92,
+    "name": "Maroille",
+    "image": "/maroille.png",
+    "price": "1.00€",
+    "categorie_id": 12
+  },
+  {
+    "id": 93,
+    "name": "Oeuf",
+    "image": "/oeuf.png",
+    "price": "1.00€",
+    "categorie_id": 12
+  },
+  {
+    "id": 94,
+    "name": "Aucuns supplements",
+    "image": "/rien.png",
+    "price": "0",
+    "categorie_id": 12
+  },
+  {
+    "id": 95,
+    "name": "Pain burger",
+    "image": "",
+    "price": "",
+    "categorie_id": 13
+  },
+  {
+    "id": 96,
+    "name": "Pain mitraillette",
+    "image": "",
+    "price": "",
+    "categorie_id": 13
+  },
+  {
+    "id": 97,
+    "name": "Fish",
+    "image": "",
+    "price": "",
+    "categorie_id": 14
+  },
+  {
+    "id": 98,
+    "name": "Chicken",
+    "image": "",
+    "price": "",
+    "categorie_id": 14
+  },
+  {
+    "id": 99,
+    "name": "Steak crispy",
+    "image": "",
+    "price": "",
+    "categorie_id": 14
+  },
+  {
+    "id": 100,
+    "name": "Steak mexicain",
+    "image": "",
+    "price": "",
+    "categorie_id": 14
+  }
+]
