@@ -113,10 +113,44 @@ export async function calculateCommandeTotal(
     */
 
     if (item?.isSupplements === true) {
+      // Cas d'un conteneur de suppléments avec des relatedItems
+      if (Array.isArray(item.relatedItems) && item.relatedItems.length > 0) {
+        const supplementsTotal = item.relatedItems.reduce(
+          (sum: number, related: any) => {
+            if (!related || related.isSupplements !== true) {
+              return sum;
+            }
+
+            const supplementPrice = parsePrice(related.price);
+            const supplementQuantity = Math.max(
+              1,
+              Number(related.quantity ?? 1)
+            );
+
+            return sum + supplementPrice * supplementQuantity;
+          },
+          0
+        );
+
+        const lineTotal = supplementsTotal * quantity;
+
+        console.log("➕ SUPPLÉMENTS DU CONTENEUR :", {
+          name: item.name,
+          quantity,
+          supplementsTotal,
+          total: lineTotal,
+          relatedItems: item.relatedItems,
+        });
+
+        total += lineTotal;
+        continue;
+      }
+
+      // Cas d'un supplément seul
       const itemPrice = parsePrice(item.price);
       const lineTotal = itemPrice * quantity;
 
-      console.log("➕ SUPPLÉMENT :", {
+      console.log("➕ SUPPLÉMENT SEUL :", {
         name: item.name,
         price: itemPrice,
         quantity,
