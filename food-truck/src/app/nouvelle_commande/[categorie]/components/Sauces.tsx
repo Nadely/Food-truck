@@ -69,9 +69,13 @@ const Sauces = () => {
     });
 
   } else if (viaFrites) {
-    // 1 sauce gratuite
-    freeSauces = 1;
+    const fritesSauces = Number(
+      searchParams.get("freeSauces") ?? 0
+    );
 
+    freeSauces = Number.isFinite(fritesSauces)
+      ? Math.max(0, fritesSauces)
+      : 0;
   } else {
     // Commande normale = aucune sauce gratuite
     freeSauces = 0;

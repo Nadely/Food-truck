@@ -34,40 +34,61 @@ const Frites = () => {
   };
 
   const handleAddToCart = () => {
-    const itemsToAdd = data.Frites.map((product) => {
-      const quantity = quantities[product.id];
-      if (quantity > 0) {
-        return {
-          id: product.id,
-          name: product.name,
-          image: product.image,
-          price: parseFloat(product.price),
-          quantity,
-        };
-      }
-      return null;
-    }).filter(Boolean);
+  const itemsToAdd = data.Frites.map((product) => {
+    const quantity = quantities[product.id];
 
-    if (itemsToAdd.length > 0) {
-      const groupId = `frites-${Date.now()}`;
-      itemsToAdd.forEach((item) => addToCart({...item, groupId}));
-
-      // Ajouter les quantités de frites dans l'URL
-      const fritesParams = Object.entries(quantities)
-        .filter(([_, quantity]) => quantity > 0)
-        .map(([id, quantity]) => {
-          const frites = data.Frites.find(
-            (product) => product.id === parseInt(id)
-          );
-          return frites ? `${frites.name}=${quantity}` : "";
-        })
-        .join("&");
-
-      router.push(`Sauces?viaFrites=true&groupId=${groupId}&${fritesParams}`);
-    } else {
-      alert("Veuillez sélectionner une quantité avant de valider !");
+    if (quantity > 0) {
+      return {
+        id: product.id,
+        name: product.name,
+        image: product.image,
+        price: parseFloat(product.price),
+        quantity,
+      };
     }
-  };
+
+    return null;
+  }).filter(Boolean);
+
+  if (itemsToAdd.length > 0) {
+    const groupId = `frites-${Date.now()}`;
+
+    itemsToAdd.forEach((item) => {
+      addToCart({
+        ...item,
+        groupId,
+      });
+    });
+
+    // ============================================
+    // CALCUL DU NOMBRE DE SAUCES GRATUITES
+    // ============================================
+
+    const totalFrites = Object.values(quantities).reduce(
+      (total, quantity) => total + quantity,
+      0
+    );
+
+    const fritesParams = Object.entries(quantities)
+      .filter(([_, quantity]) => quantity > 0)
+      .map(([id, quantity]) => {
+        const frites = data.Frites.find(
+          (product) => product.id === parseInt(id)
+        );
+
+        return frites
+          ? `${encodeURIComponent(frites.name)}=${quantity}`
+          : "";
+      })
+      .join("&");
+
+    router.push(
+      `/nouvelle_commande/Sauces?viaFrites=true&groupId=${groupId}&freeSauces=${totalFrites}&${fritesParams}`
+    );
+  } else {
+    alert("Veuillez sélectionner une quantité avant de valider !");
+  }
+};
 
   return (
     <div className="text-black font-bold style-pen text-xl mb-5 mt-2">
