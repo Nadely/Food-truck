@@ -12,6 +12,9 @@ const Header = () => {
     });
   };
 
+  const isAdmin = session?.user?.role === "ADMIN";
+  const isClient = session?.user?.role === "CLIENT";
+
   return (
     <div className="relative w-screen h-[120px] overflow-hidden">
 
@@ -29,12 +32,16 @@ const Header = () => {
 
 
       {/* ========================================= */}
-      {/* TITRE */}
+      {/* TITRE DYNAMIQUE */}
       {/* ========================================= */}
 
       <div className="absolute inset-0 flex items-center justify-center text-white text-4xl style-pen">
 
         La petite Belgique des coevrons
+
+        {isAdmin && " - Admin"}
+
+        {isClient && ""}
 
       </div>
 
@@ -45,7 +52,7 @@ const Header = () => {
 
       <Image
         src="/Micka.png"
-        alt="Logo admin"
+        alt="Logo"
         width={80}
         height={70}
         className="absolute top-0 left-5"
@@ -63,7 +70,7 @@ const Header = () => {
           <button
             type="button"
             onClick={handleLogout}
-            className="rounded-md bg-white px-4 py-2 text-red-600 font-semibold shadow-md hover:bg-red-700 transition"
+            className="rounded-md bg-red-600 px-4 py-2 text-white font-semibold shadow-md hover:bg-red-700 transition"
           >
             Déconnexion
           </button>
