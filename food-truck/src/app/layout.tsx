@@ -77,6 +77,7 @@ function LayoutContent({
     const clientAllowedPaths = [
       "/nouvelle_commande",
       "/panier",
+      "/horaires",
     ];
 
     const isAllowed = clientAllowedPaths.some(
@@ -163,11 +164,43 @@ function LayoutContent({
               {/* NOUVELLE COMMANDE */}
 
               <div className="flex-[2] w-3/4 p-2">
+
                 {children}
+
               </div>
 
 
               {/* PANIER CLIENT */}
+
+              <div className="flex-[1] w-1/4 bg-white opacity-80 rounded-md p-2">
+
+                <Panier />
+
+              </div>
+
+            </div>
+
+          )}
+
+
+          {/* ======================================= */}
+          {/* PAGE HORAIRES CLIENT */}
+          {/* ======================================= */}
+
+          {pathname.startsWith("/horaires") && (
+
+            <div className="flex mt-2 gap-4 font-bold style-pen">
+
+              {/* HORAIRES */}
+
+              <div className="flex-[2] w-3/4 p-2">
+
+                <Horaires />
+
+              </div>
+
+
+              {/* PANIER */}
 
               <div className="flex-[1] w-1/4 bg-white opacity-80 rounded-md p-2">
 
@@ -277,25 +310,33 @@ function LayoutContent({
               {pathname.startsWith("/nouvelle_commande") ? (
 
                 <div className="flex-[2] w-3/4 p-2">
+
                   {children}
+
                 </div>
 
               ) : pathname.startsWith("/panier") ? (
 
                 <div className="flex-[2] w-3/4 p-2">
+
                   <Panier />
+
                 </div>
 
               ) : pathname.startsWith("/horaires") ? (
 
                 <div className="flex-[2] w-full p-2">
+
                   <Horaires />
+
                 </div>
 
               ) : (
 
                 <div className="flex-[2] w-full p-2">
+
                   {children}
+
                 </div>
 
               )}
