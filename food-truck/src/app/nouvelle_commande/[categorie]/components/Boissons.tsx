@@ -154,7 +154,7 @@ const Boissons = () => {
                   </div>
                   <div className="absolute bottom-0 left-0 w-full bg-yellow-100 bg-opacity-80 py-1 text-center border-t border-black rounded-b-lg">
                     <p className="text-xs mt-auto mb-0.5">{product.name}</p>
-                    {!viaSupplements && (
+                    {!menus && !viaSupplements && (
                       <div className="flex flex-row items-center justify-center gap-2">
                         <button
                           onClick={(e) => {

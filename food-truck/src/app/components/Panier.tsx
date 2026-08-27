@@ -416,28 +416,35 @@ const Panier = () => {
                         Supprimer
                       </button>
                     ) : (
-                      ((!item.relatedItems) || item.relatedItems.length === 0) && (
-                        <div className="flex items-center">
-                          <button
-                            onClick={() => updateQuantity(item.uniqueId, Math.max(1, item.quantity - 1))}
-                            className="bg-red-500 text-white px-2 rounded"
-                          >
-                            -
-                          </button>
-                          <button
-                            onClick={() => updateQuantity(item.uniqueId, item.quantity + 1)}
-                            className="bg-green-500 text-white px-2 ml-2 rounded"
-                          >
-                            +
-                          </button>
-                          <button
-                            onClick={() => remove(item.uniqueId)}
-                            className="bg-black text-white px-2 ml-4 rounded"
-                          >
-                            Supprimer
-                          </button>
-                        </div>
-                      )
+                      !item.menuOption &&
+                        (!item.relatedItems || item.relatedItems.length === 0) && (
+                          <div className="flex items-center">
+                            <button
+                              onClick={() =>
+                                updateQuantity(item.uniqueId, Math.max(1, item.quantity - 1))
+                              }
+                              className="bg-red-500 text-white px-2 rounded"
+                            >
+                              -
+                            </button>
+
+                            <button
+                              onClick={() =>
+                                updateQuantity(item.uniqueId, item.quantity + 1)
+                              }
+                              className="bg-green-500 text-white px-2 ml-2 rounded"
+                            >
+                              +
+                            </button>
+
+                            <button
+                              onClick={() => remove(item.uniqueId)}
+                              className="bg-black text-white px-2 ml-4 rounded"
+                            >
+                              Supprimer
+                            </button>
+                          </div>
+                        )
                     )}
                   </div>
 

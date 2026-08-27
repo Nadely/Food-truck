@@ -78,6 +78,10 @@ type CartContextType = {
     groupId: string,
     newSauces: CartItem[]
   ) => void;
+  addRelatedItemToGroup: (
+    groupId: string,
+    item: Omit<CartItem, "uniqueId">
+  ) => void;
 };
 
 // Création du contexte
@@ -140,6 +144,36 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     });
 
     console.log("Après ajout au panier:", newItem);
+  };
+
+  const addRelatedItemToGroup = (
+    groupId: string,
+    item: Omit<CartItem, "uniqueId">
+  ) => {
+    const uniqueId = generateUniqueId();
+
+    const newRelatedItem: CartItem = {
+      ...item,
+      uniqueId,
+      groupId,
+      isRelateItem: true,
+    };
+
+    setCart((prevCart) =>
+      prevCart.map((cartItem) => {
+        if (cartItem.groupId === groupId) {
+          return {
+            ...cartItem,
+            relatedItems: [
+              ...(cartItem.relatedItems || []),
+              newRelatedItem,
+            ],
+          };
+        }
+
+        return cartItem;
+      })
+    );
   };
 
   // Retirer un produit et ses éléments liés
@@ -340,6 +374,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         deleteRelatedItemVia: () => {},
         deleteRelatedItemsVia: () => {},
         replaceSaucesForGroup: () => {},
+        addRelatedItemToGroup: () => {},
       }}
     >
       {children}
