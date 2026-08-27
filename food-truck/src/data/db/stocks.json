@@ -398,7 +398,7 @@
   {
     "id": 45,
     "produit_id": 45,
-    "quantite": 20,
+    "quantite": 18,
     "stockConseil": 0,
     "lost": 0,
     "stockAnnuel": 20,
@@ -749,7 +749,7 @@
   {
     "id": 84,
     "produit_id": 84,
-    "quantite": 0,
+    "quantite": 20,
     "stockConseil": 0,
     "lost": 0,
     "stockAnnuel": 20,

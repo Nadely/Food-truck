@@ -12,6 +12,10 @@ const Veggies = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const viaSauces = searchParams.get("viaSauces") === "true";
+  const viaVeggiMitraillette =
+  searchParams.get("viaVeggiMitraillette") === "true";
+  const viaVeggiBurger =
+    searchParams.get("viaVeggiBuger") === "true";
   const { addToCart } = useCart();
 
   const handleCheckboxChangeMenus = () => {
@@ -37,6 +41,11 @@ const Veggies = () => {
 
     const groupId = `veggie-${Date.now()}`;
 
+    const productPrice =
+      viaVeggiMitraillette || viaVeggiBurger
+        ? 0
+        : basePrice;
+
     const item = {
       id: product.id,
       name:
@@ -44,7 +53,7 @@ const Veggies = () => {
           ? `Menu ${product.name}`
           : `${product.name}`,
       image: product.image,
-      price: basePrice + menuPrice + garniturePrice,
+      price: productPrice + menuPrice + garniturePrice,
       quantity: 1,
       uniqueId: `${product.id}-${Date.now()}`,
       groupId: groupId,
@@ -91,15 +100,19 @@ const Veggies = () => {
     addToCart(item);
 
     const route =
-      product.id === 1
+      product.name === "Veggie Mitraillette"
         ? "SnacksVeggies"
-        : product.id === 2
+        : product.name === "Veggie Burger"
         ? "Supplements"
         : "";
 
     if (route) {
-      // Si le produit a une route valide, construire l'URL
-      const url = `/nouvelle_commande/${route}?viaVeggiMitraillette=true&groupId=${groupId}`;
+      const viaParam =
+        product.name === "Veggie Mitraillette"
+          ? "viaVeggieMitraillette=true"
+          : "viaVeggieBuger=true";
+
+      const url = `/nouvelle_commande/${route}?${viaParam}&groupId=${groupId}`;
 
       // Ajouter l'option menu si nécessaire
       if (menus === true) {
@@ -146,7 +159,7 @@ const Veggies = () => {
                   <p className="text-base mt-auto mb-0.5">{product.name}</p>
                 </div>
               </div>
-              {!viaSauces && (
+              {!viaSauces && !viaVeggiMitraillette && !viaVeggiBurger && (
                 <p className="text-base text-white border border-white w-full text-center rounded-md mt-1.5 p-1">
                   {product.price}
                 </p>

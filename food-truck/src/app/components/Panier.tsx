@@ -302,40 +302,46 @@ const Panier = () => {
             typeof product.categorie === "string" &&
             product.categorie.toLowerCase() === "supplements"
         )
-        .map(({ id, name, image, price, uniqueId }) => ({
+        .map(({ id, name, image, price, uniqueId, categorie }) => ({
           id,
           name,
           image,
-          price: cleanPrice(price),
+          price: categorie?.toLowerCase() === "supplements" ? (name === "Aucuns Supplements" ? 0 : 1) : cleanPrice(price),
           uniqueId,
           isSupplements: true
         }));
-    } else {
-      // En dehors du menu enfants, on cherche d'abord dans les catégories Snacks et Boissons
-      const fullProductData = allProducts.find(
-        (prod) =>
-          prod.name.trim().toLowerCase() === baseName.trim().toLowerCase() &&
-          (prod.categorie === "Snacks" || prod.categorie === "Boissons" || prod.categorie === "Sauces")
-      );
+      } else {
+        // Cherche le produit sélectionné sans limiter la catégorie
+        const fullProductData = allProducts.find(
+          (prod) =>
+            typeof prod.name === "string" &&
+            prod.name.trim().toLowerCase() === baseName.trim().toLowerCase()
+        );
 
-      if (fullProductData?.categorie) {
-        const normalizedCategory = fullProductData.categorie.toLowerCase();
-        options = allProducts
-          .filter(
-            (product) =>
-              typeof product.categorie === "string" &&
-              product.categorie.toLowerCase() === normalizedCategory
-          )
-          .map(({ id, name, image, price, uniqueId, categorie }) => ({
-            id,
-            name,
-            image,
-            price: categorie?.toLowerCase() === "sauces" ? (name === "Aucune sauce" ? 0 : 0.5) : cleanPrice(price),
-            uniqueId,
-            categorie
-          }));
+        if (fullProductData?.categorie) {
+          const normalizedCategory = fullProductData.categorie.trim().toLowerCase();
+
+          options = allProducts
+            .filter(
+              (product) =>
+                typeof product.categorie === "string" &&
+                product.categorie.trim().toLowerCase() === normalizedCategory
+            )
+            .map(({ id, name, image, price, uniqueId, categorie }) => ({
+              id,
+              name,
+              image,
+              price:
+                categorie?.trim().toLowerCase() === "sauces"
+                  ? name === "Aucune sauce"
+                    ? 0
+                    : 0.5
+                  : cleanPrice(price),
+              uniqueId,
+              categorie,
+            }));
+        }
       }
-    }
 
     // Éviter les doublons en utilisant un Set pour les noms uniques
     const uniqueNames = new Set();
@@ -598,33 +604,28 @@ const Panier = () => {
                                 return related;
                               }
 
-                              return {
-                                ...related,
-                                id: option.id,
-                                name: option.name,
-                                image: option.image,
+                              const newPrice =
+                              option.isSupplements
+                                ? cleanPrice(option.price ?? 0)
+                                : related.price;
 
-                                // ✅ On conserve la vraie catégorie de l'option
-                                categorie: option.categorie,
-
-                                // On conserve le prix existant
-                                price: related.price,
-
-                                // ✅ On conserve le vrai type :
-                                // sauce ou supplément
-                                isSupplement:
-                                  option.isSupplements ?? related.isSupplement,
-
-                                isSupplements:
-                                  option.isSupplements ?? related.isSupplements,
-
-                                // Nouveau uniqueId
-                                uniqueId: generateUniqueId(
-                                  option.isSupplements
-                                    ? "supplement"
-                                    : "sauce"
-                                ),
-                              };
+                            return {
+                              ...related,
+                              id: option.id,
+                              name: option.name,
+                              image: option.image,
+                              categorie: option.categorie,
+                              price: newPrice,
+                              isSupplement:
+                                option.isSupplements ?? related.isSupplement,
+                              isSupplements:
+                                option.isSupplements ?? related.isSupplements,
+                              uniqueId: generateUniqueId(
+                                option.isSupplements
+                                  ? "supplement"
+                                  : "sauce"
+                              ),
+                            };
                             }
                           );
 

@@ -374,7 +374,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         deleteRelatedItemVia: () => {},
         deleteRelatedItemsVia: () => {},
         replaceSaucesForGroup: () => {},
-        addRelatedItemToGroup: () => {},
+        addRelatedItemToGroup,
       }}
     >
       {children}
