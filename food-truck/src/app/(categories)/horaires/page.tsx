@@ -3,70 +3,31 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useCart } from "../../context/CartContext";
-import { useSession } from "next-auth/react";
 
 const Horaires = () => {
   const router = useRouter();
-  const { data: session } = useSession();
   const [selectedHoraire, setSelectedHoraire] = useState<string | null>(null);
   const [userName, setUserName] = useState(""); // Nom de l'utilisateur
   const [userPhone, setUserPhone] = useState(""); // Téléphone de l'utilisateur
-  // Le panier contient aussi un item spécial "horaire" (id string + champ time)
-  const { cart, setCart } = useCart() as any; // Panier
+  const { cart, setCart } = useCart(); // Panier
 
   const handleSelectHours = (hour: string) => {
     setSelectedHoraire(hour);
+  };
 
-    // Chercher si un élément "horaire" existe déjà dans le panier
-    const existingOrderIndex = (cart as any[]).findIndex(
-      (item) => item?.id === "horaire"
-    );
+  const handleValidate = async () => {
+    if (!selectedHoraire) return;
+    if (!userName.trim() || !userPhone.trim()) return;
 
-    // Si l'horaire existe déjà, on met à jour l'heure
-    const updatedCart = [...(cart as any[])];
-    if (existingOrderIndex !== -1) {
-      updatedCart[existingOrderIndex] = {
-        ...updatedCart[existingOrderIndex],
-        time: hour, // Met à jour l'horaire
-      };
-    } else {
-      // Sinon, on ajoute un nouvel élément horaire
-      updatedCart.push({
-        id: "horaire",
-        name: "", // Pas de nom pour cet élément
-        price: 0, // Prix fictif
-        time: hour, // Ajout de l'horaire
-      });
-    }
-
-    // Mettre à jour le panier
-    setCart(updatedCart as any);
-
-    // Calculer le prix total du panier
-    const totalPrice = (updatedCart as any[]).reduce((acc, item) => {
-      if (item.price > 0) {
-        return acc + item.price * item.quantity;
-      }
-      return acc;
-    }, 0);
-
-    // Envoi des données au backend pour enregistrer la commande
     try {
-      const res = await fetch("/api/panier", {
+      // 1) Enregistrer la commande (le montant est calculé côté serveur via la table produits)
+      const postRes = await fetch("/api/panier", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          id: Date.now(),
-          image: "/images/nouvelle_commande.jpg",
-          items: (cart as any[]).map((item: any) => ({
-            name: item.name,
-            quantity: item.quantity,
-            relatedItems: item.relatedItems
-              ? item.relatedItems.map((related: any) => related.name)
-              : [],
-          })),
-          user_name: userName, // Nom du client
-          user_phone: userPhone, // Téléphone du client
+          items: cart,
+          user_name: userName.trim(),
+          user_phone: userPhone.trim(),
           user_image: "/avatar.jpg",
           time: selectedHoraire,
           date: new Date().toISOString(),
@@ -92,11 +53,11 @@ const Horaires = () => {
         headers: { "Content-Type": "application/json" },
       });
 
-      if (response.ok) {
-        setCart([]); // Vider le panier après la validation
-        const role = (session?.user as any)?.role;
-        router.push(role === "admin" ? "/commandes" : "/nouvelle_commande");
-      }
+      const putData = await putRes.json().catch(() => null);
+      if (!putRes.ok) throw new Error(putData?.message || "Erreur lors du transfert.");
+
+      setCart([]); // Vider le panier local après validation
+      router.push("/commandes");
     } catch (error) {
       console.error(error);
       alert("Une erreur est survenue.");

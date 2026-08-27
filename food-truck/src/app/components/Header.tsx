@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import LogoutButton from "./LogoutButton";
+import { useSession, signOut } from "next-auth/react";
 
 const Header = () => {
   const { data: session } = useSession();
@@ -30,7 +30,6 @@ const Header = () => {
         className="object-cover"
       />
 
-
       {/* ========================================= */}
       {/* TITRE DYNAMIQUE */}
       {/* ========================================= */}
@@ -44,7 +43,11 @@ const Header = () => {
         {isClient && ""}
 
       </div>
-      <LogoutButton />
+
+      {/* ========================================= */}
+      {/* LOGO */}
+      {/* ========================================= */}
+
       <Image
         src="/Micka.png"
         alt="Logo"
@@ -53,13 +56,11 @@ const Header = () => {
         className="absolute top-0 left-5"
       />
 
-
       {/* ========================================= */}
       {/* BOUTON DÉCONNEXION */}
       {/* ========================================= */}
 
       {session && (
-
         <div className="absolute top-4 right-5 z-10">
 
           <button
@@ -71,7 +72,6 @@ const Header = () => {
           </button>
 
         </div>
-
       )}
 
     </div>
